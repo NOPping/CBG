@@ -3,17 +3,17 @@
 
 
 Piece(Coordinate position) {
-  this.position = position;
+    this.position = position;
 }
 
 Coordinate getPosition() {
-  return Position;
+    return Position;
 }
 
 int getType() {
-  return type;
+    return type;
 }
 
 void setType(int type) {
-  this.type = type;
+    this.type = type;
 }

@@ -2,17 +2,17 @@
 #define PIECE_H
 
 class Square {
-private:
-  string identifier;
-  int numberOfOccupants;
-  Piece *pieces[];
+    private:
+    string identifier;
+    int numberOfOccupants;
+    Piece *pieces[];
 
-public:
-  Square(int numberOfPlayers);
-  bool hasPieces();
-  bool addpiece();
-  bool removePiece();
-  Piece[] getPieces();
+    public:
+    Square(int numberOfPlayers);
+    bool hasPieces();
+    bool addpiece();
+    bool removePiece();
+    Piece[] getPieces();
 };
 
 #endif

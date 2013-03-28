@@ -2,16 +2,16 @@
 #define PLAYER_H
 
 class Player {
-private:
-  int  		identifier;
-  Pieces 	*pieces[];
+    private:
+    int  		identifier;
+    Pieces 	*pieces[];
 
-public:
-  Player();
-  Player(int numberOfPieces, int identifier);
-  int amountOfPieces();
-  Piece addPiece(Coordinate position);
-  bool removePiece();
+    public:
+    Player();
+    Player(int numberOfPieces, int identifier);
+    int amountOfPieces();
+    Piece addPiece(Coordinate position);
+    bool removePiece();
 };
 
 #endif
