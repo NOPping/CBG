@@ -1,9 +1,15 @@
 #ifndef PIECE_H
 #define PIECE_H
  
-struct Piece {
+class Piece {
+private:
   Coordinate   Position;
-  String       identifier;
+  int type;
+
+public:
+  int getType();
+  bool setType(int type);
+  Coordinate getPosition();
 };
  
 #endif

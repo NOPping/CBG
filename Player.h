@@ -1,13 +1,17 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-class Game {
+class Player {
 private:
-  int             id;
-  PlayerPieces    *pieces;
+  int  identifier;
+  PlayerPieces    *pieces[];
+
 public:
   Player();
-  Player(int id);
+  Player(int numberOfPieces, int identifier);
+  int amountOfPieces();
+  Piece addPiece(Coordinate position);
+  bool removePiece();
 };
  
 #endif

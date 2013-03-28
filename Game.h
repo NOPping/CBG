@@ -3,15 +3,18 @@
  
 class Game {
 private:
-  Squares*  grid[][];
-  Player*   players[];
-  Player*   whoseGo;
-  bool      isOver;
+  const int amountOfPlayers;
+  const int rows;
+  const int columns;
+  Square* grid[][];
+  Player* players[];
+  int currentPlayer;
+  int state;
   
-  virtual   bool            getMove();
-  virtual   void            drawScreen();
+  bool      getMove();
+  void      drawScreen();
 public:
-  virtual   void            Start();
+  virtual void Start();
 };
  
 #endif
