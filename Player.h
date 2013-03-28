@@ -3,8 +3,8 @@
 
 class Player {
 private:
-  int  identifier;
-  PlayerPieces    *pieces[];
+  int  		identifier;
+  Pieces 	*pieces[];
 
 public:
   Player();
@@ -13,5 +13,5 @@ public:
   Piece addPiece(Coordinate position);
   bool removePiece();
 };
- 
+
 #endif

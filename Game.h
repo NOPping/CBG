@@ -1,6 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
- 
+
 class Game {
 private:
   const int amountOfPlayers;
@@ -10,11 +10,11 @@ private:
   Player* players[];
   int currentPlayer;
   int state;
-  
+
   bool      getMove();
   void      drawScreen();
 public:
   virtual void Start();
 };
- 
+
 #endif

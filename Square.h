@@ -1,6 +1,6 @@
 #ifndef PIECE_H
 #define PIECE_H
- 
+
 class Square {
 private:
   string identifier;
@@ -14,5 +14,5 @@ public:
   bool removePiece();
   Piece[] getPieces();
 };
- 
+
 #endif
