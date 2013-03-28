@@ -1,8 +1,7 @@
 #include "Piece.h"
 #include "Coordinate.h"
 
-
-Player(Coordinate position, Player owner); {
+Piece(Coordinate position, Player owner) {
   this.position = position;
   this.owner = owner;
 }

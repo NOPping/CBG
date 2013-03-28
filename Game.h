@@ -6,8 +6,8 @@ class Game {
       const int amountOfPlayers;
       const int rows;
       const int columns;
-      Square* grid[][];
-      Player* players[];
+      Square *grid;
+      Player *players;
       int currentPlayer;
       int state;
 
@@ -15,7 +15,7 @@ class Game {
       void      drawScreen();
     
     public:
-      virtual void Start();
+      virtual void start();
 };
 
 #endif

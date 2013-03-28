@@ -3,15 +3,15 @@
 
 class Player {
     private:
-    int  		identifier;
-    Pieces 	*pieces[];
+      int     identifier;
+      Pieces  *pieces;
 
     public:
-    Player();
-    Player(int numberOfPieces, int identifier);
-    int amountOfPieces();
-    Piece addPiece(Coordinate position);
-    bool removePiece();
+      Player();
+      Player(int numberOfPieces, int identifier);
+      int amountOfPieces();
+      Piece addPiece(Coordinate position);
+      bool removePiece();
 };
 
 #endif

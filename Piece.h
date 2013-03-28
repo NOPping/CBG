@@ -3,15 +3,15 @@
 
 class Piece {
     private:
-    Player       owner;
-    Coordinate   Position;
-    int          type;
+      Player       owner;
+      Coordinate   Position;
+      int          type;
 
     public:
-    Player(Coordinate position, Player owner);
-    int getType();
-    bool setType(int type);
-    Coordinate getPosition();
+      Piece(Coordinate position, Player owner);
+      int getType();
+      bool setType(int type);
+      Coordinate getPosition();
 };
 
 #endif
