@@ -5,13 +5,16 @@
 #include "Piece.h"
 
 class Square {
-    private:
-      std::string identifier;
+    public:
+      int identifier;
+      std::string representation;
       int numberOfOccupants;
-      Piece *pieces;
+      Piece* pieces;
 
     public:
-      Square(int numberOfPlayers);
+      Square();
+      Square(int identifier, std::string representation);
+      std::string putSquare();
       bool hasPieces();
       bool addPiece();
       bool removePiece();

@@ -5,12 +5,12 @@
 #include "Player.h"
 
 class Game {
-    private:
-      const int amountOfPlayers;
-      const int rows;
-      const int columns;
-      Square* grid;
-      Player *players;
+    protected:
+      int amountOfPlayers;
+      int rows;
+      int columns;
+      Square** grid;
+      Player* players;
       int currentPlayer;
       int state;
 
@@ -18,7 +18,7 @@ class Game {
       void      drawScreen();
     
     public:
-      virtual void start();
+      void start();
 };
 
 #endif
