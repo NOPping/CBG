@@ -5,7 +5,7 @@
 #include "Piece.h"
 
 class Square {
-    public:
+    private:
       int identifier;
       std::string representation;
       int numberOfOccupants;
