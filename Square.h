@@ -1,9 +1,12 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
+#include <string>
+#include "Piece.h"
+
 class Square {
     private:
-      string identifier;
+      std::string identifier;
       int numberOfOccupants;
       Piece *pieces;
 
@@ -12,7 +15,7 @@ class Square {
       bool hasPieces();
       bool addPiece();
       bool removePiece();
-      Piece[] getPieces();
+      Piece* getPieces();
 };
 
 #endif

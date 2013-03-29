@@ -1,16 +1,22 @@
 #ifndef PIECE_H
 #define PIECE_H
 
+#include <string>
+#include "Coordinate.h"
+
+class Player;
 class Piece {
     private:
-      Player       owner;
-      Coordinate   Position;
-      int          type;
-
+      Player*       owner;
+      Coordinate*   position;
+      int           type;
+      
     public:
-      Piece(Coordinate position, Player owner);
+      Piece();
+      Piece(Coordinate* position,Player* owner);
       int getType();
       bool setType(int type);
+      std::string putPiece();
       Coordinate getPosition();
 };
 

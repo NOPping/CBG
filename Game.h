@@ -1,12 +1,15 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "Square.h"
+#include "Player.h"
+
 class Game {
     private:
       const int amountOfPlayers;
       const int rows;
       const int columns;
-      Square *grid;
+      Square* grid;
       Player *players;
       int currentPlayer;
       int state;

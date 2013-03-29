@@ -1,19 +1,52 @@
 #include "Piece.h"
-#include "Coordinate.h"
 
-Piece(Coordinate position, Player owner) {
-  this.position = position;
-  this.owner = owner;
+
+/**
+ * Default constructor
+ */
+Piece::Piece() {
+  this->type = 0;
 }
 
-Coordinate getPosition() {
-  return Position;
+/**
+ * Constructor with paramaters for setting the position and owner.
+ */
+Piece::Piece(Coordinate* position,Player* owner) {
+  this->position = position;
+  this->owner = owner;
+  this->type = 0;
 }
 
-int getType() {
-  return type;
+/**
+ * Returns the type of piece
+ */
+int Piece::getType() {
+  return this->type;
 }
 
-void setType(int type) {
-  this.type = type;
+/**
+ * Allows for setting the piece type, returns true if setting was successful.
+ * Otherwise false.
+ */
+bool Piece::setType(int type) {
+  if((*this->owner).getCharacter(type)!=NULL) {
+    this->type = type;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+/**
+ * Returns the coordinates of the piece
+ */
+Coordinate Piece::getPosition() {
+  return *position;
+}
+
+/**
+ * Returns a character representation of the piece
+ */
+std::string Piece::putPiece() {
+  return (*this->owner).getCharacter(this->type);
 }
