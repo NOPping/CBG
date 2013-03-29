@@ -14,9 +14,11 @@ class Player {
       Piece*          pieces;
 
     public:
+      Player();
       Player(int* amountOfTypes, std::string* types, int maxPieces);
       Piece* addPiece(Coordinate position);
       bool removePiece();
+      bool hasType(int type);
       std::string getCharacter(int type);
       int getAmountOfPieces();
 };

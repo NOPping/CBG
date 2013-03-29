@@ -1,11 +1,12 @@
 #include "Player.h"
+#include "Piece.h"
+
+#include <iostream>
 
 /**
  * Default constructor
  */
-Player::Player() {
-
-}
+Player::Player() {}
 
 /**
  * Constructor with paramaters for setting the amount of different piece types,
@@ -24,20 +25,24 @@ Player::Player(int* amountOfTypes, std::string* types,int maxPieces) {
  * Otherwise it returns NULL.
  */
 std::string Player::getCharacter(int type) {
-  if(type<*amountOfTypes) {
     return types[type];
+}
+
+bool Player::hasType(int type) {
+  if(type<*amountOfTypes) {
+    return true;
   } else {
-    return NULL;
+    return false;
   }
 }
 
 /**
  * Creates a piece for the player and returns a reference to the piece.
  */
-Piece* Player::addPiece(Coordinate position) {
+Piece * Player::addPiece(Coordinate position) {
   Piece* piece;
   if(this->amountOfPieces < this->maxPieces) {
-    pieces[this->amountOfPieces] = new Piece(&position,this);
+    this->pieces[this->amountOfPieces] = Piece(&position,this);
     piece = &pieces[this->amountOfPieces];
     this->amountOfPieces++;
   }

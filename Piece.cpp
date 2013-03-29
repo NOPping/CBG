@@ -1,4 +1,5 @@
 #include "Piece.h"
+#include "Player.h"
 
 
 /**
@@ -29,7 +30,7 @@ int Piece::getType() {
  * Otherwise false.
  */
 bool Piece::setType(int type) {
-  if((*this->owner).getCharacter(type)!=NULL) {
+  if((*this->owner).hasType(type)) {
     this->type = type;
     return true;
   } else {
