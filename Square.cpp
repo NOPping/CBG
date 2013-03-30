@@ -25,5 +25,5 @@ bool Square::removePiece() {
 }
 
 Coordinate Square::getPosition() {
-  return this->position;
+	return this->position;
 }

@@ -21,8 +21,8 @@ class Square {
       bool hasPieces();
       bool addPiece();
       bool removePiece();
+      Coordinate getPosition();
       Piece* getPieces();
-      Coodinate getPosition();
 };
 
 #endif
