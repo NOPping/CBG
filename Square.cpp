@@ -2,9 +2,10 @@
 
 Square::Square() {}
 
-Square::Square(int identifier, std::string representation) {
+Square::Square(int identifier, std::string representation, Coordinate position) {
   this->identifier = identifier;
   this->representation = representation;
+  this->position = position;
 }
 
 std::string Square::putSquare() {
@@ -21,4 +22,8 @@ bool Square::addPiece() {
 
 bool Square::removePiece() {
   // Same as above
+}
+
+Coordinate getPosition() {
+	return position;
 }

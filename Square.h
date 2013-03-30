@@ -6,6 +6,7 @@
 
 class Square {
     private:
+      Coordinate position;
       int identifier;
       std::string representation;
       int numberOfOccupants;
@@ -13,12 +14,13 @@ class Square {
 
     public:
       Square();
-      Square(int identifier, std::string representation);
+      Square(int identifier, std::string representation, Coordinate position);
       std::string putSquare();
       bool hasPieces();
       bool addPiece();
       bool removePiece();
       Piece* getPieces();
+      Coodinate getPosition();
 };
 
 #endif

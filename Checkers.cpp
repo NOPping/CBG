@@ -20,10 +20,10 @@ Checkers::Checkers() {
   std::string squareRepresentations[] = {"\033[0;37;47m   \033[0m","\033[0;37;40m   \033[0m"};
   int squareIdentifier = 1;
   
-  for(int i=0;i<rows;i++) {
-    for(int j=0;j<columns;j++) {
-      this->grid[i][j] = Square(squareIdentifier,
-                                squareRepresentations[squareIdentifier]);
+  for(int currentRow=0;currentRow<rows;currentRow++) {
+    for(int currentColumn=0;currentColumn<columns;currentColumn++) {
+      this->grid[currentRow][currentColumn] = Square(squareIdentifier,
+                                squareRepresentations[squareIdentifier], Coordinate(currentRow, currentColumn));
       squareIdentifier = (squareIdentifier + 1)%2;
     }
     squareIdentifier = (squareIdentifier + 1)%2;

@@ -3,4 +3,5 @@
 int main() {
   Checkers game;
   game.start();
+  return 0;
 }
