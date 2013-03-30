@@ -3,7 +3,9 @@
 
 #include <string>
 #include "Piece.h"
+#include "Coordinate.h"
 
+class Coordinate;
 class Square {
     private:
       Coordinate position;
