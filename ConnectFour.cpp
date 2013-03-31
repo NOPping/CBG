@@ -30,7 +30,9 @@ ConnectFour::ConnectFour() {
     squareIdentifier = (squareIdentifier + 1)%2;
   }
 }
-
+/**
+ * Function to draw the screen used to play connect four.
+ */
 void Game::drawScreen() {
   std::cout << "\033[2J\033[;H";
   std::cout << "Player " << (this->currentPlayer+1) << " it is your go\n";
@@ -44,10 +46,15 @@ void Game::drawScreen() {
   std::cout << "\n";
 }
 
+/**
+ * Function to reurn weather or not the game is over.
+ */
 bool ConnectFour::isGameOver() {
   return (fourInRow() || topRowFull());
 }
-
+/**
+ * Function to return true if four or more player pieces are in a row
+ */
 bool ConnectFour::fourInRow() {
   for(int currentColumn = 0; currentColumn < columns; currentColumn++) {
     for(int currentRow = 0; currentRow < rows; currentRow++) {
@@ -63,7 +70,9 @@ bool ConnectFour::fourInRow() {
   }
   return false;
 }
-
+/**
+ * Recursive function to return the number of player pieces in a row
+ */
 int ConnectFour::checkNextSquare(Square current, Square next, int nextRowOffset, int nextColumnOffset) {
   Coordinate nextPosition = next.getPosition();
   Piece* piecesOnNextSquare = next.getPieces();
@@ -73,7 +82,9 @@ int ConnectFour::checkNextSquare(Square current, Square next, int nextRowOffset,
   }
   else return 1;
 }
-
+/**
+ * Function to test if top row is full
+ */
 bool ConnectFour::topRowFull() {
   for(int currentColumn = 0; currentColumn < columns; currentColumn++) {
     if(columnSpace[currentColumn] != rows) {
