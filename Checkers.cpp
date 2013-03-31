@@ -13,11 +13,13 @@ Checkers::Checkers() {
   for(int i=0;i<rows;i++) {
     this->grid[i] = new Square[columns];
   }
+}
 
+void Game::start() {
   int amountOfPieceTypes = 2;
   int maxAmountOfPlayerPieces = 12;
-  string player1PieceTypes[] = {"\033[0;32;40m ○ \033[0m","\033[0;32;40m ◎ \033[0m"};
-  string player2PieceTypes[] = {"\033[0;37;40m ○ \033[0m","\033[0;37;40m ◎ \033[0m"};
+  string player1PieceTypes[] = {"p1d","p1k"};
+  string player2PieceTypes[] = {"p2d","p2k"};
   
   this->players[0] = Player(amountOfPieceTypes,
                             player1PieceTypes,maxAmountOfPlayerPieces);
@@ -25,8 +27,8 @@ Checkers::Checkers() {
   this->players[1] = Player(amountOfPieceTypes,
                             player2PieceTypes,maxAmountOfPlayerPieces);
   
-  string squareRepresentations[] = {"WHITE",
-                                    "BLACK"};
+  string squareRepresentations[] = {"\033[0;37;47m   \033[0m",
+                                    "\033[0;37;40m   \033[0m"};
                                     
   int squareIdentifier = 0;
   
@@ -40,7 +42,7 @@ Checkers::Checkers() {
                                 Coordinate(i,j));
       
       // Check if its a black square
-      /*if(squareIdentifier == 1) {
+      if(squareIdentifier == 1) {
         if(i<3) {
           this->grid[i][j].addPiece(0,
           this->players[0].addPiece(Coordinate(i,j)));
@@ -50,7 +52,7 @@ Checkers::Checkers() {
           this->players[1].addPiece(Coordinate(i,j)));
         }
       }
-      */
+      
       // Switch identifier
       squareIdentifier = (squareIdentifier + 1)%2;
     }
@@ -59,17 +61,18 @@ Checkers::Checkers() {
   }
   //players[0].addPiece(Coordinate(0,0));
   //this->grid[0][1].addPiece(0,players[0].addPiece(Coordinate(0,0)));
+  
+  this->drawScreen();
 }
 
 void Game::drawScreen() {
   cout << "\033[2J\033[;H";
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
-  cout << grid[0][0].putSquare();
-  /*for(int i=0;i<rows;i++) {
+  for(int i=0;i<rows;i++) {
     for(int j=0;j<columns;j++) {
-      cout << grid[i][j].putSquare() << "\n";
+      cout << grid[i][j].putSquare();
     }
     cout << "\n";
-  }*/
+  }
   cout << "\n";
 }

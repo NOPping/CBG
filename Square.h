@@ -2,6 +2,7 @@
 #define SQUARE_H
 
 #include <string>
+#include <vector>
 #include "Piece.h"
 #include "Coordinate.h"
 
@@ -12,7 +13,7 @@ class Square {
       int amountOfPlayers;
       Coordinate position;
       int numberOfOccupants;
-      Piece* pieces;
+      std::vector <Piece *> pieces;
 
     public:
       Square();
@@ -22,7 +23,6 @@ class Square {
       bool addPiece(int Player, Piece* piece);
       bool removePiece();
       Coordinate getPosition();
-      Piece* getPieces();
 };
 
 #endif

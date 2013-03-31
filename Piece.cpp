@@ -49,7 +49,7 @@ Coordinate Piece::getPosition() {
  * Returns a character representation of the piece
  */
 std::string Piece::putPiece() {
-  return (*this->owner).getCharacter(this->type);
+  return this->owner->getCharacter(this->type);
 }
 /**
  * Returns the owner of the piece of the piece
