@@ -51,24 +51,25 @@ bool ConnectFour::isGameOver() {
 bool ConnectFour::fourInRow() {
   for(int currentColumn = 0; currentColumn < columns; currentColumn++) {
     for(int currentRow = 0; currentRow < rows; currentRow++) {
-    Square current = grid[currentColumn][currentRow];
+      Square current = grid[currentRow][currentColumn];
+      Coordinate currentPosition = current.getPosition();
       if(current.hasPieces()) {
-        if(checkNextSquare(current, 1, 0) == 4)     // Check east
-        if(checkNextSquare(current, 1, 1) == 4);    // Check north east
-        if(checkNextSquare(current, -1, 1) == 4);   // Check north west
-        if(checkNextSquare(current, 0, 1) == 4);    // Check north
+        if(checkNextSquare(current, grid[currentPosition.y + 0][currentPosition.x + 1], 0, 1) == 4)  return true;       // Check east
+        else if(checkNextSquare(current, grid[currentPosition.y + 1][currentPosition.x + 1], 1, 1) == 4) return true;  // Check north east
+        else if(checkNextSquare(current, grid[currentPosition.y + 1][currentPosition.x - 1], 1, -1) == 4) return true;  // Check north west
+        else if(checkNextSquare(current, grid[currentPosition.y + 1][currentPosition.x + 0], 1, 0) == 4)  return true; // Check north
       }
     }
   }
   return false;
 }
 
-int ConnectFour::checkNextSquare(Square current, int nextColumnOffset, int nextRowOffset) {
-  Coordinate currentPosition = current.getPosition();
-  Square next = grid[currentPosition.x + nextColumnOffset][currentPosition.y + nextRowOffset];
-  //need to implement a check here to see if owners are the same, not implemented yet
-  if(next.getPieces() == current.getPieces()) {
-    return checkNextSquare(next, nextColumnOffset + nextColumnOffset, nextRowOffset + nextRowOffset) + 1;
+int ConnectFour::checkNextSquare(Square current, Square next, int nextRowOffset, int nextColumnOffset) {
+  Coordinate nextPosition = next.getPosition();
+  Piece* piecesOnNextSquare = next.getPieces();
+  Piece* piecesOnCurrentSquare = current.getPieces();
+  if(piecesOnCurrentSquare[currentPlayer].getOwner() == piecesOnNextSquare[currentPlayer].getOwner()) {
+    return checkNextSquare(next, grid[nextPosition.y + nextRowOffset][nextPosition.x + nextColumnOffset], nextRowOffset, nextColumnOffset) + 1;
   }
   else return 1;
 }

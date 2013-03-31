@@ -11,7 +11,7 @@ class ConnectFour : public Game {
   	bool topRowFull();
   	bool isGameOver();
   	bool fourInRow();
-  	int checkNextSquare(Square current, int nextColumnOffset, int nextRowOffset);
+  	int checkNextSquare(Square current, Square next, int nextColumnOffset, int nextRowOffset);
   public:
     ConnectFour();
 };
