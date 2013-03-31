@@ -51,3 +51,9 @@ Coordinate Piece::getPosition() {
 std::string Piece::putPiece() {
   return (*this->owner).getCharacter(this->type);
 }
+/**
+ * Returns the owner of the piece of the piece
+ */
+Player Piece::getOwner() {
+  return this->owner
+}
