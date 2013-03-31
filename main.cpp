@@ -1,7 +1,7 @@
 #include "Checkers.h"
 
 int main() {
-    Checkers game;
-    game.start();
-    return 0;
+  Checkers game = Checkers();
+  game.start();
+  return 0;
 }

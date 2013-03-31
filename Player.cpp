@@ -14,10 +14,10 @@ Player::Player() {}
  * player may have.
  */
 Player::Player(int amountOfTypes, std::vector<std::string> types, int maxPieces) {
-    this->types = types;
-    this->amountOfTypes = amountOfTypes;
-    this->maxPieces = maxPieces;
-    this->pieces.resize(maxPieces);
+  this->types = types;
+  this->amountOfTypes = amountOfTypes;
+  this->maxPieces = maxPieces;
+  this->pieces.resize(maxPieces);
 }
 
 /**
@@ -25,39 +25,39 @@ Player::Player(int amountOfTypes, std::vector<std::string> types, int maxPieces)
  * Otherwise it returns NULL.
  */
 std::string Player::getCharacter(int type) {
-    return types[type];
+  return types[type];
 }
 
 bool Player::hasType(int type) {
-    if(type<amountOfTypes) {
-        return true;
-    } else {
-        return false;
-    }
+  if(type<amountOfTypes) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
  * Creates a piece for the player and returns a reference to the piece.
  */
 Piece* Player::addPiece(Coordinate position) {
-    return new Piece(&position,this);
-    //Piece* piece;
-    //if(*this->amountOfPieces < *this->maxPieces) {
-    //this->pieces[*this->amountOfPieces] = Piece(&position,this);
-    //piece = &pieces[*this->amountOfPieces];
-    //*this->amountOfPieces++;
-    //}
-    //return piece;
+  return new Piece(&position,this);
+  //Piece* piece;
+  //if(*this->amountOfPieces < *this->maxPieces) {
+  //this->pieces[*this->amountOfPieces] = Piece(&position,this);
+  //piece = &pieces[*this->amountOfPieces];
+  //*this->amountOfPieces++;
+  //}
+  //return piece;
 }
 
 /**
  * Decrements the amountOfPieces count
  */
 bool Player::removePiece() {
-    if(this->amountOfPieces > 0) {
-        this->amountOfPieces--;
-        return true;
-    } else {
-        return false;
-    }
+  if(this->amountOfPieces > 0) {
+    this->amountOfPieces--;
+    return true;
+  } else {
+    return false;
+  }
 }

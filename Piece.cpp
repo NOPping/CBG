@@ -6,23 +6,23 @@
  * Default constructor
  */
 Piece::Piece() {
-    this->type = 0;
+  this->type = 0;
 }
 
 /**
  * Constructor with paramaters for setting the position and owner.
  */
 Piece::Piece(Coordinate* position,Player* owner) {
-    this->position = position;
-    this->owner = owner;
-    this->type = 0;
+  this->position = position;
+  this->owner = owner;
+  this->type = 0;
 }
 
 /**
  * Returns the type of piece
  */
 int Piece::getType() {
-    return this->type;
+  return this->type;
 }
 
 /**
@@ -30,30 +30,30 @@ int Piece::getType() {
  * Otherwise false.
  */
 bool Piece::setType(int type) {
-    if((*this->owner).hasType(type)) {
-        this->type = type;
-        return true;
-    } else {
-        return false;
-    }
+  if((*this->owner).hasType(type)) {
+    this->type = type;
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
  * Returns the coordinates of the piece
  */
 Coordinate Piece::getPosition() {
-    return *position;
+  return *position;
 }
 
 /**
  * Returns a character representation of the piece
  */
 std::string Piece::putPiece() {
-    return this->owner->getCharacter(this->type);
+  return this->owner->getCharacter(this->type);
 }
 /**
  * Returns the owner of the piece of the piece
  */
 Player* Piece::getOwner() {
-    return this->owner;
+  return this->owner;
 }
