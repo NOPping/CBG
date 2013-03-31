@@ -1,19 +1,18 @@
 #include "Square.h"
+#include <iostream>
 
 Square::Square() {}
 
-  
-Square::Square(int* identifier, std::string* representation, int* amountOfPlayers, Coordinate* position) {
+Square::Square(int identifier, std::string representation, int amountOfPlayers, Coordinate position) {
   this->identifier = identifier;
   this->representation = representation;
   this->amountOfPlayers = amountOfPlayers;
   this->position = position;
-  
   // Current Doesn't work. Suggest using a vector.
-  this->pieces = new Piece[*this->amountOfPlayers];
+  //this->pieces = new Piece[*this->amountOfPlayers];
 }
 
-std::string* Square::putSquare() {
+std::string Square::putSquare() {
   return this->representation;
 }
 
@@ -37,6 +36,6 @@ bool Square::removePiece() {
   return false;
 }
 
-Coordinate* Square::getPosition() {
+Coordinate Square::getPosition() {
 	return this->position;
 }
