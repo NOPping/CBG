@@ -18,7 +18,7 @@ class Piece {
       bool setType(int type);
       std::string putPiece();
       Coordinate getPosition();
-      Player getOwner();
+      Player* getOwner();
 };
 
 #endif

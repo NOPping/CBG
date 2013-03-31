@@ -54,6 +54,6 @@ std::string Piece::putPiece() {
 /**
  * Returns the owner of the piece of the piece
  */
-Player Piece::getOwner() {
-  return this->owner
+Player* Piece::getOwner() {
+  return this->owner;
 }

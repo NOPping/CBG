@@ -13,11 +13,11 @@ Player::Player() {}
  * the character representation for each type and the max amount of pieces the
  * player may have.
  */
-Player::Player(int* amountOfTypes, std::string* types,int maxPieces) {
+Player::Player(int* amountOfTypes, std::string* types, int* maxPieces) {
   this->types = types;
   this->amountOfTypes = amountOfTypes;
   this->maxPieces = maxPieces;
-  this->pieces = new Piece[maxPieces];
+  this->pieces = new Piece[*maxPieces];
 }
 
 /**
@@ -39,14 +39,15 @@ bool Player::hasType(int type) {
 /**
  * Creates a piece for the player and returns a reference to the piece.
  */
-Piece * Player::addPiece(Coordinate position) {
-  Piece* piece;
-  if(this->amountOfPieces < this->maxPieces) {
-    this->pieces[this->amountOfPieces] = Piece(&position,this);
-    piece = &pieces[this->amountOfPieces];
-    this->amountOfPieces++;
-  }
-  return piece;
+Piece* Player::addPiece(Coordinate position) {
+  return new Piece(&position,this);
+  //Piece* piece;
+  //if(*this->amountOfPieces < *this->maxPieces) {
+    //this->pieces[*this->amountOfPieces] = Piece(&position,this);
+    //piece = &pieces[*this->amountOfPieces];
+    //*this->amountOfPieces++;
+  //}
+  //return piece;
 }
 
 /**

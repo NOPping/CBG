@@ -1,5 +1,7 @@
 #include "Checkers.h"
 
+using namespace std;
+
 Checkers::Checkers() {
   this->rows = 8;
   this->columns = 8;
@@ -11,34 +13,61 @@ Checkers::Checkers() {
   for(int i=0;i<rows;i++) {
     this->grid[i] = new Square[columns];
   }
+
+  int amountOfPieceTypes = 2;
+  int maxAmountOfPlayerPieces = 12;
+  string player1PieceTypes[] = {"\033[0;32;40m ○ \033[0m","\033[0;32;40m ◎ \033[0m"};
+  string player2PieceTypes[] = {"\033[0;37;40m ○ \033[0m","\033[0;37;40m ◎ \033[0m"};
   
-  int amountOfTypes=2;
-  std::string types[] = {"○","◎"};
-  this->players[0] = Player(&amountOfTypes,types,12);
-  this->players[1] = Player(&amountOfTypes,types,12);
+  this->players[0] = Player(&amountOfPieceTypes,
+                            player1PieceTypes,&maxAmountOfPlayerPieces);
   
-  std::string squareRepresentations[] = {"\033[0;37;47m   \033[0m","\033[0;37;40m   \033[0m"};
-  int squareIdentifier = 1;
+  this->players[1] = Player(&amountOfPieceTypes,
+                            player2PieceTypes,&maxAmountOfPlayerPieces);
   
-  for(int currentRow=0;currentRow<rows;currentRow++) {
-    for(int currentColumn=0;currentColumn<columns;currentColumn++) {
-      this->grid[currentRow][currentColumn] = Square(squareIdentifier,
-                                squareRepresentations[squareIdentifier], Coordinate(currentRow, currentColumn));
+  string squareRepresentations[] = {"\033[0;37;47m   \033[0m",
+                                    "\033[0;37;40m   \033[0m"};
+                                    
+  int squareIdentifier = 0;
+  
+  for(int i=0;i<rows;i++) {
+    for(int j=0;j<columns;j++) {
+      // Color the square
+      this->grid[i][j] = Square(&squareIdentifier,
+                                &squareRepresentations[squareIdentifier],
+                                &amountOfPlayers,
+                                new Coordinate(i,j));
+      
+      // Check if its a black square
+      if(squareIdentifier == 1) {
+        if(i<3) {
+          this->grid[i][j].addPiece(0,
+          this->players[0].addPiece(Coordinate(i,j)));
+        }
+        else if(i>4) {
+          this->grid[i][j].addPiece(1,
+          this->players[1].addPiece(Coordinate(i,j)));
+        }
+      }
+      
+      // Switch identifier
       squareIdentifier = (squareIdentifier + 1)%2;
     }
+    // Switch identifier
     squareIdentifier = (squareIdentifier + 1)%2;
   }
+  //players[0].addPiece(Coordinate(0,0));
+  //this->grid[0][1].addPiece(0,players[0].addPiece(Coordinate(0,0)));
 }
 
 void Game::drawScreen() {
-  std::cout << "\033[2J\033[;H";
-  std::cout << "Player " << (this->currentPlayer+1) << " it is your go\n";
-  //std::cout << this->grid[0][0].representation;
+  cout << "\033[2J\033[;H";
+  cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
   for(int i=0;i<rows;i++) {
     for(int j=0;j<columns;j++) {
-      std::cout << grid[i][j].putSquare();
+      cout << grid[i][j].putSquare();
     }
-    std::cout << "\n";
+    cout << "\n";
   }
-  std::cout << "\n";
+  cout << "\n";
 }
