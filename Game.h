@@ -18,7 +18,7 @@ class Game {
       void      drawScreen();
     
     public:
-      virtual void start() = 0;
+      virtual void start();
 };
 
 #endif

@@ -9,8 +9,6 @@ Square::Square(int identifier, std::string representation, int amountOfPlayers, 
   this->amountOfPlayers = amountOfPlayers;
   this->position = position;
   this->pieces.resize(this->amountOfPlayers);
-  // Current Doesn't work. Suggest using a vector.
-  //this->pieces = new Piece[*this->amountOfPlayers];
 }
 
 std::string Square::putSquare() {
@@ -27,7 +25,7 @@ bool Square::hasPieces() {
 }
 
 bool Square::addPiece(int player, Piece* piece) {
-  this->pieces[0] = piece;
+  this->pieces[player] = piece;
   this->numberOfOccupants++;
   return true;
   // TODO UNCOMPLETED.

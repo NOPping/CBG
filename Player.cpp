@@ -13,11 +13,11 @@ Player::Player() {}
  * the character representation for each type and the max amount of pieces the
  * player may have.
  */
-Player::Player(int amountOfTypes, std::string* types, int maxPieces) {
+Player::Player(int amountOfTypes, std::vector<std::string> types, int maxPieces) {
   this->types = types;
   this->amountOfTypes = amountOfTypes;
   this->maxPieces = maxPieces;
-  this->pieces = new Piece[maxPieces];
+  this->pieces.resize(maxPieces);
 }
 
 /**

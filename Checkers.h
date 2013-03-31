@@ -2,13 +2,13 @@
 #define CHECKERS
 
 #include <string>
+#include <vector>
 #include <iostream>
 #include "Game.h"
 
 class Checkers : public Game {
   public:
     Checkers();
-    void start();
 };
 
 #endif

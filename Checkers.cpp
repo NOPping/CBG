@@ -13,14 +13,16 @@ Checkers::Checkers() {
   for(int i=0;i<rows;i++) {
     this->grid[i] = new Square[columns];
   }
-}
 
-void Checkers::start() {
   int amountOfPieceTypes = 2;
   int maxAmountOfPlayerPieces = 12;
-  string player1PieceTypes[] = {"\033[0;31;40m ○ \033[0m","\033[0;31;40m ◎ \033[0m"};
-  string player2PieceTypes[] = {"\033[0;37;40m ○ \033[0m","\033[0;37;40m ◎ \033[0m"};
-  
+  vector <string> player1PieceTypes(amountOfPieceTypes);
+  vector <string> player2PieceTypes(amountOfPieceTypes);
+  player1PieceTypes[0] = "\033[0;31;40m ○ \033[0m";
+  player1PieceTypes[1] = "\033[0;31;40m ◎ \033[0m";
+  player2PieceTypes[0] = "\033[0;37;40m ○ \033[0m";
+  player2PieceTypes[1] = "\033[0;37;40m ◎ \033[0m";
+
   this->players[0] = Player(amountOfPieceTypes,
                             player1PieceTypes,maxAmountOfPlayerPieces);
   
@@ -59,10 +61,6 @@ void Checkers::start() {
     // Switch identifier
     squareIdentifier = (squareIdentifier + 1)%2;
   }
-  //players[0].addPiece(Coordinate(0,0));
-  //this->grid[0][1].addPiece(0,players[0].addPiece(Coordinate(0,0)));
-  
-  this->drawScreen();
 }
 
 void Game::drawScreen() {
