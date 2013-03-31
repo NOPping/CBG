@@ -8,6 +8,7 @@
 class Checkers : public Game {
   public:
     Checkers();
+    void start();
 };
 
 #endif

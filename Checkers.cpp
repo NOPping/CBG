@@ -15,11 +15,11 @@ Checkers::Checkers() {
   }
 }
 
-void Game::start() {
+void Checkers::start() {
   int amountOfPieceTypes = 2;
   int maxAmountOfPlayerPieces = 12;
-  string player1PieceTypes[] = {"p1d","p1k"};
-  string player2PieceTypes[] = {"p2d","p2k"};
+  string player1PieceTypes[] = {"\033[0;31;40m ○ \033[0m","\033[0;31;40m ◎ \033[0m"};
+  string player2PieceTypes[] = {"\033[0;37;40m ○ \033[0m","\033[0;37;40m ◎ \033[0m"};
   
   this->players[0] = Player(amountOfPieceTypes,
                             player1PieceTypes,maxAmountOfPlayerPieces);
