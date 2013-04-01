@@ -38,9 +38,9 @@ bool Square::addPiece(int player, Piece* piece) {
   //return false;
 }
 
-bool Square::removePiece() {
-  // TODO fill out this method.
-  return false;
+bool Square::removePiece(int player) {
+  this->pieces[player] = 0;
+  return true;
 }
 
 Coordinate Square::getPosition() {

@@ -21,7 +21,7 @@ class Square {
       std::string putSquare();
       bool hasPieces();
       bool addPiece(int Player, Piece* piece);
-      bool removePiece();
+      bool removePiece(int player);
       Coordinate getPosition();
 };
 

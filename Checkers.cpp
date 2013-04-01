@@ -65,6 +65,7 @@ Checkers::Checkers() {
 
 void Game::drawScreen() {
   cout << "\033[2J\033[;H";
+  grid[0][1].removePiece(0);
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
