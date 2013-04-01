@@ -39,8 +39,8 @@ bool Player::hasType(int type) {
 /**
  * Creates a piece for the player and returns a reference to the piece.
  */
-Piece* Player::addPiece(Coordinate position) {
-  return new Piece(&position,this);
+Piece* Player::addPiece() {
+  return new Piece(this);
   //Piece* piece;
   //if(*this->amountOfPieces < *this->maxPieces) {
   //this->pieces[*this->amountOfPieces] = Piece(&position,this);

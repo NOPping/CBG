@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Piece.h"
+#include "Player.h"
 #include "Coordinate.h"
 
 class Square {
@@ -19,10 +20,13 @@ class Square {
       Square();
       Square(int identifier, std::string representation, int amountOfPlayers, Coordinate position);
       std::string putSquare();
-      bool hasPieces();
+      bool hasPiece();
       bool addPiece(int Player, Piece* piece);
       bool removePiece(int player);
+      bool hasPieceOwnedBy(int player);
+      Piece* getPiece(int player);
       Coordinate getPosition();
+      int getIdentifier();
 };
 
 #endif

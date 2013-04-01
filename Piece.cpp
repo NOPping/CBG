@@ -12,8 +12,8 @@ Piece::Piece() {
 /**
  * Constructor with paramaters for setting the position and owner.
  */
-Piece::Piece(Coordinate* position,Player* owner) {
-  this->position = position;
+Piece::Piece(Player* owner) {
+  //this->position = position;
   this->owner = owner;
   this->type = 0;
 }
@@ -41,19 +41,13 @@ bool Piece::setType(int type) {
 /**
  * Returns the coordinates of the piece
  */
-Coordinate Piece::getPosition() {
-  return *position;
-}
+//Coordinate Piece::getPosition() {
+  //return *position;
+   //}
 
 /**
  * Returns a character representation of the piece
  */
 std::string Piece::putPiece() {
   return this->owner->getCharacter(this->type);
-}
-/**
- * Returns the owner of the piece of the piece
- */
-Player* Piece::getOwner() {
-  return this->owner;
 }

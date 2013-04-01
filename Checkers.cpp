@@ -48,10 +48,10 @@ Checkers::Checkers() {
       if(squareIdentifier == 1) {
         if(i<3) {
           this->grid[i][j].addPiece(0,
-                                    this->players[0].addPiece(Coordinate(i,j)));
+                                    this->players[0].addPiece());
         } else if(i>4) {
           this->grid[i][j].addPiece(1,
-                                    this->players[1].addPiece(Coordinate(i,j)));
+                                    this->players[1].addPiece());
         }
       }
 
@@ -65,7 +65,6 @@ Checkers::Checkers() {
 
 void Game::drawScreen() {
   cout << "\033[2J\033[;H";
-  grid[0][1].removePiece(0);
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
@@ -74,4 +73,79 @@ void Game::drawScreen() {
     cout << "\n";
   }
   cout << "\n";
+}
+
+bool Game::getMove() {
+  int x,y;
+  do {
+    cout << "Type in the X and Y coordinate of the piece you would like to "
+         << "move:\n";
+    cin >> x;
+    cin >> y;
+    if(x < 0 || x > this->rows || y < 0 || y > this->columns) {
+      cout << "Invalid source coordinate, try again\n";
+    }
+  } while(x < 0 || x > this->rows || y < 0 || y > this->columns);
+
+  Coordinate sourceCoordinate = Coordinate(x,y);
+  
+  do {
+    cout << "Type in the X and Y coordinate of the square you would like to "
+         << "move too:\n";
+    cin >> x;
+    cin >> y;
+    if(x < 0 || x > this->rows || y < 0 || y > this->columns) {
+      cout << "Invalid destination coordinate, try again\n";
+    }
+  } while(x < 0 || x > this->rows || y < 0 || y > this->columns);
+
+  Coordinate destinationCoordinate = Coordinate(x,y);
+
+  Square* sourceSquare = &grid[sourceCoordinate.y][sourceCoordinate.x];
+  Square* destinationSquare = &grid[destinationCoordinate.y][destinationCoordinate.x];
+  
+  if(sourceSquare->getIdentifier() == 0) {
+    cout << "Source square is white\n";
+    return false;
+  }
+  
+  if(destinationSquare->getIdentifier() == 0) {
+    cout << "Destination square is white\n";
+    return false;
+  }
+
+  if(!sourceSquare->hasPiece()) {
+    cout << "Source square doesn't contain any pieces\n";
+    return false;
+  }
+  
+  if(destinationSquare->hasPiece()) {
+    cout << "Destination square is occupied\n";
+    return false;
+  }
+  
+  if(!sourceSquare->hasPieceOwnedBy(currentPlayer)) {
+    cout << "The select square doesn't contain a piece owned by you\n";
+    return false;
+  }
+
+  if(abs(sourceCoordinate.x-destinationCoordinate.x)==1) {
+    if((currentPlayer == 0
+       || sourceSquare->getPiece(currentPlayer)->getType() == 1)
+       && (destinationCoordinate.y-sourceCoordinate.y) == 1
+    ) {
+      cout << "Valid move for player1 piece\n";
+      return this->executeMove(sourceSquare,destinationSquare);
+    }
+  }
+
+  return false;
+}
+
+bool Game::executeMove(Square* sourceSquare,Square* destinationSquare) {
+  cout << "Updating the destination square";
+  destinationSquare->addPiece(this->currentPlayer,sourceSquare->getPiece(currentPlayer));
+  cout << "Removing the piece from the source square";
+  sourceSquare->removePiece(this->currentPlayer);
+  return true;
 }

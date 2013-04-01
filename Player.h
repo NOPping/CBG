@@ -17,7 +17,7 @@ class Player {
     public:
       Player();
       Player(int amountOfTypes, std::vector<std::string> types, int maxPieces);
-      Piece* addPiece(Coordinate position);
+      Piece* addPiece();
       bool removePiece();
       bool hasType(int type);
       std::string getCharacter(int type);

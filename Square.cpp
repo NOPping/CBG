@@ -7,6 +7,7 @@ Square::Square(int identifier, std::string representation, int amountOfPlayers, 
   this->identifier = identifier;
   this->representation = representation;
   this->amountOfPlayers = amountOfPlayers;
+  this->numberOfOccupants = 0;
   this->position = position;
   this->pieces.resize(this->amountOfPlayers);
 }
@@ -20,22 +21,19 @@ std::string Square::putSquare() {
   return this->representation;
 }
 
-bool Square::hasPieces() {
+bool Square::hasPiece() {
   return this->numberOfOccupants>0;
 }
 
 bool Square::addPiece(int player, Piece* piece) {
-  this->pieces[player] = piece;
-  this->numberOfOccupants++;
-  return true;
-  // TODO UNCOMPLETED.
-  //if(player < this->amountOfPlayers &&
-  // this->numberOfOccupants != this->amountOfPlayers) {
-  //this->pieces[player] = piece;
-  //this->numberOfOccupants++;
-  //return true;
-  //}
-  //return false;
+  if(player < this->amountOfPlayers
+     && this->numberOfOccupants != this->amountOfPlayers
+  ) {
+    this->pieces[player] = piece;
+    this->numberOfOccupants++;
+    return true;
+  }
+  return false;
 }
 
 bool Square::removePiece(int player) {
@@ -45,4 +43,19 @@ bool Square::removePiece(int player) {
 
 Coordinate Square::getPosition() {
   return this->position;
+}
+
+int Square::getIdentifier() {
+  return this->identifier;
+}
+
+bool Square::hasPieceOwnedBy(int player) {
+  if(this->pieces[player] != 0) {
+    return true;
+  }
+  return false;
+}
+
+Piece* Square::getPiece(int player) {
+  return this->pieces[player];
 }

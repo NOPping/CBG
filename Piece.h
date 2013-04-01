@@ -7,18 +7,17 @@
 class Player;
 class Piece {
     private:
-      Player*       owner;
-      Coordinate*   position;
+      //Coordinate*   position;
       int           type;
       
     public:
       Piece();
-      Piece(Coordinate* position,Player* owner);
+      Piece(Player* owner);
       int getType();
       bool setType(int type);
       std::string putPiece();
-      Coordinate getPosition();
-      Player* getOwner();
+      //Coordinate getPosition();
+      Player* owner;
 };
 
 #endif
