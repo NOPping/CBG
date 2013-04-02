@@ -42,8 +42,8 @@ bool Piece::setType(int type) {
  * Returns the coordinates of the piece
  */
 //Coordinate Piece::getPosition() {
-  //return *position;
-   //}
+//return *position;
+//}
 
 /**
  * Returns a character representation of the piece

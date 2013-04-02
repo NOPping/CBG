@@ -79,7 +79,7 @@ bool Game::getMove() {
   int x,y;
   do {
     cout << "Type in the X and Y coordinate of the piece you would like to "
-         << "move:\n";
+    << "move:\n";
     cin >> x;
     cin >> y;
     if(x < 0 || x > this->rows || y < 0 || y > this->columns) {
@@ -88,10 +88,10 @@ bool Game::getMove() {
   } while(x < 0 || x > this->rows || y < 0 || y > this->columns);
 
   Coordinate sourceCoordinate = Coordinate(x,y);
-  
+
   do {
     cout << "Type in the X and Y coordinate of the square you would like to "
-         << "move too:\n";
+    << "move too:\n";
     cin >> x;
     cin >> y;
     if(x < 0 || x > this->rows || y < 0 || y > this->columns) {
@@ -103,12 +103,12 @@ bool Game::getMove() {
 
   Square* sourceSquare = &grid[sourceCoordinate.y][sourceCoordinate.x];
   Square* destinationSquare = &grid[destinationCoordinate.y][destinationCoordinate.x];
-  
+
   if(sourceSquare->getIdentifier() == 0) {
     cout << "Source square is white\n";
     return false;
   }
-  
+
   if(destinationSquare->getIdentifier() == 0) {
     cout << "Destination square is white\n";
     return false;
@@ -118,12 +118,12 @@ bool Game::getMove() {
     cout << "Source square doesn't contain any pieces\n";
     return false;
   }
-  
+
   if(destinationSquare->hasPiece()) {
     cout << "Destination square is occupied\n";
     return false;
   }
-  
+
   if(!sourceSquare->hasPieceOwnedBy(currentPlayer)) {
     cout << "The select square doesn't contain a piece owned by you\n";
     return false;
@@ -131,11 +131,37 @@ bool Game::getMove() {
 
   if(abs(sourceCoordinate.x-destinationCoordinate.x)==1) {
     if((currentPlayer == 0
-       || sourceSquare->getPiece(currentPlayer)->getType() == 1)
-       && (destinationCoordinate.y-sourceCoordinate.y) == 1
-    ) {
+        || sourceSquare->getPiece(currentPlayer)->getType() == 1)
+        && ((destinationCoordinate.y-sourceCoordinate.y) == 1)
+      ) {
       cout << "Valid move for player1 piece\n";
       return this->executeMove(sourceSquare,destinationSquare);
+    } else if((currentPlayer == 1
+               || sourceSquare->getPiece(currentPlayer)->getType() == 1)
+               && ((destinationCoordinate.y-sourceCoordinate.y) == -1)
+             ) {
+      cout << "Valid move for player2 piece\n";
+      return this->executeMove(sourceSquare,destinationSquare);
+    }
+  }
+  
+  if(abs(sourceCoordinate.x-destinationCoordinate.x)==2) {
+    Square* toJump = &grid[(sourceCoordinate.y+destinationCoordinate.y)/2][(sourceCoordinate.x+destinationCoordinate.x)/2];
+    if(toJump->hasPiece() && toJump->hasPieceOwnedBy((currentPlayer+1)%2)) {
+      if((currentPlayer == 0
+          || sourceSquare->getPiece(currentPlayer)->getType() == 1)
+          && ((destinationCoordinate.y-sourceCoordinate.y) == 2)
+        ) {
+          cout << "Valid jump";
+          toJump->removePiece((currentPlayer+1)%2);
+          return this->executeMove(sourceSquare,destinationSquare);
+        } else if((this->currentPlayer == 1
+                  || sourceSquare->getPiece(currentPlayer)->getType() == 1)
+                  && ((destinationCoordinate.y-sourceCoordinate.y) == -2)
+                 ) {
+                   toJump->removePiece((currentPlayer+1)%2);
+                   return this->executeMove(sourceSquare,destinationSquare);
+        }
     }
   }
 
@@ -147,5 +173,6 @@ bool Game::executeMove(Square* sourceSquare,Square* destinationSquare) {
   destinationSquare->addPiece(this->currentPlayer,sourceSquare->getPiece(currentPlayer));
   cout << "Removing the piece from the source square";
   sourceSquare->removePiece(this->currentPlayer);
+  this->currentPlayer = (this->currentPlayer+1) % this->amountOfPlayers;
   return true;
 }

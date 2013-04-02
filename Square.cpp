@@ -27,8 +27,8 @@ bool Square::hasPiece() {
 
 bool Square::addPiece(int player, Piece* piece) {
   if(player < this->amountOfPlayers
-     && this->numberOfOccupants != this->amountOfPlayers
-  ) {
+      && this->numberOfOccupants != this->amountOfPlayers
+    ) {
     this->pieces[player] = piece;
     this->numberOfOccupants++;
     return true;
@@ -38,6 +38,7 @@ bool Square::addPiece(int player, Piece* piece) {
 
 bool Square::removePiece(int player) {
   this->pieces[player] = 0;
+  this->numberOfOccupants--;
   return true;
 }
 
