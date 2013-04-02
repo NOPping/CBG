@@ -138,13 +138,13 @@ bool Game::getMove() {
       return this->executeMove(sourceSquare,destinationSquare);
     } else if((currentPlayer == 1
                || sourceSquare->getPiece(currentPlayer)->getType() == 1)
-               && ((destinationCoordinate.y-sourceCoordinate.y) == -1)
+              && ((destinationCoordinate.y-sourceCoordinate.y) == -1)
              ) {
       cout << "Valid move for player2 piece\n";
       return this->executeMove(sourceSquare,destinationSquare);
     }
   }
-  
+
   if(abs(sourceCoordinate.x-destinationCoordinate.x)==2) {
     Square* toJump = &grid[(sourceCoordinate.y+destinationCoordinate.y)/2][(sourceCoordinate.x+destinationCoordinate.x)/2];
     if(toJump->hasPiece() && toJump->hasPieceOwnedBy((currentPlayer+1)%2)) {
@@ -152,16 +152,16 @@ bool Game::getMove() {
           || sourceSquare->getPiece(currentPlayer)->getType() == 1)
           && ((destinationCoordinate.y-sourceCoordinate.y) == 2)
         ) {
-          cout << "Valid jump";
-          toJump->removePiece((currentPlayer+1)%2);
-          return this->executeMove(sourceSquare,destinationSquare);
-        } else if((this->currentPlayer == 1
-                  || sourceSquare->getPiece(currentPlayer)->getType() == 1)
-                  && ((destinationCoordinate.y-sourceCoordinate.y) == -2)
-                 ) {
-                   toJump->removePiece((currentPlayer+1)%2);
-                   return this->executeMove(sourceSquare,destinationSquare);
-        }
+        cout << "Valid jump";
+        toJump->removePiece((currentPlayer+1)%2);
+        return this->executeMove(sourceSquare,destinationSquare);
+      } else if((this->currentPlayer == 1
+                 || sourceSquare->getPiece(currentPlayer)->getType() == 1)
+                && ((destinationCoordinate.y-sourceCoordinate.y) == -2)
+               ) {
+        toJump->removePiece((currentPlayer+1)%2);
+        return this->executeMove(sourceSquare,destinationSquare);
+      }
     }
   }
 
