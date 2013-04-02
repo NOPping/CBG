@@ -159,6 +159,7 @@ bool Game::getMove() {
                  || sourceSquare->getPiece(currentPlayer)->getType() == 1)
                 && ((destinationCoordinate.y-sourceCoordinate.y) == -2)
                ) {
+        cout << "Valid jump";
         toJump->removePiece((currentPlayer+1)%2);
         return this->executeMove(sourceSquare,destinationSquare);
       }
@@ -173,6 +174,16 @@ bool Game::executeMove(Square* sourceSquare,Square* destinationSquare) {
   destinationSquare->addPiece(this->currentPlayer,sourceSquare->getPiece(currentPlayer));
   cout << "Removing the piece from the source square";
   sourceSquare->removePiece(this->currentPlayer);
+  if(this->currentPlayer==0 && destinationSquare->getPosition().y == this->columns -1) {
+    destinationSquare->getPiece(currentPlayer)->setType(1);
+  }
+  if(this->currentPlayer==1 && destinationSquare->getPosition().y == 0) {
+    destinationSquare->getPiece(currentPlayer)->setType(1);
+  }
+  if(this->players[(currentPlayer+1)%2].getAmountOfPieces() == 0) {
+    this->state = false;
+    return false;
+  }
   this->currentPlayer = (this->currentPlayer+1) % this->amountOfPlayers;
   return true;
 }

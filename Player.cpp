@@ -40,6 +40,7 @@ bool Player::hasType(int type) {
  * Creates a piece for the player and returns a reference to the piece.
  */
 Piece* Player::addPiece() {
+  this->amountOfPieces++;
   return new Piece(this);
   //Piece* piece;
   //if(*this->amountOfPieces < *this->maxPieces) {
@@ -60,4 +61,8 @@ bool Player::removePiece() {
   } else {
     return false;
   }
+}
+
+int Player::getAmountOfPieces() {
+  return this->amountOfPieces;
 }
