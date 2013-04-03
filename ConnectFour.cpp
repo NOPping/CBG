@@ -61,7 +61,7 @@ bool ConnectFour::fourInRow(Square current) {
     for(int currentColumnOffset = -1;currentColumnOffset <= 0; currentColumnOffset++) {
       if(currentRowOffset != 0 || currentColumnOffset != 0) {
         int amountOfPlayerPliecesFirstSide = checkNextSquare(grid[currentPosition.y + currentColumnOfset][currentPosition.x + currentRowOffset], currentColumnOfset, currentRowOffset);
-        int amountOfPlayerPliecesSecondSide = checkNextSquare(4grid[currentPosition.y + currentColumnOfset*-1a][currentPosition.x + currentRowOffset*-1], currentColumnOfset*-1, currentRowOffset*-1);
+        int amountOfPlayerPliecesSecondSide = checkNextSquare(grid[currentPosition.y + currentColumnOfset*-1][currentPosition.x + currentRowOffset*-1], currentColumnOfset*-1, currentRowOffset*-1);
         if((1 + amountOfPlayerPliecesFirstSide + amountOfPlayerPliecesSecondSide) > 3)
            return true;
       }
