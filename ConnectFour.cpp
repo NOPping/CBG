@@ -57,13 +57,12 @@ bool ConnectFour::isGameOver(Square current) {
  */
 bool ConnectFour::fourInRow(Square current) {
   Coordinate currentPosition = current.getPosition();
-  for(int currentRowOffset = -1; currentRowOffset <= 0; currentRowOffset++) {
-    for(int currentColumnOffset = -1;currentColumnOffset <= 0; currentColumnOffset++) {
+  for(int rowOffset = -1; rowOffset <= 0; rowOffset++)  {
+    for(int columnOffset = -1; columnOffset <= 0; columnOffset++) {
       if(currentRowOffset != 0 || currentColumnOffset != 0) {
-        int amountOfPlayerPliecesFirstSide = checkNextSquare(grid[currentPosition.y + currentColumnOfset][currentPosition.x + currentRowOffset], currentColumnOfset, currentRowOffset);
-        int amountOfPlayerPliecesSecondSide = checkNextSquare(grid[currentPosition.y + currentColumnOfset*-1][currentPosition.x + currentRowOffset*-1], currentColumnOfset*-1, currentRowOffset*-1);
-        if((1 + amountOfPlayerPliecesFirstSide + amountOfPlayerPliecesSecondSide) > 3)
-           return true;
+        int numPlayerPiecesFirstSide  = checkNextSquare(grid[currentPosition.y + columnOffset][currentPosition.x + rowOffset], columnOfset, rowOffset);
+        int numPlayerPiecesSecondSide = checkNextSquare(grid[currentPosition.y + columnOffset*-1][currentPosition.x + rowOffset*-1], columnOffset*-1, rowOffset*-1);
+        if((1 + numPlayerPiecesFirstSide + numPlayerPiecesSecondSide) > 3) return true;
       }
     }
   }
@@ -72,10 +71,10 @@ bool ConnectFour::fourInRow(Square current) {
 /**
  * Recursive function to return the number of player pieces in a row
  */
-int ConnectFour::checkNextSquare(Square next, int nextRowOffset, int nextColumnOffset) {
-  Coordinate nextPosition = next.getPosition();
+int ConnectFour::checkNextSquare(Square next, int rowOffset, int columnOffset) {
   if(next.hasPieceOwnedBy(curentPlayer)) {
-    return checkNextSquare(grid[nextPosition.y + nextRowOffset][nextPosition.x + nextColumnOffset], nextRowOffset, nextColumnOffset) + 1;
+    Coordinate nextPosition = next.getPosition();
+    return 1 + checkNextSquare(grid[nextPosition.y + rowOffset][nextPosition.x + columnOffset], rowOffset, columnOffset);
   }
   else return 0;
 }
