@@ -49,22 +49,21 @@ void Game::drawScreen() {
 /**
  * Function to reurn weather or not the game is over.
  */
-bool ConnectFour::isGameOver() {
-  return (fourInRow() || topRowFull());
+bool ConnectFour::isGameOver(Square current) {
+  return (fourInRow(Square current) || topRowFull());
 }
 /**
  * Function to return true if four or more player pieces are in a row
  */
-bool ConnectFour::fourInRow() {
-  for(int currentColumn = 0; currentColumn < columns; currentColumn++) {
-    for(int currentRow = 0; currentRow < rows; currentRow++) {
-      Square current = grid[currentRow][currentColumn];
-      Coordinate currentPosition = current.getPosition();
-      if(current.hasPieces()) {
-        if(checkNextSquare(current, grid[currentPosition.y + 0][currentPosition.x + 1], 0, 1) == 4)  return true;       // Check east
-        else if(checkNextSquare(current, grid[currentPosition.y + 1][currentPosition.x + 1], 1, 1) == 4) return true;  // Check north east
-        else if(checkNextSquare(current, grid[currentPosition.y + 1][currentPosition.x - 1], 1, -1) == 4) return true;  // Check north west
-        else if(checkNextSquare(current, grid[currentPosition.y + 1][currentPosition.x + 0], 1, 0) == 4)  return true; // Check north
+bool ConnectFour::fourInRow(Square current) {
+  Coordinate currentPosition = current.getPosition();
+  for(int currentRowOffset = -1; currentRowOffset <= 0; currentRowOffset++) {
+    for(int currentColumnOffset = -1;currentColumnOffset <= 0; currentColumnOffset++) {
+      if(currentRowOffset != 0 || currentColumnOffset != 0) {
+        int amountOfPlayerPliecesFirstSide = checkNextSquare(current, grid[currentPosition.y + currentColumnOfset][currentPosition.x + currentRowOffset], currentColumnOfset, currentRowOffset);
+        int amountOfPlayerPliecesSecondSide = checkNextSquare(current, grid[currentPosition.y + currentColumnOfset*-1][currentPosition.x + currentRowOffset*-1], currentColumnOfset*-1, currentRowOffset*-1);
+        if((1 + amountOfPlayerPliecesFirstSide + amountOfPlayerPliecesSecondSide) > 3)
+           return true;
       }
     }
   }
@@ -79,7 +78,8 @@ int ConnectFour::checkNextSquare(Square current, Square next, int nextRowOffset,
   Piece* piecesOnCurrentSquare = current.getPieces();
   if(piecesOnCurrentSquare[currentPlayer].getOwner() == piecesOnNextSquare[currentPlayer].getOwner()) {
     return checkNextSquare(next, grid[nextPosition.y + nextRowOffset][nextPosition.x + nextColumnOffset], nextRowOffset, nextColumnOffset) + 1;
-  } else return 1;
+  }
+  else return 0;
 }
 /**
  * Function to test if top row is full
