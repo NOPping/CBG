@@ -60,8 +60,8 @@ bool ConnectFour::fourInRow(Square current) {
   for(int currentRowOffset = -1; currentRowOffset <= 0; currentRowOffset++) {
     for(int currentColumnOffset = -1;currentColumnOffset <= 0; currentColumnOffset++) {
       if(currentRowOffset != 0 || currentColumnOffset != 0) {
-        int amountOfPlayerPliecesFirstSide = checkNextSquare(current, grid[currentPosition.y + currentColumnOfset][currentPosition.x + currentRowOffset], currentColumnOfset, currentRowOffset);
-        int amountOfPlayerPliecesSecondSide = checkNextSquare(current, grid[currentPosition.y + currentColumnOfset*-1][currentPosition.x + currentRowOffset*-1], currentColumnOfset*-1, currentRowOffset*-1);
+        int amountOfPlayerPliecesFirstSide = checkNextSquare(grid[currentPosition.y + currentColumnOfset][currentPosition.x + currentRowOffset], currentColumnOfset, currentRowOffset);
+        int amountOfPlayerPliecesSecondSide = checkNextSquare(4grid[currentPosition.y + currentColumnOfset*-1a][currentPosition.x + currentRowOffset*-1], currentColumnOfset*-1, currentRowOffset*-1);
         if((1 + amountOfPlayerPliecesFirstSide + amountOfPlayerPliecesSecondSide) > 3)
            return true;
       }
@@ -72,12 +72,10 @@ bool ConnectFour::fourInRow(Square current) {
 /**
  * Recursive function to return the number of player pieces in a row
  */
-int ConnectFour::checkNextSquare(Square current, Square next, int nextRowOffset, int nextColumnOffset) {
+int ConnectFour::checkNextSquare(Square next, int nextRowOffset, int nextColumnOffset) {
   Coordinate nextPosition = next.getPosition();
-  Piece* piecesOnNextSquare = next.getPieces();
-  Piece* piecesOnCurrentSquare = current.getPieces();
-  if(piecesOnCurrentSquare[currentPlayer].getOwner() == piecesOnNextSquare[currentPlayer].getOwner()) {
-    return checkNextSquare(next, grid[nextPosition.y + nextRowOffset][nextPosition.x + nextColumnOffset], nextRowOffset, nextColumnOffset) + 1;
+  if(next.hasPieceOwnedBy(curentPlayer)) {
+    return checkNextSquare(grid[nextPosition.y + nextRowOffset][nextPosition.x + nextColumnOffset], nextRowOffset, nextColumnOffset) + 1;
   }
   else return 0;
 }
