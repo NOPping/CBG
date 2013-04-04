@@ -12,11 +12,12 @@ int main() {
   cout << "====================================" << "\n";
   cout << "\nInsert the number of the game you wish to play: ";
   cin >> selection;
-  if(selection == 1) {
-    Checkers game = Checkers();
-    game.start();
-  } else {
-    cout << "Not yet made\n";
-  }
+  Game* games = {
+      new Checkers()
+      //new ConnectFour(),
+      //new SnakesAndLadders(), 
+      //new Reversi()
+  };
+  games[selection].start();
   return 0;
 }
