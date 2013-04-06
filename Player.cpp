@@ -14,6 +14,7 @@ Player::Player() {}
  * player may have.
  */
 Player::Player(int amountOfTypes, std::vector<std::string> types, int maxPieces) {
+  this->consecutiveSixes = 0;
   this->types = types;
   this->amountOfPieces = 0;
   this->amountOfTypes = amountOfTypes;

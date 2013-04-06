@@ -15,6 +15,7 @@ class Player {
       std::vector<Piece>          pieces;
 
     public:
+      int consecutiveSixes;
       Player();
       Player(int amountOfTypes, std::vector<std::string> types, int maxPieces);
       Piece* addPiece();
