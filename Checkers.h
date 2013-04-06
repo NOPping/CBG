@@ -14,7 +14,6 @@ class Checkers : public Game {
   
   public:
     Checkers();
-    ~Checkers();
 };
 
 #endif

@@ -6,21 +6,31 @@ using namespace std;
 
 int main() {
   int selection=0;
+  
+  std::string games[] = {
+    "1) Checkers",
+    "2) ConnectFour",
+    "3) Snakes and Ladders",
+    "4) Reversi"
+  };
+  
   cout << "Welcome to compendium of board games" << "\n";
   cout << "====================================" << "\n";
-  cout << "1) Checkers\n2) ConnectFour\n3) Snakes and Ladders\n4) Reversi\n";
+  
+  for(int i=0;i<4;i++) {
+    cout << games[i] << "\n";
+  }
+  
   cout << "====================================" << "\n";
   cout << "\nInsert the number of the game you wish to play: ";
   cin >> selection;
-  Game* games = {
-    new Checkers()
-    //new ConnectFour(),
-    //new SnakesAndLadders(),
-    //new Reversi()
-  };
-  selection--;
+  
   if(selection >= 0 && selection < 4) {
-    games[selection].start();
+    if(selection == 1) {
+      Checkers().start();
+    } else if(selection == 2) {
+      ConnectFour().start();
+    }
   } else {
     cout << "Invalid Selection";
   }

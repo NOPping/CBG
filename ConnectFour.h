@@ -9,13 +9,17 @@
 
 class ConnectFour : public Game {
   private:
+    bool getMove();
+    void drawScreen();
 
-  	int *columnSpace;
-  	bool topRowFull();
-  	bool isGameOver(Square current);
-  	bool fourInRow(Square current);
-  	int checkNextSquare(Square next, int nextColumnOffset, int nextRowOffset);
-  	bool isValidMove(int destinationX);
+  	bool  topRowFull();
+  	bool  isGameOver(Square current);
+  	bool  fourInRow(Square current);
+    bool  isValidMove(int destinationX);
+    bool  executeMove(int destinationX);
+    
+    int   *columnSpace;
+  	int   checkNextSquare(Square next, int nextColumnOffset, int nextRowOffset);
   public:
     ConnectFour();
 };

@@ -32,29 +32,30 @@ ConnectFour::ConnectFour() {
   this->players[1] = Player(amountOfPieceTypes,
                             player2PieceTypes,maxAmountOfPlayerPieces);
 
-  std::string squareRepresentation = "| ";
+  std::string start = "| ";
+  std::string end = " ";
 
   for(int currentRow=0; currentRow<rows; currentRow++) {
     for(int currentColumn=0; currentColumn<columns; currentColumn++) {
-      this->grid[currentRow][currentColumn] = Square(1, squareRepresentation,amountOfPlayers, Coordinate(currentRow, currentColumn));
+      this->grid[currentRow][currentColumn] = Square(1, start, end,amountOfPlayers, Coordinate(currentRow, currentColumn));
     }
   }
 }
 /**
  * Function to draw the screen used to play connect four.
  */
-void Game::drawScreen() {
-  std::cout << "\033[2J\033[;H";
+void ConnectFour::drawScreen() {
+  this->clearScreen();
   std::cout << "Player " << (this->currentPlayer+1) << " it is your go\n";
   //std::cout << this->grid[0][0].representation;
-  std::cout << "___________\n";
+  std::cout << "_________________________\n";
   for(int currentRow=0; currentRow<rows; currentRow++) {
     for(int currentColumn=0; currentColumn<columns; currentColumn++) {
       std::cout << grid[currentRow][currentColumn].putSquare();
     }
     std::cout << "|\n";
   }
-  std::cout << "___________\n";
+  std::cout << "_________________________\n";
   std::cout << "\n";
 }
 
@@ -90,7 +91,7 @@ int ConnectFour::checkNextSquare(Square next, int rowOffset, int columnOffset) {
   } else return 0;
 }
 
-bool Game::getMove() {
+bool ConnectFour::getMove() {
   int x,y;
   bool validInput = false;
   do {
@@ -111,7 +112,7 @@ bool ConnectFour::isValidMove(int destinationX) {
   }
 }
 
-bool Game::executeMove(int destinationX) {
+bool ConnectFour::executeMove(int destinationX) {
   int destinationY = columnSpace[destinationX];
   this->columnSpace[destinationX]++;
   Square destinationSquare = grid[destinationX][destinationY];
