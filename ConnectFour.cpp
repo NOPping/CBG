@@ -87,11 +87,10 @@ int ConnectFour::checkNextSquare(Square next, int rowOffset, int columnOffset) {
   if(next.hasPieceOwnedBy(currentPlayer)) {
     Coordinate nextPosition = next.getPosition();
     return 1 + checkNextSquare(grid[nextPosition.y + rowOffset][nextPosition.x + columnOffset], rowOffset, columnOffset);
-  }
-  else return 0;
+  } else return 0;
 }
 
-bool Game::getMove() { 
+bool Game::getMove() {
   int x,y;
   bool validInput = false;
   do {

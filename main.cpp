@@ -13,10 +13,10 @@ int main() {
   cout << "\nInsert the number of the game you wish to play: ";
   cin >> selection;
   Game* games = {
-      new Checkers()
-      //new ConnectFour(),
-      //new SnakesAndLadders(), 
-      //new Reversi()
+    new Checkers()
+    //new ConnectFour(),
+    //new SnakesAndLadders(),
+    //new Reversi()
   };
   selection--;
   if(selection >= 0 && selection < 4) {
