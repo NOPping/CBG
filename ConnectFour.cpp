@@ -51,7 +51,7 @@ void ConnectFour::drawScreen() {
   std::cout << "_________________________\n";
   for(int currentRow=0; currentRow<rows; currentRow++) {
     for(int currentColumn=0; currentColumn<columns; currentColumn++) {
-      std::cout << grid[currentRow][currentColumn].putSquare();
+      std::cout << grid[currentRow][currentColumn];
     }
     std::cout << "|\n";
   }

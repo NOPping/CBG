@@ -29,50 +29,46 @@ Checkers::Checkers() {
   players[1] = Player(amountOfPieceTypes,player2PieceTypes,
                       maxAmountOfPlayerPieces);
 
-  string squareStart[] = {"\033[47m ","\033[40m "};
-  string squareEnd = " \033[0m";
-
-  int squareIdentifier = 0;
-
+  string start[] = {"\033[47m ","\033[40m "};
+  string end = " \033[0m";
+  int identifier = 0;
 
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
-      // Color the square
-      grid[i][j] = Square(squareIdentifier,
-                                squareStart[squareIdentifier],
-                                squareEnd,
-                                amountOfPlayers,
-                                Coordinate(j,i));
+      // Setup the square
+      grid[i][j] = Square(identifier,start[identifier],end,amountOfPlayers,
+                          Coordinate(j,i));
 
       // Check if its a black square
-      if(squareIdentifier == 1) {
+      if(identifier == 1) {
+        // Add a black piece if its a black square and on the first 3 rows
         if(i<3) {
           grid[i][j].addPiece(0,players[0].addPiece());
         }
+        // Add a white piece if its a black square and on the last 3 rows
         else if(i>4) {
           grid[i][j].addPiece(1,players[1].addPiece());
         }
       }
 
       // Switch identifier
-      squareIdentifier = (squareIdentifier + 1)%2;
+      identifier = (identifier+1)%2;
     }
     // Switch identifier
-    squareIdentifier = (squareIdentifier + 1)%2;
+    identifier = (identifier+1)%2;
   }
 
 }
 
 void Checkers::drawScreen() {
   clearScreen();
-  cout << "Player " << (currentPlayer+1) << " it is your go\n\n";
-  cout << "  ";
+  cout << "Player " << (currentPlayer+1) << " it is your go\n\n  ";
   for(int i=0; i<rows; i++) cout << " " << i << " ";
   cout << "\n";
   for(int i=0; i<rows; i++) {
     cout << i << " ";
     for(int j=0; j<columns; j++) {
-      cout << grid[i][j].putSquare();
+      cout << grid[i][j];
     }
     cout << "\n";
   }

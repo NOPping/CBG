@@ -13,15 +13,6 @@ Square::Square(int identifier, std::string start, std::string end, int amountOfP
   this->pieces.resize(this->amountOfPlayers);
 }
 
-std::string Square::putSquare() {
-  for(int i=0; i<amountOfPlayers; i++) {
-    if(this->pieces[i] != 0) {
-      return (this->start + this->pieces[i]->putPiece() + this->end);
-    }
-  }
-  return (this->start + " " + this->end);
-}
-
 bool Square::hasPiece() {
   return this->numberOfOccupants>0;
 }
