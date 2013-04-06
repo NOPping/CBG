@@ -65,7 +65,7 @@ Checkers::Checkers() {
 }
 
 void Checkers::drawScreen() {
-  cout << "\033[2J\033[;H";
+  this->clearScreen();
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
@@ -135,13 +135,6 @@ bool Checkers::getMove() {
       cout << "The selected square doesn't contain a piece, try again\n";
       continue;
     }
-
-    // Check that its not a white square
-    // Check is redundant for source square
-    //if(sourceSquare->getIdentifier() == 0) {
-    //cout << "The selected square is invalid, try again\n";
-    //continue;
-    //}
 
     // Check that the piece in the square is currentPlayers
     if(!sourceSquare->hasPieceOwnedBy(currentPlayer)) {
