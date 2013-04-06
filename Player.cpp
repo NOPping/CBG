@@ -1,8 +1,6 @@
 #include "Player.h"
 #include "Piece.h"
 
-#include <iostream>
-
 /**
  * Default constructor
  */
@@ -43,10 +41,10 @@ bool Player::hasType(int type) {
  */
 Piece* Player::addPiece() {
   Piece* piece = 0;
-  if(this->amountOfPieces < this->maxPieces) {
-    this->pieces[this->amountOfPieces] = Piece(this);
-    piece = &pieces[this->amountOfPieces];
-    this->amountOfPieces++;
+  if(amountOfPieces < maxPieces) {
+    pieces[amountOfPieces] = Piece(this);
+    piece = &pieces[amountOfPieces];
+    amountOfPieces++;
   }
   return piece;
 }
@@ -55,8 +53,8 @@ Piece* Player::addPiece() {
  * Decrements the amountOfPieces count
  */
 bool Player::removePiece() {
-  if(this->amountOfPieces > 0) {
-    this->amountOfPieces--;
+  if(amountOfPieces > 0) {
+    amountOfPieces--;
     return true;
   } else {
     return false;
@@ -64,5 +62,5 @@ bool Player::removePiece() {
 }
 
 int Player::getAmountOfPieces() {
-  return this->amountOfPieces;
+  return amountOfPieces;
 }

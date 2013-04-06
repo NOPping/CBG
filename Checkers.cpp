@@ -1,6 +1,9 @@
 #include "Checkers.h"
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::string;
+using std::vector;
 
 Checkers::Checkers() {
   this->rows = 8;
@@ -29,50 +32,46 @@ Checkers::Checkers() {
   players[1] = Player(amountOfPieceTypes,player2PieceTypes,
                       maxAmountOfPlayerPieces);
 
-  string squareStart[] = {"\033[47m ","\033[40m "};
-  string squareEnd = " \033[0m";
-
-  int squareIdentifier = 0;
-
+  string start[] = {"\033[47m ","\033[40m "};
+  string end = " \033[0m";
+  int identifier = 0;
 
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
-      // Color the square
-      grid[i][j] = Square(squareIdentifier,
-                                squareStart[squareIdentifier],
-                                squareEnd,
-                                amountOfPlayers,
-                                Coordinate(j,i));
+      // Setup the square
+      grid[i][j] = Square(identifier,start[identifier],end,amountOfPlayers,
+                          Coordinate(j,i));
 
       // Check if its a black square
-      if(squareIdentifier == 1) {
+      if(identifier == 1) {
+        // Add a black piece if its a black square and on the first 3 rows
         if(i<3) {
           grid[i][j].addPiece(0,players[0].addPiece());
         }
+        // Add a white piece if its a black square and on the last 3 rows
         else if(i>4) {
           grid[i][j].addPiece(1,players[1].addPiece());
         }
       }
 
       // Switch identifier
-      squareIdentifier = (squareIdentifier + 1)%2;
+      identifier = (identifier+1)%2;
     }
     // Switch identifier
-    squareIdentifier = (squareIdentifier + 1)%2;
+    identifier = (identifier+1)%2;
   }
 
 }
 
 void Checkers::drawScreen() {
   clearScreen();
-  cout << "Player " << (currentPlayer+1) << " it is your go\n\n";
-  cout << "  ";
+  cout << "Player " << (currentPlayer+1) << " it is your go\n\n  ";
   for(int i=0; i<rows; i++) cout << " " << i << " ";
   cout << "\n";
   for(int i=0; i<rows; i++) {
     cout << i << " ";
     for(int j=0; j<columns; j++) {
-      cout << grid[i][j].putSquare();
+      cout << grid[i][j];
     }
     cout << "\n";
   }
@@ -80,7 +79,7 @@ void Checkers::drawScreen() {
 }
 
 bool Checkers::getMove() {
-  Coordinate sourceCoordinate, destinationCoordinate;
+  Coordinate sourceCoordinate, destinationCoordinate, jumpCoordinate;
   Square *sourceSquare, *destinationSquare;
   int x,y;
 
@@ -212,45 +211,42 @@ bool Checkers::getMove() {
     break;
   }
 
+  int xvalidator = abs(sourceCoordinate.x-destinationCoordinate.x);
+  int yvalidator = destinationCoordinate.y-sourceCoordinate.y;
+  bool isKing = (sourceSquare->getPiece(currentPlayer)->getType() == 1);
+
   // Check for standard move
-  if(abs(sourceCoordinate.x-destinationCoordinate.x)==1) {
+  if(xvalidator==1) {
     // Check if its a southwards move
-    if((currentPlayer == 0
-        || sourceSquare->getPiece(currentPlayer)->getType() == 1)
-        && ((destinationCoordinate.y-sourceCoordinate.y) == 1)
-      ) {
+    if((currentPlayer == 0 || isKing) && (yvalidator == 1)) {
       return executeMove(sourceSquare,destinationSquare);
     }
 
     // Check if its a northwards move
-    else if((currentPlayer == 1
-             || sourceSquare->getPiece(currentPlayer)->getType() == 1)
-            && ((destinationCoordinate.y-sourceCoordinate.y) == -1)
-           ) {
+    else if((currentPlayer == 1 || isKing) && (yvalidator == -1)) {
       return executeMove(sourceSquare,destinationSquare);
     }
   }
 
   // Check for a jump
-  else if(abs(sourceCoordinate.x-destinationCoordinate.x)==2) {
-    Square* toJump = &grid[(sourceCoordinate.y+destinationCoordinate.y)/2][(sourceCoordinate.x+destinationCoordinate.x)/2];
+  else if(xvalidator==2) {
+    x = (sourceCoordinate.x+destinationCoordinate.x)/2;
+    y = (sourceCoordinate.y+destinationCoordinate.y)/2;
+    jumpCoordinate = Coordinate(x,y);
+    Square* toJump = &grid[jumpCoordinate.y][jumpCoordinate.x];
 
     // Check if its a southwards jump
     if(toJump->hasPiece() && toJump->hasPieceOwnedBy(getOpposition())) {
-      if((currentPlayer == 0
-          || sourceSquare->getPiece(currentPlayer)->getType() == 1)
-          && ((destinationCoordinate.y-sourceCoordinate.y) == 2)
-        ) {
+
+      if((currentPlayer == 0 || isKing) && (yvalidator == 2)) {
         return executeMove(sourceSquare,destinationSquare,toJump);
       }
 
       // Check if its a northwards jump
-      else if((currentPlayer == 1
-               || sourceSquare->getPiece(currentPlayer)->getType() == 1)
-              && ((destinationCoordinate.y-sourceCoordinate.y) == -2)
-             ) {
+      else if((currentPlayer == 1 || isKing) && (yvalidator == -2)) {
         return executeMove(sourceSquare,destinationSquare,toJump);
       }
+
     }
   }
 
@@ -262,12 +258,6 @@ int Checkers::getOpposition() {
   return (currentPlayer+1)%amountOfPlayers;
 }
 
-bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare, Square* toJump) {
-  toJump->removePiece(getOpposition());
-  players[getOpposition()].removePiece();
-  return executeMove(sourceSquare,destinationSquare);
-}
-
 bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
   // Move the piece from sourceSquare to destinationSquare
   destinationSquare->addPiece(currentPlayer,sourceSquare->getPiece(currentPlayer));
@@ -276,13 +266,13 @@ bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
   // Check if a piece needs to be kinged.
   if(currentPlayer==0 && destinationSquare->getPosition().y == columns-1) {
     destinationSquare->getPiece(currentPlayer)->setType(1);
-  } else if(currentPlayer==1 && destinationSquare->getPosition().y == 0) {
+  }
+  else if(currentPlayer==1 && destinationSquare->getPosition().y == 0) {
     destinationSquare->getPiece(currentPlayer)->setType(1);
   }
 
   // Check if the game is over
   if(players[getOpposition()].getAmountOfPieces() == 0) {
-    cout << "Changing state";
     state = 1;
     return true;
   }
@@ -290,4 +280,11 @@ bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
   // Switch Player
   currentPlayer = getOpposition();
   return true;
+}
+
+bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare,
+                           Square* toJump) {
+  toJump->removePiece(getOpposition());
+  players[getOpposition()].removePiece();
+  return executeMove(sourceSquare,destinationSquare);
 }

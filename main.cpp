@@ -2,12 +2,14 @@
 #include "Checkers.h"
 #include "ConnectFour.h"
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::string;
 
 int main() {
   int selection=0;
 
-  std::string games[] = {
+  string games[] = {
     "1) Checkers",
     "2) ConnectFour",
     "3) Snakes and Ladders",

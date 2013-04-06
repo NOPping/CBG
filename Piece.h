@@ -6,8 +6,9 @@
 
 class Player;
 class Piece {
+    friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
+    
     private:
-      //Coordinate*   position;
       int           type;
       
     public:
@@ -15,8 +16,6 @@ class Piece {
       Piece(Player* owner);
       int getType();
       bool setType(int type);
-      std::string putPiece();
-      //Coordinate getPosition();
       Player* owner;
 };
 

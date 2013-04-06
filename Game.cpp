@@ -1,18 +1,37 @@
 #include "Game.h"
 
+using std::cout;
+using std::ostream;
+
 void Game::start() {
-  this->drawScreen();
-  while(this->state==0) {
+  drawScreen();
+  while(state==0) {
     if(getMove()) {
-      this->drawScreen();
+      drawScreen();
     } else {
-      std::cout << "Invalid Move, try again.\n";
+      cout << "Invalid Move, try again.\n";
     }
   }
 
-  std::cout << "Game ended with state: " << this->state << "\n";
+  cout << "Game ended with state: " << state << "\n";
 }
 
 void Game::clearScreen() {
-  std::cout << "\033[2J\033[;H";
+  cout << "\033[2J\033[;H";
+}
+
+ostream& operator<<(ostream& out, const Square& square) {
+  for(int i=0; i<square.amountOfPlayers; i++) {
+    if(square.pieces[i] != 0) {
+      out << square.start << *square.pieces[i] << square.end;
+      return out;
+    }
+  }
+  out << square.start << " " << square.end;
+  return out;
+}
+
+ostream& operator<<(ostream& out, const Piece& piece) {
+  out << piece.owner->getCharacter(piece.type);
+  return out;
 }

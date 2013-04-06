@@ -22,7 +22,7 @@ Piece::Piece(Player* owner) {
  * Returns the type of piece
  */
 int Piece::getType() {
-  return this->type;
+  return type;
 }
 
 /**
@@ -30,24 +30,10 @@ int Piece::getType() {
  * Otherwise false.
  */
 bool Piece::setType(int type) {
-  if((*this->owner).hasType(type)) {
+  if((*owner).hasType(type)) {
     this->type = type;
     return true;
   } else {
     return false;
   }
-}
-
-/**
- * Returns the coordinates of the piece
- */
-//Coordinate Piece::getPosition() {
-//return *position;
-//}
-
-/**
- * Returns a character representation of the piece
- */
-std::string Piece::putPiece() {
-  return this->owner->getCharacter(this->type);
 }

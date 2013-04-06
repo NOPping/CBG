@@ -8,6 +8,8 @@
 #include "Coordinate.h"
 
 class Square {
+    friend std::ostream& operator<<(std::ostream& out, const Square& square);
+    
     private:
       int identifier;
       std::string start;
@@ -20,7 +22,6 @@ class Square {
     public:
       Square();
       Square(int identifier, std::string start, std::string end, int amountOfPlayers, Coordinate position);
-      std::string putSquare();
       bool hasPiece();
       bool addPiece(int Player, Piece* piece);
       bool removePiece(int player);
