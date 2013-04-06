@@ -18,9 +18,9 @@ Checkers::Checkers() {
   int maxAmountOfPlayerPieces = 12;
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = "\033[31;40m○";
+  player1PieceTypes[0] = "\033[31m○";
   player1PieceTypes[1] = "\033[31m◎";
-  player2PieceTypes[0] = "\033[3740m○";
+  player2PieceTypes[0] = "\033[37m○";
   player2PieceTypes[1] = "\033[37m◎";
 
   this->players[0] = Player(amountOfPieceTypes,
