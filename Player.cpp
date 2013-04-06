@@ -15,6 +15,7 @@ Player::Player() {}
  */
 Player::Player(int amountOfTypes, std::vector<std::string> types, int maxPieces) {
   this->types = types;
+  this->amountOfPieces = 0;
   this->amountOfTypes = amountOfTypes;
   this->maxPieces = maxPieces;
   this->pieces.resize(maxPieces);
@@ -40,15 +41,13 @@ bool Player::hasType(int type) {
  * Creates a piece for the player and returns a reference to the piece.
  */
 Piece* Player::addPiece() {
-  this->amountOfPieces++;
-  return new Piece(this);
-  //Piece* piece;
-  //if(*this->amountOfPieces < *this->maxPieces) {
-  //this->pieces[*this->amountOfPieces] = Piece(&position,this);
-  //piece = &pieces[*this->amountOfPieces];
-  //*this->amountOfPieces++;
-  //}
-  //return piece;
+  Piece* piece = 0;
+  if(this->amountOfPieces < this->maxPieces) {
+    this->pieces[this->amountOfPieces] = Piece(this);
+    piece = &pieces[this->amountOfPieces];
+    this->amountOfPieces++;
+  }
+  return piece;
 }
 
 /**

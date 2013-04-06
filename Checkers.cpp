@@ -69,7 +69,11 @@ Checkers::Checkers() {
 void Checkers::drawScreen() {
   this->clearScreen();
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
+  cout << "  ";
+  for(int i=0;i<rows;i++) cout << " " << i << " ";
+  cout << "\n";
   for(int i=0; i<rows; i++) {
+    cout << i << " ";
     for(int j=0; j<columns; j++) {
       cout << grid[i][j].putSquare();
     }
@@ -234,6 +238,7 @@ bool Checkers::getMove() {
         ) {
         //cout << "Valid jump";
         toJump->removePiece((currentPlayer+1)%2);
+        players[(currentPlayer+1)%2].removePiece();
         return this->executeMove(sourceSquare,destinationSquare);
       } else if((this->currentPlayer == 1
                  || sourceSquare->getPiece(currentPlayer)->getType() == 1)
@@ -241,6 +246,7 @@ bool Checkers::getMove() {
                ) {
         //cout << "Valid jump";
         toJump->removePiece((currentPlayer+1)%2);
+        players[(currentPlayer+1)%2].removePiece();
         return this->executeMove(sourceSquare,destinationSquare);
       }
     }
@@ -255,16 +261,21 @@ bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
   destinationSquare->addPiece(this->currentPlayer,sourceSquare->getPiece(currentPlayer));
   cout << "Removing the piece from the source square";
   sourceSquare->removePiece(this->currentPlayer);
-  if(this->currentPlayer==0 && destinationSquare->getPosition().y == this->columns -1) {
+  
+  if(this->currentPlayer==0 && destinationSquare->getPosition().x == this->columns -1) {
     destinationSquare->getPiece(currentPlayer)->setType(1);
   }
-  if(this->currentPlayer==1 && destinationSquare->getPosition().y == 0) {
+  
+  if(this->currentPlayer==1 && destinationSquare->getPosition().x == 0) {
     destinationSquare->getPiece(currentPlayer)->setType(1);
   }
+  
   if(this->players[(currentPlayer+1)%2].getAmountOfPieces() == 0) {
-    this->state = false;
-    return false;
+    cout << "Changing state";
+    this->state = 1;
+    return true;
   }
+ 
   this->currentPlayer = (this->currentPlayer+1) % this->amountOfPlayers;
   return true;
 }
