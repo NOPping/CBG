@@ -10,7 +10,7 @@ void Game::start() {
     }
   }
 
-  std::cout << "Game ended with state: " << this->state;
+  std::cout << "Game ended with state: " << this->state << "\n";
 }
 
 void Game::clearScreen() {
