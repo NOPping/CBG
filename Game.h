@@ -16,9 +16,10 @@ class Game {
       int currentPlayer;
       int state;
 
-      bool      getMove();
-      void      drawScreen();
-      bool      executeMove(Square* sourceSquare, Square* destinationSquare);
+      void      clearScreen();
+
+      virtual   bool      getMove() = 0;
+      virtual   void      drawScreen() = 0;
     
     public:
       virtual void start();
