@@ -20,10 +20,15 @@ void Game::clearScreen() {
 std::ostream& operator<<(std::ostream& out, const Square& square) {
   for(int i=0; i<square.amountOfPlayers; i++) {
     if(square.pieces[i] != 0) {
-      out << (square.start + square.pieces[i]->putPiece() + square.end);
+      out << square.start << *square.pieces[i] << square.end;
       return out;
     }
   }
-  out << (square.start + " " + square.end);
+  out << square.start << " " << square.end;
+  return out;
+}
+
+std::ostream& operator<<(std::ostream& out, const Piece& piece) {
+  out << piece.owner->getCharacter(piece.type);
   return out;
 }

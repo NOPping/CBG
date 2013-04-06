@@ -37,17 +37,3 @@ bool Piece::setType(int type) {
     return false;
   }
 }
-
-/**
- * Returns the coordinates of the piece
- */
-//Coordinate Piece::getPosition() {
-//return *position;
-//}
-
-/**
- * Returns a character representation of the piece
- */
-std::string Piece::putPiece() {
-  return this->owner->getCharacter(this->type);
-}
