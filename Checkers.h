@@ -10,6 +10,7 @@ class Checkers : public Game {
   private:
     bool  getMove();
     void  drawScreen();
+    int   getOpposition();
     bool  executeMove(Square* sourceSquare,Square* destinationSquare);
     bool  executeMove(Square* sourceSquare,Square* destinationSquare,Square* toJump);
   
