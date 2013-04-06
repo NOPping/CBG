@@ -18,10 +18,10 @@ Checkers::Checkers() {
   int maxAmountOfPlayerPieces = 12;
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = "\033[0;31;40m ○ \033[0m";
-  player1PieceTypes[1] = "\033[0;31;40m ◎ \033[0m";
-  player2PieceTypes[0] = "\033[0;37;40m ○ \033[0m";
-  player2PieceTypes[1] = "\033[0;37;40m ◎ \033[0m";
+  player1PieceTypes[0] = "\033[31;40m○";
+  player1PieceTypes[1] = "\033[31m◎";
+  player2PieceTypes[0] = "\033[3740m○";
+  player2PieceTypes[1] = "\033[37m◎";
 
   this->players[0] = Player(amountOfPieceTypes,
                             player1PieceTypes,maxAmountOfPlayerPieces);
@@ -29,9 +29,10 @@ Checkers::Checkers() {
   this->players[1] = Player(amountOfPieceTypes,
                             player2PieceTypes,maxAmountOfPlayerPieces);
 
-  string squareRepresentations[] = {"\033[0;37;47m   \033[0m",
-                                    "\033[0;37;40m   \033[0m"
-                                   };
+  string squareStart[] = {"\033[47m ",
+                          "\033[40m "
+                         };
+  string squareEnd = " \033[0m";
 
   int squareIdentifier = 0;
 
@@ -40,7 +41,8 @@ Checkers::Checkers() {
     for(int j=0; j<columns; j++) {
       // Color the square
       this->grid[i][j] = Square(squareIdentifier,
-                                squareRepresentations[squareIdentifier],
+                                squareStart[squareIdentifier],
+                                squareEnd,
                                 amountOfPlayers,
                                 Coordinate(i,j));
 

@@ -10,7 +10,8 @@
 class Square {
     private:
       int identifier;
-      std::string representation;
+      std::string start;
+      std::string end;
       int amountOfPlayers;
       Coordinate position;
       int numberOfOccupants;
@@ -18,7 +19,7 @@ class Square {
 
     public:
       Square();
-      Square(int identifier, std::string representation, int amountOfPlayers, Coordinate position);
+      Square(int identifier, std::string start, std::string end, int amountOfPlayers, Coordinate position);
       std::string putSquare();
       bool hasPiece();
       bool addPiece(int Player, Piece* piece);
