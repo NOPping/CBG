@@ -22,7 +22,7 @@ Piece::Piece(Player* owner) {
  * Returns the type of piece
  */
 int Piece::getType() {
-  return this->type;
+  return type;
 }
 
 /**
@@ -30,7 +30,7 @@ int Piece::getType() {
  * Otherwise false.
  */
 bool Piece::setType(int type) {
-  if((*this->owner).hasType(type)) {
+  if((*owner).hasType(type)) {
     this->type = type;
     return true;
   } else {
