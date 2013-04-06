@@ -18,6 +18,11 @@ int main() {
       //new SnakesAndLadders(), 
       //new Reversi()
   };
-  games[selection].start();
+  selection--;
+  if(selection >= 0 && selection < 4) {
+    games[selection].start();
+  } else {
+    cout << "Invalid Selection";
+  }
   return 0;
 }

@@ -13,7 +13,7 @@ Checkers::Checkers() {
   for(int i=0; i<rows; i++) {
     this->grid[i] = new Square[columns];
   }
-
+  
   int amountOfPieceTypes = 2;
   int maxAmountOfPlayerPieces = 12;
   vector <string> player1PieceTypes(amountOfPieceTypes);
@@ -34,8 +34,8 @@ Checkers::Checkers() {
                                    };
 
   int squareIdentifier = 0;
-
-
+  
+  
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
       // Color the square
@@ -61,9 +61,10 @@ Checkers::Checkers() {
     // Switch identifier
     squareIdentifier = (squareIdentifier + 1)%2;
   }
+  
 }
 
-void Game::drawScreen() {
+void Checkers::drawScreen() {
   cout << "\033[2J\033[;H";
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
   for(int i=0; i<rows; i++) {
@@ -75,7 +76,7 @@ void Game::drawScreen() {
   cout << "\n";
 }
 
-bool Game::getMove() {
+bool Checkers::getMove() {
   int x,y;
   do {
     cout << "Type in the X and Y coordinate of the piece you would like to "
@@ -169,7 +170,7 @@ bool Game::getMove() {
   return false;
 }
 
-bool Game::executeMove(Square* sourceSquare,Square* destinationSquare) {
+bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
   cout << "Updating the destination square";
   destinationSquare->addPiece(this->currentPlayer,sourceSquare->getPiece(currentPlayer));
   cout << "Removing the piece from the source square";

@@ -7,8 +7,14 @@
 #include "Game.h"
 
 class Checkers : public Game {
+  private:
+    bool  getMove();
+    void  drawScreen();
+    bool  executeMove(Square* sourceSquare,Square* destinationSquare);
+  
   public:
     Checkers();
+    ~Checkers();
 };
 
 #endif
