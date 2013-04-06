@@ -44,7 +44,7 @@ Checkers::Checkers() {
                                 squareStart[squareIdentifier],
                                 squareEnd,
                                 amountOfPlayers,
-                                Coordinate(i,j));
+                                Coordinate(j,i));
 
       // Check if its a black square
       if(squareIdentifier == 1) {
@@ -70,7 +70,7 @@ void Checkers::drawScreen() {
   this->clearScreen();
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
   cout << "  ";
-  for(int i=0;i<rows;i++) cout << " " << i << " ";
+  for(int i=0; i<rows; i++) cout << " " << i << " ";
   cout << "\n";
   for(int i=0; i<rows; i++) {
     cout << i << " ";
@@ -200,11 +200,13 @@ bool Checkers::getMove() {
     // Setup a pointer to the square at the given coordinate
     destinationSquare = &grid[destinationCoordinate.y][destinationCoordinate.x];
 
+    // Check that the destination square is not white
     if(destinationSquare->getIdentifier() == 0) {
       cout << "\nThe selected square is invalid, try again\n";
       continue;
     }
 
+    // Check that the destination square is not occupied
     if(destinationSquare->hasPiece()) {
       cout << "\nThe selected square is occupied, try again\n";
       continue;
@@ -218,13 +220,11 @@ bool Checkers::getMove() {
         || sourceSquare->getPiece(currentPlayer)->getType() == 1)
         && ((destinationCoordinate.y-sourceCoordinate.y) == 1)
       ) {
-      //cout << "Valid move for player1 piece\n";
       return this->executeMove(sourceSquare,destinationSquare);
     } else if((currentPlayer == 1
                || sourceSquare->getPiece(currentPlayer)->getType() == 1)
               && ((destinationCoordinate.y-sourceCoordinate.y) == -1)
              ) {
-      //cout << "Valid move for player2 piece\n";
       return this->executeMove(sourceSquare,destinationSquare);
     }
   }
@@ -236,18 +236,12 @@ bool Checkers::getMove() {
           || sourceSquare->getPiece(currentPlayer)->getType() == 1)
           && ((destinationCoordinate.y-sourceCoordinate.y) == 2)
         ) {
-        //cout << "Valid jump";
-        toJump->removePiece((currentPlayer+1)%2);
-        players[(currentPlayer+1)%2].removePiece();
-        return this->executeMove(sourceSquare,destinationSquare);
+        return this->executeMove(sourceSquare,destinationSquare,toJump);
       } else if((this->currentPlayer == 1
                  || sourceSquare->getPiece(currentPlayer)->getType() == 1)
                 && ((destinationCoordinate.y-sourceCoordinate.y) == -2)
                ) {
-        //cout << "Valid jump";
-        toJump->removePiece((currentPlayer+1)%2);
-        players[(currentPlayer+1)%2].removePiece();
-        return this->executeMove(sourceSquare,destinationSquare);
+        return this->executeMove(sourceSquare,destinationSquare,toJump);
       }
     }
   }
@@ -256,26 +250,32 @@ bool Checkers::getMove() {
   return false;
 }
 
+bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare, Square* toJump) {
+  toJump->removePiece((currentPlayer+1)%2);
+  players[(currentPlayer+1)%2].removePiece();
+  return this->executeMove(sourceSquare,destinationSquare);
+}
+
 bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
-  cout << "Updating the destination square";
+  // Move the piece from sourceSquare to destinationSquare
   destinationSquare->addPiece(this->currentPlayer,sourceSquare->getPiece(currentPlayer));
-  cout << "Removing the piece from the source square";
   sourceSquare->removePiece(this->currentPlayer);
-  
-  if(this->currentPlayer==0 && destinationSquare->getPosition().x == this->columns -1) {
+
+  // Check if a piece needs to be kinged.
+  if(this->currentPlayer==0 && destinationSquare->getPosition().y == this->columns-1) {
+    destinationSquare->getPiece(currentPlayer)->setType(1);
+  } else if(this->currentPlayer==1 && destinationSquare->getPosition().y == 0) {
     destinationSquare->getPiece(currentPlayer)->setType(1);
   }
-  
-  if(this->currentPlayer==1 && destinationSquare->getPosition().x == 0) {
-    destinationSquare->getPiece(currentPlayer)->setType(1);
-  }
-  
+
+  // Check if the game is over
   if(this->players[(currentPlayer+1)%2].getAmountOfPieces() == 0) {
     cout << "Changing state";
     this->state = 1;
     return true;
   }
- 
+
+  // Switch Player
   this->currentPlayer = (this->currentPlayer+1) % this->amountOfPlayers;
   return true;
 }
