@@ -85,53 +85,40 @@ void Checkers::drawScreen() {
   cout << "\n";
 }
 
+int Checkers::getPoint(string message, int range) {
+  int point=0;
+  while(true) {
+    cout << "Type the X point of the piece you would like to move: \n";
+    cin >> point;
+
+    // Check that input is a numeric value
+    if(cin.fail()) {
+      cout << "\nYou entered a non numeric value, try again\n";
+      cin.clear();
+      cin.ignore(1000,'\n');
+      continue;
+    }
+
+    // Check that input is within our grid range
+    if(point < 0 || point > range) {
+      cout << "\nPoint out of range, try again\n";
+      continue;
+    }
+
+    return point;
+  }
+}
+
 bool Checkers::getMove() {
   Coordinate sourceCoordinate, destinationCoordinate, jumpCoordinate;
   Square *sourceSquare, *destinationSquare;
   int x,y;
 
   while(true) {
-    while(true) {
-      cout << "Type the X point of the piece you would like to move: \n";
-      cin >> x;
-
-      // Check that input is a numeric value
-      if(cin.fail()) {
-        cout << "\nYou entered a non numeric value, try again\n";
-        cin.clear();
-        cin.ignore(1000,'\n');
-        continue;
-      }
-
-      // Check that input is within our grid range
-      if(x < 0 || x > rows) {
-        cout << "\nPoint out of range, try again\n";
-        continue;
-      }
-
-      break;
-    }
-
-    while(true) {
-      cout << "Type the Y point of the piece you would like to move: \n";
-      cin >> y;
-
-      // Check that input is a numeric value
-      if(cin.fail()) {
-        cout << "\nYou entered a non numeric value, try again\n";
-        cin.clear();
-        cin.ignore(1000,'\n');
-        continue;
-      }
-
-      // Check that input is within our grid range
-      if(y < 0 || y > columns) {
-        cout << "\nPoint out of range, try again\n";
-        continue;
-      }
-
-      break;
-    }
+    x = getPoint("Type the X point of the piece you would like to move:\n",
+                 rows);
+    y = getPoint("Type the Y point of the piece you would like to move:\n",
+                 columns);
 
     // Setup a coordinate for the given X and Y
     sourceCoordinate = Coordinate(x,y);
@@ -141,13 +128,14 @@ bool Checkers::getMove() {
 
     // Check that the square has a piece
     if(!sourceSquare->hasPiece()) {
-      cout << "The selected square doesn't contain a piece, try again\n";
+      cout << "\nThe selected square doesn't contain a piece, try again\n";
       continue;
     }
 
     // Check that the piece in the square is currentPlayers
     if(!sourceSquare->hasPieceOwnedBy(currentPlayer)) {
-      cout << "The selected square doesn't contain a piece owned by you, try again\n";
+      cout << "\nThe selected square doesn't contain a piece owned by you,
+               try again\n";
       continue;
     }
 
@@ -155,47 +143,10 @@ bool Checkers::getMove() {
   }
 
   while(true) {
-    while(true) {
-      cout << "Type the X point of the square you would like to move too: \n";
-      cin >> x;
-
-      // Check that input is a numeric value
-      if(cin.fail()) {
-        cout << "\nYou entered a non numeric value, try again\n";
-        cin.clear();
-        cin.ignore(1000,'\n');
-        continue;
-      }
-
-      // Check that input is within our grid range
-      if(x < 0 || x > rows) {
-        cout << "\nPoint out of range, try again\n";
-        continue;
-      }
-
-      break;
-    }
-
-    while(true) {
-      cout << "Type the Y point of the square you would like to move too:  \n";
-      cin >> y;
-
-      // Check that input is a numeric value
-      if(cin.fail()) {
-        cout << "\nYou entered a non numeric value, try again\n";
-        cin.clear();
-        cin.ignore(1000,'\n');
-        continue;
-      }
-
-      // Check that input is within our grid range
-      if(y < 0 || y > columns) {
-        cout << "\nPoint out of range, try again\n";
-        continue;
-      }
-
-      break;
-    }
+    x = getPoint("Type the X point of the square you would like to move too:\n",
+                 rows);
+    y = getPoint("Type the Y point of the square you would like to move too:\n",
+                 columns);
 
     // Setup a coordinate for the given X and Y
     destinationCoordinate = Coordinate(x,y);

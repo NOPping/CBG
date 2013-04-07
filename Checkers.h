@@ -11,6 +11,7 @@ class Checkers : public Game {
     bool  getMove();
     void  drawScreen();
     int   getOpposition();
+    int   getPoint(string message, int range);
     bool  executeMove(Square* sourceSquare,Square* destinationSquare);
     bool  executeMove(Square* sourceSquare,Square* destinationSquare,Square* toJump);
   
