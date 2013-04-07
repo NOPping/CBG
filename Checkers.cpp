@@ -135,7 +135,7 @@ bool Checkers::getMove() {
     // Check that the piece in the square is currentPlayers
     if(!sourceSquare->hasPieceOwnedBy(currentPlayer)) {
       cout << "\nThe selected square doesn't contain a piece owned by you,"
-           << "try again\n";
+      << "try again\n";
       continue;
     }
 
@@ -218,14 +218,14 @@ int Checkers::getOpposition() {
 
 bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
   // Move the piece from sourceSquare to destinationSquare
-  destinationSquare->addPiece(currentPlayer,sourceSquare->getPiece(currentPlayer));
+  destinationSquare->addPiece(currentPlayer,
+                              sourceSquare->getPiece(currentPlayer));
   sourceSquare->removePiece(currentPlayer);
 
   // Check if a piece needs to be kinged.
   if(currentPlayer==0 && destinationSquare->getPosition().y == columns-1) {
     destinationSquare->getPiece(currentPlayer)->setType(1);
-  }
-  else if(currentPlayer==1 && destinationSquare->getPosition().y == 0) {
+  } else if(currentPlayer==1 && destinationSquare->getPosition().y == 0) {
     destinationSquare->getPiece(currentPlayer)->setType(1);
   }
 

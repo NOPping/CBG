@@ -1,10 +1,13 @@
 #include <iostream>
+#include <iomanip>
 #include "Checkers.h"
 #include "ConnectFour.h"
 
 using std::cout;
 using std::cin;
 using std::string;
+
+void border(int);
 
 int main() {
   int selection=0;
@@ -15,15 +18,31 @@ int main() {
     "3) Snakes and Ladders",
     "4) Reversi"
   };
+  cout << "\033[2J\033[;H\033[36m";
 
-  cout << "Welcome to compendium of board games" << "\n";
-  cout << "====================================" << "\n";
+  cout << "    ____                                     _ _                          __ \n";
+  cout << "   / ___|___  _ __ ___  _ __   ___ _ __   __| (_)_   _ _ __ ___     ___  / _|\n";
+  cout << "  | |   / _ \\| '_ ` _ \\| '_ \\ / _ \\ '_ \\ / _` | | | | | '_ ` _ \\   / _ \\| |_ \n";
+  cout << "  | |__| (_) | | | | | | |_) |  __/ | | | (_| | | |_| | | | | | | | (_) |  _|\n";
+  cout << "   \\____\\___/|_| |_| |_| .__/ \\___|_| |_|\\__,_|_|\\__,_|_| |_| |_|  \\___/|_|  \n";
+  cout << "                       |_|                                                   \n";
+  cout << "         _                         _                                   \n";
+  cout << "        | |__   ___   __ _ _ __ __| |   __ _  __ _ _ __ ___   ___  ___ \n";
+  cout << "        | '_ \\ / _ \\ / _` | '__/ _` |  / _` |/ _` | '_ ` _ \\ / _ \\/ __|\n";
+  cout << "        | |_) | (_) | (_| | | | (_| | | (_| | (_| | | | | | |  __/\\__ \\\n";
+  cout << "        |_.__/ \\___/ \\__,_|_|  \\__,_|  \\__, |\\__,_|_| |_| |_|\\___||___/\n";
+  cout << "                                       |___/                           \n";
 
+  cout << "\033[0m";
+  cout << "\033[31m";
+  border(80);
+  cout << "\033[0m\n";
   for(int i=0; i<4; i++) {
     cout << games[i] << "\n";
   }
-
-  cout << "====================================" << "\n";
+  cout << "\033[31m\n";
+  border(80);
+  cout << "\033[0m";
   cout << "\nInsert the number of the game you wish to play: ";
   cin >> selection;
 
@@ -37,4 +56,9 @@ int main() {
     cout << "Invalid Selection";
   }
   return 0;
+}
+
+void border(int width) {
+  for(int i=0; i<width; i++)cout << "=";
+  cout << "\n";
 }
