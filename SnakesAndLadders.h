@@ -9,6 +9,7 @@
 
 class SnakesAndLadders : public Game {
   private:
+    bool isGameOver();
     void drawScreen();
     int rollDice();
     bool getMove();

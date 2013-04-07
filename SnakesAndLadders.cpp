@@ -92,6 +92,9 @@ int SnakesAndLadders::rollDice() {
   return (int)rand() % 6 + 1;
 }
 
+bool SnakesAndLadders::isGameOver(){
+  return (grid[0][0].hasPiece());
+}
 
 bool SnakesAndLadders::getMove() {
   cout << "Press enter to roll a dice and make your move\n";
@@ -100,7 +103,12 @@ bool SnakesAndLadders::getMove() {
   cout << "You rolled a " << roll << "\n";
   Coordinate current = players[currentPlayer].getPiece(0)->position;
 
-  return this->executeMove(current, roll);
+  executeMove(current, roll);
+  if(isGameOver()) {
+    state = 1;
+  } else {
+    currentPlayer=(currentPlayer+1)%(amountOfPlayers-1);
+  }
   /*
   if(roll == 6) {
     players[currentPlayer].sixes++;
@@ -125,6 +133,7 @@ bool SnakesAndLadders::getMove() {
   currentSquare.removePiece(currentPlayer);
   }
   */
+  return true;
 }
 bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
   Square *currentSquare = &grid[current.y][current.x];
@@ -138,7 +147,6 @@ bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
 
     // Check that the position actually changes
     if(position == currentSquare->getIdentifier()) {
-      currentPlayer=(currentPlayer+1)%(amountOfPlayers-1);
       return true;
     }
   }
@@ -159,8 +167,6 @@ bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
 
   destinationSquare->addPiece(currentPlayer, currentSquare->getPiece(currentPlayer));
   currentSquare->removePiece(currentPlayer);
-
-  if(state != 1) currentPlayer=(currentPlayer+1)%(amountOfPlayers-1);
 
   return true;
 }
