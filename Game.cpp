@@ -3,6 +3,10 @@
 using std::cout;
 using std::ostream;
 
+Game::Game() {}
+
+Game::~Game() {}
+
 void Game::start() {
   drawScreen();
   while(state==0) {

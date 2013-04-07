@@ -60,7 +60,14 @@ Checkers::Checkers() {
     // Switch identifier
     identifier = (identifier+1)%2;
   }
+}
 
+Checkers::~Checkers() {
+  for(int i=0; i<rows; i++) {
+    delete [] grid[i];
+  }
+  delete [] grid;
+  delete [] players;
 }
 
 void Checkers::drawScreen() {

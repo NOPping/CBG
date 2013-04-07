@@ -8,7 +8,7 @@ class Player;
 class Piece {
     friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
     
-    private:
+    protected:
       int           type;
       
     public:

@@ -22,7 +22,10 @@ class Game {
       virtual   void      drawScreen() = 0;
     
     public:
+      Game();
+      virtual ~Game();
       virtual void start();
+      
 };
 
 #endif
