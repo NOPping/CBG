@@ -12,6 +12,7 @@ class SystemPiece : public Piece {
       
     public:
       SystemPiece();
+      
       Coordinate getPosition();
       Coordinate getDestination();
 };

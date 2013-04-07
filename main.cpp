@@ -46,7 +46,8 @@ int main() {
   cout << "\033[0m";
   cout << "\nInsert the number of the game you wish to play: ";
   cin >> selection;
-
+  cin.clear();
+  cin.ignore(10000,'\n');
   if(selection >= 0 && selection < 4) {
     if(selection == 1) {
       Checkers().start();

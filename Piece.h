@@ -10,13 +10,12 @@ class Piece {
     
     protected:
       int           type;
-      Coordinate    position;
       
     public:
       Piece();
       Piece(Player* owner);
       Piece(Player* owner, Coordinate position);
-      Coordinate getCoordinate();
+      Coordinate    position;
       int getType();
       bool setType(int type);
       Player* owner;

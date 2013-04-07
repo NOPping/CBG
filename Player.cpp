@@ -52,6 +52,19 @@ Piece* Player::addPiece() {
 }
 
 /**
+ * Creates a piece for the player and returns a reference to the piece.
+ */
+Piece* Player::addPiece(Coordinate position) {
+  Piece* piece = 0;
+  if(amountOfPieces < maxPieces) {
+    pieces[amountOfPieces] = Piece(this,position);
+    piece = &pieces[amountOfPieces];
+    amountOfPieces++;
+  }
+  return piece;
+}
+
+/**
  * Decrements the amountOfPieces count
  */
 bool Player::removePiece() {

@@ -9,12 +9,12 @@
 
 class SnakesAndLadders : public Game {
   private:
-    int isGameOver();
     void drawScreen();
     int rollDice();
     bool getMove();
     void resetPlayer(Coordinate current);
     bool executeMove(Coordinate current,int roll);
+    Coordinate squareToCoordinate(int position);
     
     
   public:

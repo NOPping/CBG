@@ -43,7 +43,3 @@ bool Piece::setType(int type) {
     return false;
   }
 }
-
-Coordinate Piece::getCoordinate() {
-  return position;
-}
