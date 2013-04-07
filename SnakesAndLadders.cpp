@@ -61,8 +61,8 @@ SnakesAndLadders::SnakesAndLadders() {
     identifier = (identifier + 1)%2;
   }
   
-  grid[rows-1][0].addPiece(0,players[0].addPiece());
-  grid[rows-1][0].addPiece(1,players[0].addPiece());
+  grid[8][0].addPiece(0,players[0].addPiece());
+  grid[9][0].addPiece(1,players[1].addPiece());
 }
 
 SnakesAndLadders::~SnakesAndLadders() {
@@ -83,7 +83,7 @@ void SnakesAndLadders::drawScreen() {
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
       cout << grid[i][j].getStart();
-      printf ("%-3d",grid[i][j].getIdentifier());
+      printf ("%-4d",grid[i][j].getIdentifier());
       cout << grid[i][j];
       cout << grid[i][j].getEnd();
     }
@@ -98,7 +98,7 @@ int SnakesAndLadders::rollDice() {
 
 
 bool SnakesAndLadders::getMove() {
-  cout << "Press any key to roll a dice and make your move\n";
+  /*cout << "Press any key to roll a dice and make your move\n";
   int roll = rollDice();
   cout << "You rolled a " << roll << "\n";
 
@@ -148,5 +148,7 @@ bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
   Square destinationSquare = grid[destination.y][destination.x];
   destinationSquare.addPiece(currentPlayer, currentSquare.getPiece(currentPlayer));
   currentSquare.removePiece(currentPlayer);
+  */
+  while(true) {}
   return true;
 }
