@@ -60,6 +60,9 @@ SnakesAndLadders::SnakesAndLadders() {
     counter -= (i % 2 == 0) ? 9 : 11;
     identifier = (identifier + 1)%2;
   }
+  
+  grid[rows-1][0].addPiece(0,players[0].addPiece());
+  grid[rows-1][0].addPiece(1,players[0].addPiece());
 }
 
 SnakesAndLadders::~SnakesAndLadders() {
