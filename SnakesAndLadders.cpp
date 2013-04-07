@@ -25,8 +25,8 @@ SnakesAndLadders::SnakesAndLadders() {
   vector <string> systemPieceTypes(2);
   player1PieceTypes[0] = "\033[31m◎";
   player2PieceTypes[0] = "\033[34m◎";
-  systemPieceTypes[0] = "\033[38;5;88mL";
-  systemPieceTypes[1] = "\033[35mS";
+  systemPieceTypes[0] = "\033[38;5;88mS";
+  systemPieceTypes[1] = "\033[35mL";
 
   this->players[0] = Player(amountOfPieceTypes,
                             player1PieceTypes,maxAmountOfPlayerPieces);
@@ -63,11 +63,51 @@ SnakesAndLadders::SnakesAndLadders() {
 
   grid[9][0].addPiece(0,players[0].addPiece(Coordinate(0,9)));
   grid[9][0].addPiece(1,players[1].addPiece(Coordinate(0,9)));
+  
+  Coordinate source;
+  Coordinate destination;
 
-  grid[9][1].addPiece(2,
-                      new Piece(&players[2],string("1"),Coordinate(1,9),Coordinate(1,8))
-                     );
+  // This is TEMPORARY....
+  // I'm shocked this doesn't go out of scope....
+  // 20 to 17
+  source = squareToCoordinate(20);
+  destination = squareToCoordinate(17);
+  grid[source.y][source.x].addPiece(2,new Piece(&players[2],string("1"),source,destination));
 
+  // 33 to 7
+  source = squareToCoordinate(33);
+  destination = squareToCoordinate(7);
+  grid[source.y][source.x].addPiece(2,new Piece(&players[2],string("2"),source,destination));
+
+  // 44 to 22
+  source = squareToCoordinate(44);
+  destination = squareToCoordinate(22);
+  grid[source.y][source.x].addPiece(2,new Piece(&players[2],string("3"),source,destination));
+
+  // 52 to 31
+  source = squareToCoordinate(52);
+  destination = squareToCoordinate(31);
+  grid[source.y][source.x].addPiece(2,new Piece(&players[2],string("4"),source,destination));
+
+  // 63 to 54
+  source = squareToCoordinate(63);
+  destination = squareToCoordinate(54);
+  grid[source.y][source.x].addPiece(2,new Piece(&players[2],string("5"),source,destination));
+
+  // 85 to 67
+  source = squareToCoordinate(85);
+  destination = squareToCoordinate(67);
+  grid[source.y][source.x].addPiece(2,new Piece(&players[2],string("6"),source,destination));
+
+  // 94 to 71
+  source = squareToCoordinate(94);
+  destination = squareToCoordinate(71);
+  grid[source.y][source.x].addPiece(2,new Piece(&players[2],string("7"),source,destination));
+
+  // 99 to 61
+  source = squareToCoordinate(99);
+  destination = squareToCoordinate(61);
+  grid[source.y][source.x].addPiece(2,new Piece(&players[2],string("8"),source,destination));
 }
 
 SnakesAndLadders::~SnakesAndLadders() {
@@ -124,8 +164,8 @@ void SnakesAndLadders::drawScreen() {
 }
 
 int SnakesAndLadders::rollDice() {
-  //return (int)rand() % 6 + 1;
-  return 1;
+  return (int)rand() % 6 + 1;
+  //return 1;
 }
 
 bool SnakesAndLadders::isGameOver() {

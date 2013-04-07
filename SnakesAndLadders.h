@@ -5,7 +5,6 @@
 #include <vector>
 #include <iostream>
 #include "Game.h"
-#include "SystemPiece.h"
 
 class SnakesAndLadders : public Game {
   private:
