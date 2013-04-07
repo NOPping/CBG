@@ -134,8 +134,8 @@ bool Checkers::getMove() {
 
     // Check that the piece in the square is currentPlayers
     if(!sourceSquare->hasPieceOwnedBy(currentPlayer)) {
-      cout << "\nThe selected square doesn't contain a piece owned by you,
-               try again\n";
+      cout << "\nThe selected square doesn't contain a piece owned by you,"
+           << "try again\n";
       continue;
     }
 
