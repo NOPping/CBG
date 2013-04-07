@@ -2,19 +2,22 @@
 #define SYSTEMPIECE_H
 
 #include <string>
-#include "Coordinate.h"
+#include "Square.h"
 #include "Piece.h"
+
+using std::string;
 
 class SystemPiece : public Piece {
     private:
-      Coordinate   position;
-      Coordinate   destination;
+      string            identifier;
+      Square*           source;
+      Square*           destination;
       
     public:
-      SystemPiece();
-      
-      Coordinate getPosition();
-      Coordinate getDestination();
+      SystemPiece(Player* owner, string identifier, Square* source, Square* destination);
+      std::string getIdentifier();
+      Square* getSource();
+      Square* getDestination();
 };
 
 #endif

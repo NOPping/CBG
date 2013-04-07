@@ -1,10 +1,22 @@
 #include "SystemPiece.h"
 
-Coordinate SystemPiece::getPosition() {
-  return position;
+SystemPiece::SystemPiece(Player* owner, string identifier, Square* source, Square* destination) {
+  this->position = position;
+  this->owner = owner;
+  this->type = 0;
+  this->identifier = identifier;
+  this->source = source;
+  this->destination = destination;
 }
 
-Coordinate SystemPiece::getDestination() {
+Square* SystemPiece::getSource() {
+  return source;
+}
+
+Square* SystemPiece::getDestination() {
   return destination;
 }
 
+std::string SystemPiece::getIdentifier() {
+  return identifier;
+}

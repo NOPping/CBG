@@ -25,8 +25,8 @@ SnakesAndLadders::SnakesAndLadders() {
   vector <string> systemPieceTypes(2);
   player1PieceTypes[0] = "\033[31m◎";
   player2PieceTypes[0] = "\033[34m◎";
-  systemPieceTypes[0] = "\033[32mS";
-  systemPieceTypes[1] = "\033[33mL";
+  systemPieceTypes[0] = "\033[38;5;88mL";
+  systemPieceTypes[1] = "\033[35mS";
 
   this->players[0] = Player(amountOfPieceTypes,
                             player1PieceTypes,maxAmountOfPlayerPieces);
@@ -63,6 +63,11 @@ SnakesAndLadders::SnakesAndLadders() {
 
   grid[9][0].addPiece(0,players[0].addPiece(Coordinate(0,9)));
   grid[9][0].addPiece(1,players[1].addPiece(Coordinate(0,9)));
+
+  grid[9][1].addPiece(2,
+                      new Piece(&players[2],string("1"),Coordinate(1,9),Coordinate(1,8))
+                     );
+
 }
 
 SnakesAndLadders::~SnakesAndLadders() {
@@ -76,12 +81,42 @@ SnakesAndLadders::~SnakesAndLadders() {
 void SnakesAndLadders::drawScreen() {
   this->clearScreen();
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
-  for(int i=0; i<rows; i++) {
-    for(int j=0; j<columns; j++) {
-      cout << grid[i][j].getStart();
-      printf ("%-4d",grid[i][j].getIdentifier());
-      cout << grid[i][j];
-      cout << grid[i][j].getEnd();
+  for(int currentRow=0; currentRow<rows; currentRow++) {
+    for(int currentColumn=0; currentColumn<columns; currentColumn++) {
+      // Start the Square
+      cout << grid[currentRow][currentColumn].getStart();
+
+      // Print square number
+      printf ("%-4d",grid[currentRow][currentColumn].getIdentifier());
+
+      // Print player piece if any.
+      bool pieceFound = false;
+      if(grid[currentRow][currentColumn].hasPiece()) {
+        for(int i=0; i<(amountOfPlayers-1); i++) {
+          if(grid[currentRow][currentColumn].hasPieceOwnedBy(i)) {
+            cout << *grid[currentRow][currentColumn].getPiece(i);
+            pieceFound = true;
+            break;
+          }
+        }
+      }
+      if(!pieceFound) cout << " ";
+
+      cout << " ";
+
+      string snakeOrLadder = "  ";
+
+      // Print snakes/ladders if the square has some.
+      if(grid[currentRow][currentColumn].hasPieceOwnedBy(2)) {
+        Piece* systemPiece = grid[currentRow][currentColumn].getPiece(2);
+        snakeOrLadder = systemPiece->owner->getCharacter(systemPiece->getType())
+                        + systemPiece->getIdentifier();
+      }
+
+      cout << snakeOrLadder;
+
+      // End the square
+      cout << grid[currentRow][currentColumn].getEnd();
     }
     cout << "\n";
   }
@@ -89,11 +124,11 @@ void SnakesAndLadders::drawScreen() {
 }
 
 int SnakesAndLadders::rollDice() {
-  return (int)rand() % 6 + 1;
-  //return 6;
+  //return (int)rand() % 6 + 1;
+  return 1;
 }
 
-bool SnakesAndLadders::isGameOver(){
+bool SnakesAndLadders::isGameOver() {
   return (grid[0][0].hasPiece());
 }
 
@@ -103,7 +138,7 @@ bool SnakesAndLadders::getMove() {
   int roll = rollDice();
   cout << "You rolled a " << roll << "\n";
   Coordinate current = players[currentPlayer].getPiece(0)->position;
-  
+
   // The below code doesn't work as expected and is somewhat messy.
   /*
   if(roll == 6) {
@@ -125,22 +160,21 @@ bool SnakesAndLadders::getMove() {
     this->executeMove(current, roll);
   } else cout << "\nYou can't move til you roll a six\n";
   */
-  
+
   if(players[currentPlayer].canMove) {
     players[currentPlayer].sixes = 0;
     this->executeMove(current, roll);
-  }
-  else {
+  } else {
     cout << "You can't move\n";
   }
-  
+
   if(isGameOver()) {
     state = 1;
     return true;
   } else {
     currentPlayer=(currentPlayer+1)%(amountOfPlayers-1);
   }
-  
+
   return true;
 }
 
@@ -152,7 +186,7 @@ bool SnakesAndLadders::getMove() {
     currentSquare.removePiece(currentPlayer);
   }
 */
-  
+
 bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
   Square *currentSquare = &grid[current.y][current.x];
 
@@ -173,7 +207,7 @@ bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
 
   if(grid[destination.y][destination.x].hasPieceOwnedBy(2)) {
     cout << "You landed on a snake/ladder, oh no/oh yes";
-    SystemPiece* piece =  (SystemPiece*)grid[destination.y][destination.x].getPiece(0);
+    Piece* piece =  grid[destination.y][destination.x].getPiece(2);
     destination = piece->getDestination();
   }
 

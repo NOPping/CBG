@@ -25,6 +25,7 @@ class Player {
       bool hasType(int type);
       std::string getCharacter(int type);
       int getAmountOfPieces();
+      Piece* addPiece(Piece insert);
       int sixes;
       bool canMove;
 };

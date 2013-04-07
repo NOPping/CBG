@@ -43,3 +43,24 @@ bool Piece::setType(int type) {
     return false;
   }
 }
+
+Piece::Piece(Player* owner, string identifier, Coordinate source, Coordinate destination) {
+  this->position = position;
+  this->owner = owner;
+  this->type = 0;
+  this->identifier = identifier;
+  this->source = source;
+  this->destination = destination;
+}
+
+Coordinate Piece::getSource() {
+  return source;
+}
+
+Coordinate Piece::getDestination() {
+  return destination;
+}
+
+std::string Piece::getIdentifier() {
+  return identifier;
+}
