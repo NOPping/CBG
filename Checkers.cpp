@@ -88,7 +88,7 @@ void Checkers::drawScreen() {
 int Checkers::getPoint(string message, int range) {
   int point=0;
   while(true) {
-    cout << "Type the X point of the piece you would like to move: \n";
+    cout << message;
     cin >> point;
 
     // Check that input is a numeric value
