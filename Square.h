@@ -33,6 +33,8 @@ class Square {
       Piece* getPiece(int player);
       Coordinate getPosition();
       int getIdentifier();
+      std::string getStart();
+      std::string getEnd();
 };
 
 #endif

@@ -78,7 +78,9 @@ void Checkers::drawScreen() {
   for(int i=0; i<rows; i++) {
     cout << i << " ";
     for(int j=0; j<columns; j++) {
+      cout << grid[i][j].getStart();
       cout << grid[i][j];
+      cout << grid[i][j].getEnd();
     }
     cout << "\n";
   }

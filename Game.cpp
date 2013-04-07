@@ -27,11 +27,11 @@ void Game::clearScreen() {
 ostream& operator<<(ostream& out, const Square& square) {
   for(int i=0; i<square.amountOfPlayers; i++) {
     if(square.pieces[i] != 0) {
-      out << square.start << *square.pieces[i] << square.end;
+      out << *square.pieces[i];
       return out;
     }
   }
-  out << square.start << " " << square.end;
+  out << " ";
   return out;
 }
 

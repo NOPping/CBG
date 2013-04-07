@@ -36,7 +36,7 @@ SnakesAndLadders::SnakesAndLadders() {
 
   this->players[2] = Player(amountOfPieceTypes, systemPieceTypes,10);
 
-  string start[] = {"\033[47m ","\033[40m "};
+  string start[] = {"\033[47m","\033[40m"};
   string end = " \033[0m";
   
   int identifier = 0;
@@ -79,7 +79,10 @@ void SnakesAndLadders::drawScreen() {
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
-      printf ("%-4d",grid[i][j].getIdentifier());
+      cout << grid[i][j].getStart();
+      printf ("%-3d",grid[i][j].getIdentifier());
+      cout << grid[i][j];
+      cout << grid[i][j].getEnd();
     }
     cout << "\n";
   }
