@@ -19,10 +19,13 @@ class Player {
       Player();
       Player(int amountOfTypes, std::vector<std::string> types, int maxPieces);
       Piece* addPiece();
+      Piece* getPiece(int index);
       bool removePiece();
       bool hasType(int type);
       std::string getCharacter(int type);
       int getAmountOfPieces();
+      int sixes;
+      bool canMove;
 };
 
 #endif

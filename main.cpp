@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "Checkers.h"
 #include "ConnectFour.h"
+#include "SnakesAndLadders.h"
 
 using std::cout;
 using std::cin;
@@ -51,6 +52,8 @@ int main() {
       Checkers().start();
     } else if(selection == 2) {
       ConnectFour().start();
+    } else if(selection == 3) {
+      SnakesAndLadders().start();
     }
   } else {
     cout << "Invalid Selection";

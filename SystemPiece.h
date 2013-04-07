@@ -7,12 +7,13 @@
 
 class SystemPiece : public Piece {
     private:
-      Coordinate*   position;
-      Coordinate*   destination;
+      Coordinate   position;
+      Coordinate   destination;
       
     public:
-      Coordinate* getPosition();
-      Coordinate* getDestination();
+      SystemPiece();
+      Coordinate getPosition();
+      Coordinate getDestination();
 };
 
 #endif

@@ -1,10 +1,10 @@
 #include "SystemPiece.h"
 
-Coordinate* SystemPiece::getPosition() {
+Coordinate SystemPiece::getPosition() {
   return position;
 }
 
-Coordinate* SystemPiece::getDestination() {
+Coordinate SystemPiece::getDestination() {
   return destination;
 }
 

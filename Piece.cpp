@@ -18,6 +18,12 @@ Piece::Piece(Player* owner) {
   this->type = 0;
 }
 
+Piece::Piece(Player* owner, Coordinate position) {
+  this->position = position;
+  this->owner = owner;
+  this->type = 0;
+}
+
 /**
  * Returns the type of piece
  */
@@ -36,4 +42,8 @@ bool Piece::setType(int type) {
   } else {
     return false;
   }
+}
+
+Coordinate Piece::getCoordinate() {
+  return position;
 }

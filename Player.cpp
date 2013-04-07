@@ -18,6 +18,8 @@ Player::Player(int amountOfTypes, std::vector<std::string> types, int maxPieces)
   this->amountOfTypes = amountOfTypes;
   this->maxPieces = maxPieces;
   this->pieces.resize(maxPieces);
+  this->canMove = true;
+  this->sixes = 0;
 }
 
 /**
@@ -63,4 +65,12 @@ bool Player::removePiece() {
 
 int Player::getAmountOfPieces() {
   return amountOfPieces;
+}
+
+Piece* Player::getPiece(int index) {
+  Piece* piece = 0;
+  if(index >= 0 && index < maxPieces) {
+    piece = &pieces[index];
+  }
+  return piece;
 }
