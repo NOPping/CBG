@@ -90,6 +90,7 @@ void SnakesAndLadders::drawScreen() {
 
 int SnakesAndLadders::rollDice() {
   return (int)rand() % 6 + 1;
+  //return 6;
 }
 
 bool SnakesAndLadders::isGameOver(){
@@ -102,39 +103,56 @@ bool SnakesAndLadders::getMove() {
   int roll = rollDice();
   cout << "You rolled a " << roll << "\n";
   Coordinate current = players[currentPlayer].getPiece(0)->position;
-
-  executeMove(current, roll);
-  if(isGameOver()) {
-    state = 1;
-  } else {
-    currentPlayer=(currentPlayer+1)%(amountOfPlayers-1);
-  }
+  
+  // The below code doesn't work as expected and is somewhat messy.
   /*
   if(roll == 6) {
     players[currentPlayer].sixes++;
     if(players[currentPlayer].sixes == 3) {
+      cout << "\nYou got three successive 6, your piece gets reset\n";
       this->resetPlayer(current);
       players[currentPlayer].canMove = false;
     } else {
+      cout << ", you get to go again.\n";
       players[currentPlayer].canMove = true;
       this->executeMove(current, roll);
       this->getMove();
+      currentPlayer=(currentPlayer+1)%(amountOfPlayers-1);
     }
   } else if(players[currentPlayer].canMove) {
+    cout << "\n";
     players[currentPlayer].sixes = 0;
     this->executeMove(current, roll);
-  } else cout << "You can't move til you roll a six\n";
-  return true;
-  }
-
-  void SnakesAndLadders::resetPlayer(Coordinate current) {
-  Square currentSquare = grid[current.y][current.x];
-  grid[0][10].addPiece(currentPlayer, currentSquare.getPiece(currentPlayer));
-  currentSquare.removePiece(currentPlayer);
-  }
+  } else cout << "\nYou can't move til you roll a six\n";
   */
+  
+  if(players[currentPlayer].canMove) {
+    players[currentPlayer].sixes = 0;
+    this->executeMove(current, roll);
+  }
+  else {
+    cout << "You can't move\n";
+  }
+  
+  if(isGameOver()) {
+    state = 1;
+    return true;
+  } else {
+    currentPlayer=(currentPlayer+1)%(amountOfPlayers-1);
+  }
+  
   return true;
 }
+
+// Part of the messy code on 107
+/*
+  void SnakesAndLadders::resetPlayer(Coordinate current) {
+    Square currentSquare = grid[current.y][current.x];
+    grid[9][0].addPiece(currentPlayer, currentSquare.getPiece(currentPlayer));
+    currentSquare.removePiece(currentPlayer);
+  }
+*/
+  
 bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
   Square *currentSquare = &grid[current.y][current.x];
 
@@ -158,8 +176,6 @@ bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
     SystemPiece* piece =  (SystemPiece*)grid[destination.y][destination.x].getPiece(0);
     destination = piece->getDestination();
   }
-
-  cout << destination.x << " " << destination.y << "\n";
 
   Square *destinationSquare = &grid[destination.y][destination.x];
   currentSquare->getPiece(currentPlayer)->position.x = destination.x;
