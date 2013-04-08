@@ -72,68 +72,28 @@ SnakesAndLadders::SnakesAndLadders() {
   Coordinate source;
   Coordinate destination;
 
-  Coordinate snakes[8][2] = {
-    {
-      squareToCoordinate(20),squareToCoordinate(17)
-    },
-    {
-      squareToCoordinate(33),squareToCoordinate(7)
-    },
-    {
-      squareToCoordinate(44),squareToCoordinate(22)
-    },
-    {
-      squareToCoordinate(52),squareToCoordinate(31)
-    },
-    {
-      squareToCoordinate(63),squareToCoordinate(54)
-    },
-    {
-      squareToCoordinate(85),squareToCoordinate(67)
-    },
-    {
-      squareToCoordinate(94),squareToCoordinate(71)
-    },
-    {
-      squareToCoordinate(99),squareToCoordinate(61)
-    }
+  Coordinate sl[16][2] = {
+    {squareToCoordinate(20),squareToCoordinate(17)},
+    {squareToCoordinate(33),squareToCoordinate(7)},
+    {squareToCoordinate(44),squareToCoordinate(22)},
+    {squareToCoordinate(52),squareToCoordinate(31)},
+    {squareToCoordinate(63),squareToCoordinate(54)},
+    {squareToCoordinate(85),squareToCoordinate(67)},
+    {squareToCoordinate(94),squareToCoordinate(71)},
+    {squareToCoordinate(99),squareToCoordinate(61)},
+    {squareToCoordinate(9),squareToCoordinate(29)},
+    {squareToCoordinate(15),squareToCoordinate(26)},
+    {squareToCoordinate(24),squareToCoordinate(46)},
+    {squareToCoordinate(40),squareToCoordinate(60)},
+    {squareToCoordinate(64),squareToCoordinate(76)},
+    {squareToCoordinate(69),squareToCoordinate(87)},
+    {squareToCoordinate(83),squareToCoordinate(98)},
+    {squareToCoordinate(48),squareToCoordinate(68)}
   };
   
-  for(int i=0;i<8;i++) {
-    grid[snakes[i][0].y][snakes[i][0].x].addPiece(2,new Piece(&players[2],i,snakes[i][0],snakes[i][1]));
-    grid[snakes[i][1].y][snakes[i][1].x].addPiece(3,new Piece(&players[3],i));
-  }
-  
-  Coordinate ladders[8][2] = {
-    {
-      squareToCoordinate(9),squareToCoordinate(29)
-    },
-    {
-      squareToCoordinate(15),squareToCoordinate(26)
-    },
-    {
-      squareToCoordinate(24),squareToCoordinate(46)
-    },
-    {
-      squareToCoordinate(40),squareToCoordinate(60)
-    },
-    {
-      squareToCoordinate(64),squareToCoordinate(76)
-    },
-    {
-      squareToCoordinate(69),squareToCoordinate(87)
-    },
-    {
-      squareToCoordinate(83),squareToCoordinate(98)
-    },
-    {
-      squareToCoordinate(48),squareToCoordinate(68)
-    }
-  };
-  
-  for(int i=0;i<8;i++) {
-    grid[ladders[i][0].y][ladders[i][0].x].addPiece(2,new Piece(&players[2],i,ladders[i][0],ladders[i][1],1));
-    grid[ladders[i][1].y][ladders[i][1].x].addPiece(3,new Piece(&players[3],i,1));
+  for(int i=0;i<16;i++) {
+    grid[sl[i][0].y][sl[i][0].x].addPiece(2,new Piece(&players[2],i,sl[i][0],sl[i][1]));
+    grid[sl[i][1].y][sl[i][1].x].addPiece(3,new Piece(&players[3],i));
   }
 }
 
