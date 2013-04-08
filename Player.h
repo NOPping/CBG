@@ -12,7 +12,7 @@ class Player {
       int                         maxPieces;
       int                         amountOfTypes;
       std::vector<std::string>    types;
-      std::vector<Piece>          pieces;
+      std::vector<Piece*>          pieces;
 
     public:
       int consecutiveSixes;
@@ -26,8 +26,6 @@ class Player {
       std::string getCharacter(int type);
       int getAmountOfPieces();
       Piece* addPiece(Piece insert);
-      int sixes;
-      bool canMove;
 };
 
 #endif

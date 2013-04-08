@@ -18,8 +18,6 @@ Player::Player(int amountOfTypes, std::vector<std::string> types, int maxPieces)
   this->amountOfTypes = amountOfTypes;
   this->maxPieces = maxPieces;
   this->pieces.resize(maxPieces);
-  this->canMove = true;
-  this->sixes = 0;
 }
 
 /**
@@ -44,8 +42,8 @@ bool Player::hasType(int type) {
 Piece* Player::addPiece() {
   Piece* piece = 0;
   if(amountOfPieces < maxPieces) {
-    pieces[amountOfPieces] = Piece(this);
-    piece = &pieces[amountOfPieces];
+    pieces[amountOfPieces] = new Piece(this);
+    piece = pieces[amountOfPieces];
     amountOfPieces++;
   }
   return piece;
@@ -57,8 +55,8 @@ Piece* Player::addPiece() {
 Piece* Player::addPiece(Coordinate position) {
   Piece* piece = 0;
   if(amountOfPieces < maxPieces) {
-    pieces[amountOfPieces] = Piece(this,position);
-    piece = &pieces[amountOfPieces];
+    pieces[amountOfPieces] = new Piece(this,position);
+    piece = pieces[amountOfPieces];
     amountOfPieces++;
   }
   return piece;
@@ -70,8 +68,8 @@ Piece* Player::addPiece(Coordinate position) {
 Piece* Player::addPiece(Piece insert) {
   Piece* piece = 0;
   if(amountOfPieces < maxPieces) {
-    pieces[amountOfPieces] = insert;
-    piece = &pieces[amountOfPieces];
+    pieces[amountOfPieces] = &insert;
+    piece = pieces[amountOfPieces];
     amountOfPieces++;
   }
   return piece;
@@ -96,7 +94,7 @@ int Player::getAmountOfPieces() {
 Piece* Player::getPiece(int index) {
   Piece* piece = 0;
   if(index >= 0 && index < maxPieces) {
-    piece = &pieces[index];
+    piece = pieces[index];
   }
   return piece;
 }
