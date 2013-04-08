@@ -78,12 +78,12 @@ SnakesAndLadders::SnakesAndLadders() {
   }
 
   // Add the players to the starting square
-  Piece* player1Piece = new Piece(&players[0],Coordinate(0,9));
-  Piece* player2Piece = new Piece(&players[1],Coordinate(0,9));
+  Piece* player1Piece = new Piece(&players[0]);
+  Piece* player2Piece = new Piece(&players[1]);
   cout << player1Piece << "\n";
   squareRefs[0]->addPiece(0,players[0].addPiece(player1Piece));
   squareRefs[0]->addPiece(1,players[1].addPiece(player2Piece));
-
+  /*
   Coordinate snakes[maxSystemPieces/2][2] = {
     {squareToCoordinate(20),squareToCoordinate(17)},
     {squareToCoordinate(33),squareToCoordinate(7)},
@@ -122,6 +122,7 @@ SnakesAndLadders::SnakesAndLadders() {
     grid[ladders[i][0].y][ladders[i][0].x].addPiece(2,source);
     grid[ladders[i][1].y][ladders[i][1].x].addPiece(3,destination);
   }
+  */
 }
 
 SnakesAndLadders::~SnakesAndLadders() {
@@ -158,7 +159,7 @@ void SnakesAndLadders::drawScreen() {
 
       cout << " ";
 
-      if(!printSnakeLadder(currentColumn,currentRow)) cout << "  ";
+      //if(!printSnakeLadder(currentColumn,currentRow)) cout << "  ";
 
       // End the square
       cout << grid[currentRow][currentColumn].getEnd();
@@ -169,14 +170,14 @@ void SnakesAndLadders::drawScreen() {
 }
 
 bool SnakesAndLadders::printSnakeLadder(int x, int y) {
-  for(int systemPlayer=amountOfPlayers; systemPlayer<amountOfPlayers+2; systemPlayer++) {
+  /*for(int systemPlayer=amountOfPlayers; systemPlayer<amountOfPlayers+2; systemPlayer++) {
     if(grid[y][x].hasPieceOwnedBy(systemPlayer)) {
       Piece* systemItem = grid[y][x].getPiece(systemPlayer);
       cout << systemItem->owner->getCharacter(systemItem->getType())
       << systemItem->getIdentifier();
       return true;
     }
-  }
+  }*/
   return false;
 }
 
@@ -193,7 +194,8 @@ bool SnakesAndLadders::getMove() {
   cin.get();
   int roll = rollDice();
   cout << "You rolled a " << roll << "\n";
-  Coordinate current = players[currentPlayer].getPiece(0)->position;
+  Coordinate current;
+  //Coordinate current = players[currentPlayer].getPiece(0)->position;
 
 
   this->executeMove(current, roll);
@@ -223,17 +225,17 @@ bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
   }
 
   Coordinate destination = squareToCoordinate(position);
-
+  /*
   if(grid[destination.y][destination.x].hasPieceOwnedBy(2)) {
     cout << "You landed on a snake/ladder, oh no/oh yes";
     Piece* piece =  grid[destination.y][destination.x].getPiece(2);
     destination = piece->getDestination();
     if(destination.x == current.x && destination.y == current.y) return true;
   }
-
+  */
   Square *destinationSquare = &grid[destination.y][destination.x];
-  currentSquare->getPiece(currentPlayer)->position.x = destination.x;
-  currentSquare->getPiece(currentPlayer)->position.y = destination.y;
+  //currentSquare->getPiece(currentPlayer)->position.x = destination.x;
+  //currentSquare->getPiece(currentPlayer)->position.y = destination.y;
 
   destinationSquare->addPiece(currentPlayer, currentSquare->getPiece(currentPlayer));
   currentSquare->removePiece(currentPlayer);
