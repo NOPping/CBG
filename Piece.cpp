@@ -44,13 +44,36 @@ bool Piece::setType(int type) {
   }
 }
 
-Piece::Piece(Player* owner, string identifier, Coordinate source, Coordinate destination) {
+Piece::Piece(Player* owner, int identifier, Coordinate source, Coordinate destination) {
   this->position = position;
   this->owner = owner;
   this->type = 0;
   this->identifier = identifier;
   this->source = source;
   this->destination = destination;
+}
+
+Piece::Piece(Player* owner, int identifier, Coordinate source, Coordinate destination, int type) {
+  this->position = position;
+  this->owner = owner;
+  this->type = type;
+  this->identifier = identifier;
+  this->source = source;
+  this->destination = destination;
+}
+
+Piece::Piece(Player* owner, int identifier) {
+  this->position = position;
+  this->owner = owner;
+  this->type = 0;
+  this->identifier = identifier;
+}
+
+Piece::Piece(Player* owner, int identifier, int type) {
+  this->position = position;
+  this->owner = owner;
+  this->type = type;
+  this->identifier = identifier;
 }
 
 Coordinate Piece::getSource() {
@@ -61,6 +84,6 @@ Coordinate Piece::getDestination() {
   return destination;
 }
 
-std::string Piece::getIdentifier() {
+int Piece::getIdentifier() {
   return identifier;
 }

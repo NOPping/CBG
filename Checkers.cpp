@@ -34,6 +34,7 @@ Checkers::Checkers() {
 
   string start[] = {"\033[47m ","\033[40m "};
   string end = " \033[0m";
+  
   int identifier = 0;
 
   for(int i=0; i<rows; i++) {

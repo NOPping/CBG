@@ -12,7 +12,7 @@ class Piece {
     
     protected:
       int           type;
-      string            identifier;
+      int            identifier;
       Coordinate           source;
       Coordinate          destination;
       
@@ -25,8 +25,11 @@ class Piece {
       bool setType(int type);
       Player* owner;
       
-      Piece(Player* owner, string identifier, Coordinate source, Coordinate destination);
-      std::string getIdentifier();
+      Piece(Player* owner, int identifier, Coordinate source, Coordinate destination);
+      Piece(Player* owner, int identifier);
+      Piece(Player* owner, int identifier, Coordinate source, Coordinate destination, int type);
+      Piece(Player* owner, int identifier, int type);
+      int getIdentifier();
       Coordinate getSource();
       Coordinate getDestination();
 };

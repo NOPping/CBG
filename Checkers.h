@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <cstdlib>
 #include <iostream>
 #include "Game.h"
 
