@@ -8,6 +8,7 @@ using namespace std;
 SnakesAndLadders::SnakesAndLadders() {
   srand(time(NULL));
   const int amountOfSystemItems = 2;
+  
   this->rows = 10;
   this->columns = 10;
   this->amountOfPlayers = 2;
@@ -18,11 +19,14 @@ SnakesAndLadders::SnakesAndLadders() {
   this->systemItems = new Player[amountOfSystemItems];
 
   this->grid = new Square*[rows];
-  this->squareRefs = new Square[100];
+  this->squareRefs = new Square*[100];
+  
   for(int i=0; i<rows; i++) {
     this->grid[i] = new Square[columns];
   }
 
+
+  // Setup the Players
   const int playerTypes = 1;
   const int maxPlayerPieces = 1;
 
@@ -35,6 +39,7 @@ SnakesAndLadders::SnakesAndLadders() {
   this->players[0] = Player(playerTypes,player1PieceTypes,maxPlayerPieces);
   this->players[1] = Player(playerTypes,player2PieceTypes,maxPlayerPieces);
 
+  // Setup the snakes and ladders
   const int systemTypes = 2;
   const int maxSystemPieces = 16;
   vector <string> system1PieceTypes(systemTypes);
@@ -49,6 +54,7 @@ SnakesAndLadders::SnakesAndLadders() {
   this->systemItems[0] = Player(systemTypes,system1PieceTypes,maxSystemPieces);
   this->systemItems[1] = Player(systemTypes,system2PieceTypes,maxSystemPieces);
 
+  // Setup all the squares
   int totalPlayers = amountOfPlayers + amountOfSystemItems;
 
   string start[] = {"\033[48;5;16m","\033[48;5;241m"};
@@ -62,7 +68,7 @@ SnakesAndLadders::SnakesAndLadders() {
     for(int j=0; j<columns; j++) {
 
       grid[i][j] = Square(counter,start[identifier],end,totalPlayers,Coordinate(j,i));
-      squareRefs[counter-1] = grid[i][j];
+      squareRefs[counter-1] = &grid[i][j];
 
       counter += (i % 2 == 0) ? -1 : 1;
       identifier = (identifier + 1)%2;
@@ -71,8 +77,9 @@ SnakesAndLadders::SnakesAndLadders() {
     identifier = (identifier + 1)%2;
   }
 
-  grid[9][0].addPiece(0,players[0].addPiece(Coordinate(0,9)));
-  grid[9][0].addPiece(1,players[1].addPiece(Coordinate(0,9)));
+  // Add the players to the starting square
+  squareRefs[0]->addPiece(0,players[0].addPiece(Coordinate(0,9)));
+  squareRefs[0]->addPiece(1,players[1].addPiece(Coordinate(0,9)));
 
   Coordinate sl[16][2] = {
     // Snakes
@@ -111,11 +118,6 @@ SnakesAndLadders::SnakesAndLadders() {
     grid[sl[i][0].y][sl[i][0].x].addPiece(2,source);
     grid[sl[i][1].y][sl[i][1].x].addPiece(3,destination);
   }
-
-  source = NULL;
-  destination = NULL;
-  delete source;
-  delete destination;
 }
 
 SnakesAndLadders::~SnakesAndLadders() {
@@ -236,5 +238,5 @@ bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
 }
 
 Coordinate SnakesAndLadders::squareToCoordinate(int position) {
-  return squareRefs[position-1].getPosition();
+  return squareRefs[position-1]->getPosition();
 }

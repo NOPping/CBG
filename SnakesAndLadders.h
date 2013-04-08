@@ -15,7 +15,7 @@ class SnakesAndLadders : public Game {
     void resetPlayer(Coordinate current);
     bool executeMove(Coordinate current,int roll);
     Coordinate squareToCoordinate(int position);
-    Square* squareRefs;
+    Square** squareRefs;
     Player* systemItems;
     bool printSnakeLadder(int x, int y); 
     
