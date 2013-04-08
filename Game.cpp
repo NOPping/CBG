@@ -5,7 +5,13 @@ using std::ostream;
 
 Game::Game() {}
 
-Game::~Game() {}
+Game::~Game() {
+  for(int i=0; i<rows; i++) {
+    delete [] grid[i];
+  }
+  delete [] grid;
+  delete [] players;
+}
 
 void Game::start() {
   drawScreen();

@@ -5,27 +5,32 @@
 #include <vector>
 #include "Coordinate.h"
 
+using std::string;
+using std::vector;
+
 class Piece;
 class Player {
-    private:
-      int                         amountOfPieces;
-      int                         maxPieces;
-      int                         amountOfTypes;
-      std::vector<std::string>    types;
-      std::vector<Piece*>          pieces;
+    protected:
+      // Protected Data
+      int             amountOfPieces;
+      int             maxPieces;
+      int             amountOfTypes;
+      vector<string>  types;
+      vector<Piece*>  pieces;
 
     public:
-      int consecutiveSixes;
+      // Constructor
       Player();
-      Player(int amountOfTypes, std::vector<std::string> types, int maxPieces);
-      Piece* addPiece();
-      Piece* addPiece(Coordinate position);
-      Piece* getPiece(int index);
-      bool removePiece();
-      bool hasType(int type);
-      std::string getCharacter(int type);
-      int getAmountOfPieces();
-      Piece* addPiece(Piece insert);
+      Player(int amountOfTypes, vector<string> types, int maxPieces);
+      
+      // Public functions
+      int     getAmountOfPieces();
+      bool    removePiece();
+      bool    hasType(int type);
+      string  getCharacter(int type);
+      Piece*  addPiece();
+      Piece*  addPiece(Piece* insert);
+      Piece*  getPiece(int index);
 };
 
 #endif

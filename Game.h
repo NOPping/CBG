@@ -8,24 +8,29 @@
 
 class Game {
     protected:
-      int amountOfPlayers;
-      int rows;
-      int columns;
-      Square** grid;
-      Player* players;
-      int currentPlayer;
-      int state;
-
+      // Protected Data
+      int       amountOfPlayers;
+      int       columns;
+      int       currentPlayer;
+      int       rows;
+      int       state;
+      Player*   players;
+      Square**  grid;
+      
+      // Protected function
       void      clearScreen();
-
-      virtual   bool      getMove() = 0;
-      virtual   void      drawScreen() = 0;
+      
+      // Protected pure virtual functions
+      virtual   bool  getMove() = 0;
+      virtual   void  drawScreen() = 0;
     
     public:
+      // Constructor and deconstructor
       Game();
       virtual ~Game();
-      virtual void start();
       
+      // Public Functions
+      virtual   void  start();
 };
 
 #endif

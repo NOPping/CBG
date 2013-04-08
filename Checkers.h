@@ -9,13 +9,13 @@
 
 class Checkers : public Game {
   private:
-    bool  getMove();
-    void  drawScreen();
     int   getOpposition();
     int   getPoint(string message, int range);
+    bool  getMove();
     bool  executeMove(Square* sourceSquare,Square* destinationSquare);
     bool  executeMove(Square* sourceSquare,Square* destinationSquare,Square* toJump);
-  
+    void  drawScreen();
+    
   public:
     Checkers();
     ~Checkers();

@@ -8,7 +8,7 @@ using namespace std;
 SnakesAndLadders::SnakesAndLadders() {
   srand(time(NULL));
   const int amountOfSystemItems = 2;
-  
+
   this->rows = 10;
   this->columns = 10;
   this->amountOfPlayers = 2;
@@ -20,7 +20,7 @@ SnakesAndLadders::SnakesAndLadders() {
 
   this->grid = new Square*[rows];
   this->squareRefs = new Square*[100];
-  
+
   for(int i=0; i<rows; i++) {
     this->grid[i] = new Square[columns];
   }
@@ -78,11 +78,13 @@ SnakesAndLadders::SnakesAndLadders() {
   }
 
   // Add the players to the starting square
-  squareRefs[0]->addPiece(0,players[0].addPiece(Coordinate(0,9)));
-  squareRefs[0]->addPiece(1,players[1].addPiece(Coordinate(0,9)));
+  Piece* player1Piece = new Piece(&players[0],Coordinate(0,9));
+  Piece* player2Piece = new Piece(&players[1],Coordinate(0,9));
+  cout << player1Piece << "\n";
+  squareRefs[0]->addPiece(0,players[0].addPiece(player1Piece));
+  squareRefs[0]->addPiece(1,players[1].addPiece(player2Piece));
 
-  Coordinate sl[16][2] = {
-    // Snakes
+  Coordinate snakes[maxSystemPieces/2][2] = {
     {squareToCoordinate(20),squareToCoordinate(17)},
     {squareToCoordinate(33),squareToCoordinate(7)},
     {squareToCoordinate(44),squareToCoordinate(22)},
@@ -91,9 +93,9 @@ SnakesAndLadders::SnakesAndLadders() {
     {squareToCoordinate(85),squareToCoordinate(67)},
     {squareToCoordinate(94),squareToCoordinate(71)},
     {squareToCoordinate(99),squareToCoordinate(61)},
+  };
+  Coordinate ladders[maxSystemPieces/2][2] = {
     {squareToCoordinate(9),squareToCoordinate(29)},
-
-    // Ladders
     {squareToCoordinate(15),squareToCoordinate(26)},
     {squareToCoordinate(24),squareToCoordinate(46)},
     {squareToCoordinate(40),squareToCoordinate(60)},
@@ -106,33 +108,35 @@ SnakesAndLadders::SnakesAndLadders() {
   Piece* source;
   Piece* destination;
 
-  for(int i=0; i<8; i++) {
-    source = new Piece(&systemItems[0],i,sl[i][0],sl[i][1]);
+  for(int i=0; i<maxSystemPieces/2; i++) {
+    source = new Piece(&systemItems[0],i,snakes[i][0],snakes[i][1]);
     destination = new Piece(&systemItems[1],i);
-    grid[sl[i][0].y][sl[i][0].x].addPiece(2,source);
-    grid[sl[i][1].y][sl[i][1].x].addPiece(3,destination);
+    grid[snakes[i][0].y][snakes[i][0].x].addPiece(2,source);
+    grid[snakes[i][1].y][snakes[i][1].x].addPiece(3,destination);
   }
-  for(int i=8; i<16; i++) {
-    source = new Piece(&systemItems[0],i-8,sl[i][0],sl[i][1],1);
-    destination = new Piece(&systemItems[1],i-8,1);
-    grid[sl[i][0].y][sl[i][0].x].addPiece(2,source);
-    grid[sl[i][1].y][sl[i][1].x].addPiece(3,destination);
+  for(int i=0; i<maxSystemPieces/2; i++) {
+    source = new Piece(&systemItems[0],i,ladders[i][0],ladders[i][1]);
+    destination = new Piece(&systemItems[1],i);
+    source->setType(1);
+    destination->setType(1);
+    grid[ladders[i][0].y][ladders[i][0].x].addPiece(2,source);
+    grid[ladders[i][1].y][ladders[i][1].x].addPiece(3,destination);
   }
 }
 
 SnakesAndLadders::~SnakesAndLadders() {
-  for(int i=0; i<rows; i++) {
-    delete [] grid[i];
-  }
-  delete [] grid;
-  delete [] players;
+  delete [] systemItems;
+  delete [] squareRefs;
 }
 
 void SnakesAndLadders::drawScreen() {
-  this->clearScreen();
+  clearScreen();
+
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
+
   for(int currentRow=0; currentRow<rows; currentRow++) {
     for(int currentColumn=0; currentColumn<columns; currentColumn++) {
+
       // Start the Square
       cout << grid[currentRow][currentColumn].getStart();
 
@@ -165,11 +169,11 @@ void SnakesAndLadders::drawScreen() {
 }
 
 bool SnakesAndLadders::printSnakeLadder(int x, int y) {
-  for(int systemPlayer=2; systemPlayer<4; systemPlayer++) {
+  for(int systemPlayer=amountOfPlayers; systemPlayer<amountOfPlayers+2; systemPlayer++) {
     if(grid[y][x].hasPieceOwnedBy(systemPlayer)) {
-      Piece* systemPiece = grid[y][x].getPiece(systemPlayer);
-      cout << systemPiece->owner->getCharacter(systemPiece->getType())
-      << systemPiece->getIdentifier();
+      Piece* systemItem = grid[y][x].getPiece(systemPlayer);
+      cout << systemItem->owner->getCharacter(systemItem->getType())
+      << systemItem->getIdentifier();
       return true;
     }
   }

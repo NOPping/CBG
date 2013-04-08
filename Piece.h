@@ -5,33 +5,28 @@
 #include "Coordinate.h"
 
 using std::string;
+using std::ostream;
 
 class Player;
 class Piece {
-    friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
+    friend ostream& operator<<(ostream& out, const Piece& piece);
     
     protected:
-      int           type;
-      int            identifier;
-      Coordinate           source;
-      Coordinate          destination;
-      
+      // Protected Data
+      int type;
+
     public:
+      // Constructors
       Piece();
       Piece(Player* owner);
-      Piece(Player* owner, Coordinate position);
-      Coordinate    position;
+      Piece(Player* owner, int type);
+      
+      // Public functions
       int getType();
       bool setType(int type);
-      Player* owner;
       
-      Piece(Player* owner, int identifier, Coordinate source, Coordinate destination);
-      Piece(Player* owner, int identifier);
-      Piece(Player* owner, int identifier, Coordinate source, Coordinate destination, int type);
-      Piece(Player* owner, int identifier, int type);
-      int getIdentifier();
-      Coordinate getSource();
-      Coordinate getDestination();
+      // Public Data
+      Player* owner;
 };
 
 #endif

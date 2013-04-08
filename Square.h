@@ -14,27 +14,31 @@ using std::vector;
 class Square {
     friend ostream& operator<<(ostream& out, const Square& square);
     
-    private:
-      int identifier;
-      string start;
-      string end;
-      int amountOfPlayers;
-      Coordinate position;
-      int numberOfOccupants;
-      vector <Piece *> pieces;
+    protected:
+      // Protected Data
+      int             identifier;
+      int             amountOfPlayers;
+      int             numberOfOccupants;
+      string          start;
+      string          end;
+      vector<Piece *> pieces;
+      Coordinate      position;
 
     public:
+      // Constructors
       Square();
       Square(int identifier, string start, string end, int amountOfPlayers, Coordinate position);
-      bool hasPiece();
-      bool addPiece(int Player, Piece* piece);
-      bool removePiece(int player);
-      bool hasPieceOwnedBy(int player);
-      Piece* getPiece(int player);
-      Coordinate getPosition();
-      int getIdentifier();
-      std::string getStart();
-      std::string getEnd();
+      
+      // Public Functions
+      int         getIdentifier();
+      bool        hasPiece();
+      bool        addPiece(int Player, Piece* piece);
+      bool        removePiece(int player);
+      bool        hasPieceOwnedBy(int player);
+      string      getStart();
+      string      getEnd();
+      Piece*      getPiece(int player);
+      Coordinate  getPosition();
 };
 
 #endif
