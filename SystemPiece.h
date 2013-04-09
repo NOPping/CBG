@@ -9,7 +9,8 @@ class SystemPiece : public PositionPiece {
     Coordinate destination;
     
   public:
-    SystemPiece(Player* owner, Coordinate source, Coordinate destination, int identifer);
+    SystemPiece(Player* owner, Coordinate source, Coordinate destination,
+                int identifer);
     ~SystemPiece();
 };
 
