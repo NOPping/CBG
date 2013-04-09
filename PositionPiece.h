@@ -8,7 +8,7 @@ class PositionPiece : public Piece {
     Coordinate source;
     
   public:
-    PositionPiece(Player* owner, Coordinate Source);
+    PositionPiece(Player* owner, Coordinate source);
     ~PositionPiece();
 };
 
