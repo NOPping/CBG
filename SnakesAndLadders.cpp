@@ -24,7 +24,6 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
   this->players[0] = Player(playerTypes,player1PieceTypes,maxPlayerPieces);
   this->players[1] = Player(playerTypes,player2PieceTypes,maxPlayerPieces);
 
-  /*
   // Setup the snakes and ladders
   const int systemTypes = 2;
   const int maxSystemPieces = 16;
@@ -39,9 +38,8 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
 
   this->systemItems[0] = Player(systemTypes,system1PieceTypes,maxSystemPieces);
   this->systemItems[1] = Player(systemTypes,system2PieceTypes,maxSystemPieces);
-  */
-  // Setup all the squares
-  
+
+  // Setup all the squares  
   int totalPlayers = amountOfPlayers + amountOfSystemItems;
 
   string start[] = {"\033[48;5;16m","\033[48;5;241m"};
@@ -65,13 +63,12 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
   }
   
   // Add the players to the starting square
-  Piece* player1Piece = new Piece(&players[0]);
-  Piece* player2Piece = new Piece(&players[1]);
+  Piece* player1Piece = new SourcePiece(&players[0],Coordinate(0,9));
+  Piece* player2Piece = new SourcePiece(&players[1],Coordinate(0,9));
   cout << player1Piece << "\n";
   squareRefs[0]->addPiece(0,players[0].addPiece(player1Piece));
   squareRefs[0]->addPiece(1,players[1].addPiece(player2Piece));
   
-  /*
   Coordinate snakes[maxSystemPieces/2][2] = {
     {squareToCoordinate(20),squareToCoordinate(17)},
     {squareToCoordinate(33),squareToCoordinate(7)},
@@ -97,20 +94,19 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
   Piece* destination;
 
   for(int i=0; i<maxSystemPieces/2; i++) {
-    source = new Piece(&systemItems[0],i,snakes[i][0],snakes[i][1]);
-    destination = new Piece(&systemItems[1],i);
+    source = new SystemPiece(&systemItems[0],snakes[i][0],snakes[i][1],i);
+    destination = new IdentifierPiece(&systemItems[1],i);
     grid[snakes[i][0].y][snakes[i][0].x].addPiece(2,source);
     grid[snakes[i][1].y][snakes[i][1].x].addPiece(3,destination);
   }
   for(int i=0; i<maxSystemPieces/2; i++) {
-    source = new Piece(&systemItems[0],i,ladders[i][0],ladders[i][1]);
-    destination = new Piece(&systemItems[1],i);
+    source = new SystemPiece(&systemItems[0],ladders[i][0],ladders[i][1],i);
+    destination = new IdentifierPiece(&systemItems[1],i);
     source->setType(1);
     destination->setType(1);
     grid[ladders[i][0].y][ladders[i][0].x].addPiece(2,source);
     grid[ladders[i][1].y][ladders[i][1].x].addPiece(3,destination);
   }
-  */
 }
 
 SnakesAndLadders::~SnakesAndLadders() {
@@ -147,7 +143,7 @@ void SnakesAndLadders::drawScreen() {
 
       cout << " ";
 
-      //if(!printSnakeLadder(currentColumn,currentRow)) cout << "  ";
+      if(!printSnakeLadder(currentColumn,currentRow)) cout << "  ";
 
       // End the square
       cout << grid[currentRow][currentColumn].getEnd();
@@ -158,14 +154,13 @@ void SnakesAndLadders::drawScreen() {
 }
 
 bool SnakesAndLadders::printSnakeLadder(int x, int y) {
-  /*for(int systemPlayer=amountOfPlayers; systemPlayer<amountOfPlayers+2; systemPlayer++) {
+  for(int systemPlayer=amountOfPlayers; systemPlayer<amountOfPlayers+2; systemPlayer++) {
     if(grid[y][x].hasPieceOwnedBy(systemPlayer)) {
       Piece* systemItem = grid[y][x].getPiece(systemPlayer);
-      cout << systemItem->owner->getCharacter(systemItem->getType())
-      << systemItem->getIdentifier();
+      systemItem->print();
       return true;
     }
-  }*/
+  }
   return false;
 }
 

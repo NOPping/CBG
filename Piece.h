@@ -2,6 +2,7 @@
 #define PIECE_H
 
 #include <string>
+#include <iostream>
 #include "Coordinate.h"
 
 using std::string;
@@ -24,6 +25,7 @@ class Piece {
       // Public functions
       int getType();
       bool setType(int type);
+      virtual void print();
       
       // Public Data
       Player* owner;

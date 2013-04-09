@@ -1,16 +1,14 @@
 #ifndef SYSTEMPIECE_H
 #define SYSTEMPIECE_H
 
-#include "PositionPiece.h"
+#include "Piece.h"
+#include "SourcePiece.h"
+#include "DestinationPiece.h"
+#include "IdentifierPiece.h"
 
-class SystemPiece : public PositionPiece {
-  protected:
-    int identifier;
-    Coordinate destination;
-    
+class SystemPiece : public SourcePiece, public DestinationPiece, public IdentifierPiece {    
   public:
-    SystemPiece(Player* owner, Coordinate source, Coordinate destination,
-                int identifer);
+    SystemPiece(Player* owner, Coordinate source, Coordinate destination, int identifier);
     ~SystemPiece();
 };
 
