@@ -10,7 +10,7 @@ class IdentifierPiece : virtual public Piece {
   public:
     IdentifierPiece(Player* owner, int identifier);
     ~IdentifierPiece();
-    void print();
+    string print();
     int getIdentifier();
 };
 

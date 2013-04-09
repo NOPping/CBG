@@ -3,14 +3,17 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
+
 #include "Coordinate.h"
 
 using std::string;
+using std::stringstream;
 using std::ostream;
 
 class Player;
 class Piece {
-    friend ostream& operator<<(ostream& out, const Piece& piece);
+    //friend ostream& operator<<(ostream& out, const Piece& piece);
     
     protected:
       // Protected Data
@@ -25,7 +28,7 @@ class Piece {
       // Public functions
       int getType();
       bool setType(int type);
-      virtual void print();
+      virtual string print();
       
       // Public Data
       Player* owner;
