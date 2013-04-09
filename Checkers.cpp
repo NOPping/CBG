@@ -5,17 +5,7 @@ using std::cin;
 using std::string;
 using std::vector;
 
-Checkers::Checkers() {
-  this->rows = 8;
-  this->columns = 8;
-  this->amountOfPlayers = 2;
-  currentPlayer = 0;
-  this->state = 0;
-  this->players = new Player[this->amountOfPlayers];
-  this->grid = new Square*[rows];
-  for(int i=0; i<rows; i++) {
-    this->grid[i] = new Square[columns];
-  }
+Checkers::Checkers():Game(2, 8, 8) {
 
   int amountOfPieceTypes = 2;
   int maxAmountOfPlayerPieces = 12;

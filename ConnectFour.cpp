@@ -2,22 +2,7 @@
 
 using namespace std;
 
-ConnectFour::ConnectFour() {
-  this->rows = 7;
-  this->columns = 6;
-  this->amountOfPlayers = 2;
-  this->currentPlayer = 0;
-  this->state = 0;
-  this->players = new Player[this->amountOfPlayers];
-  this->grid = new Square*[rows];
-  this->columnSpace = new int[columns];
-  for(int i=0; i<rows; i++) {
-    this->columnSpace[i] = 0;
-  }
-  for(int currentRow=0; currentRow<rows; currentRow++) {
-    this->grid[currentRow] = new Square[columns];
-  }
-
+ConnectFour::ConnectFour():Game(2,6,7) {
   int amountOfPieceTypes = 1;
   int maxAmountOfPlayerPieces = 12;
   std::string types[] = {"O","◎"};

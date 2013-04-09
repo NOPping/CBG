@@ -3,7 +3,16 @@
 using std::cout;
 using std::ostream;
 
-Game::Game() {}
+Game::Game(const int amountOfPlayers, const int columns, const int rows)
+           : amountOfPlayers(amountOfPlayers), columns(columns), rows(rows) {
+  this->currentPlayer = 0;
+  this->state = 0;
+  this->players = new Player[amountOfPlayers];
+  this->grid = new Square*[rows];
+  for(int i=0; i<rows; i++) {
+    this->grid[i] = new Square[columns];
+  }
+}
 
 Game::~Game() {
   for(int i=0; i<rows; i++) {

@@ -9,13 +9,14 @@
 class Game {
     protected:
       // Protected Data
-      int       amountOfPlayers;
-      int       columns;
       int       currentPlayer;
-      int       rows;
       int       state;
       Player*   players;
       Square**  grid;
+      
+      const   int   amountOfPlayers;
+      const   int   columns;
+      const   int   rows;
       
       // Protected function
       void      clearScreen();
@@ -26,7 +27,7 @@ class Game {
     
     public:
       // Constructor and deconstructor
-      Game();
+      Game(const int amountOfPlayers, const int columns, const int rows);
       virtual ~Game();
       
       // Public Functions
