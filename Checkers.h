@@ -1,5 +1,5 @@
 #ifndef CHECKERS_H
-#define CHECKERS
+#define CHECKERS_H
 
 #include <string>
 #include <vector>

@@ -1,5 +1,5 @@
 #ifndef SNAKESANDLADDERS_H
-#define SNAKESANDLADDERS
+#define SNAKESANDLADDERS_H
 
 #include <string>
 #include <vector>
