@@ -9,6 +9,8 @@ class DestinationPiece : virtual public Piece {
     
   public:
     DestinationPiece(Player* owner, Coordinate destination);
+    Coordinate getDestination();
+    void setDestination(Coordinate destination);
     ~DestinationPiece();
 };
 

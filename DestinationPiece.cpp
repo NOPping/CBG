@@ -5,4 +5,13 @@ DestinationPiece::DestinationPiece(Player* owner, Coordinate destination)
     this->destination = destination;
 }
 
+
+Coordinate DestinationPiece::getDestination() {
+  return destination;
+}
+
+void DestinationPiece::setDestination(Coordinate destination) {
+  this->destination = destination;
+}
+
 DestinationPiece::~DestinationPiece() {}

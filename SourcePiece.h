@@ -9,6 +9,8 @@ class SourcePiece : virtual public Piece {
     
   public:
     SourcePiece(Player* owner, Coordinate source);
+    Coordinate getSource();
+    void setSource(Coordinate source);
     ~SourcePiece();
 };
 

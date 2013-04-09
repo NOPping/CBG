@@ -5,4 +5,12 @@ SourcePiece::SourcePiece(Player* owner, Coordinate source)
     this->source = source;
 }
 
+Coordinate SourcePiece::getSource() {
+  return source;
+}
+
+void SourcePiece::setSource(Coordinate source) {
+  this->source = source;
+}
+
 SourcePiece::~SourcePiece() {}
