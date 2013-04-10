@@ -50,11 +50,11 @@ int main() {
   cin.ignore(10000,'\n');
   if(selection >= 0 && selection < 4) {
     if(selection == 1) {
-      Checkers().start();
+      //Checkers().start();
     } else if(selection == 2) {
       ConnectFour().start();
     } else if(selection == 3) {
-      SnakesAndLadders().start();
+      //SnakesAndLadders().start();
     }
   } else {
     cout << "Invalid Selection";
