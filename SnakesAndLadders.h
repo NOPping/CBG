@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 #include "Game.h"
-#include "sourcePiece.h"
+#include "SourcePiece.h"
 #include "SystemPiece.h"
 
 class SnakesAndLadders : public Game {
