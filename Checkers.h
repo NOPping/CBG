@@ -15,6 +15,7 @@ class Checkers : public Game {
     bool  executeMove(Square* sourceSquare,Square* destinationSquare);
     bool  executeMove(Square* sourceSquare,Square* destinationSquare,Square* toJump);
     void  drawScreen();
+    int   isOver();
     
   public:
     Checkers();

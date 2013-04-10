@@ -209,6 +209,10 @@ int Checkers::getOpposition() {
   return (currentPlayer+1)%amountOfPlayers;
 }
 
+int Checkers::isOver() {
+  return players[currentPlayer].getAmountOfPieces() == 0 ? 1 : 0;
+}
+
 bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
   // Move the piece from sourceSquare to destinationSquare
   destinationSquare->addPiece(currentPlayer,
@@ -220,12 +224,6 @@ bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
     destinationSquare->getPiece(currentPlayer)->setType(1);
   } else if(currentPlayer==1 && destinationSquare->getPosition().y == 0) {
     destinationSquare->getPiece(currentPlayer)->setType(1);
-  }
-
-  // Check if the game is over
-  if(players[getOpposition()].getAmountOfPieces() == 0) {
-    state = 1;
-    return true;
   }
 
   // Switch Player

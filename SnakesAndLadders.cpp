@@ -168,8 +168,8 @@ int SnakesAndLadders::rollDice() {
   return (int)rand() % 6 + 1;
 }
 
-bool SnakesAndLadders::isGameOver() {
-  return (grid[0][0].hasPiece());
+int SnakesAndLadders::isOver() {
+  return squareRefs[99]->hasPiece() ? 1 : 0;
 }
 
 bool SnakesAndLadders::getMove() {
@@ -182,13 +182,9 @@ bool SnakesAndLadders::getMove() {
 
 
   this->executeMove(current, roll);
-
-  if(isGameOver()) {
-    state = 1;
-  } else {
-    currentPlayer=(currentPlayer+1)%(amountOfPlayers);
-  }
-
+  
+  currentPlayer=(currentPlayer+1)%(amountOfPlayers);
+  
   return true;
 }
 
@@ -197,9 +193,7 @@ bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
 
   int position = currentSquare->getIdentifier()+roll;
 
-  if(position == 100) {
-    state = 1;
-  } else if(position > 100) {
+  if(position > 100) {
     position = 100 - (position % 100);
 
     if(position == currentSquare->getIdentifier()) {

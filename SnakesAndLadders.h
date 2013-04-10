@@ -19,7 +19,8 @@ class SnakesAndLadders : public Game {
     Coordinate squareToCoordinate(int position);
     Square** squareRefs;
     Player* systemItems;
-    bool printSnakeLadder(int x, int y); 
+    bool printSnakeLadder(int x, int y);
+    int isOver();
     
   public:
     SnakesAndLadders();

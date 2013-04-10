@@ -6,7 +6,6 @@ using std::ostream;
 Game::Game(const int amountOfPlayers, const int columns, const int rows)
            : amountOfPlayers(amountOfPlayers), columns(columns), rows(rows) {
   this->currentPlayer = 0;
-  this->state = 0;
   this->players = new Player[amountOfPlayers];
   this->grid = new Square*[rows];
   for(int i=0; i<rows; i++) {
@@ -24,7 +23,7 @@ Game::~Game() {
 
 void Game::start() {
   drawScreen();
-  while(isOver==0) {
+  while(isOver()==0) {
     if(getMove()) {
       drawScreen();
     } else {
@@ -32,7 +31,7 @@ void Game::start() {
     }
   }
 
-  cout << "Game ended with state: " << state << "\n";
+  cout << "Game ended with: " << isOver() << "\n";
 }
 
 void Game::clearScreen() {
