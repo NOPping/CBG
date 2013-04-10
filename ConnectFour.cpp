@@ -2,7 +2,22 @@
 
 using namespace std;
 
-ConnectFour::ConnectFour():Game(2,6,7) {
+ConnectFour::ConnectFour() {
+  this->rows = 7;
+  this->columns = 6;
+  this->amountOfPlayers = 2;
+  this->currentPlayer = 0;
+  this->state = 0;
+  this->players = new Player[this->amountOfPlayers];
+  this->grid = new Square*[rows];
+  this->columnSpace = new int[columns];
+  for(int i=0; i<rows; i++) {
+    this->columnSpace[i] = 0;
+  }
+  for(int currentRow=0; currentRow<rows; currentRow++) {
+    this->grid[currentRow] = new Square[columns];
+  }
+
   int amountOfPieceTypes = 1;
   int maxAmountOfPlayerPieces = 12;
   std::string types[] = {"O","◎"};
@@ -11,11 +26,8 @@ ConnectFour::ConnectFour():Game(2,6,7) {
   player1PieceTypes[0] = types[0];
   player2PieceTypes[0] = types[1];
 
-  this->players[0] = Player(amountOfPieceTypes,
-                            player1PieceTypes,maxAmountOfPlayerPieces);
-
-  this->players[1] = Player(amountOfPieceTypes,
-                            player2PieceTypes,maxAmountOfPlayerPieces);
+  this->players[0] = Player(playerTypes,player1PieceTypes,maxPlayerPieces);
+  this->players[1] = Player(playerTypes,player2PieceTypes,maxPlayerPieces);
 
   std::string start = "| ";
   std::string end = " ";
@@ -49,19 +61,24 @@ void ConnectFour::drawScreen() {
 /**
  * Function to reurn weather or not the game is over.
  */
-bool ConnectFour::isOver() {
+bool ConnectFour::isGameOver(Square current) {
+  cout << "got to isGameOvere \n";
   return (this->fourInRow(current) || this->topRowFull());
 }
 /**
  * Function to return true if four or more player pieces are in a row
  */
 bool ConnectFour::fourInRow(Square current) {
-  Coordinate currentPosition = current.getPosition();
+  cout << "got to four in \n";
+  Coordinate* currentPosition = &current.getPosition();
   for(int rowOffset = -1; rowOffset <= 0; rowOffset++)  {
     for(int columnOffset = -1; columnOffset <= 0; columnOffset++) {
       if(rowOffset != 0 || columnOffset != 0) { //Make sure we avoid infinate recursion by not checking current square
-        int numPlayerPiecesFirstSide  = checkNextSquare(grid[currentPosition.y + columnOffset][currentPosition.x + rowOffset], columnOffset, rowOffset);
-        int numPlayerPiecesSecondSide = checkNextSquare(grid[currentPosition.y - columnOffset][currentPosition.x - rowOffset], columnOffset*-1, rowOffset*-1);
+        Square* next = &grid[currentPosition->y + rowOffset][currentPosition->x + columnOffset];
+        cout << "got to here \n";
+        int numPlayerPiecesFirstSide  = checkNextSquare(next, rowOffset, columnOffset);
+        next = &grid[currentPosition->y - rowOffset][currentPosition->x - columnOffset];
+        int numPlayerPiecesSecondSide = checkNextSquare(next,  rowOffset*-1,columnOffset*-1);
         if((1 + numPlayerPiecesFirstSide + numPlayerPiecesSecondSide) > 3) return true;
       }
     }
@@ -71,10 +88,12 @@ bool ConnectFour::fourInRow(Square current) {
 /**
  * Recursive function to return the number of player pieces in a row
  */
-int ConnectFour::checkNextSquare(Square next, int rowOffset, int columnOffset) {
-  if(next.hasPieceOwnedBy(currentPlayer)) {
-    Coordinate nextPosition = next.getPosition();
-    return 1 + checkNextSquare(grid[nextPosition.y + rowOffset][nextPosition.x + columnOffset], rowOffset, columnOffset);
+int ConnectFour::checkNextSquare(Square* next, int rowOffset, int columnOffset) {
+  cout << "got to check next \n";
+  if(next->hasPieceOwnedBy(currentPlayer)) {
+    Coordinate* nextPosition = &next->getPosition();
+    cout << "here \n";
+    return 1 + checkNextSquare(&grid[nextPosition->y + rowOffset][nextPosition->x + columnOffset], rowOffset, columnOffset);
   } else return 0;
 }
 
@@ -92,6 +111,7 @@ bool ConnectFour::getMove() {
 }
 
 bool ConnectFour::isValidMove(int destinationX) {
+  cout << "got to isvalid \n";
   if(columnSpace[destinationX] < columns) return true;
   else {
     cout << "Destination column is full\n";
@@ -100,9 +120,10 @@ bool ConnectFour::isValidMove(int destinationX) {
 }
 
 bool ConnectFour::executeMove(int destinationX) {
+  cout << "got to exeute \n";
   int destinationY = columnSpace[destinationX];
   this->columnSpace[destinationX]++;
-  Square destinationSquare = grid[destinationX][destinationY];
+  Square destinationSquare = grid[destinationY][destinationX];
   cout << "Updating the destination square";
   destinationSquare.addPiece(currentPlayer,this->players[currentPlayer].addPiece());
   if(isGameOver(destinationSquare)) {
@@ -114,8 +135,9 @@ bool ConnectFour::executeMove(int destinationX) {
  * Function to test if top row is full
  */
 bool ConnectFour::topRowFull() {
+  cout << "got to topr \n";
   for(int currentColumn = 0; currentColumn < columns; currentColumn++) {
-    if(columnSpace[currentColumn] != rows) {
+    if(!grid[0][currentColumn].hasPiece()) {
       return false;
     }
   }

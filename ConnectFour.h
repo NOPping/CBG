@@ -1,5 +1,5 @@
-#ifndef CONNECTFOUR_H
-#define CONNECTFOUR_H
+#ifndef CONNCTFOUR_H
+#define CONNCTFOUR
 
 #include <string>
 #include <iostream>
@@ -19,7 +19,7 @@ class ConnectFour : public Game {
     bool  executeMove(int destinationX);
     
     int   *columnSpace;
-  	int   checkNextSquare(Square next, int nextColumnOffset, int nextRowOffset);
+  	int   checkNextSquare(Square* next, int nextColumnOffset, int nextRowOffset);
   public:
     ConnectFour();
 };
