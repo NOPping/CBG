@@ -10,7 +10,6 @@ class Game {
     protected:
       // Protected Data
       int       currentPlayer;
-      int       state;
       Player*   players;
       Square**  grid;
       
@@ -24,7 +23,8 @@ class Game {
       // Protected pure virtual functions
       virtual   bool  getMove() = 0;
       virtual   void  drawScreen() = 0;
-    
+      virtual   int   isOver() = 0;
+
     public:
       // Constructor and deconstructor
       Game(const int amountOfPlayers, const int columns, const int rows);
