@@ -5,6 +5,7 @@ using namespace std;
 ConnectFour::ConnectFour():Game(2,6,7) {
   int amountOfPieceTypes = 1;
   int maxAmountOfPlayerPieces = 12;
+  this->columnSpace.resize(columns);
   std::string types[] = {"O","◎"};
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
@@ -21,9 +22,9 @@ ConnectFour::ConnectFour():Game(2,6,7) {
   std::string start = "| ";
   std::string end = " ";
 
-  for(int currentRow=0; currentRow<rows; currentRow++) {
-    for(int currentColumn=0; currentColumn<columns; currentColumn++) {
-      this->grid[currentRow][currentColumn] = Square(1, start, end,amountOfPlayers, Coordinate(currentRow, currentColumn));
+  for(int i=0; i<rows; i++) {
+    for(int j=0; j<columns; j++) {
+      this->grid[i][j] = Square(1, start, end,amountOfPlayers, Coordinate(i, j));
     }
   }
 }
@@ -35,11 +36,11 @@ void ConnectFour::drawScreen() {
   std::cout << "Player " << (this->currentPlayer+1) << " it is your go\n";
   //std::cout << this->grid[0][0].representation;
   std::cout << "_________________________\n";
-  for(int currentRow=0; currentRow<rows; currentRow++) {
-    for(int currentColumn=0; currentColumn<columns; currentColumn++) {
-      std::cout << grid[currentRow][currentColumn].getStart();
-      std::cout << grid[currentRow][currentColumn];
-      std::cout << grid[currentRow][currentColumn].getEnd();
+  for(int i=0; i<rows; i++) {
+    for(int j=0; j<columns; j++) {
+      std::cout << grid[i][j].getStart();
+      std::cout << grid[i][j];
+      std::cout << grid[i][j].getEnd();
     }
     std::cout << "|\n";
   }
@@ -51,7 +52,9 @@ void ConnectFour::drawScreen() {
  * Function to reurn weather or not the game is over.
  */
 int ConnectFour::isOver() {
+  cout << "got to isOver \n";
   for(int j = 0; j < columns; j++) {
+    cout << "got to here";
     if(grid[this->columnSpace[j]][j].hasPieceOwnedBy(currentPlayer))
       if(this->fourInRow(&grid[this->columnSpace[j]][j])) return 1;
   }
@@ -62,8 +65,7 @@ int ConnectFour::isOver() {
  * Function to return true if four or more player pieces are in a row
  */
 bool ConnectFour::fourInRow(Square* current) {
-  
-
+  cout << "got to fourInRow \n";
   Coordinate currentPosition = current->getPosition();
 
   for(int rowOffset = -1; rowOffset <= 0; rowOffset++)  {
@@ -83,6 +85,7 @@ bool ConnectFour::fourInRow(Square* current) {
  * Recursive function to return the number of player pieces in a row
  */
 int ConnectFour::checkNextSquare(Square* next, int rowOffset, int columnOffset) {
+  cout << "got to checkNextSquare";
   if(next->hasPieceOwnedBy(currentPlayer)) {
     Coordinate nextPosition = next->getPosition();
     cout << "here \n";
