@@ -7,10 +7,9 @@ IdentifierPiece::IdentifierPiece(Player* owner, int identifier)
 
 IdentifierPiece::~IdentifierPiece() {}
 
-string IdentifierPiece::print() {
-  stringstream out;
-  out << Piece::print() << identifier;
-  return out.str();
+void IdentifierPiece::print(ostream& os) const{
+  Piece::print(os);
+  os << identifier;
 }
 
 int IdentifierPiece::getIdentifier() {

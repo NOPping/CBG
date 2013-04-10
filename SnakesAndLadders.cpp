@@ -133,7 +133,7 @@ void SnakesAndLadders::drawScreen() {
       if(grid[currentRow][currentColumn].hasPiece()) {
         for(int i=0; i<amountOfPlayers; i++) {
           if(grid[currentRow][currentColumn].hasPieceOwnedBy(i)) {
-            cout << grid[currentRow][currentColumn].getPiece(i)->print();
+            cout << grid[currentRow][currentColumn];
             pieceFound = true;
             break;
           }
@@ -157,7 +157,7 @@ bool SnakesAndLadders::printSnakeLadder(int x, int y) {
   for(int systemPlayer=amountOfPlayers; systemPlayer<amountOfPlayers+2; systemPlayer++) {
     if(grid[y][x].hasPieceOwnedBy(systemPlayer)) {
       Piece* systemItem = grid[y][x].getPiece(systemPlayer);
-      cout << systemItem->print();
+      systemItem->print(cout);
       return true;
     }
   }

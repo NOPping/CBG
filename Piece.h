@@ -13,9 +13,7 @@ using std::ostream;
 
 class Player;
 class Piece {
-    //friend ostream& operator<<(ostream& out, const Piece& piece);
-    
-    protected:
+      protected:
       // Protected Data
       int type;
 
@@ -28,7 +26,7 @@ class Piece {
       // Public functions
       int getType();
       bool setType(int type);
-      virtual string print();
+      virtual void print(ostream& os) const;
       
       // Public Data
       Player* owner;

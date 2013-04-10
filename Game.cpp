@@ -39,18 +39,19 @@ void Game::clearScreen() {
   cout << "\033[2J\033[;H";
 }
 
-ostream& operator<<(ostream& out, const Square& square) {
+ostream& operator << (ostream& os, const Square &square) {
   for(int i=0; i<square.amountOfPlayers; i++) {
     if(square.pieces[i] != 0) {
-      out << square.pieces[i]->print();
-      return out;
+      square.pieces[i]->print(os);
+      return os;
     }
   }
-  out << " ";
-  return out;
+  os << " ";
+  return os;
 }
-/*
-ostream& operator<<(ostream& out, const Piece& piece) {
-  out << piece.print();
-  return out;
-}*/
+
+ostream& operator << (ostream& os, const Piece &piece)
+{
+    piece.print(os);
+    return os;
+}
