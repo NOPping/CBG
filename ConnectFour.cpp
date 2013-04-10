@@ -51,19 +51,21 @@ void ConnectFour::drawScreen() {
  * Function to reurn weather or not the game is over.
  */
 int ConnectFour::isOver() {
-
-  if(this->fourInRow()) return 1;
-  else if (this->topRowFull()) return 2;
+  for(int j = 0; j < columns; j++) {
+    if(grid[this->columnSpace[j]][j].hasPieceOwnedBy(currentPlayer))
+      if(this->fourInRow(&grid[this->columnSpace[j]][j])) return 1;
+  }
+  if (this->topRowFull()) return 2;
   return 0;
 }
 /**
  * Function to return true if four or more player pieces are in a row
  */
-bool ConnectFour::fourInRow() {
+bool ConnectFour::fourInRow(Square* current) {
   
 
   Coordinate currentPosition = current->getPosition();
-  
+
   for(int rowOffset = -1; rowOffset <= 0; rowOffset++)  {
     for(int columnOffset = -1; columnOffset <= 0; columnOffset++) {
       if(rowOffset != 0 || columnOffset != 0) { //Make sure we avoid infinate recursion by not checking current square

@@ -13,7 +13,7 @@ class ConnectFour : public Game {
     void  drawScreen();
     int   isOver();
   	bool  topRowFull();
-  	bool  fourInRow();
+  	bool  fourInRow(Square * current);
     bool  isValidMove(int destinationX);
     bool  executeMove(int destinationX);
     int   *columnSpace;
