@@ -49,7 +49,7 @@ void ConnectFour::drawScreen() {
 /**
  * Function to reurn weather or not the game is over.
  */
-int ConnectFour::isGameOver() {
+int ConnectFour::isOver() {
 
   if(this->fourInRow(current)) return 1;
   else if (this->topRowFull()) return 2;
@@ -59,12 +59,16 @@ int ConnectFour::isGameOver() {
  * Function to return true if four or more player pieces are in a row
  */
 bool ConnectFour::fourInRow(Square current) {
-  Coordinate currentPosition = current.getPosition();
+  cout << "got to four in \n";
+  Coordinate* currentPosition = &current.getPosition();
   for(int rowOffset = -1; rowOffset <= 0; rowOffset++)  {
     for(int columnOffset = -1; columnOffset <= 0; columnOffset++) {
       if(rowOffset != 0 || columnOffset != 0) { //Make sure we avoid infinate recursion by not checking current square
-        int numPlayerPiecesFirstSide  = checkNextSquare(grid[currentPosition.y + columnOffset][currentPosition.x + rowOffset], columnOffset, rowOffset);
-        int numPlayerPiecesSecondSide = checkNextSquare(grid[currentPosition.y - columnOffset][currentPosition.x - rowOffset], columnOffset*-1, rowOffset*-1);
+        Square* next = &grid[currentPosition->y + rowOffset][currentPosition->x + columnOffset];
+        cout << "got to here \n";
+        int numPlayerPiecesFirstSide  = checkNextSquare(next, rowOffset, columnOffset);
+        next = &grid[currentPosition->y - rowOffset][currentPosition->x - columnOffset];
+        int numPlayerPiecesSecondSide = checkNextSquare(next, rowOffset*-1,columnOffset*-1);
         if((1 + numPlayerPiecesFirstSide + numPlayerPiecesSecondSide) > 3) return true;
       }
     }
@@ -74,10 +78,12 @@ bool ConnectFour::fourInRow(Square current) {
 /**
  * Recursive function to return the number of player pieces in a row
  */
-int ConnectFour::checkNextSquare(Square next, int rowOffset, int columnOffset) {
-  if(next.hasPieceOwnedBy(currentPlayer)) {
-    Coordinate nextPosition = next.getPosition();
-    return 1 + checkNextSquare(grid[nextPosition.y + rowOffset][nextPosition.x + columnOffset], rowOffset, columnOffset);
+int ConnectFour::checkNextSquare(Square* next, int rowOffset, int columnOffset) {
+  cout << "got to check next \n";
+  if(next->hasPieceOwnedBy(currentPlayer)) {
+    Coordinate* nextPosition = &next->getPosition();
+    cout << "here \n";
+    return 1 + checkNextSquare(&grid[nextPosition->y + rowOffset][nextPosition->x + columnOffset], rowOffset, columnOffset);
   } else return 0;
 }
 
