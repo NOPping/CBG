@@ -2,7 +2,7 @@
 
 using namespace std;
 
-ConnectFour::ConnectFour() {
+ConnectFour::ConnectFour():Game(2,6,7) {
   this->rows = 7;
   this->columns = 6;
   this->amountOfPlayers = 2;
