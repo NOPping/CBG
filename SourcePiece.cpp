@@ -1,8 +1,8 @@
 #include "SourcePiece.h"
 
-SourcePiece::SourcePiece(Player* owner, Coordinate source) 
-                         : Piece(owner) {
-    this->source = source;
+SourcePiece::SourcePiece(Player* owner, Coordinate source)
+: Piece(owner) {
+  this->source = source;
 }
 
 Coordinate SourcePiece::getSource() {

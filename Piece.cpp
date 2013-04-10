@@ -24,6 +24,6 @@ bool Piece::setType(int type) {
   }
 }
 
-void Piece::print(ostream& os) const{
+void Piece::print(ostream& os) const {
   os << owner->getCharacter(type);
 }

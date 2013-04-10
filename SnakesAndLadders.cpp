@@ -10,7 +10,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
   const int amountOfSystemItems = 2;
   this->systemItems = new Player[amountOfSystemItems];
   this->squareRefs = new Square*[100];
-  
+
   // Setup the Players
   const int playerTypes = 1;
   const int maxPlayerPieces = 1;
@@ -39,7 +39,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
   this->systemItems[0] = Player(systemTypes,system1PieceTypes,maxSystemPieces);
   this->systemItems[1] = Player(systemTypes,system2PieceTypes,maxSystemPieces);
 
-  // Setup all the squares  
+  // Setup all the squares
   int totalPlayers = amountOfPlayers + amountOfSystemItems;
 
   string start[] = {"\033[48;5;16m","\033[48;5;241m"};
@@ -48,7 +48,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
   int identifier = 0;
 
   int counter = 100;
-  
+
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
 
@@ -61,14 +61,14 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
     counter -= (i % 2 == 0) ? 9 : 11;
     identifier = (identifier + 1)%2;
   }
-  
+
   // Add the players to the starting square
   Piece* player1Piece = new SourcePiece(&players[0],Coordinate(0,9));
   Piece* player2Piece = new SourcePiece(&players[1],Coordinate(0,9));
   cout << player1Piece << "\n";
   squareRefs[0]->addPiece(0,players[0].addPiece(player1Piece));
   squareRefs[0]->addPiece(1,players[1].addPiece(player2Piece));
-  
+
   Coordinate snakes[maxSystemPieces/2][2] = {
     {squareToCoordinate(20),squareToCoordinate(17)},
     {squareToCoordinate(33),squareToCoordinate(7)},
@@ -182,9 +182,9 @@ bool SnakesAndLadders::getMove() {
 
 
   this->executeMove(current, roll);
-  
+
   currentPlayer=(currentPlayer+1)%(amountOfPlayers);
-  
+
   return true;
 }
 
@@ -200,16 +200,16 @@ bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
       return true;
     }
   }
-  
+
   Coordinate destination = squareToCoordinate(position);
-  
+
   if(grid[destination.y][destination.x].hasPieceOwnedBy(2)) {
     cout << "You landed on a snake/ladder, oh no/oh yes";
     DestinationPiece* piece =  dynamic_cast<DestinationPiece*>(grid[destination.y][destination.x].getPiece(2));
     destination = piece->getDestination();
     if(destination.x == current.x && destination.y == current.y) return true;
   }
-  
+
   Square *destinationSquare = &grid[destination.y][destination.x];
   dynamic_cast<SourcePiece*>(currentSquare->getPiece(currentPlayer))->setSource(destination);
 

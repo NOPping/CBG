@@ -4,7 +4,7 @@ using std::cout;
 using std::ostream;
 
 Game::Game(const int amountOfPlayers, const int columns, const int rows)
-           : amountOfPlayers(amountOfPlayers), columns(columns), rows(rows) {
+: amountOfPlayers(amountOfPlayers), columns(columns), rows(rows) {
   this->currentPlayer = 0;
   this->players = new Player[amountOfPlayers];
   this->grid = new Square*[rows];
@@ -49,8 +49,7 @@ ostream& operator << (ostream& os, const Square &square) {
   return os;
 }
 
-ostream& operator << (ostream& os, const Piece &piece)
-{
-    piece.print(os);
-    return os;
+ostream& operator << (ostream& os, const Piece &piece) {
+  piece.print(os);
+  return os;
 }

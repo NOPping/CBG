@@ -1,13 +1,13 @@
 #include "IdentifierPiece.h"
 
 IdentifierPiece::IdentifierPiece(Player* owner, int identifier)
-                : Piece(owner) {
-    this->identifier = identifier;
+: Piece(owner) {
+  this->identifier = identifier;
 }
 
 IdentifierPiece::~IdentifierPiece() {}
 
-void IdentifierPiece::print(ostream& os) const{
+void IdentifierPiece::print(ostream& os) const {
   Piece::print(os);
   os << identifier;
 }
