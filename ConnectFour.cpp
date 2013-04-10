@@ -49,7 +49,7 @@ void ConnectFour::drawScreen() {
 /**
  * Function to reurn weather or not the game is over.
  */
-bool ConnectFour::isGameOver(Square current) {
+bool ConnectFour::isOver() {
   return (this->fourInRow(current) || this->topRowFull());
 }
 /**

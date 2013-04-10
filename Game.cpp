@@ -24,7 +24,7 @@ Game::~Game() {
 
 void Game::start() {
   drawScreen();
-  while(state==0) {
+  while(isOver==0) {
     if(getMove()) {
       drawScreen();
     } else {
