@@ -5,9 +5,8 @@
 
 using namespace std;
 
-SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
+SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   srand(time(NULL));
-  const int amountOfSystemItems = 2;
   this->systemItems = new Player[amountOfSystemItems];
   this->squareRefs = new Square*[100];
 
@@ -65,7 +64,6 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
   // Add the players to the starting square
   Piece* player1Piece = new SourcePiece(&players[0],Coordinate(0,9));
   Piece* player2Piece = new SourcePiece(&players[1],Coordinate(0,9));
-  cout << player1Piece << "\n";
   squareRefs[0]->addPiece(0,players[0].addPiece(player1Piece));
   squareRefs[0]->addPiece(1,players[1].addPiece(player2Piece));
 
@@ -93,7 +91,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10) {
   Piece* source;
   Piece* destination;
 
-  for(int i=0; i<maxSystemPieces/2; i++) {
+  for(int i=0; i<maxSystemPieces/amountOfSystemItems; i++) {
     source = new SystemPiece(&systemItems[0],snakes[i][0],snakes[i][1],i);
     destination = new IdentifierPiece(&systemItems[1],i);
     grid[snakes[i][0].y][snakes[i][0].x].addPiece(2,source);
@@ -119,21 +117,21 @@ void SnakesAndLadders::drawScreen() {
 
   cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
 
-  for(int currentRow=0; currentRow<rows; currentRow++) {
-    for(int currentColumn=0; currentColumn<columns; currentColumn++) {
+  for(int y=0; y<rows; y++) {
+    for(int x=0; x<columns; x++) {
 
       // Start the Square
-      cout << grid[currentRow][currentColumn].getStart();
+      cout << grid[y][x].getStart();
 
       // Print square number
-      printf ("%-3d",grid[currentRow][currentColumn].getIdentifier());
+      printf ("%-3d",grid[y][x].getIdentifier());
 
       // Print player piece if any.
       bool pieceFound = false;
-      if(grid[currentRow][currentColumn].hasPiece()) {
-        for(int i=0; i<amountOfPlayers; i++) {
-          if(grid[currentRow][currentColumn].hasPieceOwnedBy(i)) {
-            cout << grid[currentRow][currentColumn];
+      if(grid[y][x].hasPiece()) {
+        for(int players=0; players<amountOfPlayers; players++) {
+          if(grid[y][x].hasPieceOwnedBy(players)) {
+            cout << grid[y][x];
             pieceFound = true;
             break;
           }
@@ -143,10 +141,10 @@ void SnakesAndLadders::drawScreen() {
 
       cout << " ";
 
-      if(!printSnakeLadder(currentColumn,currentRow)) cout << "  ";
+      if(!printSnakeLadder(x,y)) cout << "  ";
 
       // End the square
-      cout << grid[currentRow][currentColumn].getEnd();
+      cout << grid[y][x].getEnd();
     }
     cout << "\n";
   }

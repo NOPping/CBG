@@ -18,6 +18,7 @@ class SnakesAndLadders : public Game {
     Player* systemItems;
     bool printSnakeLadder(int x, int y);
     int isOver();
+    const int amountOfSystemItems;
     
   public:
     SnakesAndLadders();
