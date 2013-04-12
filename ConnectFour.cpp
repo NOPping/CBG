@@ -2,7 +2,7 @@
 
 using namespace std;
 
-ConnectFour::ConnectFour():Game(2,6,7) {
+ConnectFour::ConnectFour():Game(2,7,6) {
 
   state = 0;
   int amountOfPieceTypes = 1;
@@ -10,7 +10,7 @@ ConnectFour::ConnectFour():Game(2,6,7) {
   this->columnSpace.resize(columns);
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = "O";
+  player1PieceTypes[0] = "o";
   player2PieceTypes[0] = "◎";
 
   this->players[0] = Player(amountOfPieceTypes,
@@ -36,7 +36,7 @@ void ConnectFour::drawScreen() {
   this->clearScreen();
   std::cout << "Player " << (this->currentPlayer+1) << " it is your go\n";
   //std::cout << this->grid[0][0].representation;
-  std::cout << "_________________________\n";
+  std::cout << "+---+---+---+---+---+---+---+\n";
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
       std::cout << grid[i][j].getStart();
@@ -44,8 +44,8 @@ void ConnectFour::drawScreen() {
       std::cout << grid[i][j].getEnd();
     }
     std::cout << "|\n";
+    std::cout << "+---+---+---+---+---+---+---+\n";
   }
-  std::cout << "_________________________\n";
   std::cout << "\n";
 }
 
@@ -67,6 +67,8 @@ bool ConnectFour::fourInRow(Square* current) {
   Coordinate currentPosition = current->getPosition();
   for(int rowOffset = 0; rowOffset <= 1; rowOffset++)  {
     for(int colOffset = 0; colOffset <= 1; colOffset++) {
+      cout << "\n"<< rowOffset << "." << colOffset << "\n";
+      for(int i = 0; i < 100000000; i++) {}
       int numPlayerPiecesFirstSide  = checkNext(current, rowOffset, colOffset);
       int numPlayerPiecesSecondSide = checkNext(current, 0-rowOffset, 0-colOffset);
       if((1+ numPlayerPiecesFirstSide + numPlayerPiecesSecondSide) >3) return true;
