@@ -67,8 +67,6 @@ bool ConnectFour::fourInRow(Square* current) {
   Coordinate currentPosition = current->getPosition();
   for(int rowOffset = 0; rowOffset <= 1; rowOffset++)  {
     for(int colOffset = 0; colOffset <= 1; colOffset++) {
-      cout << "\n"<< rowOffset << "." << colOffset << "\n";
-      for(int i = 0; i < 100000000; i++) {}
       int numPlayerPiecesFirstSide  = checkNext(current, rowOffset, colOffset);
       int numPlayerPiecesSecondSide = checkNext(current, 0-rowOffset, 0-colOffset);
       if((1+ numPlayerPiecesFirstSide + numPlayerPiecesSecondSide) >3) return true;
