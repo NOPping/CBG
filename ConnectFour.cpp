@@ -82,8 +82,6 @@ int ConnectFour::checkNext(Square* current,int rowOffset,int colOffset) {
     Coordinate currentPos = current->getPosition();
     if(isLegal(currentPos, rowOffset, colOffset)) {
       Square* next = &grid[currentPos.y + rowOffset][currentPos.x + colOffset];
-      cout << "\n" << currentPos.y << " + " << rowOffset << "\n";
-      cout << "\n" << currentPos.x << " + " << colOffset << "\n";
       return 1 + checkNext(next, rowOffset, colOffset);
     }
   }
@@ -124,7 +122,7 @@ bool ConnectFour::isValidMove(int destinationX) {
     cout << "Your input fell out of the bounds of the board\n";
     return false;
   }
-  else if(columnSpace[destinationX] > rows) {
+  else if(columnSpace[destinationX] => rows) {
     cout << "Destination column is full\n";
     return false;
   }
