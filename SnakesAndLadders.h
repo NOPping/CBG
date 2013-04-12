@@ -2,6 +2,7 @@
 #define SNAKESANDLADDERS_H
 
 #include "Game.h"
+#include "SnakesAndLaddersPlayer.h"
 #include "SourcePiece.h"
 #include "SystemPiece.h"
 

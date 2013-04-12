@@ -31,6 +31,7 @@ class Player {
       Piece*  addPiece();
       Piece*  addPiece(Piece* insert);
       Piece*  getPiece(int index);
+      bool suspended;
 };
 
 #endif

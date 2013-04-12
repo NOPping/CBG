@@ -152,7 +152,7 @@ void SnakesAndLadders::drawScreen() {
 }
 
 bool SnakesAndLadders::printSnakeLadder(int x, int y) {
-  for(int systemPlayer=amountOfPlayers; systemPlayer<amountOfPlayers+2; systemPlayer++) {
+  for(int systemPlayer=amountOfPlayers; systemPlayer<amountOfPlayers+amountOfSystemItems; systemPlayer++) {
     if(grid[y][x].hasPieceOwnedBy(systemPlayer)) {
       Piece* systemItem = grid[y][x].getPiece(systemPlayer);
       systemItem->print(cout);
@@ -163,7 +163,8 @@ bool SnakesAndLadders::printSnakeLadder(int x, int y) {
 }
 
 int SnakesAndLadders::rollDice() {
-  return (int)rand() % 6 + 1;
+  //return (int)rand() % 6 + 1;
+  return 6;
 }
 
 int SnakesAndLadders::isOver() {
@@ -174,12 +175,28 @@ bool SnakesAndLadders::getMove() {
   cout << "Press enter to roll a dice and make your move\n";
   cin.get();
   int roll = rollDice();
-  cout << "You rolled a " << roll << "\n";
-
+  int total=roll;
+  while((roll/6 == 0) || (total != 6*3)) {
+    cout << "You rolled a " << roll << ", go again\n";
+    cin.get();
+    roll = rollDice();
+    total += roll;
+  }
+  
   Coordinate current = dynamic_cast<SourcePiece*>(players[currentPlayer].getPiece(0))->getSource();
-
-
-  this->executeMove(current, roll);
+  if(total == 6) {
+    players[currentPlayer].suspended = false;
+  }
+  
+  if(total == 6*3) {
+    players[currentPlayer].suspended = true; 
+    this->executeMove(current,1);
+    cout << "You rolled 3 sucessive 6s.\n";
+  } else if(!players[currentPlayer].suspended) {
+    this->executeMove(current, total);
+  } else {
+    cout << "You are suspended until you roll a 6\n";
+  }
 
   currentPlayer=(currentPlayer+1)%(amountOfPlayers);
 

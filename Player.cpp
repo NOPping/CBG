@@ -9,6 +9,7 @@ Player::Player(int amountOfTypes, std::vector<std::string> types, int maxPieces)
   this->amountOfTypes = amountOfTypes;
   this->maxPieces = maxPieces;
   this->pieces.resize(maxPieces);
+  this->suspended=false;
 }
 
 
