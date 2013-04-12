@@ -122,7 +122,7 @@ bool ConnectFour::isValidMove(int destinationX) {
     cout << "Your input fell out of the bounds of the board\n";
     return false;
   }
-  else if(columnSpace[destinationX] => rows) {
+  else if(columnSpace[destinationX] >= rows) {
     cout << "Destination column is full\n";
     return false;
   }
