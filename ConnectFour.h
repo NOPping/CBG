@@ -11,7 +11,7 @@ using std::vector;
 
 class ConnectFour : public Game {
 
-  private:
+private:
     bool         isLegal(Coordinate currentPos,int nextRowOffset,int nextColumnOffset);
     int 	 state;
     bool         getMove();
@@ -24,7 +24,7 @@ class ConnectFour : public Game {
     bool         executeMove(int destinationX);
     vector<int>  columnSpace;
     int          checkNext(Square* next,int nextRowOffset,int nextColumnOffset);
-  public:
+public:
     ConnectFour();
 };
 
