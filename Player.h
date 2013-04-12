@@ -22,6 +22,7 @@ class Player {
       // Constructor
       Player();
       Player(int amountOfTypes, vector<string> types, int maxPieces);
+      virtual ~Player();
       
       // Public functions
       int     getAmountOfPieces();

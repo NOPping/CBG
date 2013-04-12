@@ -66,3 +66,6 @@ Piece* Player::getPiece(int index) {
   }
   return piece;
 }
+
+Player::~Player() {
+}

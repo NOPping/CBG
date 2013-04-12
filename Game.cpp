@@ -6,7 +6,7 @@ using std::ostream;
 Game::Game(const int amountOfPlayers, const int columns, const int rows)
 : amountOfPlayers(amountOfPlayers), columns(columns), rows(rows) {
   this->currentPlayer = 0;
-  this->players = new Player[amountOfPlayers];
+  this->players = new Player*[this->amountOfPlayers];
   this->grid = new Square*[rows];
   for(int i=0; i<rows; i++) {
     this->grid[i] = new Square[columns];

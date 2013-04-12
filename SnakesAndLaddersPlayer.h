@@ -8,7 +8,7 @@ class SnakesAndLaddersPlayer : public Player {
     SnakesAndLaddersPlayer();
     SnakesAndLaddersPlayer(int amountOfTypes, vector<string> types,
                            int maxPieces);
-    ~SnakesAndLaddersPlayer();
+    virtual ~SnakesAndLaddersPlayer();
     
     bool suspended;
 };

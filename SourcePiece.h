@@ -11,7 +11,7 @@ class SourcePiece : virtual public Piece {
     SourcePiece(Player* owner, Coordinate source);
     Coordinate getSource();
     void setSource(Coordinate source);
-    ~SourcePiece();
+    virtual ~SourcePiece();
 };
 
 #endif

@@ -16,11 +16,11 @@ Checkers::Checkers():Game(2, 8, 8) {
   player2PieceTypes[0] = "\033[37m○";
   player2PieceTypes[1] = "\033[37m◎";
 
-  players[0] = Player(amountOfPieceTypes,player1PieceTypes,
-                      maxAmountOfPlayerPieces);
+  players[0] = new Player(amountOfPieceTypes,player1PieceTypes,
+                          maxAmountOfPlayerPieces);
 
-  players[1] = Player(amountOfPieceTypes,player2PieceTypes,
-                      maxAmountOfPlayerPieces);
+  players[1] = new Player(amountOfPieceTypes,player2PieceTypes,
+                          maxAmountOfPlayerPieces);
 
   string start[] = {"\033[47m ","\033[40m "};
   string end = " \033[0m";
@@ -37,11 +37,11 @@ Checkers::Checkers():Game(2, 8, 8) {
       if(identifier == 1) {
         // Add a black piece if its a black square and on the first 3 rows
         if(i<3) {
-          grid[i][j].addPiece(0,players[0].addPiece());
+          grid[i][j].addPiece(0,players[0]->addPiece());
         }
         // Add a white piece if its a black square and on the last 3 rows
         else if(i>4) {
-          grid[i][j].addPiece(1,players[1].addPiece());
+          grid[i][j].addPiece(1,players[1]->addPiece());
         }
       }
 
@@ -205,7 +205,7 @@ int Checkers::getOpposition() {
 }
 
 int Checkers::isOver() {
-  return players[currentPlayer].getAmountOfPieces() == 0 ? 1 : 0;
+  return players[currentPlayer]->getAmountOfPieces() == 0 ? 1 : 0;
 }
 
 bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
@@ -229,6 +229,6 @@ bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
 bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare,
                            Square* toJump) {
   toJump->removePiece(getOpposition());
-  players[getOpposition()].removePiece();
+  players[getOpposition()]->removePiece();
   return executeMove(sourceSquare,destinationSquare);
 }

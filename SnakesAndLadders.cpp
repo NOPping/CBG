@@ -20,8 +20,8 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   player1PieceTypes[0] = "\033[38;5;160m◎";
   player2PieceTypes[0] = "\033[38;5;27m◎";
 
-  this->players[0] = Player(playerTypes,player1PieceTypes,maxPlayerPieces);
-  this->players[1] = Player(playerTypes,player2PieceTypes,maxPlayerPieces);
+  this->players[0] = new SnakesAndLaddersPlayer(playerTypes,player1PieceTypes,maxPlayerPieces);
+  this->players[1] = new SnakesAndLaddersPlayer(playerTypes,player2PieceTypes,maxPlayerPieces);
 
   // Setup the snakes and ladders
   const int systemTypes = 2;
@@ -62,10 +62,10 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   }
 
   // Add the players to the starting square
-  Piece* player1Piece = new SourcePiece(&players[0],Coordinate(0,9));
-  Piece* player2Piece = new SourcePiece(&players[1],Coordinate(0,9));
-  squareRefs[0]->addPiece(0,players[0].addPiece(player1Piece));
-  squareRefs[0]->addPiece(1,players[1].addPiece(player2Piece));
+  Piece* player1Piece = new SourcePiece(players[0],Coordinate(0,9));
+  Piece* player2Piece = new SourcePiece(players[1],Coordinate(0,9));
+  squareRefs[0]->addPiece(0,(players[0]->addPiece(player1Piece)));
+  squareRefs[0]->addPiece(1,(players[1]->addPiece(player2Piece)));
 
   Coordinate snakes[maxSystemPieces/2][2] = {
     {squareToCoordinate(20),squareToCoordinate(17)},
@@ -183,16 +183,28 @@ bool SnakesAndLadders::getMove() {
     total += roll;
   }
   
-  Coordinate current = dynamic_cast<SourcePiece*>(players[currentPlayer].getPiece(0))->getSource();
+  SnakesAndLaddersPlayer* player = dynamic_cast<SnakesAndLaddersPlayer*>(players[currentPlayer]);
+  Coordinate current = dynamic_cast<SourcePiece*>(player->getPiece(0))->getSource();
+  
   if(total == 6) {
-    players[currentPlayer].suspended = false;
+    player->suspended = false;
   }
   
   if(total == 6*3) {
-    players[currentPlayer].suspended = true; 
-    this->executeMove(current,1);
+    player->suspended = true; 
+    
+    // messy fix up at some stage.
+    if(current.y != 9 && current.x != 0) {
+      Square *destinationSquare = &grid[current.y][current.x];
+      Square *currentSquare = &grid[current.y][current.x];
+
+      dynamic_cast<SourcePiece*>(currentSquare->getPiece(currentPlayer))->setSource(Coordinate(0,9));
+
+      destinationSquare->addPiece(currentPlayer, currentSquare->getPiece(currentPlayer));
+      currentSquare->removePiece(currentPlayer);
+    }
     cout << "You rolled 3 sucessive 6s.\n";
-  } else if(!players[currentPlayer].suspended) {
+  } else if(!player->suspended) {
     this->executeMove(current, total);
   } else {
     cout << "You are suspended until you roll a 6\n";

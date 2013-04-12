@@ -14,7 +14,7 @@ class Game {
     protected:
       // Protected Data
       int       currentPlayer;
-      Player*   players;
+      Player**  players;
       Square**  grid;
       
       const   int   amountOfPlayers;

@@ -11,10 +11,10 @@ ConnectFour::ConnectFour():Game(2,6,7) {
   player1PieceTypes[0] = "O";
   player2PieceTypes[0] = "◎";
 
-  this->players[0] = Player(amountOfPieceTypes,
+  this->players[0] = new Player(amountOfPieceTypes,
                             player1PieceTypes,maxAmountOfPlayerPieces);
 
-  this->players[1] = Player(amountOfPieceTypes,
+  this->players[1] = new Player(amountOfPieceTypes,
                             player2PieceTypes,maxAmountOfPlayerPieces);
 
 
@@ -109,7 +109,7 @@ bool ConnectFour::getMove() {
 bool ConnectFour::executeMove(int destinationX) {
   this->columnSpace[destinationX]++;
   int destinationY = rows - columnSpace[destinationX];
-  grid[destinationY][destinationX].addPiece(currentPlayer,this->players[currentPlayer].addPiece());
+  grid[destinationY][destinationX].addPiece(currentPlayer,this->players[currentPlayer]->addPiece());
   return true;
 }
 
