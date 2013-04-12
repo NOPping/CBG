@@ -10,7 +10,7 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   this->columnSpace.resize(columns);
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = "o";
+  player1PieceTypes[0] = "○";
   player2PieceTypes[0] = "◎";
 
   this->players[0] = Player(amountOfPieceTypes,
