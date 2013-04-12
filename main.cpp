@@ -44,20 +44,23 @@ int main() {
   cout << "\033[31m\n";
   border(80);
   cout << "\033[0m";
-  cout << "\nInsert the number of the game you wish to play: ";
-  cin >> selection;
-  cin.clear();
-  cin.ignore(10000,'\n');
-  if(selection >= 0 && selection < 4) {
-    if(selection == 1) {
-      Checkers().start();
-    } else if(selection == 2) {
-      ConnectFour().start();
-    } else if(selection == 3) {
-      SnakesAndLadders().start();
-    }
-  } else {
-    cout << "Invalid Selection";
+  bool valid = false;
+  while(!validSelection) {
+    vector <Game*> games(4);
+    games[0] =  new Checkers(); 
+    games[1] =  new ConnectFour();
+    games[2] =  new SnakesAndLadders();
+    //games[4] =  new Reversi();
+	  cout << "\nInsert the number of the game you wish to play: ";
+	  cin >> selection;
+	  cin.clear();
+	  cin.ignore(10000,'\n');
+	  if(selection > 0 && selection < 4) {
+      validSelection = true;
+	    games[selection-1]->start();
+	  } else {
+	    cout << "\nInvalid Selection";
+	  }
   }
   return 0;
 }
