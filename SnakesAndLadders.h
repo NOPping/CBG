@@ -1,9 +1,6 @@
 #ifndef SNAKESANDLADDERS_H
 #define SNAKESANDLADDERS_H
 
-#include <string>
-#include <vector>
-#include <iostream>
 #include "Game.h"
 #include "SourcePiece.h"
 #include "SystemPiece.h"

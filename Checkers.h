@@ -1,10 +1,6 @@
 #ifndef CHECKERS_H
 #define CHECKERS_H
 
-#include <string>
-#include <vector>
-#include <cstdlib>
-#include <iostream>
 #include "Game.h"
 
 class Checkers : public Game {

@@ -8,7 +8,7 @@ using std::vector;
 Checkers::Checkers():Game(2, 8, 8) {
 
   int amountOfPieceTypes = 2;
-  int maxAmountOfPlayerPieces = 12;
+  int maxAmountOfPlayerPieces = 1;
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
   player1PieceTypes[0] = "\033[31m○";
@@ -54,11 +54,6 @@ Checkers::Checkers():Game(2, 8, 8) {
 }
 
 Checkers::~Checkers() {
-  for(int i=0; i<rows; i++) {
-    delete [] grid[i];
-  }
-  delete [] grid;
-  delete [] players;
 }
 
 void Checkers::drawScreen() {

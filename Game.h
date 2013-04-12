@@ -1,7 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <string>
+#include <vector>
 #include <iostream>
+#include <cstdlib>
+
 #include "Square.h"
 #include "Player.h"
 
