@@ -10,6 +10,7 @@
 using std::vector;
 
 class ConnectFour : public Game {
+
   private:
     bool         isLegal(Coordinate currentPos,int nextRowOffset,int nextColumnOffset);
     int 	 state;

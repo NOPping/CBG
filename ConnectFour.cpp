@@ -3,6 +3,7 @@
 using namespace std;
 
 ConnectFour::ConnectFour():Game(2,6,7) {
+
   state = 0;
   int amountOfPieceTypes = 1;
   int maxAmountOfPlayerPieces = 12;
