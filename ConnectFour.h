@@ -13,7 +13,7 @@ class ConnectFour : public Game {
 
 private:
   bool         isLegal(Coordinate currentPos,int nextRowOffset,int nextColumnOffset);
-  int 	 state;
+  int 	       state;
   bool         getMove();
   void         drawScreen();
   int          isOver();

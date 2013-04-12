@@ -82,7 +82,8 @@ int ConnectFour::checkNext(Square* current,int rowOffset,int colOffset) {
     Coordinate currentPos = current->getPosition();
     if(isLegal(currentPos, rowOffset, colOffset)) {
       Square* next = &grid[currentPos.y + rowOffset][currentPos.x + colOffset];
-      cout << "\ngot here\n";
+      cout << "\n" << currentPos.y << " + " << rowOffset << "\n";
+      cout << "\n" << currentPos.x << " + " << colOffset << "\n";
       return 1 + checkNext(next, rowOffset, colOffset);
     }
   }
@@ -90,7 +91,9 @@ int ConnectFour::checkNext(Square* current,int rowOffset,int colOffset) {
 }
 
 bool ConnectFour::isLegal(Coordinate currentPos,int rowOffset,int colOffset) {
-  return((rowOffset != 0 || colOffset != 0)&&(currentPos.x + colOffset >= 0))&&(currentPos.y + rowOffset >= 0);
+  return((currentPos.x + colOffset < columns)&&(currentPos.x + colOffset >= 0))
+        &&(currentPos.y + rowOffset < columns)&&(currentPos.y + rowOffset >= 0)
+        &&(rowOffset != 0 || colOffset != 0);
 }
 
 bool ConnectFour::getMove() {
