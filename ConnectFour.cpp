@@ -35,7 +35,9 @@ ConnectFour::ConnectFour():Game(2,7,6) {
 void ConnectFour::drawScreen() {
   this->clearScreen();
   std::cout << "Player " << (this->currentPlayer+1) << " it is your go\n";
-  //std::cout << this->grid[0][0].representation;
+  std::cout << "\n";
+  for(int i=1; i<=columns; i++) cout << "  " << i << " ";
+  std::cout << "\n";
   std::cout << "+---+---+---+---+---+---+---+\n";
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
