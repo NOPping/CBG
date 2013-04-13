@@ -14,10 +14,10 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   player2PieceTypes[0] = "\033[38m○\033[0m";
 
   this->players[0] = new Player(amountOfPieceTypes,
-                            player1PieceTypes,maxAmountOfPlayerPieces);
+                                player1PieceTypes,maxAmountOfPlayerPieces);
 
   this->players[1] = new Player(amountOfPieceTypes,
-                            player2PieceTypes,maxAmountOfPlayerPieces);
+                                player2PieceTypes,maxAmountOfPlayerPieces);
 
 
   std::string start = "\033[36m| \033[0m";
@@ -102,7 +102,7 @@ bool ConnectFour::getMove() {
   bool validInput = false;
   do {
     cout << "Type in the X coordinate of the column you would like to "
-         << "add your piece to:\n";
+    << "add your piece to:\n";
     cin >> x;
 
     validInput = isValidMove(x - 1);
@@ -124,8 +124,7 @@ bool ConnectFour::isValidMove(int destinationX) {
   if(destinationX >= columns || destinationX < 0) {
     cout << "Your input fell out of the bounds of the board\n";
     return false;
-  }
-  else if(columnSpace[destinationX] >= rows) {
+  } else if(columnSpace[destinationX] >= rows) {
     cout << "Destination column is full\n";
     return false;
   }

@@ -182,17 +182,17 @@ bool SnakesAndLadders::getMove() {
     roll = rollDice();
     total += roll;
   }
-  
+
   SnakesAndLaddersPlayer* player = dynamic_cast<SnakesAndLaddersPlayer*>(players[currentPlayer]);
   Coordinate current = dynamic_cast<SourcePiece*>(player->getPiece(0))->getSource();
-  
+
   if(total == 6) {
     player->suspended = false;
   }
-  
+
   if(total == 6*3) {
-    player->suspended = true; 
-    
+    player->suspended = true;
+
     // messy fix up at some stage.
     if(current.y != 9 && current.x != 0) {
       Square *destinationSquare = &grid[current.y][current.x];
