@@ -8,7 +8,7 @@ using std::vector;
 Checkers::Checkers():Game(2, 8, 8) {
 
   int amountOfPieceTypes = 2;
-  int maxAmountOfPlayerPieces = 1;
+  int maxAmountOfPlayerPieces = 12;
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
   player1PieceTypes[0] = "\033[31m○";
