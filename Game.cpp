@@ -31,7 +31,12 @@ void Game::start() {
     }
   }
 
-  cout << "Game ended with: " << isOver() << "\n";
+  if(isOver()==1) {
+    int winner =  currentPlayer-1 == -1  ? amountOfPlayers : currentPlayer;
+    cout << "Player " << winner << " has won the game\n";
+  } else if(isOver()==2) {
+    cout << "Game ended in a draw";
+  } 
 }
 
 void Game::clearScreen() {
