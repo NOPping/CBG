@@ -10,8 +10,8 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   this->columnSpace.resize(columns);
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = "○";
-  player2PieceTypes[0] = "◎";
+  player1PieceTypes[0] = "\033[33m○\033[0m";
+  player2PieceTypes[0] = "\033[38m○\033[0m";
 
   this->players[0] = new Player(amountOfPieceTypes,
                             player1PieceTypes,maxAmountOfPlayerPieces);
@@ -20,7 +20,7 @@ ConnectFour::ConnectFour():Game(2,7,6) {
                             player2PieceTypes,maxAmountOfPlayerPieces);
 
 
-  std::string start = "| ";
+  std::string start = "\033[36m| \033[0m";
   std::string end = " ";
 
   for(int i=0; i<rows; i++) {
@@ -38,15 +38,15 @@ void ConnectFour::drawScreen() {
   std::cout << "\n";
   for(int i=1; i<=columns; i++) cout << "  " << i << " ";
   std::cout << "\n";
-  std::cout << "+---+---+---+---+---+---+---+\n";
+  std::cout << "\033[36m+---+---+---+---+---+---+---+\033[0m\n";
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
       std::cout << grid[i][j].getStart();
       std::cout << grid[i][j];
       std::cout << grid[i][j].getEnd();
     }
-    std::cout << "|\n";
-    std::cout << "+---+---+---+---+---+---+---+\n";
+    std::cout << "\033[36m|\033[0m\n";
+    std::cout << "\033[36m+---+---+---+---+---+---+---+\033[0m\n";
   }
   std::cout << "\n";
 }
@@ -71,7 +71,7 @@ bool ConnectFour::fourInRow(Square* current) {
     for(int colOffset = 0; colOffset <= 1; colOffset++) {
       int numPlayerPiecesFirstSide  = checkNext(current, rowOffset, colOffset);
       int numPlayerPiecesSecondSide = checkNext(current, 0-rowOffset, 0-colOffset);
-      if((1+ numPlayerPiecesFirstSide + numPlayerPiecesSecondSide) >3) return true;
+      if((numPlayerPiecesFirstSide + numPlayerPiecesSecondSide) > 3) return true;
     }
   }
   return false;
@@ -86,6 +86,7 @@ int ConnectFour::checkNext(Square* current,int rowOffset,int colOffset) {
       Square* next = &grid[currentPos.y + rowOffset][currentPos.x + colOffset];
       return 1 + checkNext(next, rowOffset, colOffset);
     }
+    return 1;
   }
   return 0;
 }
@@ -114,7 +115,7 @@ bool ConnectFour::getMove() {
 bool ConnectFour::executeMove(int destinationX) {
   this->columnSpace[destinationX]++;
   int destinationY = rows - columnSpace[destinationX];
-  grid[destinationY][destinationX].addPiece(currentPlayer,this->players[currentPlayer].addPiece());
+  grid[destinationY][destinationX].addPiece(currentPlayer,this->players[currentPlayer]->addPiece());
   state = isOver(&grid[destinationY][destinationX]);
   return true;
 }
