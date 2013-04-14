@@ -14,10 +14,10 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   player2PieceTypes[0] = "\033[38m○\033[0m";
 
   this->players[0] = new Player(amountOfPieceTypes,
-                            player1PieceTypes,maxAmountOfPlayerPieces);
+                                player1PieceTypes,maxAmountOfPlayerPieces);
 
   this->players[1] = new Player(amountOfPieceTypes,
-                            player2PieceTypes,maxAmountOfPlayerPieces);
+                                player2PieceTypes,maxAmountOfPlayerPieces);
 
 
   std::string start = "\033[36m| \033[0m";
@@ -25,7 +25,8 @@ ConnectFour::ConnectFour():Game(2,7,6) {
 
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
-      this->grid[i][j] = Square(1, start, end,amountOfPlayers, Coordinate(j, i));
+      this->grid[i][j] = Square(1, start, end,amountOfPlayers,
+                                Coordinate(j, i));
     }
   }
 }
@@ -67,11 +68,12 @@ int ConnectFour::isOver(Square* current) {
  */
 bool ConnectFour::fourInRow(Square* current) {
   Coordinate currentPosition = current->getPosition();
-  for(int rowOffset = 0; rowOffset <= 1; rowOffset++)  {
-    for(int colOffset = 0; colOffset <= 1; colOffset++) {
-      int numPlayerPiecesFirstSide  = checkNext(current,   rowOffset,   colOffset);
-      int numPlayerPiecesSecondSide = checkNext(current, 0-rowOffset, 0-colOffset);
-      if((numPlayerPiecesFirstSide + numPlayerPiecesSecondSide) > 3) return true;
+  for(int iOffset = 0; iOffset <= 1; iOffset++)  {
+    for(int jOffset = 0; jOffset <= 1; jOffset++) {
+      int numPlayerPiecesFirstSide  = checkNext(current,  iOffset,  jOffset);
+      int numPlayerPiecesSecondSide = checkNext(current,0-iOffset,0-jOffset);
+      if((numPlayerPiecesFirstSide +numPlayerPiecesSecondSide -1) > 3)
+        return true;
     }
   }
   return false;
@@ -79,22 +81,23 @@ bool ConnectFour::fourInRow(Square* current) {
 /**
  * Recursive function to return the number of player pieces in a row
  */
-int ConnectFour::checkNext(Square* current,int rowOffset,int colOffset) {
+int ConnectFour::checkNext(Square* current,int iOffset,int jOffset) {
   if(current->hasPieceOwnedBy(currentPlayer)) {
-    if(isLegal(current, rowOffset, colOffset)) {
+    if(isLegal(current, iOffset, jOffset)) {
       Coordinate currentPos = current->getPosition();
-      Square* next = &grid[currentPos.y + rowOffset][currentPos.x + colOffset];
-      return 1 + checkNext(next, rowOffset, colOffset);
+      Square* next = &grid[currentPos.y + iOffset][currentPos.x + jOffset];
+      return 1 + checkNext(next, iOffset, jOffset);
     }
+    return 1;
   }
   return 0;
 }
 
-bool ConnectFour::isLegal(Square* current,int rowOffset,int colOffset) {
+bool ConnectFour::isLegal(Square* current,int iOffset,int jOffset) {
   Coordinate currentPos = current->getPosition();
-  return((currentPos.x + colOffset < columns)&&(currentPos.x + colOffset >= 0))
-        &&(currentPos.y + rowOffset < rows)&&(currentPos.y + rowOffset >= 0)
-        &&(rowOffset != 0 || colOffset != 0);
+  return((currentPos.x + jOffset < columns)&&(currentPos.x + jOffset >= 0))
+        &&(currentPos.y + iOffset < rows)&&(currentPos.y + iOffset >= 0)
+        &&(iOffset != 0 || jOffset != 0);
 }
 
 bool ConnectFour::getMove() {
@@ -130,7 +133,8 @@ bool ConnectFour::getMove() {
 bool ConnectFour::executeMove(int x) {
   this->columnSpace[x]++;
   int y = rows - columnSpace[x];
-  grid[y][x].addPiece(currentPlayer,this->players[currentPlayer]->addPiece());
+  grid[y][x].addPiece(currentPlayer,
+                      this->players[currentPlayer]->addPiece());
   state = isOver(&grid[y][x]);
   return true;
 }
