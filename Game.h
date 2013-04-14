@@ -9,6 +9,7 @@
 
 #include "Square.h"
 #include "Player.h"
+#include "Colors.h"
 
 
 class Game {

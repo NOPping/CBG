@@ -40,7 +40,7 @@ void Game::start() {
 }
 
 void Game::clearScreen() {
-  cout << "\033[2J\033[;H";
+  cout << CLEAR;
 }
 
 ostream& operator << (ostream& os, const Square &square) {

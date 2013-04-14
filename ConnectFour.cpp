@@ -10,8 +10,8 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   this->columnSpace.resize(columns);
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = "\033[33m○\033[0m";
-  player2PieceTypes[0] = "\033[38m○\033[0m";
+  player1PieceTypes[0] = FYELLOW "○";
+  player2PieceTypes[0] = FRED "○";
 
   this->players[0] = new Player(amountOfPieceTypes,
                                 player1PieceTypes,maxAmountOfPlayerPieces);
@@ -20,8 +20,8 @@ ConnectFour::ConnectFour():Game(2,7,6) {
                                 player2PieceTypes,maxAmountOfPlayerPieces);
 
 
-  std::string start = "\033[36m| \033[0m";
-  std::string end = " ";
+  std::string start = FBLUE "| ";
+  std::string end = " " RESET;
 
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {

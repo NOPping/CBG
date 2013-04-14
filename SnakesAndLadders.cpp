@@ -29,8 +29,8 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   vector<string> player2PieceTypes(maxPlayerPieces);
   
   // Set their character representations
-  player1PieceTypes[0] = "\033[38;5;160m◎";
-  player2PieceTypes[0] = "\033[38;5;27m◎";
+  player1PieceTypes[0] = FRED "◎";
+  player2PieceTypes[0] = FBLUE "◎";
 
   players[0] = new SLPlayer(playerTypes,player1PieceTypes,maxPlayerPieces);
   players[1] = new SLPlayer(playerTypes,player2PieceTypes,maxPlayerPieces);
@@ -42,12 +42,12 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   vector <string> system2PieceTypes(systemTypes);
 
   // Set the start point snake/ladder character representations
-  system1PieceTypes[0] = "\033[38;5;208mS";
-  system1PieceTypes[1] = "\033[38;5;106mL";
+  system1PieceTypes[0] = FVIOLET "S";
+  system1PieceTypes[1] = FGREEN "L";
 
   // Set the end point snake/ladder character representations
-  system2PieceTypes[0] = "\033[38;5;226mS";
-  system2PieceTypes[1] = "\033[38;5;134mL";
+  system2PieceTypes[0] = FORANGE "S";
+  system2PieceTypes[1] = FMAGENTA "L";
 
   systemItems[0] = Player(systemTypes,system1PieceTypes,maxSystemPieces);
   systemItems[1] = Player(systemTypes,system2PieceTypes,maxSystemPieces);
@@ -55,8 +55,8 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   // Setup all the squares
   int totalPlayers = amountOfPlayers + amountOfSystemItems;
 
-  string start[] = {"\033[48;5;16m","\033[48;5;241m"};
-  string end = "\033[0m";
+  string start[] = {BBLACK,BWHITE};
+  string end = RESET;
 
   int identifier = 0;
 
@@ -271,6 +271,9 @@ bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) {
   }
 }
 
+/**
+ * Returns the coordinates of the square containing identifier position.
+ */
 Coord SnakesAndLadders::squareToCoordinate(int position) {
   return squareRefs[position-1]->getPosition();
 }

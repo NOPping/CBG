@@ -11,10 +11,10 @@ Checkers::Checkers():Game(2, 8, 8) {
   int maxAmountOfPlayerPieces = 12;
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = "\033[31m○";
-  player1PieceTypes[1] = "\033[31m◎";
-  player2PieceTypes[0] = "\033[37m○";
-  player2PieceTypes[1] = "\033[37m◎";
+  player1PieceTypes[0] = FRED "○";
+  player1PieceTypes[1] = FRED "◎";
+  player2PieceTypes[0] = FCYAN "○";
+  player2PieceTypes[1] = FCYAN "◎";
 
   players[0] = new Player(amountOfPieceTypes,player1PieceTypes,
                           maxAmountOfPlayerPieces);
@@ -22,8 +22,8 @@ Checkers::Checkers():Game(2, 8, 8) {
   players[1] = new Player(amountOfPieceTypes,player2PieceTypes,
                           maxAmountOfPlayerPieces);
 
-  string start[] = {"\033[47m ","\033[40m "};
-  string end = " \033[0m";
+  string start[] = {BBLACK " ",BWHITE " "};
+  string end = " " RESET;
 
   int identifier = 0;
 
