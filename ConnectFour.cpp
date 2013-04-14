@@ -68,11 +68,11 @@ int ConnectFour::isOver(Square* current) {
  */
 bool ConnectFour::fourInRow(Square* current) {
   Coordinate currentPosition = current->getPosition();
-  for(int iOffset = 0; iOffset <= 1; iOffset++)  {
-    for(int jOffset = 0; jOffset <= 1; jOffset++) {
+  for(int iOffset = -1; iOffset <= 1; iOffset++)  {
+    for(int jOffset = -1; jOffset <= 1; jOffset++) {
       int numPlayerPiecesFirstSide  = checkNext(current,  iOffset,  jOffset);
       int numPlayerPiecesSecondSide = checkNext(current,0-iOffset,0-jOffset);
-      if((numPlayerPiecesFirstSide +numPlayerPiecesSecondSide -1) > 3)
+      if((numPlayerPiecesFirstSide + numPlayerPiecesSecondSide) > 4)
         return true;
     }
   }
