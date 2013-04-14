@@ -11,12 +11,12 @@ typedef Coordinate Coord;
 SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   // Set srand a more random die roll
   srand(time(NULL));
-  
+
   // Setup the global variables
-  
+
   // systemItems holds the snakes and ladders
   this->systemItems = new Player[amountOfSystemItems];
-  
+
   // This is simply just used an a reference instead of trying to convert
   // Coords to square ids.
   this->squareRefs = new Square*[100];
@@ -27,7 +27,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
 
   vector<string> player1PieceTypes(playerTypes);
   vector<string> player2PieceTypes(maxPlayerPieces);
-  
+
   // Set their character representations
   player1PieceTypes[0] = FRED "◎";
   player2PieceTypes[0] = FBLUE "◎";
@@ -115,7 +115,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
     // Snake end point
     grid[snakes[i][1].y][snakes[i][1].x].addPiece(3,destination);
   }
-  
+
   // Places all the ladders onto the board.
   for(int i=0; i<maxSystemPieces/2; i++) {
     source = new SystemPiece(&systemItems[0],ladders[i][0],ladders[i][1],i);
@@ -221,7 +221,7 @@ bool SnakesAndLadders::getMove() {
     total += roll;
   }
   if(roll != 6) cout << "You rolled a " << roll << "\n";
-  
+
   SLPlayer* player = dynamic_cast<SLPlayer*>(players[currentPlayer]);
   Coord current = dynamic_cast<SrcPiece*>(player->getPiece(0))->getSource();
   Square* srcSquare = &grid[current.y][current.x];
@@ -257,14 +257,14 @@ bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) {
     Coord modifiedDestination = piece->getDestination();
     destSquare = &grid[modifiedDestination.y][modifiedDestination.x];
   }
-  
+
   if(srcSquare == destSquare) {
     return true;
   } else {
     SrcPiece* piece = dynamic_cast<SrcPiece*>(srcSquare->getPiece(currentPlayer));
     Coord destinationCoord = destSquare->getPosition();
     piece->setSource(destinationCoord);
-    
+
     destSquare->addPiece(currentPlayer, piece);
     srcSquare->removePiece(currentPlayer);
     return true;
