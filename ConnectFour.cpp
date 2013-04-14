@@ -10,8 +10,8 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   this->columnSpace.resize(columns);
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = FYELLOW "○";
-  player2PieceTypes[0] = FRED "○";
+  player1PieceTypes[0] = "\033[33m○\033[0m";
+  player2PieceTypes[0] = "\033[38m○\033[0m";
 
   this->players[0] = new Player(amountOfPieceTypes,
                                 player1PieceTypes,maxAmountOfPlayerPieces);
@@ -20,8 +20,8 @@ ConnectFour::ConnectFour():Game(2,7,6) {
                                 player2PieceTypes,maxAmountOfPlayerPieces);
 
 
-  std::string start = FBLUE "| ";
-  std::string end = " " RESET;
+  std::string start = "\033[36m| \033[0m";
+  std::string end = " ";
 
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
@@ -36,18 +36,19 @@ ConnectFour::ConnectFour():Game(2,7,6) {
 void ConnectFour::drawScreen() {
   this->clearScreen();
   std::cout << "Player " << (this->currentPlayer+1) << " it is your go\n";
-  std::cout << "\n";
+  std::cout << "\n ";
   for(int i=1; i<=columns; i++) cout << "  " << i << " ";
   std::cout << "\n";
-  std::cout << FBLUE "+---+---+---+---+---+---+---+" RESET << "\n";
+  std::cout << "\033[36m +---+---+---+---+---+---+---+\033[0m\n";
   for(int i=0; i<rows; i++) {
+    std::cout << " ";
     for(int j=0; j<columns; j++) {
       std::cout << grid[i][j].getStart();
       std::cout << grid[i][j];
       std::cout << grid[i][j].getEnd();
     }
-    std::cout << FBLUE "|" RESET << "\n";
-    std::cout << FBLUE "+---+---+---+---+---+---+---+" RESET << "\n";
+    std::cout << "\033[36m|\033[0m\n";
+    std::cout << "\033[36m +---+---+---+---+---+---+---+\033[0m\n";
   }
   std::cout << "\n";
 }
@@ -92,22 +93,26 @@ int ConnectFour::checkNext(Square* current,int iOffset,int jOffset) {
   }
   return 0;
 }
-
+/**
+ * Function to test is the next move a valid square
+ */
 bool ConnectFour::isLegal(Square* current,int iOffset,int jOffset) {
   Coordinate currentPos = current->getPosition();
   return((currentPos.x + jOffset < columns)&&(currentPos.x + jOffset >= 0))
         &&(currentPos.y + iOffset < rows)&&(currentPos.y + iOffset >= 0)
         &&(iOffset != 0 || jOffset != 0);
 }
-
+/**
+ * Function to get player input and make sure it is legal
+ */
 bool ConnectFour::getMove() {
   int x;
   bool validInput = false;
   do {
-    cout << "Type in the X coordinate of the column you would like to "
-    << "add your piece to:\n";
+    cout << "\nType in the X coordinate of the column you would like to "
+         << "add your piece to:\n";
     cin >> x;
-    // Derement x
+    // Decrement x
     x--;
     // Check that input is a numeric value
     if(cin.fail()) {
@@ -117,17 +122,21 @@ bool ConnectFour::getMove() {
       continue;
     }
     if(x >= columns || x < 0) {
-      cout << "Your input fell out of the bounds of the board\n";
-    } else if(columnSpace[x] >= rows) {
-      cout << "Destination column is full\n";
-    } else validInput = true;
+      cout << "\nYour input fell out of the bounds of the board\n";
+    }
+    else if(columnSpace[x] >= rows) {
+      cout << "\nDestination column is full\n";
+    }
+    else validInput = true;
 
   } while(!validInput);
   this->executeMove(x);
   currentPlayer = (currentPlayer + 1) % 2;
   return true;
 }
-
+/**
+ * Function to execute a move
+ */
 bool ConnectFour::executeMove(int x) {
   this->columnSpace[x]++;
   int y = rows - columnSpace[x];
@@ -136,7 +145,6 @@ bool ConnectFour::executeMove(int x) {
   state = isOver(&grid[y][x]);
   return true;
 }
-
 /**
  * Function to test if top row is full
  */
