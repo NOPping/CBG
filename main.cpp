@@ -20,7 +20,7 @@ int main() {
     "3) Snakes and Ladders",
     "4) Reversi"
   };
-  cout << CLEAR FCYAN;
+  cout << CLEAR FVIOLET;
 
   cout << "    ____                                     _ _                          __ \n";
   cout << "   / ___|___  _ __ ___  _ __   ___ _ __   __| (_)_   _ _ __ ___     ___  / _|\n";
@@ -36,7 +36,7 @@ int main() {
   cout << "                                       |___/                           \n";
 
   cout << RESET;
-  cout << FRED;
+  cout << FRED "\n";
   border(80);
   cout << RESET "\n";
   for(int i=0; i<4; i++) {
@@ -44,7 +44,7 @@ int main() {
   }
   cout << FRED "\n";
   border(80);
-  cout << RESET "\033[0m";
+  cout << RESET;
   bool validSelection = false;
   while(!validSelection) {
     vector <Game*> games(4);
@@ -67,6 +67,6 @@ int main() {
 }
 
 void border(int width) {
-  for(int i=0; i<width; i++)cout << "=";
+  for(int i=0; i<width/2; i++)cout << "=-";
   cout << "\n";
 }
