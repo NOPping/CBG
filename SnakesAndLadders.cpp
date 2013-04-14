@@ -1,13 +1,18 @@
 #include "SnakesAndLadders.h"
-#include <stdio.h>
-#include <ctime>
-#include <cstdlib>
 
 using namespace std;
 
 SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
+  // Set srand a more random die roll
   srand(time(NULL));
+  
+  // Setup the global variables
+  
+  // systemItems holds the snakes and ladders
   this->systemItems = new Player[amountOfSystemItems];
+  
+  // This is simply just used an a reference instead of trying to convert
+  // Coordinates to square ids.
   this->squareRefs = new Square*[100];
 
   // Setup the Players
@@ -16,7 +21,8 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
 
   vector<string> player1PieceTypes(playerTypes);
   vector<string> player2PieceTypes(maxPlayerPieces);
-
+  
+  // Set their character representations
   player1PieceTypes[0] = "\033[38;5;160m◎";
   player2PieceTypes[0] = "\033[38;5;27m◎";
 
@@ -29,9 +35,11 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   vector <string> system1PieceTypes(systemTypes);
   vector <string> system2PieceTypes(systemTypes);
 
+  // Set the start point snake/ladder character representations
   system1PieceTypes[0] = "\033[38;5;208mS";
   system1PieceTypes[1] = "\033[38;5;106mL";
 
+  // Set the end point snake/ladder character representations
   system2PieceTypes[0] = "\033[38;5;226mS";
   system2PieceTypes[1] = "\033[38;5;134mL";
 
@@ -51,7 +59,8 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
 
-      grid[i][j] = Square(counter,start[identifier],end,totalPlayers,Coordinate(j,i));
+      grid[i][j] = Square(counter,start[identifier],end,totalPlayers,
+                          Coordinate(j,i));
       squareRefs[counter-1] = &grid[i][j];
 
       counter += (i % 2 == 0) ? -1 : 1;
@@ -91,18 +100,26 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   Piece* source;
   Piece* destination;
 
+  // Place all the snakes onto the board
   for(int i=0; i<maxSystemPieces/amountOfSystemItems; i++) {
     source = new SystemPiece(&systemItems[0],snakes[i][0],snakes[i][1],i);
     destination = new IdentifierPiece(&systemItems[1],i);
+    // Snake start point
     grid[snakes[i][0].y][snakes[i][0].x].addPiece(2,source);
+    // Snake end point
     grid[snakes[i][1].y][snakes[i][1].x].addPiece(3,destination);
   }
+  
+  // Places all the ladders onto the board.
   for(int i=0; i<maxSystemPieces/2; i++) {
     source = new SystemPiece(&systemItems[0],ladders[i][0],ladders[i][1],i);
     destination = new IdentifierPiece(&systemItems[1],i);
+    // Sets the piece to use the ladder character representation
     source->setType(1);
     destination->setType(1);
+    // Ladder start point
     grid[ladders[i][0].y][ladders[i][0].x].addPiece(2,source);
+    // Ladder end point
     grid[ladders[i][1].y][ladders[i][1].x].addPiece(3,destination);
   }
 }
@@ -151,6 +168,10 @@ void SnakesAndLadders::drawScreen() {
   cout << "\n";
 }
 
+/**
+ * If a snake or ladder is contained at coordinate x,y print it and return true
+ * otherwise return false.
+ */
 bool SnakesAndLadders::printSnakeLadder(int x, int y) {
   for(int systemPlayer=amountOfPlayers; systemPlayer<amountOfPlayers+amountOfSystemItems; systemPlayer++) {
     if(grid[y][x].hasPieceOwnedBy(systemPlayer)) {
@@ -162,10 +183,17 @@ bool SnakesAndLadders::printSnakeLadder(int x, int y) {
   return false;
 }
 
+/**
+ * Generate a random number between 1 and 6, return it.
+ */
 int SnakesAndLadders::rollDice() {
   return (int)rand() % 6 + 1;
 }
 
+/**
+ * Check if square with identifier 100 is occupied, if it is return 1.
+ * otherwise return 0.
+ */
 int SnakesAndLadders::isOver() {
   return squareRefs[99]->hasPiece() ? 1 : 0;
 }
