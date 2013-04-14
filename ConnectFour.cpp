@@ -86,7 +86,6 @@ int ConnectFour::checkNext(Square* current,int rowOffset,int colOffset) {
       Square* next = &grid[currentPos.y + rowOffset][currentPos.x + colOffset];
       return 1 + checkNext(next, rowOffset, colOffset);
     }
-    return 1;
   }
   return 0;
 }
