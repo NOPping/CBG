@@ -13,7 +13,7 @@ class SnakesAndLadders : public Game {
     int rollDice();
     bool getMove();
     void resetPlayer(Coordinate current);
-    bool executeMove(Coordinate current,int roll);
+    bool executeMove(Square* sourceSquare, Square* destinationSquare);
     Coordinate squareToCoordinate(int position);
     Square** squareRefs;
     Player* systemItems;

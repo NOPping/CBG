@@ -163,8 +163,7 @@ bool SnakesAndLadders::printSnakeLadder(int x, int y) {
 }
 
 int SnakesAndLadders::rollDice() {
-  //return (int)rand() % 6 + 1;
-  return 6;
+  return (int)rand() % 6 + 1;
 }
 
 int SnakesAndLadders::isOver() {
@@ -176,15 +175,17 @@ bool SnakesAndLadders::getMove() {
   cin.get();
   int roll = rollDice();
   int total=roll;
-  while((roll/6 == 0) || (total != 6*3)) {
-    cout << "You rolled a " << roll << ", go again\n";
+  while((roll % 6 == 0) && (total != 6*3)) {
+    cout << "You rolled a " << roll << " go again\n";
     cin.get();
     roll = rollDice();
     total += roll;
   }
-
+  if(roll != 6) cout << "You rolled a " << roll << "\n";
+  
   SnakesAndLaddersPlayer* player = dynamic_cast<SnakesAndLaddersPlayer*>(players[currentPlayer]);
   Coordinate current = dynamic_cast<SourcePiece*>(player->getPiece(0))->getSource();
+  Square* sourceSquare = &grid[current.y][current.x];
 
   if(total == 6) {
     player->suspended = false;
@@ -192,20 +193,12 @@ bool SnakesAndLadders::getMove() {
 
   if(total == 6*3) {
     player->suspended = true;
-
-    // messy fix up at some stage.
-    if(current.y != 9 && current.x != 0) {
-      Square *destinationSquare = &grid[current.y][current.x];
-      Square *currentSquare = &grid[current.y][current.x];
-
-      dynamic_cast<SourcePiece*>(currentSquare->getPiece(currentPlayer))->setSource(Coordinate(0,9));
-
-      destinationSquare->addPiece(currentPlayer, currentSquare->getPiece(currentPlayer));
-      currentSquare->removePiece(currentPlayer);
-    }
+    executeMove(sourceSquare, squareRefs[0]);
     cout << "You rolled 3 sucessive 6s.\n";
   } else if(!player->suspended) {
-    this->executeMove(current, total);
+    total = total + sourceSquare->getIdentifier()-1;
+    total = total > 100 ? 100 - (total % 100) : total;
+    this->executeMove(sourceSquare, squareRefs[total]);
   } else {
     cout << "You are suspended until you roll a 6\n";
   }
@@ -215,35 +208,24 @@ bool SnakesAndLadders::getMove() {
   return true;
 }
 
-bool SnakesAndLadders::executeMove(Coordinate current,int roll) {
-  Square *currentSquare = &grid[current.y][current.x];
-
-  int position = currentSquare->getIdentifier()+roll;
-
-  if(position > 100) {
-    position = 100 - (position % 100);
-
-    if(position == currentSquare->getIdentifier()) {
-      return true;
-    }
+bool SnakesAndLadders::executeMove(Square* sourceSquare, Square* destinationSquare) {
+  if(destinationSquare->hasPieceOwnedBy(2)) {
+    DestinationPiece* piece =  dynamic_cast<DestinationPiece*>(destinationSquare->getPiece(2));
+    Coordinate modifiedDestination = piece->getDestination();
+    destinationSquare = &grid[modifiedDestination.y][modifiedDestination.x];
   }
-
-  Coordinate destination = squareToCoordinate(position);
-
-  if(grid[destination.y][destination.x].hasPieceOwnedBy(2)) {
-    cout << "You landed on a snake/ladder, oh no/oh yes";
-    DestinationPiece* piece =  dynamic_cast<DestinationPiece*>(grid[destination.y][destination.x].getPiece(2));
-    destination = piece->getDestination();
-    if(destination.x == current.x && destination.y == current.y) return true;
+  
+  if(sourceSquare == destinationSquare) {
+    return true;
+  } else {
+    SourcePiece* piece = dynamic_cast<SourcePiece*>(sourceSquare->getPiece(currentPlayer));
+    Coordinate destinationCoordinate = destinationSquare->getPosition();
+    piece->setSource(destinationCoordinate);
+    
+    destinationSquare->addPiece(currentPlayer, piece);
+    sourceSquare->removePiece(currentPlayer);
+    return true;
   }
-
-  Square *destinationSquare = &grid[destination.y][destination.x];
-  dynamic_cast<SourcePiece*>(currentSquare->getPiece(currentPlayer))->setSource(destination);
-
-  destinationSquare->addPiece(currentPlayer, currentSquare->getPiece(currentPlayer));
-  currentSquare->removePiece(currentPlayer);
-
-  return true;
 }
 
 Coordinate SnakesAndLadders::squareToCoordinate(int position) {
