@@ -10,8 +10,8 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   this->columnSpace.resize(columns);
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = "\033[33m○\033[0m";
-  player2PieceTypes[0] = "\033[38m○\033[0m";
+  player1PieceTypes[0] = FYELLOW "○";
+  player2PieceTypes[0] = FWHITE "○";
 
   this->players[0] = new Player(amountOfPieceTypes,
                                 player1PieceTypes,maxAmountOfPlayerPieces);
@@ -20,8 +20,8 @@ ConnectFour::ConnectFour():Game(2,7,6) {
                                 player2PieceTypes,maxAmountOfPlayerPieces);
 
 
-  std::string start = "\033[36m| \033[0m";
-  std::string end = " ";
+  std::string start = FBLUE "| ";
+  std::string end = " " RESET;
 
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
@@ -36,10 +36,10 @@ ConnectFour::ConnectFour():Game(2,7,6) {
 void ConnectFour::drawScreen() {
   this->clearScreen();
   std::cout << "Player " << (this->currentPlayer+1) << " it is your go\n";
-  std::cout << "\n ";
+  std::cout << "\n";
   for(int i=1; i<=columns; i++) cout << "  " << i << " ";
   std::cout << "\n";
-  std::cout << "\033[36m +---+---+---+---+---+---+---+\033[0m\n";
+  std::cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
   for(int i=0; i<rows; i++) {
     std::cout << " ";
     for(int j=0; j<columns; j++) {
@@ -47,8 +47,8 @@ void ConnectFour::drawScreen() {
       std::cout << grid[i][j];
       std::cout << grid[i][j].getEnd();
     }
-    std::cout << "\033[36m|\033[0m\n";
-    std::cout << "\033[36m +---+---+---+---+---+---+---+\033[0m\n";
+    std::cout << FBLUE "|" RESET << "\n";
+    std::cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
   }
   std::cout << "\n";
 }
