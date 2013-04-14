@@ -198,7 +198,7 @@ bool SnakesAndLadders::getMove() {
   } else if(!player->suspended) {
     total = total + sourceSquare->getIdentifier()-1;
     total = total > 100 ? 100 - (total % 100) : total;
-    this->executeMove(sourceSquare, squareRefs[total]);
+    this->executeMove(sourceSquare, squareRefs[total-1]);
   } else {
     cout << "You are suspended until you roll a 6\n";
   }
