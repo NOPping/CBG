@@ -6,7 +6,8 @@
   
   // BACKGROUND COLORS
   #define BBLACK   "\033[48;5;234m"
-  #define BWHITE   "\033[48;5;238m"
+  #define BWHITE   "\033[48;5;255m"
+  #define BGRAY    "\033[48;5;240m"
   #define BYELLOW  "\033[48;5;136m"
   #define BORANGE  "\033[48;5;166m"
   #define BRED     "\033[48;5;124m"
@@ -19,7 +20,8 @@
 
   // FOREGROUND COLORS
   #define FBLACK   "\033[38;5;234m"
-  #define FWHITE   "\033[38;5;238m"
+  #define FWHITE   "\033[38;5;255m"
+  #define FGRAY    "\033[48;5;240m"
   #define FYELLOW  "\033[38;5;136m"
   #define FORANGE  "\033[38;5;166m"
   #define FRED     "\033[38;5;124m"

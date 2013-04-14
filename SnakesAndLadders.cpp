@@ -55,7 +55,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   // Setup all the squares
   int totalPlayers = amountOfPlayers + amountOfSystemItems;
 
-  string start[] = {BBLACK,BWHITE};
+  string start[] = {BBLACK,BGRAY};
   string end = RESET;
 
   int identifier = 0;

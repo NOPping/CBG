@@ -13,8 +13,8 @@ Checkers::Checkers():Game(2, 8, 8) {
   vector <string> player2PieceTypes(amountOfPieceTypes);
   player1PieceTypes[0] = FRED "○";
   player1PieceTypes[1] = FRED "◎";
-  player2PieceTypes[0] = FCYAN "○";
-  player2PieceTypes[1] = FCYAN "◎";
+  player2PieceTypes[0] = FWHITE "○";
+  player2PieceTypes[1] = FWHITE "◎";
 
   players[0] = new Player(amountOfPieceTypes,player1PieceTypes,
                           maxAmountOfPlayerPieces);
@@ -22,7 +22,7 @@ Checkers::Checkers():Game(2, 8, 8) {
   players[1] = new Player(amountOfPieceTypes,player2PieceTypes,
                           maxAmountOfPlayerPieces);
 
-  string start[] = {BBLACK " ",BWHITE " "};
+  string start[] = {BWHITE " ",BBLACK " "};
   string end = " " RESET;
 
   int identifier = 0;
