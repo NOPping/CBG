@@ -39,15 +39,15 @@ void ConnectFour::drawScreen() {
   std::cout << "\n";
   for(int i=1; i<=columns; i++) cout << "  " << i << " ";
   std::cout << "\n";
-  std::cout << "\033[36m+---+---+---+---+---+---+---+\033[0m\n";
+  std::cout << FBLUE "+---+---+---+---+---+---+---+" RESET << "\n";
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
       std::cout << grid[i][j].getStart();
       std::cout << grid[i][j];
       std::cout << grid[i][j].getEnd();
     }
-    std::cout << "\033[36m|\033[0m\n";
-    std::cout << "\033[36m+---+---+---+---+---+---+---+\033[0m\n";
+    std::cout << FBLUE "|" RESET << "\n";
+    std::cout << FBLUE "+---+---+---+---+---+---+---+" RESET << "\n";
   }
   std::cout << "\n";
 }
