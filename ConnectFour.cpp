@@ -6,7 +6,7 @@ ConnectFour::ConnectFour():Game(2,7,6) {
 
   state = 0;
   int amountOfPieceTypes = 1;
-  int maxAmountOfPlayerPieces = 12;
+  int maxAmountOfPlayerPieces = 21;
   this->columnSpace.resize(columns);
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
