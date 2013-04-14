@@ -2,6 +2,12 @@
 
 using namespace std;
 
+typedef SnakesAndLaddersPlayer SLPlayer;
+typedef SourcePiece SrcPiece;
+typedef DestinationPiece DestPiece;
+typedef IdentifierPiece IDPiece;
+typedef Coordinate Coord;
+
 SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   // Set srand a more random die roll
   srand(time(NULL));
@@ -12,7 +18,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   this->systemItems = new Player[amountOfSystemItems];
   
   // This is simply just used an a reference instead of trying to convert
-  // Coordinates to square ids.
+  // Coords to square ids.
   this->squareRefs = new Square*[100];
 
   // Setup the Players
@@ -26,8 +32,8 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   player1PieceTypes[0] = "\033[38;5;160m◎";
   player2PieceTypes[0] = "\033[38;5;27m◎";
 
-  this->players[0] = new SnakesAndLaddersPlayer(playerTypes,player1PieceTypes,maxPlayerPieces);
-  this->players[1] = new SnakesAndLaddersPlayer(playerTypes,player2PieceTypes,maxPlayerPieces);
+  players[0] = new SLPlayer(playerTypes,player1PieceTypes,maxPlayerPieces);
+  players[1] = new SLPlayer(playerTypes,player2PieceTypes,maxPlayerPieces);
 
   // Setup the snakes and ladders
   const int systemTypes = 2;
@@ -43,8 +49,8 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   system2PieceTypes[0] = "\033[38;5;226mS";
   system2PieceTypes[1] = "\033[38;5;134mL";
 
-  this->systemItems[0] = Player(systemTypes,system1PieceTypes,maxSystemPieces);
-  this->systemItems[1] = Player(systemTypes,system2PieceTypes,maxSystemPieces);
+  systemItems[0] = Player(systemTypes,system1PieceTypes,maxSystemPieces);
+  systemItems[1] = Player(systemTypes,system2PieceTypes,maxSystemPieces);
 
   // Setup all the squares
   int totalPlayers = amountOfPlayers + amountOfSystemItems;
@@ -60,7 +66,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
     for(int j=0; j<columns; j++) {
 
       grid[i][j] = Square(counter,start[identifier],end,totalPlayers,
-                          Coordinate(j,i));
+                          Coord(j,i));
       squareRefs[counter-1] = &grid[i][j];
 
       counter += (i % 2 == 0) ? -1 : 1;
@@ -71,12 +77,12 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   }
 
   // Add the players to the starting square
-  Piece* player1Piece = new SourcePiece(players[0],Coordinate(0,9));
-  Piece* player2Piece = new SourcePiece(players[1],Coordinate(0,9));
+  Piece* player1Piece = new SrcPiece(players[0],Coord(0,9));
+  Piece* player2Piece = new SrcPiece(players[1],Coord(0,9));
   squareRefs[0]->addPiece(0,(players[0]->addPiece(player1Piece)));
   squareRefs[0]->addPiece(1,(players[1]->addPiece(player2Piece)));
 
-  Coordinate snakes[maxSystemPieces/2][2] = {
+  Coord snakes[maxSystemPieces/2][2] = {
     {squareToCoordinate(20),squareToCoordinate(17)},
     {squareToCoordinate(33),squareToCoordinate(7)},
     {squareToCoordinate(44),squareToCoordinate(22)},
@@ -86,7 +92,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
     {squareToCoordinate(94),squareToCoordinate(71)},
     {squareToCoordinate(99),squareToCoordinate(61)},
   };
-  Coordinate ladders[maxSystemPieces/2][2] = {
+  Coord ladders[maxSystemPieces/2][2] = {
     {squareToCoordinate(9),squareToCoordinate(29)},
     {squareToCoordinate(15),squareToCoordinate(26)},
     {squareToCoordinate(24),squareToCoordinate(46)},
@@ -103,7 +109,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   // Place all the snakes onto the board
   for(int i=0; i<maxSystemPieces/amountOfSystemItems; i++) {
     source = new SystemPiece(&systemItems[0],snakes[i][0],snakes[i][1],i);
-    destination = new IdentifierPiece(&systemItems[1],i);
+    destination = new IDPiece(&systemItems[1],i);
     // Snake start point
     grid[snakes[i][0].y][snakes[i][0].x].addPiece(2,source);
     // Snake end point
@@ -113,7 +119,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   // Places all the ladders onto the board.
   for(int i=0; i<maxSystemPieces/2; i++) {
     source = new SystemPiece(&systemItems[0],ladders[i][0],ladders[i][1],i);
-    destination = new IdentifierPiece(&systemItems[1],i);
+    destination = new IDPiece(&systemItems[1],i);
     // Sets the piece to use the ladder character representation
     source->setType(1);
     destination->setType(1);
@@ -132,7 +138,7 @@ SnakesAndLadders::~SnakesAndLadders() {
 void SnakesAndLadders::drawScreen() {
   clearScreen();
 
-  cout << "Player " << (this->currentPlayer+1) << " it is your go\n\n";
+  cout << "Player " << (currentPlayer+1) << " it is your go\n\n";
 
   for(int y=0; y<rows; y++) {
     for(int x=0; x<columns; x++) {
@@ -173,7 +179,8 @@ void SnakesAndLadders::drawScreen() {
  * otherwise return false.
  */
 bool SnakesAndLadders::printSnakeLadder(int x, int y) {
-  for(int systemPlayer=amountOfPlayers; systemPlayer<amountOfPlayers+amountOfSystemItems; systemPlayer++) {
+  int max = amountOfPlayers+amountOfSystemItems;
+  for(int systemPlayer=amountOfPlayers; systemPlayer<max; systemPlayer++) {
     if(grid[y][x].hasPieceOwnedBy(systemPlayer)) {
       Piece* systemItem = grid[y][x].getPiece(systemPlayer);
       systemItem->print(cout);
@@ -198,6 +205,10 @@ int SnakesAndLadders::isOver() {
   return squareRefs[99]->hasPiece() ? 1 : 0;
 }
 
+/**
+ * Simulate a die roll and call execute move with the necessary source
+ * and destination Square.
+ */
 bool SnakesAndLadders::getMove() {
   cout << "Press enter to roll a dice and make your move\n";
   cin.get();
@@ -211,9 +222,9 @@ bool SnakesAndLadders::getMove() {
   }
   if(roll != 6) cout << "You rolled a " << roll << "\n";
   
-  SnakesAndLaddersPlayer* player = dynamic_cast<SnakesAndLaddersPlayer*>(players[currentPlayer]);
-  Coordinate current = dynamic_cast<SourcePiece*>(player->getPiece(0))->getSource();
-  Square* sourceSquare = &grid[current.y][current.x];
+  SLPlayer* player = dynamic_cast<SLPlayer*>(players[currentPlayer]);
+  Coord current = dynamic_cast<SrcPiece*>(player->getPiece(0))->getSource();
+  Square* srcSquare = &grid[current.y][current.x];
 
   if(total == 6) {
     player->suspended = false;
@@ -221,12 +232,12 @@ bool SnakesAndLadders::getMove() {
 
   if(total == 6*3) {
     player->suspended = true;
-    executeMove(sourceSquare, squareRefs[0]);
+    executeMove(srcSquare, squareRefs[0]);
     cout << "You rolled 3 sucessive 6s.\n";
   } else if(!player->suspended) {
-    total = total + sourceSquare->getIdentifier()-1;
+    total = total + srcSquare->getIdentifier()-1;
     total = total > 100 ? 100 - (total % 100) : total;
-    this->executeMove(sourceSquare, squareRefs[total-1]);
+    this->executeMove(srcSquare, squareRefs[total-1]);
   } else {
     cout << "You are suspended until you roll a 6\n";
   }
@@ -236,26 +247,30 @@ bool SnakesAndLadders::getMove() {
   return true;
 }
 
-bool SnakesAndLadders::executeMove(Square* sourceSquare, Square* destinationSquare) {
-  if(destinationSquare->hasPieceOwnedBy(2)) {
-    DestinationPiece* piece =  dynamic_cast<DestinationPiece*>(destinationSquare->getPiece(2));
-    Coordinate modifiedDestination = piece->getDestination();
-    destinationSquare = &grid[modifiedDestination.y][modifiedDestination.x];
+/**
+ * Moves the piece on srcSquare to destSquare.
+ * The move is always successful so it always returns true.
+ */
+bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) {
+  if(destSquare->hasPieceOwnedBy(2)) {
+    DestPiece* piece =  dynamic_cast<DestPiece*>(destSquare->getPiece(2));
+    Coord modifiedDestination = piece->getDestination();
+    destSquare = &grid[modifiedDestination.y][modifiedDestination.x];
   }
   
-  if(sourceSquare == destinationSquare) {
+  if(srcSquare == destSquare) {
     return true;
   } else {
-    SourcePiece* piece = dynamic_cast<SourcePiece*>(sourceSquare->getPiece(currentPlayer));
-    Coordinate destinationCoordinate = destinationSquare->getPosition();
-    piece->setSource(destinationCoordinate);
+    SrcPiece* piece = dynamic_cast<SrcPiece*>(srcSquare->getPiece(currentPlayer));
+    Coord destinationCoord = destSquare->getPosition();
+    piece->setSource(destinationCoord);
     
-    destinationSquare->addPiece(currentPlayer, piece);
-    sourceSquare->removePiece(currentPlayer);
+    destSquare->addPiece(currentPlayer, piece);
+    srcSquare->removePiece(currentPlayer);
     return true;
   }
 }
 
-Coordinate SnakesAndLadders::squareToCoordinate(int position) {
+Coord SnakesAndLadders::squareToCoordinate(int position) {
   return squareRefs[position-1]->getPosition();
 }

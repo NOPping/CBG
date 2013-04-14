@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdlib>
+#include <cstdio>
 
 #include "Square.h"
 #include "Player.h"
