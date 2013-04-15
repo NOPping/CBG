@@ -1,3 +1,7 @@
+/// A square makes up the grid/board for each game.
+/// @author Ian Duffy
+/// @author Darren Brogan
+
 #include "Square.h"
 
 Square::Square() {}
@@ -12,10 +16,12 @@ Square::Square(int identifier, string start, string end, int amountOfPlayers, Co
   this->pieces.resize(this->amountOfPlayers);
 }
 
+/// Returns whether or not the square has a piece on it.
 bool Square::hasPiece() {
   return numberOfOccupants>0;
 }
 
+/// Adds a piece to the square.
 bool Square::addPiece(int player, Piece* piece) {
   if(player < amountOfPlayers
       && numberOfOccupants != amountOfPlayers
@@ -28,20 +34,24 @@ bool Square::addPiece(int player, Piece* piece) {
   return false;
 }
 
+/// Removes a piece from the square.
 bool Square::removePiece(int player) {
   pieces[player] = 0;
   numberOfOccupants--;
   return true;
 }
 
+/// Returns the piece on the square owned by player.
 Coordinate Square::getPosition() {
   return position;
 }
 
+/// Returns the square's identifier.
 int Square::getIdentifier() {
   return identifier;
 }
 
+/// Returns whether or not the square has a piece owned by player on it.
 bool Square::hasPieceOwnedBy(int player) {
   if(pieces[player] != 0) {
     return true;
@@ -49,14 +59,17 @@ bool Square::hasPieceOwnedBy(int player) {
   return false;
 }
 
+
 Piece* Square::getPiece(int player) {
   return pieces[player];
 }
 
+/// Returns the start string of a square.
 string Square::getStart() {
   return start;
 }
 
+/// Returns the closing string of a square.
 string Square::getEnd() {
   return end;
 }
