@@ -1,3 +1,6 @@
+/// Color constants.
+/// @author Ian Duffy
+
 #if (defined __linux__ || defined __unix__ || defined __CYGWIN__ || defined __APPLE__ || defined __MACH__ )
 
   // MISC ESCAPES

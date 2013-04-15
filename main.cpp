@@ -1,3 +1,7 @@
+/// Game Launcher.
+/// @author Ian Duffy
+/// @author Darren Brogan.
+
 #include <iostream>
 #include <iomanip>
 #include "Checkers.h"
@@ -11,6 +15,7 @@ using std::string;
 
 void border(int);
 
+/// Prints out a menu of the games available.
 int main() {
   int selection=0;
 
@@ -39,7 +44,7 @@ int main() {
   cout << FRED "\n";
   border(80);
   cout << RESET "\n";
-  ///Print out the titles of each game
+  // Print out the titles of each game.
   for(int i=0; i<4; i++) {
     cout << games[i] << "\n";
   }
@@ -48,20 +53,20 @@ int main() {
   cout << RESET;
   bool validSelection = false;
   while(!validSelection) {
-    ///Create a vector of pointers to hold the locations of each game
+    // Create a vector of pointers to hold the locations of each game.
     vector <Game*> games(4);
     games[0] =  new Checkers();
     games[1] =  new ConnectFour();
     games[2] =  new SnakesAndLadders();
-    ///games[4] =  new Reversi();
+    // games[4] =  new Reversi();
     cout << "\nInsert the number of the game you wish to play: ";
     cin >> selection;
     cin.clear();
     cin.ignore(10000,'\n');
-    ///Ensure that the selection is valid
+    // Ensure that the selection is valid.
     if(selection > 0 && selection < 4) {
       validSelection = true;
-      ///Launch selected game
+      // Launch selected game.
       games[selection-1]->start();
     } else {
       cout << "\nInvalid Selection";
@@ -69,7 +74,8 @@ int main() {
   }
   return 0;
 }
-///Print border
+
+/// Prints a border of the specified width.
 void border(int width) {
   for(int i=0; i<width/2; i++)cout << "=-";
   cout << "\n";
