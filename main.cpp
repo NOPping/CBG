@@ -51,7 +51,7 @@ int main() {
     games[0] =  new Checkers();
     games[1] =  new ConnectFour();
     games[2] =  new SnakesAndLadders();
-    games[4] =  new Reversi();
+    //games[4] =  new Reversi();
     cout << "\nInsert the number of the game you wish to play: ";
     cin >> selection;
     cin.clear();

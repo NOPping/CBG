@@ -88,7 +88,7 @@ int Checkers::getPoint(string message, int range) {
     }
 
     // Check that input is within our grid range
-    if(point < 0 || point > range) {
+    if(point < 0 || point >= range) {
       cout << "\nPoint out of range, try again\n";
       continue;
     }
