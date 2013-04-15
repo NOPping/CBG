@@ -3,7 +3,7 @@
 
 Player::Player() {}
 
-Player::Player(int amountOfTypes, std::vector<std::string> types, int maxPieces) {
+Player::Player(int amountOfTypes, vector<string> types, int maxPieces) {
   this->types = types;
   this->amountOfPieces = 0;
   this->amountOfTypes = amountOfTypes;
