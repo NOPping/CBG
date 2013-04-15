@@ -7,5 +7,5 @@
 SystemPiece::SystemPiece(Player* owner, Coordinate source, Coordinate destination,
                          int identifier)
 : Piece(owner), SourcePiece(owner, source),
-  DestinationPiece(owner, destination), IdentifierPiece(owner, identifier) {
+DestinationPiece(owner, destination), IdentifierPiece(owner, identifier) {
 }

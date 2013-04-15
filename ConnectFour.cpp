@@ -7,7 +7,7 @@ using namespace std;
 
 ConnectFour::ConnectFour():Game(2,7,6) {
   state = 0;
-  
+
   ///Setup the players.
   int amountOfPieceTypes = 1;
   int maxAmountOfPlayerPieces = 21;
@@ -18,10 +18,10 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   player2PieceTypes[0] = FWHITE "○";
 
   players[0] = new Player(amountOfPieceTypes,
-                                player1PieceTypes,maxAmountOfPlayerPieces);
+                          player1PieceTypes,maxAmountOfPlayerPieces);
 
   players[1] = new Player(amountOfPieceTypes,
-                                player2PieceTypes,maxAmountOfPlayerPieces);
+                          player2PieceTypes,maxAmountOfPlayerPieces);
 
 
   ///Setup the start and end of each square
@@ -32,7 +32,7 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
       grid[i][j] = Square(1, start, end,amountOfPlayers,
-                                Coordinate(j, i));
+                          Coordinate(j, i));
     }
   }
 }

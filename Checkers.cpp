@@ -9,7 +9,7 @@ using std::string;
 using std::vector;
 
 Checkers::Checkers():Game(2, 8, 8) {
-  
+
   // Setup the players.
   int amountOfPieceTypes = 2;
   int maxAmountOfPlayerPieces = 12;
