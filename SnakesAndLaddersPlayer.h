@@ -1,3 +1,6 @@
+/// Player for snakes and ladders. Adds a suspended boolean.
+/// @author Ian Duffy
+
 #ifndef SNAKESANDLADDERSPLAYER_H
 #define SNAKESANDLADDERSPLAYER_H
 
@@ -8,7 +11,6 @@ class SnakesAndLaddersPlayer : public Player {
     SnakesAndLaddersPlayer();
     SnakesAndLaddersPlayer(int amountOfTypes, vector<string> types,
                            int maxPieces);
-    virtual ~SnakesAndLaddersPlayer();
     
     bool suspended;
 };

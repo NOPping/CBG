@@ -1,3 +1,6 @@
+/// Player for snakes and ladders. Adds a suspended boolean.
+/// @author Ian Duffy
+
 #include "SnakesAndLaddersPlayer.h"
 
 SnakesAndLaddersPlayer::SnakesAndLaddersPlayer(int amountOfTypes,
@@ -5,5 +8,3 @@ SnakesAndLaddersPlayer::SnakesAndLaddersPlayer(int amountOfTypes,
     int maxPieces) : Player(amountOfTypes, types, maxPieces) {
   this->suspended = false;
 }
-
-SnakesAndLaddersPlayer::~SnakesAndLaddersPlayer() {}
