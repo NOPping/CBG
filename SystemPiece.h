@@ -1,3 +1,7 @@
+/// A piece with made up of a SourcePiece, DestinationPiece and IdentifierPiece.
+/// @author Ian Duffy
+/// @author Darren Brogan
+
 #ifndef SYSTEMPIECE_H
 #define SYSTEMPIECE_H
 
@@ -8,8 +12,8 @@
 
 class SystemPiece : public SourcePiece, public DestinationPiece, public IdentifierPiece {    
   public:
-    SystemPiece(Player* owner, Coordinate source, Coordinate destination, int identifier);
-    ~SystemPiece();
+    SystemPiece(Player* owner, Coordinate source, Coordinate destination,
+                int identifier);
 };
 
 #endif
