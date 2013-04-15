@@ -174,10 +174,7 @@ void SnakesAndLadders::drawScreen() {
   cout << "\n";
 }
 
-/**
- * If a snake or ladder is contained at coordinate x,y print it and return true
- * otherwise return false.
- */
+/// Prints a snake and ladder at coordinates x,y.
 bool SnakesAndLadders::printSnakeLadder(int x, int y) {
   int max = amountOfPlayers+amountOfSystemItems;
   for(int systemPlayer=amountOfPlayers; systemPlayer<max; systemPlayer++) {
@@ -190,39 +187,36 @@ bool SnakesAndLadders::printSnakeLadder(int x, int y) {
   return false;
 }
 
-/**
- * Generate a random number between 1 and 6, return it.
- */
+/// Generate a random number between 1 and 6
 int SnakesAndLadders::rollDice() {
   return (int)rand() % 6 + 1;
 }
 
-/**
- * Check if square with identifier 100 is occupied, if it is return 1.
- * otherwise return 0.
- */
+/// Check if square with identifier 100 is occupied
 int SnakesAndLadders::isOver() {
   return squareRefs[99]->hasPiece() ? 1 : 0;
 }
 
-/**
- * Simulate a die roll and call execute move with the necessary source
- * and destination Square.
- */
+/// Calls rollRice() and calculates the destination square
+/// Passes these too executeMove()
 bool SnakesAndLadders::getMove() {
+  // Setup a pointer to the current player and the square they are on
   SLPlayer* player = dynamic_cast<SLPlayer*>(players[currentPlayer]);
   Coord current = dynamic_cast<SrcPiece*>(player->getPiece(0))->getSource();
   Square* srcSquare = &grid[current.y][current.x];
   
+  // Prompt the user to roll
   cout << "Press enter to roll a dice and make your move\n";
   cin.get();
   int roll = rollDice();
   int total=roll;
   
+  // Unsuspend the player if they roll a 6
   if(roll == 6) {
     player->suspended = false;
   }
   
+  // Roll again if a 6 is rolled.
   while((roll % 6 == 0) && (total != 6*3)) {
     cout << "You rolled a " << roll << " go again\n";
     cin.get();
@@ -243,22 +237,23 @@ bool SnakesAndLadders::getMove() {
     cout << "You are suspended until you roll a 6\n";
   }
 
+  // Switch Player
   currentPlayer=(currentPlayer+1)%(amountOfPlayers);
 
   return true;
 }
 
-/**
- * Moves the piece on srcSquare to destSquare.
- * The move is always successful so it always returns true.
- */
+/// Moves the piece on srcSquare to destSquare.
 bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) {
+
+  // Check if the square has a snake or ladder.
   if(destSquare->hasPieceOwnedBy(2)) {
     DestPiece* piece =  dynamic_cast<DestPiece*>(destSquare->getPiece(2));
     Coord modifiedDestination = piece->getDestination();
     destSquare = &grid[modifiedDestination.y][modifiedDestination.x];
   }
 
+  // Check if the source square and destination square are the same
   if(srcSquare == destSquare) {
     return true;
   } else {
@@ -272,9 +267,7 @@ bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) {
   }
 }
 
-/**
- * Returns the coordinates of the square containing identifier position.
- */
+/// Converts an square identifier to a coordinate.
 Coord SnakesAndLadders::squareToCoordinate(int position) {
   return squareRefs[position-1]->getPosition();
 }
