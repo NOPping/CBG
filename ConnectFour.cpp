@@ -1,53 +1,60 @@
+/// ConnectFour Game.
+/// @author Darren Brogan
+
 #include "ConnectFour.h"
 
 using namespace std;
 
 ConnectFour::ConnectFour():Game(2,7,6) {
   state = 0;
+  
+  ///Setup the players.
   int amountOfPieceTypes = 1;
   int maxAmountOfPlayerPieces = 21;
-  this->columnSpace.resize(columns);
+  columnSpace.resize(columns);
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
   player1PieceTypes[0] = FYELLOW "○";
   player2PieceTypes[0] = FWHITE "○";
 
-  this->players[0] = new Player(amountOfPieceTypes,
+  players[0] = new Player(amountOfPieceTypes,
                                 player1PieceTypes,maxAmountOfPlayerPieces);
 
-  this->players[1] = new Player(amountOfPieceTypes,
+  players[1] = new Player(amountOfPieceTypes,
                                 player2PieceTypes,maxAmountOfPlayerPieces);
 
 
-  std::string start = FBLUE "| ";
-  std::string end = " " RESET;
+  ///Setup the start and end of each square
+  string start = FBLUE "| ";
+  string end = " " RESET;
 
+  ///Setup the squares in the grid.
   for(int i=0; i<rows; i++) {
     for(int j=0; j<columns; j++) {
-      this->grid[i][j] = Square(1, start, end,amountOfPlayers,
+      grid[i][j] = Square(1, start, end,amountOfPlayers,
                                 Coordinate(j, i));
     }
   }
 }
 
 void ConnectFour::drawScreen() {
-  this->clearScreen();
-  std::cout << "Player " << (this->currentPlayer+1) << " it is your go\n";
-  std::cout << "\n";
+  clearScreen();
+  cout << "Player " << (currentPlayer+1) << " it is your go\n";
+  cout << "\n";
   for(int i=1; i<=columns; i++) cout << "  " << i << " ";
-  std::cout << "\n";
-  std::cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
+  cout << "\n";
+  cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
   for(int i=0; i<rows; i++) {
-    std::cout << " ";
+    cout << " ";
     for(int j=0; j<columns; j++) {
-      std::cout << grid[i][j].getStart();
-      std::cout << grid[i][j];
-      std::cout << grid[i][j].getEnd();
+      cout << grid[i][j].getStart();
+      cout << grid[i][j];
+      cout << grid[i][j].getEnd();
     }
-    std::cout << FBLUE "|" RESET << "\n";
-    std::cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
+    cout << FBLUE "|" RESET << "\n";
+    cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
   }
-  std::cout << "\n";
+  cout << "\n";
 }
 
 int ConnectFour::isOver() {
@@ -55,8 +62,8 @@ int ConnectFour::isOver() {
 }
 
 int ConnectFour::isOver(Square* current) {
-  if(this->fourInRow(current)) return 1;
-  else if (this->topRowFull()) return 2;
+  if(fourInRow(current)) return 1;
+  else if (topRowFull()) return 2;
   else return 0;
 }
 
@@ -116,16 +123,15 @@ bool ConnectFour::getMove() {
     } else validInput = true;
 
   } while(!validInput);
-  this->executeMove(x);
+  executeMove(x);
   currentPlayer = (currentPlayer + 1) % 2;
   return true;
 }
 
 bool ConnectFour::executeMove(int x) {
-  this->columnSpace[x]++;
+  columnSpace[x]++;
   int y = rows - columnSpace[x];
-  grid[y][x].addPiece(currentPlayer,
-                      this->players[currentPlayer]->addPiece());
+  grid[y][x].addPiece(currentPlayer,players[currentPlayer]->addPiece());
   state = isOver(&grid[y][x]);
   return true;
 }
