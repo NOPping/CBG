@@ -210,10 +210,19 @@ int SnakesAndLadders::isOver() {
  * and destination Square.
  */
 bool SnakesAndLadders::getMove() {
+  SLPlayer* player = dynamic_cast<SLPlayer*>(players[currentPlayer]);
+  Coord current = dynamic_cast<SrcPiece*>(player->getPiece(0))->getSource();
+  Square* srcSquare = &grid[current.y][current.x];
+  
   cout << "Press enter to roll a dice and make your move\n";
   cin.get();
   int roll = rollDice();
   int total=roll;
+  
+  if(roll == 6) {
+    player->suspended = false;
+  }
+  
   while((roll % 6 == 0) && (total != 6*3)) {
     cout << "You rolled a " << roll << " go again\n";
     cin.get();
@@ -221,14 +230,6 @@ bool SnakesAndLadders::getMove() {
     total += roll;
   }
   if(roll != 6) cout << "You rolled a " << roll << "\n";
-
-  SLPlayer* player = dynamic_cast<SLPlayer*>(players[currentPlayer]);
-  Coord current = dynamic_cast<SrcPiece*>(player->getPiece(0))->getSource();
-  Square* srcSquare = &grid[current.y][current.x];
-
-  if(total == 6) {
-    player->suspended = false;
-  }
 
   if(total == 6*3) {
     player->suspended = true;
