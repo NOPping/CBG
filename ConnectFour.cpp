@@ -39,22 +39,22 @@ ConnectFour::ConnectFour():Game(2,7,6) {
 
 void ConnectFour::drawScreen() {
   clearScreen();
-  std::cout << "Player " << (currentPlayer+1) << " it is your go\n";
-  std::cout << "\n";
+  cout << "Player " << (currentPlayer+1) << " it is your go\n";
+  cout << "\n";
   for(int i=1; i<=columns; i++) cout << "  " << i << " ";
-  std::cout << "\n";
-  std::cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
+  cout << "\n";
+  cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
   for(int i=0; i<rows; i++) {
-    std::cout << " ";
+    cout << " ";
     for(int j=0; j<columns; j++) {
-      std::cout << grid[i][j].getStart();
-      std::cout << grid[i][j];
-      std::cout << grid[i][j].getEnd();
+      cout << grid[i][j].getStart();
+      cout << grid[i][j];
+      cout << grid[i][j].getEnd();
     }
-    std::cout << FBLUE "|" RESET << "\n";
-    std::cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
+    cout << FBLUE "|" RESET << "\n";
+    cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
   }
-  std::cout << "\n";
+  cout << "\n";
 }
 
 int ConnectFour::isOver() {
