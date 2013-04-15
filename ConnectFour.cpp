@@ -3,7 +3,6 @@
 using namespace std;
 
 ConnectFour::ConnectFour():Game(2,7,6) {
-
   state = 0;
   int amountOfPieceTypes = 1;
   int maxAmountOfPlayerPieces = 21;
@@ -30,9 +29,7 @@ ConnectFour::ConnectFour():Game(2,7,6) {
     }
   }
 }
-/**
- * Function to draw the screen used to play connect four.
- */
+
 void ConnectFour::drawScreen() {
   this->clearScreen();
   std::cout << "Player " << (this->currentPlayer+1) << " it is your go\n";
@@ -53,20 +50,16 @@ void ConnectFour::drawScreen() {
   std::cout << "\n";
 }
 
-/**
- * Function to reurn weather or not the game is over.
- */
 int ConnectFour::isOver() {
   return state;
 }
+
 int ConnectFour::isOver(Square* current) {
   if(this->fourInRow(current)) return 1;
   else if (this->topRowFull()) return 2;
   else return 0;
 }
-/**
- * Function to return true if four or more player pieces are in a row
- */
+
 bool ConnectFour::fourInRow(Square* current) {
   Coordinate currentPosition = current->getPosition();
   for(int iOffset = -1; iOffset <= 1; iOffset++)  {
@@ -79,9 +72,7 @@ bool ConnectFour::fourInRow(Square* current) {
   }
   return false;
 }
-/**
- * Recursive function to return the number of player pieces in a row
- */
+
 int ConnectFour::checkNext(Square* current,int iOffset,int jOffset) {
   if(current->hasPieceOwnedBy(currentPlayer)) {
     if(isLegal(current, iOffset, jOffset)) {
@@ -93,18 +84,15 @@ int ConnectFour::checkNext(Square* current,int iOffset,int jOffset) {
   }
   return 0;
 }
-/**
- * Function to test is the next move a valid square
- */
+
+
 bool ConnectFour::isLegal(Square* current,int iOffset,int jOffset) {
   Coordinate currentPos = current->getPosition();
   return((currentPos.x + jOffset < columns)&&(currentPos.x + jOffset >= 0))
         &&(currentPos.y + iOffset < rows)&&(currentPos.y + iOffset >= 0)
         &&(iOffset != 0 || jOffset != 0);
 }
-/**
- * Function to get player input and make sure it is legal
- */
+
 bool ConnectFour::getMove() {
   int x;
   bool validInput = false;
@@ -134,9 +122,7 @@ bool ConnectFour::getMove() {
   currentPlayer = (currentPlayer + 1) % 2;
   return true;
 }
-/**
- * Function to execute a move
- */
+
 bool ConnectFour::executeMove(int x) {
   this->columnSpace[x]++;
   int y = rows - columnSpace[x];
@@ -145,9 +131,7 @@ bool ConnectFour::executeMove(int x) {
   state = isOver(&grid[y][x]);
   return true;
 }
-/**
- * Function to test if top row is full
- */
+
 bool ConnectFour::topRowFull() {
   for(int currentColumn = 0; currentColumn < columns; currentColumn++) {
     if(columnSpace[currentColumn] != rows) {
