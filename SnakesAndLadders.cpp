@@ -1,3 +1,7 @@
+/// Snakes and Ladders Game.
+/// @author Ian Duffy
+/// @author Darren Brogan
+
 #include "SnakesAndLadders.h"
 
 using namespace std;
@@ -198,25 +202,25 @@ int SnakesAndLadders::isOver() {
   return squareRefs[99]->hasPiece() ? 1 : 0;
 }
 
-/// Calls rollRice() and calculates the destination square
+/// Calls rollDice() and calculates the destination square
 /// Passes these too executeMove().
 bool SnakesAndLadders::getMove() {
   // Setup a pointer to the current player and the square they are on.
   SLPlayer* player = dynamic_cast<SLPlayer*>(players[currentPlayer]);
   Coord current = dynamic_cast<SrcPiece*>(player->getPiece(0))->getSource();
   Square* srcSquare = &grid[current.y][current.x];
-  
+
   // Prompt the user to roll.
   cout << "Press enter to roll a dice and make your move\n";
   cin.get();
   int roll = rollDice();
   int total=roll;
-  
+
   // Unsuspend the player if they roll a 6.
   if(roll == 6) {
     player->suspended = false;
   }
-  
+
   // Roll again if a 6 is rolled.
   while((roll % 6 == 0) && (total != 6*3)) {
     cout << "You rolled a " << roll << " go again\n";

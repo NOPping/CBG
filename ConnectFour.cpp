@@ -110,7 +110,7 @@ bool ConnectFour::getMove() {
   bool validInput = false;
   do {
     cout << "\nType in the X coordinate of the column you would like to "
-         << "add your piece to:\n";
+    << "add your piece to:\n";
     cin >> x;
     // Decrement x
     x--;
@@ -123,11 +123,9 @@ bool ConnectFour::getMove() {
     }
     if(x >= columns || x < 0) {
       cout << "\nYour input fell out of the bounds of the board\n";
-    }
-    else if(columnSpace[x] >= rows) {
+    } else if(columnSpace[x] >= rows) {
       cout << "\nDestination column is full\n";
-    }
-    else validInput = true;
+    } else validInput = true;
 
   } while(!validInput);
   this->executeMove(x);

@@ -1,8 +1,13 @@
+/// Base foundation for all of the games.
+/// @author Ian Duffy
+/// @author Darren Brogan
+
 #include "Game.h"
 
 using std::cout;
 using std::ostream;
 
+/// Constructor for game.
 Game::Game(const int amountOfPlayers, const int columns, const int rows)
 : amountOfPlayers(amountOfPlayers), columns(columns), rows(rows) {
   this->currentPlayer = 0;
@@ -13,6 +18,7 @@ Game::Game(const int amountOfPlayers, const int columns, const int rows)
   }
 }
 
+/// Deconstructor for game.
 Game::~Game() {
   for(int i=0; i<rows; i++) {
     delete [] grid[i];
@@ -21,6 +27,8 @@ Game::~Game() {
   delete [] players;
 }
 
+/// Controls the flow of the game, Continues to call getMove() until
+/// isOver() returns something other than 0.
 void Game::start() {
   drawScreen();
   while(isOver()==0) {
@@ -39,10 +47,12 @@ void Game::start() {
   }
 }
 
+/// Clears the terminal window.
 void Game::clearScreen() {
   cout << CLEAR;
 }
 
+/// Overrides the insert operator for a square.
 ostream& operator << (ostream& os, const Square &square) {
   for(int i=0; i<square.amountOfPlayers; i++) {
     if(square.pieces[i] != 0) {
@@ -54,6 +64,7 @@ ostream& operator << (ostream& os, const Square &square) {
   return os;
 }
 
+/// Overrides the insert operator for a piece.
 ostream& operator << (ostream& os, const Piece &piece) {
   piece.print(os);
   return os;
