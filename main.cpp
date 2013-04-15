@@ -69,7 +69,7 @@ int main() {
   }
   return 0;
 }
-
+///Print border
 void border(int width) {
   for(int i=0; i<width/2; i++)cout << "=-";
   cout << "\n";
