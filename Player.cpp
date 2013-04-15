@@ -4,6 +4,7 @@
 Player::Player() {}
 
 Player::Player(int amountOfTypes, vector<string> types, int maxPieces) {
+  // Initialize member variables
   this->types = types;
   this->amountOfPieces = 0;
   this->amountOfTypes = amountOfTypes;
@@ -28,6 +29,7 @@ bool Player::hasType(int type) {
 Piece* Player::addPiece() {
   Piece* piece = 0;
   if(amountOfPieces < maxPieces) {
+    // Add new piece to vector, pass in this player.
     pieces[amountOfPieces] = new Piece(this);
     piece = pieces[amountOfPieces];
     amountOfPieces++;
@@ -35,10 +37,11 @@ Piece* Player::addPiece() {
   return piece;
 }
 
-// Only used by snakes and ladders
+// / Only used by snakes and ladders
 Piece* Player::addPiece(Piece* insert) {
   Piece* piece = 0;
   if(amountOfPieces < maxPieces) {
+    // Add insert to pieces vector
     pieces[amountOfPieces] = insert;
     piece = pieces[amountOfPieces];
     amountOfPieces++;
@@ -48,6 +51,8 @@ Piece* Player::addPiece(Piece* insert) {
 
 bool Player::removePiece() {
   if(amountOfPieces > 0) {
+    // Decrement amountOfPieces so the next piece added 
+    // will overwrite last piece
     amountOfPieces--;
     return true;
   } else {
@@ -61,6 +66,7 @@ int Player::getAmountOfPieces() {
 
 Piece* Player::getPiece(int index) {
   Piece* piece = 0;
+  // If index is valid get the piece
   if(index >= 0 && index < maxPieces) {
     piece = pieces[index];
   }
