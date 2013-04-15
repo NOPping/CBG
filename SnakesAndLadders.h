@@ -44,7 +44,10 @@ class SnakesAndLadders : public Game {
     int isOver();
 
   public:
+    /// Default constructor for Snakes and Ladders.
     SnakesAndLadders();
+    
+    /// Deconstructor Snakes and Ladders.
     ~SnakesAndLadders();
 };
 
