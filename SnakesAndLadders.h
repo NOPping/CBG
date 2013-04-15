@@ -1,3 +1,7 @@
+/// Snakes and Ladders Game.
+/// @author Ian Duffy
+/// @author Darren Brogan
+
 #ifndef SNAKESANDLADDERS_H
 #define SNAKESANDLADDERS_H
 
@@ -8,19 +12,37 @@
 
 class SnakesAndLadders : public Game {
   private:
-    bool isGameOver();
+    /// Prints out the board, players, snakes and ladders.
     void drawScreen();
+
+    /// Generate a random number between 1 and 6.
     int rollDice();
+
+    /// Calls rollRice() and calculates the destination square
+    /// Passes these too executeMove().
     bool getMove();
-    void resetPlayer(Coordinate current);
+
+    /// Moves the piece on srcSquare to destSquare.
     bool executeMove(Square* sourceSquare, Square* destinationSquare);
+
+    /// Converts an square identifier to a coordinate.
     Coordinate squareToCoordinate(int position);
+
+    /// Pointers to the squares based on their identifiers.
     Square** squareRefs;
+
+    /// Array that holds the snakes and ladder character representations.
     Player* systemItems;
-    bool printSnakeLadder(int x, int y);
-    int isOver();
+
+    /// Amount of system items.
     const int amountOfSystemItems;
-    
+
+    /// Prints a snake and ladder at coordinates x,y.
+    bool printSnakeLadder(int x, int y);
+
+    /// Check if square with identifier 100 is occupied.
+    int isOver();
+
   public:
     SnakesAndLadders();
     ~SnakesAndLadders();

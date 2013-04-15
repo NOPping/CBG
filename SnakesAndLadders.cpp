@@ -8,51 +8,50 @@ typedef DestinationPiece DestPiece;
 typedef IdentifierPiece IDPiece;
 typedef Coordinate Coord;
 
+/// Default constructor for Snakes and Ladders.
 SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
-  // Set srand a more random die roll
+  // Set srand a more random die roll.
   srand(time(NULL));
 
-  // Setup the global variables
-
-  // systemItems holds the snakes and ladders
+  // systemItems holds the snakes and ladders.
   this->systemItems = new Player[amountOfSystemItems];
 
   // This is simply just used an a reference instead of trying to convert
   // Coords to square ids.
   this->squareRefs = new Square*[100];
 
-  // Setup the Players
+  // Setup the Players.
   const int playerTypes = 1;
   const int maxPlayerPieces = 1;
 
   vector<string> player1PieceTypes(playerTypes);
   vector<string> player2PieceTypes(maxPlayerPieces);
 
-  // Set their character representations
+  // Set their character representations.
   player1PieceTypes[0] = FRED "◎";
   player2PieceTypes[0] = FBLUE "◎";
 
   players[0] = new SLPlayer(playerTypes,player1PieceTypes,maxPlayerPieces);
   players[1] = new SLPlayer(playerTypes,player2PieceTypes,maxPlayerPieces);
 
-  // Setup the snakes and ladders
+  // Setup the snakes and ladders.
   const int systemTypes = 2;
   const int maxSystemPieces = 16;
   vector <string> system1PieceTypes(systemTypes);
   vector <string> system2PieceTypes(systemTypes);
 
-  // Set the start point snake/ladder character representations
+  // Set the start point snake/ladder character representations.
   system1PieceTypes[0] = FVIOLET "S";
   system1PieceTypes[1] = FGREEN "L";
 
-  // Set the end point snake/ladder character representations
+  // Set the end point snake/ladder character representations.
   system2PieceTypes[0] = FORANGE "S";
   system2PieceTypes[1] = FMAGENTA "L";
 
   systemItems[0] = Player(systemTypes,system1PieceTypes,maxSystemPieces);
   systemItems[1] = Player(systemTypes,system2PieceTypes,maxSystemPieces);
 
-  // Setup all the squares
+  // Setup all the squares.
   int totalPlayers = amountOfPlayers + amountOfSystemItems;
 
   string start[] = {BBLACK,BGRAY};
@@ -76,7 +75,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
     identifier = (identifier + 1)%2;
   }
 
-  // Add the players to the starting square
+  // Add the players to the starting square.
   Piece* player1Piece = new SrcPiece(players[0],Coord(0,9));
   Piece* player2Piece = new SrcPiece(players[1],Coord(0,9));
   squareRefs[0]->addPiece(0,(players[0]->addPiece(player1Piece)));
@@ -106,13 +105,13 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   Piece* source;
   Piece* destination;
 
-  // Place all the snakes onto the board
+  // Place all the snakes onto the board.
   for(int i=0; i<maxSystemPieces/amountOfSystemItems; i++) {
     source = new SystemPiece(&systemItems[0],snakes[i][0],snakes[i][1],i);
     destination = new IDPiece(&systemItems[1],i);
-    // Snake start point
+    // Snake start point.
     grid[snakes[i][0].y][snakes[i][0].x].addPiece(2,source);
-    // Snake end point
+    // Snake end point.
     grid[snakes[i][1].y][snakes[i][1].x].addPiece(3,destination);
   }
 
@@ -120,21 +119,23 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   for(int i=0; i<maxSystemPieces/2; i++) {
     source = new SystemPiece(&systemItems[0],ladders[i][0],ladders[i][1],i);
     destination = new IDPiece(&systemItems[1],i);
-    // Sets the piece to use the ladder character representation
+    // Sets the piece to use the ladder character representation.
     source->setType(1);
     destination->setType(1);
-    // Ladder start point
+    // Ladder start point.
     grid[ladders[i][0].y][ladders[i][0].x].addPiece(2,source);
-    // Ladder end point
+    // Ladder end point.
     grid[ladders[i][1].y][ladders[i][1].x].addPiece(3,destination);
   }
 }
 
+/// Deconstructor for snakes and ladders.
 SnakesAndLadders::~SnakesAndLadders() {
   delete [] systemItems;
   delete [] squareRefs;
 }
 
+/// Prints out the board, players, snakes and ladders.
 void SnakesAndLadders::drawScreen() {
   clearScreen();
 
@@ -143,10 +144,10 @@ void SnakesAndLadders::drawScreen() {
   for(int y=0; y<rows; y++) {
     for(int x=0; x<columns; x++) {
 
-      // Start the Square
+      // Start the Square.
       cout << grid[y][x].getStart();
 
-      // Print square number
+      // Print square number.
       printf ("%-3d",grid[y][x].getIdentifier());
 
       // Print player piece if any.
@@ -187,31 +188,31 @@ bool SnakesAndLadders::printSnakeLadder(int x, int y) {
   return false;
 }
 
-/// Generate a random number between 1 and 6
+/// Generate a random number between 1 and 6.
 int SnakesAndLadders::rollDice() {
   return (int)rand() % 6 + 1;
 }
 
-/// Check if square with identifier 100 is occupied
+/// Check if square with identifier 100 is occupied.
 int SnakesAndLadders::isOver() {
   return squareRefs[99]->hasPiece() ? 1 : 0;
 }
 
 /// Calls rollRice() and calculates the destination square
-/// Passes these too executeMove()
+/// Passes these too executeMove().
 bool SnakesAndLadders::getMove() {
-  // Setup a pointer to the current player and the square they are on
+  // Setup a pointer to the current player and the square they are on.
   SLPlayer* player = dynamic_cast<SLPlayer*>(players[currentPlayer]);
   Coord current = dynamic_cast<SrcPiece*>(player->getPiece(0))->getSource();
   Square* srcSquare = &grid[current.y][current.x];
   
-  // Prompt the user to roll
+  // Prompt the user to roll.
   cout << "Press enter to roll a dice and make your move\n";
   cin.get();
   int roll = rollDice();
   int total=roll;
   
-  // Unsuspend the player if they roll a 6
+  // Unsuspend the player if they roll a 6.
   if(roll == 6) {
     player->suspended = false;
   }
@@ -237,7 +238,7 @@ bool SnakesAndLadders::getMove() {
     cout << "You are suspended until you roll a 6\n";
   }
 
-  // Switch Player
+  // Switch Player.
   currentPlayer=(currentPlayer+1)%(amountOfPlayers);
 
   return true;
@@ -253,7 +254,7 @@ bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) {
     destSquare = &grid[modifiedDestination.y][modifiedDestination.x];
   }
 
-  // Check if the source square and destination square are the same
+  // Check if the source square and destination square are the same.
   if(srcSquare == destSquare) {
     return true;
   } else {
