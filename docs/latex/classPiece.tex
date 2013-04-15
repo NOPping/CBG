@@ -1,0 +1,179 @@
+\hypertarget{classPiece}{\section{Piece Class Reference}
+\label{classPiece}\index{Piece@{Piece}}
+}
+
+
+{\ttfamily \#include $<$Piece.\-h$>$}
+
+Inheritance diagram for Piece\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classPiece}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classPiece_aeebab4a49f40fde49a9698c19f51f4a0}{get\-Type} ()
+\begin{DoxyCompactList}\small\item\em Returns the type of piece. \end{DoxyCompactList}\item 
+\hyperlink{classPiece_ac57de5803bbad829b143bc7268267dc1}{Piece} ()
+\item 
+\hyperlink{classPiece_a645709ec114f364073ee432d102b0551}{Piece} (\hyperlink{classPlayer}{Player} $\ast$\hyperlink{classPiece_a43beac3b5268343b9f7e575d637eda98}{owner})
+\item 
+\hyperlink{classPiece_a72c6f3a5df2036c7743bd91e2daeb5bc}{Piece} (\hyperlink{classPlayer}{Player} $\ast$\hyperlink{classPiece_a43beac3b5268343b9f7e575d637eda98}{owner}, int \hyperlink{classPiece_a5c3c79a15de7daa1efde1b8aa246e8d4}{type})
+\item 
+virtual void \hyperlink{classPiece_aace14e1a78a22394f997b045fe31e84a}{print} (ostream \&os) const 
+\begin{DoxyCompactList}\small\item\em Inserts the piece into the given ostream. \end{DoxyCompactList}\item 
+bool \hyperlink{classPiece_acdc19e123cac0d8999ce70953de61aa3}{set\-Type} (int \hyperlink{classPiece_a5c3c79a15de7daa1efde1b8aa246e8d4}{type})
+\begin{DoxyCompactList}\small\item\em Sets the type of piece. \end{DoxyCompactList}\item 
+virtual \hyperlink{classPiece_a5d7a4f6bade94cb33b6f634de8aa7918}{$\sim$\-Piece} ()
+\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPlayer}{Player} $\ast$ \hyperlink{classPiece_a43beac3b5268343b9f7e575d637eda98}{owner}
+\begin{DoxyCompactList}\small\item\em Pointer to the pieces owner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classPiece_a5c3c79a15de7daa1efde1b8aa246e8d4}{type}
+\begin{DoxyCompactList}\small\item\em The type of the piece. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 15 of file Piece.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classPiece_ac57de5803bbad829b143bc7268267dc1}{\index{Piece@{Piece}!Piece@{Piece}}
+\index{Piece@{Piece}!Piece@{Piece}}
+\subsubsection[{Piece}]{\setlength{\rightskip}{0pt plus 5cm}Piece\-::\-Piece (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classPiece_ac57de5803bbad829b143bc7268267dc1}
+\hyperlink{classPiece}{Piece} \begin{DoxyAuthor}{Author}
+Ian Duffy 
+
+Darren Brogan 
+\end{DoxyAuthor}
+
+
+Definition at line 9 of file Piece.\-cpp.
+
+\hypertarget{classPiece_a645709ec114f364073ee432d102b0551}{\index{Piece@{Piece}!Piece@{Piece}}
+\index{Piece@{Piece}!Piece@{Piece}}
+\subsubsection[{Piece}]{\setlength{\rightskip}{0pt plus 5cm}Piece\-::\-Piece (
+\begin{DoxyParamCaption}
+\item[{{\bf Player} $\ast$}]{owner}
+\end{DoxyParamCaption}
+)}}\label{classPiece_a645709ec114f364073ee432d102b0551}
+
+
+Definition at line 13 of file Piece.\-cpp.
+
+\hypertarget{classPiece_a72c6f3a5df2036c7743bd91e2daeb5bc}{\index{Piece@{Piece}!Piece@{Piece}}
+\index{Piece@{Piece}!Piece@{Piece}}
+\subsubsection[{Piece}]{\setlength{\rightskip}{0pt plus 5cm}Piece\-::\-Piece (
+\begin{DoxyParamCaption}
+\item[{{\bf Player} $\ast$}]{owner, }
+\item[{int}]{type}
+\end{DoxyParamCaption}
+)}}\label{classPiece_a72c6f3a5df2036c7743bd91e2daeb5bc}
+\hypertarget{classPiece_a5d7a4f6bade94cb33b6f634de8aa7918}{\index{Piece@{Piece}!$\sim$\-Piece@{$\sim$\-Piece}}
+\index{$\sim$\-Piece@{$\sim$\-Piece}!Piece@{Piece}}
+\subsubsection[{$\sim$\-Piece}]{\setlength{\rightskip}{0pt plus 5cm}Piece\-::$\sim$\-Piece (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classPiece_a5d7a4f6bade94cb33b6f634de8aa7918}
+
+
+Definition at line 18 of file Piece.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classPiece_aeebab4a49f40fde49a9698c19f51f4a0}{\index{Piece@{Piece}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!Piece@{Piece}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}int Piece\-::get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classPiece_aeebab4a49f40fde49a9698c19f51f4a0}
+
+
+Returns the type of piece. 
+
+
+
+Definition at line 22 of file Piece.\-cpp.
+
+\hypertarget{classPiece_aace14e1a78a22394f997b045fe31e84a}{\index{Piece@{Piece}!print@{print}}
+\index{print@{print}!Piece@{Piece}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}void Piece\-::print (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classPiece_aace14e1a78a22394f997b045fe31e84a}
+
+
+Inserts the piece into the given ostream. 
+
+
+
+Reimplemented in \hyperlink{classIdentifierPiece_a63030a6e3daf72f81d2731e809e30d5b}{Identifier\-Piece}.
+
+
+
+Definition at line 37 of file Piece.\-cpp.
+
+\hypertarget{classPiece_acdc19e123cac0d8999ce70953de61aa3}{\index{Piece@{Piece}!set\-Type@{set\-Type}}
+\index{set\-Type@{set\-Type}!Piece@{Piece}}
+\subsubsection[{set\-Type}]{\setlength{\rightskip}{0pt plus 5cm}bool Piece\-::set\-Type (
+\begin{DoxyParamCaption}
+\item[{int}]{type}
+\end{DoxyParamCaption}
+)}}\label{classPiece_acdc19e123cac0d8999ce70953de61aa3}
+
+
+Sets the type of piece. 
+
+
+
+Definition at line 27 of file Piece.\-cpp.
+
+
+
+\subsection{Field Documentation}
+\hypertarget{classPiece_a43beac3b5268343b9f7e575d637eda98}{\index{Piece@{Piece}!owner@{owner}}
+\index{owner@{owner}!Piece@{Piece}}
+\subsubsection[{owner}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player}$\ast$ Piece\-::owner}}\label{classPiece_a43beac3b5268343b9f7e575d637eda98}
+
+
+Pointer to the pieces owner. 
+
+
+
+Definition at line 36 of file Piece.\-h.
+
+\hypertarget{classPiece_a5c3c79a15de7daa1efde1b8aa246e8d4}{\index{Piece@{Piece}!type@{type}}
+\index{type@{type}!Piece@{Piece}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}int Piece\-::type\hspace{0.3cm}{\ttfamily [protected]}}}\label{classPiece_a5c3c79a15de7daa1efde1b8aa246e8d4}
+
+
+The type of the piece. 
+
+
+
+Definition at line 18 of file Piece.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Piece_8h}{Piece.\-h}\item 
+\hyperlink{Piece_8cpp}{Piece.\-cpp}\end{DoxyCompactItemize}

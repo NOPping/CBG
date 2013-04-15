@@ -1,0 +1,270 @@
+\hypertarget{classSquare}{\section{Square Class Reference}
+\label{classSquare}\index{Square@{Square}}
+}
+
+
+{\ttfamily \#include $<$Square.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classSquare_a8839d897e85342bc9ccd0c3c8ae37ac1}{add\-Piece} (int \hyperlink{classPlayer}{Player}, \hyperlink{classPiece}{Piece} $\ast$piece)
+\item 
+string \hyperlink{classSquare_aa2d3fa7c91fef0ab75b657fff84a0e5d}{get\-End} ()
+\item 
+int \hyperlink{classSquare_a61e01113ed501094f077facc98247834}{get\-Identifier} ()
+\item 
+\hyperlink{classPiece}{Piece} $\ast$ \hyperlink{classSquare_ae679e5dba819d52e03d96e4d6b192aba}{get\-Piece} (int player)
+\item 
+\hyperlink{structCoordinate}{Coordinate} \hyperlink{classSquare_a49a097184b5773dbdac054aba5eaf556}{get\-Position} ()
+\item 
+string \hyperlink{classSquare_a950cc5ee3db1236f953b2b54a7eb2aad}{get\-Start} ()
+\item 
+bool \hyperlink{classSquare_a875e971657b4670b121837d80f247626}{has\-Piece} ()
+\item 
+bool \hyperlink{classSquare_a767fa41efec1594d87ae7b47854ea8f1}{has\-Piece\-Owned\-By} (int player)
+\item 
+bool \hyperlink{classSquare_aa549b2d293165c7978b21f7d26f58fb2}{remove\-Piece} (int player)
+\item 
+\hyperlink{classSquare_a3dc7ff9aefc2725172b5d3153973d243}{Square} ()
+\item 
+\hyperlink{classSquare_ae66f3039b28e813bcdc832bbe1f5ddcf}{Square} (int \hyperlink{classSquare_a564b1f548b3be90a32c0dfd045de1187}{identifier}, string \hyperlink{classSquare_ab8661c5b8e8026d074cf11c9e6634d18}{start}, string \hyperlink{classSquare_a419b11e7d6cac76bfbc89c9b1ad111f2}{end}, int \hyperlink{classSquare_ae6bded80423341335f9dd86c189955c0}{amount\-Of\-Players}, \hyperlink{structCoordinate}{Coordinate} \hyperlink{classSquare_a08e99afd7be993cd1cbb50f4716e95ff}{position})
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classSquare_ae6bded80423341335f9dd86c189955c0}{amount\-Of\-Players}
+\item 
+string \hyperlink{classSquare_a419b11e7d6cac76bfbc89c9b1ad111f2}{end}
+\item 
+int \hyperlink{classSquare_a564b1f548b3be90a32c0dfd045de1187}{identifier}
+\item 
+int \hyperlink{classSquare_a61b6be58fcaec7b02aa82158cf9ac6fe}{number\-Of\-Occupants}
+\item 
+vector$<$ \hyperlink{classPiece}{Piece} $\ast$ $>$ \hyperlink{classSquare_a144124544a38dc3e81ff702191c1c627}{pieces}
+\item 
+\hyperlink{structCoordinate}{Coordinate} \hyperlink{classSquare_a08e99afd7be993cd1cbb50f4716e95ff}{position}
+\item 
+string \hyperlink{classSquare_ab8661c5b8e8026d074cf11c9e6634d18}{start}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{classSquare_a1cef282cd4504e20e1687a571e9cf943}{operator$<$$<$} (ostream \&out, const \hyperlink{classSquare}{Square} \&square)
+\begin{DoxyCompactList}\small\item\em Overrides the insert operator for a square. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 14 of file Square.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classSquare_a3dc7ff9aefc2725172b5d3153973d243}{\index{Square@{Square}!Square@{Square}}
+\index{Square@{Square}!Square@{Square}}
+\subsubsection[{Square}]{\setlength{\rightskip}{0pt plus 5cm}Square\-::\-Square (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSquare_a3dc7ff9aefc2725172b5d3153973d243}
+
+
+Definition at line 3 of file Square.\-cpp.
+
+\hypertarget{classSquare_ae66f3039b28e813bcdc832bbe1f5ddcf}{\index{Square@{Square}!Square@{Square}}
+\index{Square@{Square}!Square@{Square}}
+\subsubsection[{Square}]{\setlength{\rightskip}{0pt plus 5cm}Square\-::\-Square (
+\begin{DoxyParamCaption}
+\item[{int}]{identifier, }
+\item[{string}]{start, }
+\item[{string}]{end, }
+\item[{int}]{amount\-Of\-Players, }
+\item[{{\bf Coordinate}}]{position}
+\end{DoxyParamCaption}
+)}}\label{classSquare_ae66f3039b28e813bcdc832bbe1f5ddcf}
+
+
+Definition at line 5 of file Square.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classSquare_a8839d897e85342bc9ccd0c3c8ae37ac1}{\index{Square@{Square}!add\-Piece@{add\-Piece}}
+\index{add\-Piece@{add\-Piece}!Square@{Square}}
+\subsubsection[{add\-Piece}]{\setlength{\rightskip}{0pt plus 5cm}bool Square\-::add\-Piece (
+\begin{DoxyParamCaption}
+\item[{int}]{Player, }
+\item[{{\bf Piece} $\ast$}]{piece}
+\end{DoxyParamCaption}
+)}}\label{classSquare_a8839d897e85342bc9ccd0c3c8ae37ac1}
+
+
+Definition at line 19 of file Square.\-cpp.
+
+\hypertarget{classSquare_aa2d3fa7c91fef0ab75b657fff84a0e5d}{\index{Square@{Square}!get\-End@{get\-End}}
+\index{get\-End@{get\-End}!Square@{Square}}
+\subsubsection[{get\-End}]{\setlength{\rightskip}{0pt plus 5cm}string Square\-::get\-End (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSquare_aa2d3fa7c91fef0ab75b657fff84a0e5d}
+
+
+Definition at line 60 of file Square.\-cpp.
+
+\hypertarget{classSquare_a61e01113ed501094f077facc98247834}{\index{Square@{Square}!get\-Identifier@{get\-Identifier}}
+\index{get\-Identifier@{get\-Identifier}!Square@{Square}}
+\subsubsection[{get\-Identifier}]{\setlength{\rightskip}{0pt plus 5cm}int Square\-::get\-Identifier (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSquare_a61e01113ed501094f077facc98247834}
+
+
+Definition at line 41 of file Square.\-cpp.
+
+\hypertarget{classSquare_ae679e5dba819d52e03d96e4d6b192aba}{\index{Square@{Square}!get\-Piece@{get\-Piece}}
+\index{get\-Piece@{get\-Piece}!Square@{Square}}
+\subsubsection[{get\-Piece}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Piece} $\ast$ Square\-::get\-Piece (
+\begin{DoxyParamCaption}
+\item[{int}]{player}
+\end{DoxyParamCaption}
+)}}\label{classSquare_ae679e5dba819d52e03d96e4d6b192aba}
+
+
+Definition at line 52 of file Square.\-cpp.
+
+\hypertarget{classSquare_a49a097184b5773dbdac054aba5eaf556}{\index{Square@{Square}!get\-Position@{get\-Position}}
+\index{get\-Position@{get\-Position}!Square@{Square}}
+\subsubsection[{get\-Position}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Coordinate} Square\-::get\-Position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSquare_a49a097184b5773dbdac054aba5eaf556}
+
+
+Definition at line 37 of file Square.\-cpp.
+
+\hypertarget{classSquare_a950cc5ee3db1236f953b2b54a7eb2aad}{\index{Square@{Square}!get\-Start@{get\-Start}}
+\index{get\-Start@{get\-Start}!Square@{Square}}
+\subsubsection[{get\-Start}]{\setlength{\rightskip}{0pt plus 5cm}string Square\-::get\-Start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSquare_a950cc5ee3db1236f953b2b54a7eb2aad}
+
+
+Definition at line 56 of file Square.\-cpp.
+
+\hypertarget{classSquare_a875e971657b4670b121837d80f247626}{\index{Square@{Square}!has\-Piece@{has\-Piece}}
+\index{has\-Piece@{has\-Piece}!Square@{Square}}
+\subsubsection[{has\-Piece}]{\setlength{\rightskip}{0pt plus 5cm}bool Square\-::has\-Piece (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classSquare_a875e971657b4670b121837d80f247626}
+
+
+Definition at line 15 of file Square.\-cpp.
+
+\hypertarget{classSquare_a767fa41efec1594d87ae7b47854ea8f1}{\index{Square@{Square}!has\-Piece\-Owned\-By@{has\-Piece\-Owned\-By}}
+\index{has\-Piece\-Owned\-By@{has\-Piece\-Owned\-By}!Square@{Square}}
+\subsubsection[{has\-Piece\-Owned\-By}]{\setlength{\rightskip}{0pt plus 5cm}bool Square\-::has\-Piece\-Owned\-By (
+\begin{DoxyParamCaption}
+\item[{int}]{player}
+\end{DoxyParamCaption}
+)}}\label{classSquare_a767fa41efec1594d87ae7b47854ea8f1}
+
+
+Definition at line 45 of file Square.\-cpp.
+
+\hypertarget{classSquare_aa549b2d293165c7978b21f7d26f58fb2}{\index{Square@{Square}!remove\-Piece@{remove\-Piece}}
+\index{remove\-Piece@{remove\-Piece}!Square@{Square}}
+\subsubsection[{remove\-Piece}]{\setlength{\rightskip}{0pt plus 5cm}bool Square\-::remove\-Piece (
+\begin{DoxyParamCaption}
+\item[{int}]{player}
+\end{DoxyParamCaption}
+)}}\label{classSquare_aa549b2d293165c7978b21f7d26f58fb2}
+
+
+Definition at line 31 of file Square.\-cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classSquare_a1cef282cd4504e20e1687a571e9cf943}{\index{Square@{Square}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Square@{Square}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{out, }
+\item[{const {\bf Square} \&}]{square}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{classSquare_a1cef282cd4504e20e1687a571e9cf943}
+
+
+Overrides the insert operator for a square. 
+
+
+
+Definition at line 54 of file Game.\-cpp.
+
+
+
+\subsection{Field Documentation}
+\hypertarget{classSquare_ae6bded80423341335f9dd86c189955c0}{\index{Square@{Square}!amount\-Of\-Players@{amount\-Of\-Players}}
+\index{amount\-Of\-Players@{amount\-Of\-Players}!Square@{Square}}
+\subsubsection[{amount\-Of\-Players}]{\setlength{\rightskip}{0pt plus 5cm}int Square\-::amount\-Of\-Players\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSquare_ae6bded80423341335f9dd86c189955c0}
+
+
+Definition at line 20 of file Square.\-h.
+
+\hypertarget{classSquare_a419b11e7d6cac76bfbc89c9b1ad111f2}{\index{Square@{Square}!end@{end}}
+\index{end@{end}!Square@{Square}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}string Square\-::end\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSquare_a419b11e7d6cac76bfbc89c9b1ad111f2}
+
+
+Definition at line 23 of file Square.\-h.
+
+\hypertarget{classSquare_a564b1f548b3be90a32c0dfd045de1187}{\index{Square@{Square}!identifier@{identifier}}
+\index{identifier@{identifier}!Square@{Square}}
+\subsubsection[{identifier}]{\setlength{\rightskip}{0pt plus 5cm}int Square\-::identifier\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSquare_a564b1f548b3be90a32c0dfd045de1187}
+
+
+Definition at line 19 of file Square.\-h.
+
+\hypertarget{classSquare_a61b6be58fcaec7b02aa82158cf9ac6fe}{\index{Square@{Square}!number\-Of\-Occupants@{number\-Of\-Occupants}}
+\index{number\-Of\-Occupants@{number\-Of\-Occupants}!Square@{Square}}
+\subsubsection[{number\-Of\-Occupants}]{\setlength{\rightskip}{0pt plus 5cm}int Square\-::number\-Of\-Occupants\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSquare_a61b6be58fcaec7b02aa82158cf9ac6fe}
+
+
+Definition at line 21 of file Square.\-h.
+
+\hypertarget{classSquare_a144124544a38dc3e81ff702191c1c627}{\index{Square@{Square}!pieces@{pieces}}
+\index{pieces@{pieces}!Square@{Square}}
+\subsubsection[{pieces}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Piece} $\ast$$>$ Square\-::pieces\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSquare_a144124544a38dc3e81ff702191c1c627}
+
+
+Definition at line 24 of file Square.\-h.
+
+\hypertarget{classSquare_a08e99afd7be993cd1cbb50f4716e95ff}{\index{Square@{Square}!position@{position}}
+\index{position@{position}!Square@{Square}}
+\subsubsection[{position}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Coordinate} Square\-::position\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSquare_a08e99afd7be993cd1cbb50f4716e95ff}
+
+
+Definition at line 25 of file Square.\-h.
+
+\hypertarget{classSquare_ab8661c5b8e8026d074cf11c9e6634d18}{\index{Square@{Square}!start@{start}}
+\index{start@{start}!Square@{Square}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}string Square\-::start\hspace{0.3cm}{\ttfamily [protected]}}}\label{classSquare_ab8661c5b8e8026d074cf11c9e6634d18}
+
+
+Definition at line 22 of file Square.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Square_8h}{Square.\-h}\item 
+\hyperlink{Square_8cpp}{Square.\-cpp}\end{DoxyCompactItemize}

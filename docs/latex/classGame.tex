@@ -1,0 +1,224 @@
+\hypertarget{classGame}{\section{Game Class Reference}
+\label{classGame}\index{Game@{Game}}
+}
+
+
+{\ttfamily \#include $<$Game.\-h$>$}
+
+Inheritance diagram for Game\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classGame}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classGame_ad2ad634188c8b6151d74cbcc4f858d81}{Game} (const int \hyperlink{classGame_a2a64a5ac5fe7466f02392d7bc75cf372}{amount\-Of\-Players}, const int \hyperlink{classGame_a33dcee5dd512148a0b12aa7fba41b5da}{columns}, const int \hyperlink{classGame_ae882486dec6d9507bbef7f44aaf07db5}{rows})
+\item 
+virtual void \hyperlink{classGame_a3d9b98f7c4a96ecf578f75b96c9f0e90}{start} ()
+\item 
+virtual \hyperlink{classGame_ae3d112ca6e0e55150d2fdbc704474530}{$\sim$\-Game} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classGame_a43a51eaa8b6fdb3dc6faa4d3417bad1e}{clear\-Screen} ()
+\begin{DoxyCompactList}\small\item\em Clears the terminal window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classGame_a7034c849d9fb62c74edb0a43f66b3bba}{draw\-Screen} ()=0
+\begin{DoxyCompactList}\small\item\em Draws out the board as required. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classGame_a4986ef96dee8f573ba1532dfe3ee8a4a}{get\-Move} ()=0
+\begin{DoxyCompactList}\small\item\em Gets input from the player detailing which move they wish to make. \end{DoxyCompactList}\item 
+virtual int \hyperlink{classGame_ada584c598be0f7066a396e1677ad7dc6}{is\-Over} ()=0
+\begin{DoxyCompactList}\small\item\em Defines whether or not the game is over. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{classGame_a2a64a5ac5fe7466f02392d7bc75cf372}{amount\-Of\-Players}
+\begin{DoxyCompactList}\small\item\em Holds the length of the players array. \end{DoxyCompactList}\item 
+const int \hyperlink{classGame_a33dcee5dd512148a0b12aa7fba41b5da}{columns}
+\begin{DoxyCompactList}\small\item\em Holds the amount of columns within the grid. \end{DoxyCompactList}\item 
+int \hyperlink{classGame_af57daa2f1aef9f264c18b462f8294e52}{current\-Player}
+\begin{DoxyCompactList}\small\item\em Holds the position in the players array of the current player. \end{DoxyCompactList}\item 
+\hyperlink{classSquare}{Square} $\ast$$\ast$ \hyperlink{classGame_a44fda9d5235865323c59d95b1f59b459}{grid}
+\begin{DoxyCompactList}\small\item\em Holds all of the squares that makes up the games grid. \end{DoxyCompactList}\item 
+\hyperlink{classPlayer}{Player} $\ast$$\ast$ \hyperlink{classGame_ad82f617ca44c8996333c7f41c410a56b}{players}
+\begin{DoxyCompactList}\small\item\em Holds all of the games players. \end{DoxyCompactList}\item 
+const int \hyperlink{classGame_ae882486dec6d9507bbef7f44aaf07db5}{rows}
+\begin{DoxyCompactList}\small\item\em Holds the amount of rows within the grid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base foundation for all of the games. \begin{DoxyAuthor}{Author}
+Ian Duffy 
+
+Darren Brogan 
+\end{DoxyAuthor}
+
+
+Definition at line 19 of file Game.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classGame_ad2ad634188c8b6151d74cbcc4f858d81}{\index{Game@{Game}!Game@{Game}}
+\index{Game@{Game}!Game@{Game}}
+\subsubsection[{Game}]{\setlength{\rightskip}{0pt plus 5cm}Game\-::\-Game (
+\begin{DoxyParamCaption}
+\item[{const int}]{amount\-Of\-Players, }
+\item[{const int}]{columns, }
+\item[{const int}]{rows}
+\end{DoxyParamCaption}
+)}}\label{classGame_ad2ad634188c8b6151d74cbcc4f858d81}
+
+
+Definition at line 10 of file Game.\-cpp.
+
+\hypertarget{classGame_ae3d112ca6e0e55150d2fdbc704474530}{\index{Game@{Game}!$\sim$\-Game@{$\sim$\-Game}}
+\index{$\sim$\-Game@{$\sim$\-Game}!Game@{Game}}
+\subsubsection[{$\sim$\-Game}]{\setlength{\rightskip}{0pt plus 5cm}Game\-::$\sim$\-Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classGame_ae3d112ca6e0e55150d2fdbc704474530}
+
+
+Definition at line 20 of file Game.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classGame_a43a51eaa8b6fdb3dc6faa4d3417bad1e}{\index{Game@{Game}!clear\-Screen@{clear\-Screen}}
+\index{clear\-Screen@{clear\-Screen}!Game@{Game}}
+\subsubsection[{clear\-Screen}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::clear\-Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classGame_a43a51eaa8b6fdb3dc6faa4d3417bad1e}
+
+
+Clears the terminal window. 
+
+
+
+Definition at line 49 of file Game.\-cpp.
+
+\hypertarget{classGame_a7034c849d9fb62c74edb0a43f66b3bba}{\index{Game@{Game}!draw\-Screen@{draw\-Screen}}
+\index{draw\-Screen@{draw\-Screen}!Game@{Game}}
+\subsubsection[{draw\-Screen}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Game\-::draw\-Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{classGame_a7034c849d9fb62c74edb0a43f66b3bba}
+
+
+Draws out the board as required. 
+
+\hypertarget{classGame_a4986ef96dee8f573ba1532dfe3ee8a4a}{\index{Game@{Game}!get\-Move@{get\-Move}}
+\index{get\-Move@{get\-Move}!Game@{Game}}
+\subsubsection[{get\-Move}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Game\-::get\-Move (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{classGame_a4986ef96dee8f573ba1532dfe3ee8a4a}
+
+
+Gets input from the player detailing which move they wish to make. 
+
+\hypertarget{classGame_ada584c598be0f7066a396e1677ad7dc6}{\index{Game@{Game}!is\-Over@{is\-Over}}
+\index{is\-Over@{is\-Over}!Game@{Game}}
+\subsubsection[{is\-Over}]{\setlength{\rightskip}{0pt plus 5cm}virtual int Game\-::is\-Over (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}}\label{classGame_ada584c598be0f7066a396e1677ad7dc6}
+
+
+Defines whether or not the game is over. 
+
+\hypertarget{classGame_a3d9b98f7c4a96ecf578f75b96c9f0e90}{\index{Game@{Game}!start@{start}}
+\index{start@{start}!Game@{Game}}
+\subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classGame_a3d9b98f7c4a96ecf578f75b96c9f0e90}
+Controls the flow of the game, Continues to call \hyperlink{classGame_a4986ef96dee8f573ba1532dfe3ee8a4a}{get\-Move()} until \hyperlink{classGame_ada584c598be0f7066a396e1677ad7dc6}{is\-Over()} returns something other than 0. 
+
+Definition at line 30 of file Game.\-cpp.
+
+
+
+\subsection{Field Documentation}
+\hypertarget{classGame_a2a64a5ac5fe7466f02392d7bc75cf372}{\index{Game@{Game}!amount\-Of\-Players@{amount\-Of\-Players}}
+\index{amount\-Of\-Players@{amount\-Of\-Players}!Game@{Game}}
+\subsubsection[{amount\-Of\-Players}]{\setlength{\rightskip}{0pt plus 5cm}const int Game\-::amount\-Of\-Players\hspace{0.3cm}{\ttfamily [protected]}}}\label{classGame_a2a64a5ac5fe7466f02392d7bc75cf372}
+
+
+Holds the length of the players array. 
+
+
+
+Definition at line 31 of file Game.\-h.
+
+\hypertarget{classGame_a33dcee5dd512148a0b12aa7fba41b5da}{\index{Game@{Game}!columns@{columns}}
+\index{columns@{columns}!Game@{Game}}
+\subsubsection[{columns}]{\setlength{\rightskip}{0pt plus 5cm}const int Game\-::columns\hspace{0.3cm}{\ttfamily [protected]}}}\label{classGame_a33dcee5dd512148a0b12aa7fba41b5da}
+
+
+Holds the amount of columns within the grid. 
+
+
+
+Definition at line 34 of file Game.\-h.
+
+\hypertarget{classGame_af57daa2f1aef9f264c18b462f8294e52}{\index{Game@{Game}!current\-Player@{current\-Player}}
+\index{current\-Player@{current\-Player}!Game@{Game}}
+\subsubsection[{current\-Player}]{\setlength{\rightskip}{0pt plus 5cm}int Game\-::current\-Player\hspace{0.3cm}{\ttfamily [protected]}}}\label{classGame_af57daa2f1aef9f264c18b462f8294e52}
+
+
+Holds the position in the players array of the current player. 
+
+
+
+Definition at line 22 of file Game.\-h.
+
+\hypertarget{classGame_a44fda9d5235865323c59d95b1f59b459}{\index{Game@{Game}!grid@{grid}}
+\index{grid@{grid}!Game@{Game}}
+\subsubsection[{grid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Square}$\ast$$\ast$ Game\-::grid\hspace{0.3cm}{\ttfamily [protected]}}}\label{classGame_a44fda9d5235865323c59d95b1f59b459}
+
+
+Holds all of the squares that makes up the games grid. 
+
+
+
+Definition at line 28 of file Game.\-h.
+
+\hypertarget{classGame_ad82f617ca44c8996333c7f41c410a56b}{\index{Game@{Game}!players@{players}}
+\index{players@{players}!Game@{Game}}
+\subsubsection[{players}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player}$\ast$$\ast$ Game\-::players\hspace{0.3cm}{\ttfamily [protected]}}}\label{classGame_ad82f617ca44c8996333c7f41c410a56b}
+
+
+Holds all of the games players. 
+
+
+
+Definition at line 25 of file Game.\-h.
+
+\hypertarget{classGame_ae882486dec6d9507bbef7f44aaf07db5}{\index{Game@{Game}!rows@{rows}}
+\index{rows@{rows}!Game@{Game}}
+\subsubsection[{rows}]{\setlength{\rightskip}{0pt plus 5cm}const int Game\-::rows\hspace{0.3cm}{\ttfamily [protected]}}}\label{classGame_ae882486dec6d9507bbef7f44aaf07db5}
+
+
+Holds the amount of rows within the grid. 
+
+
+
+Definition at line 37 of file Game.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Game_8h}{Game.\-h}\item 
+\hyperlink{Game_8cpp}{Game.\-cpp}\end{DoxyCompactItemize}
