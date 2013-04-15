@@ -3,7 +3,6 @@
 
 #include "DestinationPiece.h"
 
-/// Default constructor.
 DestinationPiece::DestinationPiece(Player* owner, Coordinate destination)
 : Piece(owner) {
   this->destination = destination;

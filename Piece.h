@@ -18,16 +18,9 @@ class Piece {
       int type;
 
     public:
-      /// Default constructor for a piece.
       Piece();
-      
-      /// Constructor with parameter to set an owner.
       Piece(Player* owner);
-      
-      /// Constructor with parameters to set an owner and type.
       Piece(Player* owner, int type);
-      
-      /// Deconstructor for a Piece.
       virtual ~Piece();
       
       /// Returns the type of piece.

@@ -11,10 +11,7 @@ struct Coordinate {
     /// The Y position.
     int y;
     
-    /// Default Constructor.
-    Coordinate();
-    
-    /// Constructor with paramaters.
+    Coordinate();    
     Coordinate(int x, int y);
 };
 

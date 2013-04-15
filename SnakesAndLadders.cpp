@@ -12,7 +12,6 @@ typedef DestinationPiece DestPiece;
 typedef IdentifierPiece IDPiece;
 typedef Coordinate Coord;
 
-/// Default constructor for Snakes and Ladders.
 SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   // Set srand a more random die roll.
   srand(time(NULL));

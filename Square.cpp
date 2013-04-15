@@ -53,10 +53,10 @@ Piece* Square::getPiece(int player) {
   return pieces[player];
 }
 
-std::string Square::getStart() {
+string Square::getStart() {
   return start;
 }
 
-std::string Square::getEnd() {
+string Square::getEnd() {
   return end;
 }

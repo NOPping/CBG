@@ -35,7 +35,6 @@ class Checkers : public Game {
     int   isOver();
     
   public:
-    /// Default constructor for Checkers.
     Checkers();
 };
 

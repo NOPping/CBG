@@ -3,10 +3,8 @@
 
 #include "Coordinate.h"
 
-/// Default constructor.
 Coordinate::Coordinate() {}
 
-/// Constructor with paramaters.
 Coordinate::Coordinate(int x, int y) {
   this->x = x;
   this->y = y;

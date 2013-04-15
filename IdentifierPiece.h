@@ -1,5 +1,5 @@
 /// A Piece with an identifier.
-/// @author Ian Duffy
+/// @author Ian Duffy.
 
 #ifndef IDENTIFIERPIECE_H
 #define IDENTIFIERPIECE_H
@@ -12,7 +12,6 @@ class IdentifierPiece : virtual public Piece {
     int identifier;
     
   public:
-    /// Default constructor
     IdentifierPiece(Player* owner, int identifier);
     
     /// Override the print function to include the identifier.

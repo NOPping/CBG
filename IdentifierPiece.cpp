@@ -1,9 +1,8 @@
 /// A Piece with an identifier.
-/// @author Ian Duffy
+/// @author Ian Duffy.
 
 #include "IdentifierPiece.h"
 
-/// Default constructor
 IdentifierPiece::IdentifierPiece(Player* owner, int identifier)
 : Piece(owner) {
   this->identifier = identifier;

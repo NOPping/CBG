@@ -12,10 +12,9 @@ class DestinationPiece : virtual public Piece {
     Coordinate destination;
     
   public:
-    /// Default constructor.
     DestinationPiece(Player* owner, Coordinate destination);
     
-    /// Returns the destination.
+    /// Returns the destination
     Coordinate getDestination();
     
     /// Sets the destination coordinate.

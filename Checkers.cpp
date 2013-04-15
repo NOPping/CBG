@@ -8,7 +8,6 @@ using std::cin;
 using std::string;
 using std::vector;
 
-/// Default constructor for Checkers.
 Checkers::Checkers():Game(2, 8, 8) {
   
   // Setup the players.
