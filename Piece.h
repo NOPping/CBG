@@ -19,6 +19,8 @@ class Piece {
       Piece(Player* owner);
       Piece(Player* owner, int type);
       
+      virtual ~Piece();
+      
       // Public functions
       int getType();
       bool setType(int type);

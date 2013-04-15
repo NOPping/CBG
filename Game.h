@@ -57,7 +57,7 @@ class Game {
       
       /// Controls the flow of the game, Continues to call getMove() until
       /// isOver() returns something other than 0.
-      virtual   void  start();
+      virtual void start();
 };
 
 #endif

@@ -27,3 +27,7 @@ bool Piece::setType(int type) {
 void Piece::print(ostream& os) const {
   os << owner->getCharacter(type);
 }
+
+Piece::~Piece() {
+  delete owner;
+}
