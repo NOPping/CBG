@@ -25,10 +25,10 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   string start = FBLUE "| ";
   string end = " " RESET;
 
-  for(int i=0; i<rows; i++) {
-    for(int j=0; j<columns; j++) {
-      grid[i][j] = Square(1, start, end,amountOfPlayers,
-                          Coordinate(j, i));
+  for(int y=0; y<rows; y++) {
+    for(int x=0; x<columns; x++) {
+      grid[y][x] = Square(1, start, end,amountOfPlayers,
+                          Coordinate(x, y));
     }
   }
 }
@@ -46,13 +46,13 @@ void ConnectFour::drawScreen() const {
   cout << "\n";
   cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
   //Print out each square of the board
-  for(int i=0; i<rows; i++) {
+  for(int y=0; y<rows; y++) {
     std::cout << " ";
-    for(int j=0; j<columns; j++) {
+    for(int x=0; x<columns; x++) {
       //Print out what's inside each square
-      cout << grid[i][j].getStart();
-      cout << grid[i][j];
-      cout << grid[i][j].getEnd();
+      cout << grid[y][x].getStart();
+      cout << grid[y][x];
+      cout << grid[y][x].getEnd();
     }
     cout << FBLUE "|" RESET << "\n";
     cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
@@ -73,12 +73,12 @@ int ConnectFour::isOver(const Square& current) const {
 bool ConnectFour::fourInRow(const Square& current) const {
   Coordinate& currentPosition = current.getPosition();
   //Test each side of the current square.
-  for(int iOffset = -1; iOffset <= 1; iOffset++)  {
-    for(int jOffset = -1; jOffset <= 1; jOffset++) {
+  for(int yOffset = -1; yOffset <= 1; yOffset++)  {
+    for(int xOffset = -1; xOffset <= 1; xOffset++) {
       //Get the number of pieces the first side of current square.
-      int numPlayerPiecesFirstSide  = checkNext(current,  iOffset,  jOffset);
+      int numPlayerPiecesFirstSide  = checkNext(current,  yOffset,  xOffset);
       //Get the number of pieces the second side of current square.
-      int numPlayerPiecesSecondSide = checkNext(current,0-iOffset,0-jOffset);
+      int numPlayerPiecesSecondSide = checkNext(current,0-yOffset,0-xOffset);
       //Add the number of pieces each side up and test if they exceed three
       //current square is counted twice so we take one away before testing
       if((numPlayerPiecesFirstSide + numPlayerPiecesSecondSide -1) > 3)
@@ -88,15 +88,15 @@ bool ConnectFour::fourInRow(const Square& current) const {
   return false;
 }
 
-int ConnectFour::checkNext(const Square& current,int iOffset,int jOffset) const {
+int ConnectFour::checkNext(const Square& current,int yOffset,int xOffset) const {
   if(current.hasPieceOwnedBy(currentPlayer)) {
-    if(isLegal(current, iOffset, jOffset)) {
-      Coordinate& currentPos = current.getPosition();
+    if(isLegal(current, yOffset, xOffset)) {
+      Coordinate currentPos = current.getPosition();
       //Get the next square in the row by adding the offsets to there
       //cooresponding x/y values in the Coordinate class.
-      Square& next = grid[currentPos.y + iOffset][currentPos.x + jOffset];
+      Square& next = grid[currentPos.y + yOffset][currentPos.x + xOffset];
       //Return 1 for the current piece plus check the next square and add it on.
-      return 1 + checkNext(next, iOffset, jOffset);
+      return 1 + checkNext(next, yOffset, xOffset);
     }
     //If the next square isn't legal just return one for the current square
     return 1;
@@ -105,12 +105,12 @@ int ConnectFour::checkNext(const Square& current,int iOffset,int jOffset) const 
 }
 
 
-bool ConnectFour::isLegal(const Square& current,int iOffset,int jOffset) const {
+bool ConnectFour::isLegal(const Square& current,int yOffset,int xOffset) const {
   Coordinate& currentPos = current.getPosition();
   //Ensure that the next square lies inside the bounds of the board
-  return((currentPos.x + jOffset < columns)&&(currentPos.x + jOffset >= 0))
-  &&(currentPos.y + iOffset < rows)&&(currentPos.y + iOffset >= 0)
-  &&(iOffset != 0 || jOffset != 0);
+  return((currentPos.x + xOffset < columns)&&(currentPos.x + xOffset >= 0))
+         &&(currentPos.y + yOffset < rows)&&(currentPos.y + yOffset >= 0)
+         &&(yOffset != 0 || xOffset != 0);
 }
 
 bool ConnectFour::getMove() {
