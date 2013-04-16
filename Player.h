@@ -34,24 +34,24 @@ class Player {
       virtual ~Player();
       
       /// Public functions.
-      int getAmountOfPieces();
+      int getAmountOfPieces() const;
       
       /// Remove Piece from the player and return a bollean to identify 
       /// if it succeded or failed.
       bool removePiece();
       
       /// Check if pieces vector at index type is empty
-      bool hasType(int type);
+      bool hasType(int type) const;
       
       /// Returns a string from pieces vector at index type. 
-      string getCharacter(int type);
+      string getCharacter(int type) const;
       
       /// Add pieces to the pieces vector.
       Piece* addPiece();
       Piece* addPiece(Piece* insert);
       
       /// Returns a pointer to the piece in the pieces vector at index index
-      Piece* getPiece(int index);
+      Piece* getPiece(int index) const;
       
       /// Return weather this player can move or not
       bool suspended;

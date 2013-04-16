@@ -47,7 +47,7 @@ Coordinate Square::getPosition() const {
 }
 
 /// Returns the square's identifier.
-int Square::getIdentifier() {
+int Square::getIdentifier() const {
   return identifier;
 }
 

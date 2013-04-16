@@ -45,7 +45,7 @@ class Square {
       Square(int identifier, string start, string end, int amountOfPlayers, Coordinate position);
       
       /// Returns the square's identifier.
-      int getIdentifier();
+      int getIdentifier() const;
       
       /// Returns whether or not the square has a piece on it.
       bool hasPiece();

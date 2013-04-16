@@ -14,11 +14,11 @@ Player::Player(int amountOfTypes, vector<string> types, int maxPieces) {
 }
 
 
-std::string Player::getCharacter(int type) {
+std::string Player::getCharacter(int type) const {
   return types[type];
 }
 
-bool Player::hasType(int type) {
+bool Player::hasType(int type) const {
   if(type<amountOfTypes) {
     return true;
   } else {
@@ -60,11 +60,11 @@ bool Player::removePiece() {
   }
 }
 
-int Player::getAmountOfPieces() {
+int Player::getAmountOfPieces() const {
   return amountOfPieces;
 }
 
-Piece* Player::getPiece(int index) {
+Piece* Player::getPiece(int index) const {
   Piece* piece = 0;
   // If index is valid get the piece
   if(index >= 0 && index < maxPieces) {
