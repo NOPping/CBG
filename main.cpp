@@ -76,9 +76,6 @@ int main() {
     }
   }
   
-  //for(int i=0; i<numberOfGames; ++i) {
-   //delete games[i];
-  //}
   games.clear();
   
   return 0;
