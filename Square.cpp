@@ -42,8 +42,8 @@ bool Square::removePiece(int player) {
 }
 
 /// Returns the piece on the square owned by player.
-Coordinate Square::getPosition() const {
-  return position;
+Coordinate& Square::getPosition() const {
+  return (Coordinate&)position;
 }
 
 /// Returns the square's identifier.

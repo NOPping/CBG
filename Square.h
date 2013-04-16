@@ -69,7 +69,7 @@ class Square {
       Piece* getPiece(int player);
       
       /// Returns the position of the square.
-      Coordinate getPosition() const;
+      Coordinate& getPosition() const;
 };
 
 #endif

@@ -51,7 +51,7 @@ void Game::clearScreen() const{
 }
 
 /// Overrides the insert operator for a square.
-ostream& operator << (ostream& os, const Square &square) {
+ostream& operator << (ostream& os, const Square& square) {
   for(int i=0; i<square.amountOfPlayers; i++) {
     if(square.pieces[i] != 0) {
       square.pieces[i]->print(os);
@@ -63,7 +63,7 @@ ostream& operator << (ostream& os, const Square &square) {
 }
 
 /// Overrides the insert operator for a piece.
-ostream& operator << (ostream& os, const Piece &piece) {
+ostream& operator << (ostream& os, const Piece& piece) {
   piece.print(os);
   return os;
 }

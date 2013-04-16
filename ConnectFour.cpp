@@ -71,7 +71,7 @@ int ConnectFour::isOver(const Square& current) const {
 }
 
 bool ConnectFour::fourInRow(const Square& current) const {
-  Coordinate currentPosition = current.getPosition();
+  Coordinate& currentPosition = current.getPosition();
   //Test each side of the current square.
   for(int iOffset = -1; iOffset <= 1; iOffset++)  {
     for(int jOffset = -1; jOffset <= 1; jOffset++) {
@@ -91,7 +91,7 @@ bool ConnectFour::fourInRow(const Square& current) const {
 int ConnectFour::checkNext(const Square& current,int iOffset,int jOffset) const {
   if(current.hasPieceOwnedBy(currentPlayer)) {
     if(isLegal(current, iOffset, jOffset)) {
-      Coordinate currentPos = current.getPosition();
+      Coordinate& currentPos = current.getPosition();
       //Get the next square in the row by adding the offsets to there
       //cooresponding x/y values in the Coordinate class.
       Square& next = grid[currentPos.y + iOffset][currentPos.x + jOffset];
@@ -106,7 +106,7 @@ int ConnectFour::checkNext(const Square& current,int iOffset,int jOffset) const 
 
 
 bool ConnectFour::isLegal(const Square& current,int iOffset,int jOffset) const {
-  Coordinate currentPos = current.getPosition();
+  Coordinate& currentPos = current.getPosition();
   //Ensure that the next square lies inside the bounds of the board
   return((currentPos.x + jOffset < columns)&&(currentPos.x + jOffset >= 0))
         &&(currentPos.y + iOffset < rows)&&(currentPos.y + iOffset >= 0)
