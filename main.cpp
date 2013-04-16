@@ -8,6 +8,7 @@
 #include "ConnectFour.h"
 #include "SnakesAndLadders.h"
 #include "Colors.h"
+#include "Reversi.h"
 
 using std::cout;
 using std::cin;
