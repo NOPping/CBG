@@ -13,20 +13,20 @@
 class SnakesAndLadders : public Game {
   private:
     /// Prints out the board, players, snakes and ladders.
-    void drawScreen();
+    void drawScreen() const;
 
     /// Generate a random number between 1 and 6.
-    int rollDice();
+    int rollDice() const;
 
     /// Calls rollDice() and calculates the destination square
     /// Passes these too executeMove().
     bool getMove();
 
     /// Moves the piece on srcSquare to destSquare.
-    bool executeMove(Square* sourceSquare, Square* destinationSquare);
+    bool executeMove(Square* sourceSquare, Square* destinationSquare) const;
 
     /// Converts an square identifier to a coordinate.
-    Coordinate squareToCoordinate(int position);
+    Coordinate squareToCoordinate(int position) const;
 
     /// Pointers to the squares based on their identifiers.
     Square** squareRefs;
@@ -38,10 +38,10 @@ class SnakesAndLadders : public Game {
     const int amountOfSystemItems;
 
     /// Prints a snake and ladder at coordinates x,y.
-    bool printSnakeLadder(int x, int y);
+    bool printSnakeLadder(int x, int y) const;
 
     /// Check if square with identifier 100 is occupied.
-    int isOver();
+    int isOver() const;
 
   public:
     SnakesAndLadders();

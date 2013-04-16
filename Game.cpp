@@ -46,7 +46,7 @@ void Game::start() {
 }
 
 /// Clears the terminal window.
-void Game::clearScreen() {
+void Game::clearScreen() const{
   cout << CLEAR;
 }
 

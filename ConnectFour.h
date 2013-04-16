@@ -11,17 +11,17 @@ using std::vector;
 
 class ConnectFour : public Game {
 private:
-  bool        isLegal(Square* current,int nextRowOffset,int nextColumnOffset);
+  bool        isLegal(Square* current,int nextRowOffset,int nextColumnOffset) const;
   int 	      state;
   bool        getMove();
-  void        drawScreen();
-  int         isOver();
-  int         isOver(Square* current);
-  bool        topRowFull();
-  bool        fourInRow(Square * current);
+  void        drawScreen() const;
+  int         isOver() const;
+  int         isOver(Square* current) const;
+  bool        topRowFull() const;
+  bool        fourInRow(Square * current) const;
   bool        executeMove(int destinationX);
   vector<int> columnSpace;
-  int         checkNext(Square* next,int nextRowOffset,int nextColumnOffset);
+  int         checkNext(Square* next,int nextRowOffset,int nextColumnOffset) const;
 public:
   ConnectFour();
 };

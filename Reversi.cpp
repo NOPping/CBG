@@ -4,20 +4,16 @@ using std::cin;
 using std::string;
 using std::vector;
 Reversi::Reversi():Game(2, 8, 8)  {
-  const int amountOfPieceTypes= 1;
-  const int maxAmountOfPlayerPieces = 64;
-  
+  int amountOfPieceTypes= 1;
+  int maxAmountOfPlayerPieces = 64;
   vector<string> player1PieceTypes(amountOfPieceTypes);
   vector<string> player2PieceTypes(amountOfPieceTypes);
-  
-  player1PieceTypes[0] = FWHITE "◎";
-  player2PieceTypes[0] = FBLACK "◎";
-  
-  players[0] =new Player(amountOfPieceTypes,player1PieceTypes,maxAmountOfPlayerPieces);
-  players[1] =new Player(amountOfPieceTypes,player2PieceTypes,maxAmountOfPlayerPieces);
-  
-  string start[] = {BGREEN " ",BLIME " "};
-  string end = " " RESET;
+  player1PieceTypes[0] = "\033[37m◎";
+  player2PieceTypes[0] = "\033[30m◎";
+  this->players[0] =new Player(amountOfPieceTypes,player1PieceTypes,maxAmountOfPlayerPieces);
+  this->players[1] =new Player(amountOfPieceTypes,player2PieceTypes,maxAmountOfPlayerPieces);
+  string start[] = {"\033[48;5;2m ","\033[48;5;10m "};
+  string end = " \033[0m";
 
   int identifier = 0;
 
@@ -31,7 +27,6 @@ Reversi::Reversi():Game(2, 8, 8)  {
     // Switch identifier
     identifier = (identifier+1)%2;
   }
-  
   grid[3][3].addPiece(0,players[0]->addPiece());
   grid[4][4].addPiece(0,players[0]->addPiece());
   grid[3][4].addPiece(1,players[1]->addPiece());
@@ -39,9 +34,14 @@ Reversi::Reversi():Game(2, 8, 8)  {
 }
 
 Reversi::~Reversi() {
+  for(int i=0; i<rows; i++) {
+    delete [] grid[i];
+  }
+  delete [] grid;
+  delete [] players;
 }
 
-void Reversi::drawScreen() {
+void Reversi::drawScreen() const {
   clearScreen();
   cout << "Player " << (currentPlayer+1) << " it is your go\n\n  ";
   for(int i=0; i<rows; i++) cout << " " << i << " ";
@@ -58,7 +58,7 @@ void Reversi::drawScreen() {
   cout << "\n";
 }
 
-int Reversi::getPoint(string message, int range) {
+int Reversi::getPoint(string message, int range) const {
   int point=0;
   while(true) {
     cout << message;
@@ -80,13 +80,13 @@ int Reversi::getPoint(string message, int range) {
     return point;
   }
 }
-bool Reversi::isLegal(Coordinate* current,int iOffset,int jOffset) {
+bool Reversi::isLegal(Coordinate* current,int iOffset,int jOffset) const {
   //Ensure that the next square lies inside the bounds of the board
   return((current->x + jOffset < columns)&&(current->x + jOffset >= 0))
         &&(current->y + iOffset < rows)&&(current->y + iOffset >= 0)
         &&(iOffset != 0 || jOffset != 0);
 }
-bool Reversi::flanks(Coordinate* current) {
+bool Reversi::flanks(Coordinate* current) const {
   bool count=false;
   bool count2=false;
   Square* orbit;
@@ -104,7 +104,7 @@ bool Reversi::flanks(Coordinate* current) {
   }
   return count2;
 }
-bool Reversi::checkLine(Coordinate current,int rowOffset,int columnOffset) {
+bool Reversi::checkLine(Coordinate current,int rowOffset,int columnOffset) const {
   bool test=false;
   int xCor=current.x;
   int yCor=current.y;
@@ -152,10 +152,10 @@ bool Reversi::getMove() {
   return true;
 }
 
-int Reversi::isOver() {
+int Reversi::isOver() const {
   return false;
 }
-int Reversi::getOpposition() {
+int Reversi::getOpposition() const {
   return (currentPlayer+1)%amountOfPlayers;
 }
 bool Reversi::executeMove(Square* sourceSquare,Square* destinationSquare) {

@@ -139,7 +139,7 @@ SnakesAndLadders::~SnakesAndLadders() {
 }
 
 /// Prints out the board, players, snakes and ladders.
-void SnakesAndLadders::drawScreen() {
+void SnakesAndLadders::drawScreen() const {
   clearScreen();
 
   cout << "Player " << (currentPlayer+1) << " it is your go\n\n";
@@ -179,7 +179,7 @@ void SnakesAndLadders::drawScreen() {
 }
 
 /// Prints a snake and ladder at coordinates x,y.
-bool SnakesAndLadders::printSnakeLadder(int x, int y) {
+bool SnakesAndLadders::printSnakeLadder(int x, int y) const {
   int max = amountOfPlayers+amountOfSystemItems;
   for(int systemPlayer=amountOfPlayers; systemPlayer<max; systemPlayer++) {
     if(grid[y][x].hasPieceOwnedBy(systemPlayer)) {
@@ -192,12 +192,12 @@ bool SnakesAndLadders::printSnakeLadder(int x, int y) {
 }
 
 /// Generate a random number between 1 and 6.
-int SnakesAndLadders::rollDice() {
+int SnakesAndLadders::rollDice() const{
   return (int)rand() % 6 + 1;
 }
 
 /// Check if square with identifier 100 is occupied.
-int SnakesAndLadders::isOver() {
+int SnakesAndLadders::isOver() const {
   return squareRefs[99]->hasPiece() ? 1 : 0;
 }
 
@@ -248,7 +248,7 @@ bool SnakesAndLadders::getMove() {
 }
 
 /// Moves the piece on srcSquare to destSquare.
-bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) {
+bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) const {
 
   // Check if the square has a snake or ladder.
   if(destSquare->hasPieceOwnedBy(2)) {
@@ -272,6 +272,6 @@ bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) {
 }
 
 /// Converts an square identifier to a coordinate.
-Coord SnakesAndLadders::squareToCoordinate(int position) {
+Coord SnakesAndLadders::squareToCoordinate(int position) const {
   return squareRefs[position-1]->getPosition();
 }

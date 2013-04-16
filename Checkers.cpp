@@ -58,7 +58,7 @@ Checkers::Checkers():Game(2, 8, 8) {
 }
 
 /// Prints out the board and all the players pieces.
-void Checkers::drawScreen() {
+void Checkers::drawScreen() const {
   clearScreen();
   cout << "Player " << (currentPlayer+1) << " it is your go\n\n  ";
   for(int i=0; i<rows; i++) cout << " " << i << " ";
@@ -76,7 +76,7 @@ void Checkers::drawScreen() {
 }
 
 /// Prompts with message to get a point between 0 and range.
-int Checkers::getPoint(string message, int range) {
+int Checkers::getPoint(string message, int range) const {
   int point=0;
   while(true) {
     cout << message;
@@ -209,12 +209,12 @@ bool Checkers::getMove() {
 }
 
 /// Returns the opposition.
-int Checkers::getOpposition() {
+int Checkers::getOpposition() const {
   return (currentPlayer+1)%amountOfPlayers;
 }
 
 /// Checks if either of the players no longer have pieces.
-int Checkers::isOver() {
+int Checkers::isOver() const {
   return players[currentPlayer]->getAmountOfPieces() == 0 ? 1 : 0;
 }
 

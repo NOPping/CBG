@@ -10,10 +10,10 @@ class Checkers : public Game {
   private:
     
     /// Returns the opposition.
-    int   getOpposition();
+    int   getOpposition() const;
     
     /// Prompts with message to get a point between 0 and range.
-    int   getPoint(string message, int range);
+    int   getPoint(string message, int range) const;
     
     /// Calls getPoint twice to get a source square and destination square
     /// Validates the move and passes the source square and destination square
@@ -29,10 +29,10 @@ class Checkers : public Game {
                       Square* toJump);
     
     /// Prints out the board and all the players pieces.
-    void  drawScreen();
+    void  drawScreen() const;
     
     /// Checks if either of the players no longer have pieces.
-    int   isOver();
+    int   isOver() const;
     
   public:
     Checkers();

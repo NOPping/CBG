@@ -37,16 +37,16 @@ class Game {
       const int rows;
       
       /// Clears the terminal window.
-      void clearScreen();
+      void clearScreen() const;
       
       /// Gets input from the player detailing which move they wish to make
       virtual bool getMove() = 0;
       
       /// Draws out the board as required.
-      virtual void drawScreen() = 0;
+      virtual void drawScreen() const = 0;
       
       /// Defines whether or not the game is over.
-      virtual int isOver() = 0;
+      virtual int isOver() const =0;
 
     public:
       Game(const int amountOfPlayers, const int columns, const int rows);      
