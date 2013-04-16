@@ -58,13 +58,13 @@ int main() {
     games[0] =  new Checkers();
     games[1] =  new ConnectFour();
     games[2] =  new SnakesAndLadders();
-    // games[4] =  new Reversi();
+    games[4] =  new Reversi();
     cout << "\nInsert the number of the game you wish to play: ";
     cin >> selection;
     cin.clear();
     cin.ignore(10000,'\n');
     // Ensure that the selection is valid.
-    if(selection > 0 && selection < 4) {
+    if(selection > 0 && selection < 5) {
       validSelection = true;
       // Launch selected game.
       games[selection-1]->start();
