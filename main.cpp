@@ -20,7 +20,7 @@ void border(int);
 int main() {
   int selection=0;
 
-  string games[] = {
+  string gamesTitles[] = {
     "1) Checkers",
     "2) ConnectFour",
     "3) Snakes and Ladders",
@@ -47,16 +47,16 @@ int main() {
   cout << RESET "\n";
   // Print out the titles of each game.
   for(int i=0; i<4; i++) {
-    cout << games[i] << "\n";
+    cout << gamesTitles[i] << "\n";
   }
   cout << FRED "\n";
+  const int numberOfGames = 4;
+  vector <Game*> games(numberOfGames);
   border(80);
   cout << RESET;
   bool validSelection = false;
   while(!validSelection) {
     // Create a vector of pointers to hold the locations of each game.
-    const int numberOfGames = 4;
-    vector <Game*> games(numberOfGames);
     games[0] =  new Checkers();
     games[1] =  new ConnectFour();
     games[2] =  new SnakesAndLadders();
