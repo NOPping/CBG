@@ -24,6 +24,7 @@ private:
   int         checkNext(Square* next,int nextRowOffset,int nextColumnOffset) const;
 public:
   ConnectFour();
+  ~ConnectFour();
 };
 
 #endif

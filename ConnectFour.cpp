@@ -33,7 +33,12 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   }
 }
 
-void ConnectFour::drawScreen() {
+/// Deconstructor for Connect Four
+ConnectFour::~ConnectFour() {
+   
+}
+
+void ConnectFour::drawScreen() const {
   clearScreen();
   cout << "Player " << (currentPlayer+1) << " it is your go\n";
   cout << "\n";
@@ -55,17 +60,17 @@ void ConnectFour::drawScreen() {
   cout << "\n";
 }
 
-int ConnectFour::isOver() {
+int ConnectFour::isOver() const {
   return state;
 }
 
-int ConnectFour::isOver(Square* current) {
+int ConnectFour::isOver(Square* current) const {
   if(fourInRow(current)) return 1;
   else if (topRowFull()) return 2;
   else return 0;
 }
 
-bool ConnectFour::fourInRow(Square* current) {
+bool ConnectFour::fourInRow(Square* current) const {
   Coordinate currentPosition = current->getPosition();
   //Test each side of the current square.
   for(int iOffset = -1; iOffset <= 1; iOffset++)  {
@@ -83,7 +88,7 @@ bool ConnectFour::fourInRow(Square* current) {
   return false;
 }
 
-int ConnectFour::checkNext(Square* current,int iOffset,int jOffset) {
+int ConnectFour::checkNext(Square* current,int iOffset,int jOffset) const {
   if(current->hasPieceOwnedBy(currentPlayer)) {
     if(isLegal(current, iOffset, jOffset)) {
       Coordinate currentPos = current->getPosition();
@@ -100,7 +105,7 @@ int ConnectFour::checkNext(Square* current,int iOffset,int jOffset) {
 }
 
 
-bool ConnectFour::isLegal(Square* current,int iOffset,int jOffset) {
+bool ConnectFour::isLegal(Square* current,int iOffset,int jOffset) const {
   Coordinate currentPos = current->getPosition();
   //Ensure that the next square lies inside the bounds of the board
   return((currentPos.x + jOffset < columns)&&(currentPos.x + jOffset >= 0))
@@ -152,7 +157,7 @@ bool ConnectFour::executeMove(int x) {
   return true;
 }
 
-bool ConnectFour::topRowFull() {
+bool ConnectFour::topRowFull() const {
   for(int currentColumn = 0; currentColumn < columns; currentColumn++) {
     //If this coloumn isn't full return false because top row isn't full
     if(columnSpace[currentColumn] != rows) {
