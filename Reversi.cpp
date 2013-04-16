@@ -153,14 +153,13 @@ bool Reversi::getMove() {
 }
 
 int Reversi::isOver() {
-  //return players[currentPlayer]->getAmountOfPieces() == 0 ? 1 : 0
   return false;
 }
 int Reversi::getOpposition() {
   return (currentPlayer+1)%amountOfPlayers;
 }
 bool Reversi::executeMove(Square* sourceSquare,Square* destinationSquare) {
-  // Move the piece from sourceSquare to destinationSquare
+  // Not implemented yet
   destinationSquare->addPiece(currentPlayer,
                               sourceSquare->getPiece(currentPlayer));
   sourceSquare->removePiece(currentPlayer);
