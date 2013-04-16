@@ -11,17 +11,43 @@ using std::vector;
 
 class ConnectFour : public Game {
 private:
-  bool isLegal(const Square& current,int nextRowOffset,int nextColumnOffset) const;
+  /// Function to test if the next square is legal.
+  bool isLegal(const Square& current,int yOffset,int xOffset) const;
+
+  /// Int to storee the current state of the game.
   int  state;
+
+  /// Function to request a move from the user and read it in
+  /// Pass move to executeMove().
   bool getMove();
+
+  /// Function to print out the board.
   void drawScreen() const;
+
+  /// Function to return weather or not the game is over or not.
   int  isOver() const;
+
+  /// Overloaded function to to return weather or not the game 
+  /// is over or not.
   int  isOver(const Square& current) const;
+
+  /// Function to test the top row of the board and see if every
+  /// square has a piece on it.
   bool topRowFull() const;
+
+  /// Function to test if four player pieces lie in a row.
   bool fourInRow(const Square& current) const;
-  bool executeMove(int destinationX);
+
+  /// Function to take a column and move a piece to the next 
+  /// available slot in that column.
+  bool executeMove(int x);
+
+  /// Vector to hold how much pieces lie in each column.
   vector<int> columnSpace;
-  int  checkNext(const Square& next,int nextRowOffset,int nextColumnOffset) const;
+
+  /// recursive function to check the next square to see if it has a piece 
+  /// owned by current player if square lies in the bounds of the board.
+  int  checkNext(const Square& next,int yOffset,int xOffset) const;
 public:
   ConnectFour();
   ~ConnectFour();
