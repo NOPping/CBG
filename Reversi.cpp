@@ -4,16 +4,20 @@ using std::cin;
 using std::string;
 using std::vector;
 Reversi::Reversi():Game(2, 8, 8)  {
-  int amountOfPieceTypes= 1;
-  int maxAmountOfPlayerPieces = 64;
+  const int amountOfPieceTypes= 1;
+  const int maxAmountOfPlayerPieces = 64;
+  
   vector<string> player1PieceTypes(amountOfPieceTypes);
   vector<string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = "\033[37m◎";
-  player2PieceTypes[0] = "\033[30m◎";
-  this->players[0] =new Player(amountOfPieceTypes,player1PieceTypes,maxAmountOfPlayerPieces);
-  this->players[1] =new Player(amountOfPieceTypes,player2PieceTypes,maxAmountOfPlayerPieces);
-  string start[] = {"\033[48;5;2m ","\033[48;5;10m "};
-  string end = " \033[0m";
+  
+  player1PieceTypes[0] = FWHITE "◎";
+  player2PieceTypes[0] = FBLACK "◎";
+  
+  players[0] =new Player(amountOfPieceTypes,player1PieceTypes,maxAmountOfPlayerPieces);
+  players[1] =new Player(amountOfPieceTypes,player2PieceTypes,maxAmountOfPlayerPieces);
+  
+  string start[] = {BGREEN " ",BLIME " "};
+  string end = " " RESET;
 
   int identifier = 0;
 
@@ -27,6 +31,7 @@ Reversi::Reversi():Game(2, 8, 8)  {
     // Switch identifier
     identifier = (identifier+1)%2;
   }
+  
   grid[3][3].addPiece(0,players[0]->addPiece());
   grid[4][4].addPiece(0,players[0]->addPiece());
   grid[3][4].addPiece(1,players[1]->addPiece());
@@ -34,11 +39,6 @@ Reversi::Reversi():Game(2, 8, 8)  {
 }
 
 Reversi::~Reversi() {
-  for(int i=0; i<rows; i++) {
-    delete [] grid[i];
-  }
-  delete [] grid;
-  delete [] players;
 }
 
 void Reversi::drawScreen() {

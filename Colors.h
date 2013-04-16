@@ -18,7 +18,8 @@
   #define BVIOLET  "\033[48;5;61m"
   #define BBLUE    "\033[48;5;33m"
   #define BCYAN    "\033[48;5;37m"
-  #define BGREEN   "\033[48;5;64m"
+  #define BGREEN   "\033[48;5;28m"
+  #define BLIME    "\033[48;5;40m"
 
 
   // FOREGROUND COLORS
@@ -32,7 +33,9 @@
   #define FVIOLET  "\033[38;5;61m"
   #define FBLUE    "\033[38;5;33m"
   #define FCYAN    "\033[38;5;37m"
-  #define FGREEN   "\033[38;5;64m"
+  #define FGREEN   "\033[38;5;28m"
+  #define FLIME    "\033[38;5;40m"
+
 
 #else
 
@@ -52,6 +55,7 @@
   #define BBLUE    ""
   #define BCYAN    ""
   #define BGREEN   ""
+  #define BLIME    ""
 
 
   // FOREGROUND COLORS
@@ -66,5 +70,6 @@
   #define FBLUE    ""
   #define FCYAN    ""
   #define FGREEN   ""
+  #define FLIME    ""
 
 #endif
