@@ -64,14 +64,14 @@ int ConnectFour::isOver() const {
   return state;
 }
 
-int ConnectFour::isOver(Square* current) const {
+int ConnectFour::isOver(const Square& current) const {
   if(fourInRow(current)) return 1;
   else if (topRowFull()) return 2;
   else return 0;
 }
 
-bool ConnectFour::fourInRow(Square* current) const {
-  Coordinate currentPosition = current->getPosition();
+bool ConnectFour::fourInRow(const Square& current) const {
+  Coordinate currentPosition = current.getPosition();
   //Test each side of the current square.
   for(int iOffset = -1; iOffset <= 1; iOffset++)  {
     for(int jOffset = -1; jOffset <= 1; jOffset++) {
@@ -88,13 +88,13 @@ bool ConnectFour::fourInRow(Square* current) const {
   return false;
 }
 
-int ConnectFour::checkNext(Square* current,int iOffset,int jOffset) const {
-  if(current->hasPieceOwnedBy(currentPlayer)) {
+int ConnectFour::checkNext(const Square& current,int iOffset,int jOffset) const {
+  if(current.hasPieceOwnedBy(currentPlayer)) {
     if(isLegal(current, iOffset, jOffset)) {
-      Coordinate currentPos = current->getPosition();
+      Coordinate currentPos = current.getPosition();
       //Get the next square in the row by adding the offsets to there
       //cooresponding x/y values in the Coordinate class.
-      Square* next = &grid[currentPos.y + iOffset][currentPos.x + jOffset];
+      Square& next = grid[currentPos.y + iOffset][currentPos.x + jOffset];
       //Return 1 for the current piece plus check the next square and add it on.
       return 1 + checkNext(next, iOffset, jOffset);
     }
@@ -105,8 +105,8 @@ int ConnectFour::checkNext(Square* current,int iOffset,int jOffset) const {
 }
 
 
-bool ConnectFour::isLegal(Square* current,int iOffset,int jOffset) const {
-  Coordinate currentPos = current->getPosition();
+bool ConnectFour::isLegal(const Square& current,int iOffset,int jOffset) const {
+  Coordinate currentPos = current.getPosition();
   //Ensure that the next square lies inside the bounds of the board
   return((currentPos.x + jOffset < columns)&&(currentPos.x + jOffset >= 0))
         &&(currentPos.y + iOffset < rows)&&(currentPos.y + iOffset >= 0)
@@ -153,7 +153,7 @@ bool ConnectFour::executeMove(int x) {
   int y = rows - columnSpace[x];
   grid[y][x].addPiece(currentPlayer,players[currentPlayer]->addPiece());
   //Update the state variable
-  state = isOver(&grid[y][x]);
+  state = isOver(grid[y][x]);
   return true;
 }
 

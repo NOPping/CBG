@@ -57,7 +57,7 @@ class Square {
       bool removePiece(int player);
       
       /// Returns whether or not the square has a piece owned by player on it.
-      bool hasPieceOwnedBy(int player);
+      bool hasPieceOwnedBy(int player) const;
       
       /// Returns the start string of a square.
       string getStart();
@@ -69,7 +69,7 @@ class Square {
       Piece* getPiece(int player);
       
       /// Returns the position of the square.
-      Coordinate getPosition();
+      Coordinate getPosition() const;
 };
 
 #endif
