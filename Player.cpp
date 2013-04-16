@@ -26,7 +26,7 @@ bool Player::hasType(int type) const {
   }
 }
 
-Piece* Player::addPiece() {
+Piece& Player::addPiece() {
   Piece* piece = 0;
   if(amountOfPieces < maxPieces) {
     // Add new piece to vector, pass in this player.
@@ -34,11 +34,11 @@ Piece* Player::addPiece() {
     piece = pieces[amountOfPieces];
     amountOfPieces++;
   }
-  return piece;
+  return *piece;
 }
 
 // / Only used by snakes and ladders
-Piece* Player::addPiece(Piece* insert) {
+Piece& Player::addPiece(Piece* insert) {
   Piece* piece = 0;
   if(amountOfPieces < maxPieces) {
     // Add insert to pieces vector
@@ -46,7 +46,7 @@ Piece* Player::addPiece(Piece* insert) {
     piece = pieces[amountOfPieces];
     amountOfPieces++;
   }
-  return piece;
+  return *piece;
 }
 
 bool Player::removePiece() {
@@ -64,13 +64,13 @@ int Player::getAmountOfPieces() const {
   return amountOfPieces;
 }
 
-Piece* Player::getPiece(int index) const {
+Piece& Player::getPiece(int index) const {
   Piece* piece = 0;
   // If index is valid get the piece
   if(index >= 0 && index < maxPieces) {
     piece = pieces[index];
   }
-  return piece;
+  return *piece;
 }
 
 Player::~Player() {

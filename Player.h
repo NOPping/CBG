@@ -47,11 +47,11 @@ class Player {
       string getCharacter(int type) const;
       
       /// Add pieces to the pieces vector.
-      Piece* addPiece();
-      Piece* addPiece(Piece* insert);
+      Piece& addPiece();
+      Piece& addPiece(Piece* insert);
       
       /// Returns a pointer to the piece in the pieces vector at index index
-      Piece* getPiece(int index) const;
+      Piece& getPiece(int index) const;
       
       /// Return weather this player can move or not
       bool suspended;

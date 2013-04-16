@@ -81,8 +81,8 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   // Add the players to the starting square.
   Piece* player1Piece = new SrcPiece(*players[0],Coord(0,9));
   Piece* player2Piece = new SrcPiece(*players[1],Coord(0,9));
-  squareRefs[0]->addPiece(0,*(players[0]->addPiece(player1Piece)));
-  squareRefs[0]->addPiece(1,*(players[1]->addPiece(player2Piece)));
+  squareRefs[0]->addPiece(0, players[0]->addPiece(player1Piece));
+  squareRefs[0]->addPiece(1, players[1]->addPiece(player2Piece));
 
   Coord snakes[maxSystemPieces/2][2] = {
     {squareToCoordinate(20),squareToCoordinate(17)},
@@ -206,7 +206,7 @@ int SnakesAndLadders::isOver() const {
 bool SnakesAndLadders::getMove() {
   // Setup a pointer to the current player and the square they are on.
   SLPlayer* player = dynamic_cast<SLPlayer*>(players[currentPlayer]);
-  Coord current = dynamic_cast<SrcPiece*>(player->getPiece(0))->getSource();
+  Coord current = dynamic_cast<SrcPiece&>(player->getPiece(0)).getSource();
   Square* srcSquare = &grid[current.y][current.x];
 
   // Prompt the user to roll.
