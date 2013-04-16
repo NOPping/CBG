@@ -18,7 +18,7 @@ class SnakesAndLadders : public Game {
     /// Generate a random number between 1 and 6.
     int rollDice();
 
-    /// Calls rollRice() and calculates the destination square
+    /// Calls rollDice() and calculates the destination square
     /// Passes these too executeMove().
     bool getMove();
 
