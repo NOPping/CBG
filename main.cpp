@@ -55,7 +55,8 @@ int main() {
   bool validSelection = false;
   while(!validSelection) {
     // Create a vector of pointers to hold the locations of each game.
-    vector <Game*> games(4);
+    const int numberOfGames = 4;
+    vector <Game*> games(numberOfGames);
     games[0] =  new Checkers();
     games[1] =  new ConnectFour();
     games[2] =  new SnakesAndLadders();
@@ -65,13 +66,16 @@ int main() {
     cin.clear();
     cin.ignore(10000,'\n');
     // Ensure that the selection is valid.
-    if(selection > 0 && selection < 5) {
+    if(selection > 0 && selection <= numberOfGames) {
       validSelection = true;
       // Launch selected game.
       games[selection-1]->start();
     } else {
       cout << "\nInvalid Selection";
     }
+  }
+  for(int i=0; i< numberOfGames; i++) {
+    delete games[i];
   }
   return 0;
 }
