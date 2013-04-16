@@ -1,3 +1,7 @@
+/// Player
+/// @author Ian Duffy
+/// @author Darren Brogan
+
 #ifndef PLAYER_H
 #define PLAYER_H
 

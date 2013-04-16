@@ -1,3 +1,7 @@
+/// Player
+/// @author Ian Duffy
+/// @author Darren Brogan
+
 #include "Player.h"
 #include "Piece.h"
 
