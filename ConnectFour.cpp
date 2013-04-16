@@ -151,7 +151,7 @@ bool ConnectFour::executeMove(int x) {
   //Get the y destination of the piece to be added bytaking the
   //amount of pieces in the column from the total
   int y = rows - columnSpace[x];
-  grid[y][x].addPiece(currentPlayer,players[currentPlayer]->addPiece());
+  grid[y][x].addPiece(currentPlayer,*(players[currentPlayer]->addPiece()));
   //Update the state variable
   state = isOver(grid[y][x]);
   return true;

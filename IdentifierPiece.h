@@ -12,7 +12,7 @@ class IdentifierPiece : virtual public Piece {
     int identifier;
     
   public:
-    IdentifierPiece(Player* owner, int identifier);
+    IdentifierPiece(Player& owner, int identifier);
     
     /// Override the print function to include the identifier.
     virtual void print(ostream& os) const;

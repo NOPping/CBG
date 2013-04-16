@@ -12,7 +12,7 @@
 
 class SystemPiece : public SourcePiece, public DestinationPiece, public IdentifierPiece {    
   public:
-    SystemPiece(Player* owner, Coordinate source, Coordinate destination,
+    SystemPiece(Player& owner, Coordinate source, Coordinate destination,
                 int identifier);
 };
 

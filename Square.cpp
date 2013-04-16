@@ -22,12 +22,11 @@ bool Square::hasPiece() {
 }
 
 /// Adds a piece to the square.
-bool Square::addPiece(int player, Piece* piece) {
+bool Square::addPiece(int player, Piece& piece) {
   if(player < amountOfPlayers
       && numberOfOccupants != amountOfPlayers
-      && piece != 0
     ) {
-    pieces[player] = piece;
+    pieces[player] = &piece;
     numberOfOccupants++;
     return true;
   }
@@ -60,8 +59,8 @@ bool Square::hasPieceOwnedBy(int player) const {
 }
 
 
-Piece* Square::getPiece(int player) {
-  return pieces[player];
+Piece& Square::getPiece(int player) {
+  return *(pieces[player]);
 }
 
 /// Returns the start string of a square.

@@ -30,7 +30,7 @@ Piece* Player::addPiece() {
   Piece* piece = 0;
   if(amountOfPieces < maxPieces) {
     // Add new piece to vector, pass in this player.
-    pieces[amountOfPieces] = new Piece(this);
+    pieces[amountOfPieces] = new Piece(*this);
     piece = pieces[amountOfPieces];
     amountOfPieces++;
   }

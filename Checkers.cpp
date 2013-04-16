@@ -41,11 +41,11 @@ Checkers::Checkers():Game(2, 8, 8) {
       if(identifier == 1) {
         // Add a black piece if its a black square and on the first 3 rows
         if(i<3) {
-          grid[i][j].addPiece(0,players[0]->addPiece());
+          grid[i][j].addPiece(0,*(players[0]->addPiece()));
         }
         // Add a white piece if its a black square and on the last 3 rows
         else if(i>4) {
-          grid[i][j].addPiece(1,players[1]->addPiece());
+          grid[i][j].addPiece(1,*(players[1]->addPiece()));
         }
       }
 
@@ -167,7 +167,7 @@ bool Checkers::getMove() {
 
   int xvalidator = abs(sourceCoordinate.x-destinationCoordinate.x);
   int yvalidator = destinationCoordinate.y-sourceCoordinate.y;
-  bool isKing = (sourceSquare->getPiece(currentPlayer)->getType() == 1);
+  bool isKing = (sourceSquare->getPiece(currentPlayer).getType() == 1);
 
   // Check for standard move.
   if(xvalidator==1) {
@@ -227,9 +227,9 @@ bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
 
   // Check if a piece needs to be kinged.
   if(currentPlayer==0 && destinationSquare->getPosition().y == columns-1) {
-    destinationSquare->getPiece(currentPlayer)->setType(1);
+    destinationSquare->getPiece(currentPlayer).setType(1);
   } else if(currentPlayer==1 && destinationSquare->getPosition().y == 0) {
-    destinationSquare->getPiece(currentPlayer)->setType(1);
+    destinationSquare->getPiece(currentPlayer).setType(1);
   }
 
   // Switch Player.

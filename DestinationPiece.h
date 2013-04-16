@@ -12,7 +12,7 @@ class DestinationPiece : virtual public Piece {
     Coordinate destination;
     
   public:
-    DestinationPiece(Player* owner, Coordinate destination);
+    DestinationPiece(Player& owner, Coordinate destination);
     
     /// Returns the destination
     Coordinate getDestination();

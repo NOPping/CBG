@@ -10,13 +10,13 @@ Piece::Piece() {
   this->type = 0;
 }
 
-Piece::Piece(Player* owner) {
-  this->owner = owner;
+Piece::Piece(Player& owner) {
+  this->owner = &owner;
   this->type = 0;
 }
 
 Piece::~Piece() {
-  delete owner;
+  
 }
 
 int Piece::getType() {
@@ -25,7 +25,7 @@ int Piece::getType() {
 
 /// Sets the type of piece.
 bool Piece::setType(int type) {
-  if((*owner).hasType(type)) {
+  if(owner->hasType(type)) {
     this->type = type;
     return true;
   } else {

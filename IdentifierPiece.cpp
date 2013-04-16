@@ -3,7 +3,7 @@
 
 #include "IdentifierPiece.h"
 
-IdentifierPiece::IdentifierPiece(Player* owner, int identifier)
+IdentifierPiece::IdentifierPiece(Player& owner, int identifier)
 : Piece(owner) {
   this->identifier = identifier;
 }

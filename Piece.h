@@ -19,8 +19,7 @@ class Piece {
 
     public:
       Piece();
-      Piece(Player* owner);
-      Piece(Player* owner, int type);
+      Piece(Player& owner);
       virtual ~Piece();
       
       /// Returns the type of piece.

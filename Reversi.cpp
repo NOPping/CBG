@@ -27,10 +27,10 @@ Reversi::Reversi():Game(2, 8, 8)  {
     // Switch identifier
     identifier = (identifier+1)%2;
   }
-  grid[3][3].addPiece(0,players[0]->addPiece());
-  grid[4][4].addPiece(0,players[0]->addPiece());
-  grid[3][4].addPiece(1,players[1]->addPiece());
-  grid[4][3].addPiece(1,players[1]->addPiece());
+  grid[3][3].addPiece(0,*(players[0]->addPiece()));
+  grid[4][4].addPiece(0,*(players[0]->addPiece()));
+  grid[3][4].addPiece(1,*(players[1]->addPiece()));
+  grid[4][3].addPiece(1,*(players[1]->addPiece()));
 }
 
 Reversi::~Reversi() {
@@ -96,7 +96,7 @@ bool Reversi::flanks(Coordinate* current) const {
         orbit = &grid[current->y + rowOffset][current->x + columnOffset];
         if(orbit->hasPieceOwnedBy((currentPlayer+1)%2)&&orbit!=0) {
           Coordinate beside=orbit->getPosition();
-          count= 	checkLine(beside,rowOffset,columnOffset);
+          count= checkLine(beside,rowOffset,columnOffset);
         }
       }
       if(count)count2=true;
@@ -122,7 +122,7 @@ bool Reversi::checkLine(Coordinate current,int rowOffset,int columnOffset) const
       yCor-=rowOffset;
       Square* next = &grid[yCor][xCor];
       if (next->hasPiece())next->removePiece((currentPlayer+1)%2);
-      next->addPiece(currentPlayer,players[currentPlayer]->addPiece());
+      next->addPiece(currentPlayer,*(players[currentPlayer]->addPiece()));
     }
   }
   return test;
@@ -145,7 +145,7 @@ bool Reversi::getMove() {
     }
     if(flanks(&destinationCoordinate)) {
       test=false;
-      destinationSquare->addPiece(currentPlayer,players[currentPlayer]->addPiece());
+      destinationSquare->addPiece(currentPlayer,*(players[currentPlayer]->addPiece()));
     } else cout<<"\nDoes not flank opponent piece\n";
   }
   currentPlayer = (currentPlayer + 1) % 2;

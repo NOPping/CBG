@@ -12,7 +12,7 @@ class SourcePiece : virtual public Piece {
     Coordinate source;
     
   public:
-    SourcePiece(Player* owner, Coordinate source);
+    SourcePiece(Player& owner, Coordinate source);
     
     /// Returns the source.
     Coordinate getSource();

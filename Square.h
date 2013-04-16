@@ -51,7 +51,7 @@ class Square {
       bool hasPiece();
       
       /// Adds a piece to the square.
-      bool addPiece(int Player, Piece* piece);
+      bool addPiece(int Player, Piece& piece);
       
       /// Removes a piece from the square.
       bool removePiece(int player);
@@ -66,7 +66,7 @@ class Square {
       string getEnd();
       
       /// Returns the piece on the square owned by player.
-      Piece* getPiece(int player);
+      Piece& getPiece(int player);
       
       /// Returns the position of the square.
       Coordinate& getPosition() const;
