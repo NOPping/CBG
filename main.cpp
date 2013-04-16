@@ -19,8 +19,16 @@ void border(int);
 /// Prints out a menu of the games available.
 int main() {
   int selection=0;
-
-  string games[] = {
+  const int numberOfGames = 4;
+  
+  vector <Game*> games(numberOfGames);
+  // Create a vector of pointers to hold the locations of each game.
+  games[0] =  new Checkers();
+  games[1] =  new ConnectFour();
+  games[2] =  new SnakesAndLadders();
+  games[3] =  new Reversi();
+  
+  string menu[] = {
     "1) Checkers",
     "2) ConnectFour",
     "3) Snakes and Ladders",
@@ -46,21 +54,14 @@ int main() {
   border(80);
   cout << RESET "\n";
   // Print out the titles of each game.
-  for(int i=0; i<4; i++) {
-    cout << games[i] << "\n";
+  for(int i=0; i<numberOfGames; i++) {
+    cout << menu[i] << "\n";
   }
   cout << FRED "\n";
   border(80);
   cout << RESET;
   bool validSelection = false;
   while(!validSelection) {
-    // Create a vector of pointers to hold the locations of each game.
-    const int numberOfGames = 4;
-    vector <Game*> games(numberOfGames);
-    games[0] =  new Checkers();
-    games[1] =  new ConnectFour();
-    games[2] =  new SnakesAndLadders();
-    games[3] =  new Reversi();
     cout << "\nInsert the number of the game you wish to play: ";
     cin >> selection;
     cin.clear();
@@ -74,9 +75,12 @@ int main() {
       cout << "\nInvalid Selection";
     }
   }
-  for(int i=0; i< numberOfGames; i++) {
-    delete games[i];
-  }
+  
+  //for(int i=0; i<numberOfGames; ++i) {
+   //delete games[i];
+  //}
+  games.clear();
+  
   return 0;
 }
 
