@@ -51,7 +51,7 @@ Piece* Player::addPiece(Piece* insert) {
 
 bool Player::removePiece() {
   if(amountOfPieces > 0) {
-    // Decrement amountOfPieces so the next piece added 
+    // Decrement amountOfPieces so the next piece added
     // will overwrite last piece
     amountOfPieces--;
     return true;
