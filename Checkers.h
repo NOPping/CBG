@@ -13,7 +13,7 @@ class Checkers : public Game {
     int   getOpposition() const;
     
     /// Prompts with message to get a point between 0 and range.
-    int   getPoint(string message, int range) const;
+    int   getPoint(const string message, const int range) const;
     
     /// Calls getPoint twice to get a source square and destination square
     /// Validates the move and passes the source square and destination square
@@ -21,12 +21,12 @@ class Checkers : public Game {
     bool  getMove();
     
     /// Moves the piece on source square to destination square.
-    bool  executeMove(Square* sourceSquare,Square* destinationSquare);
+    bool  executeMove(Square& srcSquare,Square& destSquare);
     
     /// Moves the piece on source square to destination square and deletes
     /// the piece on the to jump square.
-    bool  executeMove(Square* sourceSquare,Square* destinationSquare,
-                      Square* toJump);
+    bool  executeMove(Square& srcSquare,Square& destSquare,
+                      Square& toJump);
     
     /// Prints out the board and all the players pieces.
     void  drawScreen() const;

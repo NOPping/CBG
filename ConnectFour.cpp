@@ -35,7 +35,7 @@ ConnectFour::ConnectFour():Game(2,7,6) {
 
 /// Deconstructor for Connect Four
 ConnectFour::~ConnectFour() {
-   
+
 }
 
 void ConnectFour::drawScreen() const {
@@ -109,8 +109,8 @@ bool ConnectFour::isLegal(const Square& current,int iOffset,int jOffset) const {
   Coordinate& currentPos = current.getPosition();
   //Ensure that the next square lies inside the bounds of the board
   return((currentPos.x + jOffset < columns)&&(currentPos.x + jOffset >= 0))
-        &&(currentPos.y + iOffset < rows)&&(currentPos.y + iOffset >= 0)
-        &&(iOffset != 0 || jOffset != 0);
+  &&(currentPos.y + iOffset < rows)&&(currentPos.y + iOffset >= 0)
+  &&(iOffset != 0 || jOffset != 0);
 }
 
 bool ConnectFour::getMove() {

@@ -16,7 +16,7 @@ Piece::Piece(Player& owner) {
 }
 
 Piece::~Piece() {
-  
+
 }
 
 int Piece::getType() {

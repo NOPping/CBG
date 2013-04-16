@@ -192,7 +192,7 @@ bool SnakesAndLadders::printSnakeLadder(int x, int y) const {
 }
 
 /// Generate a random number between 1 and 6.
-int SnakesAndLadders::rollDice() const{
+int SnakesAndLadders::rollDice() const {
   return (int)rand() % 6 + 1;
 }
 

@@ -83,8 +83,8 @@ int Reversi::getPoint(string message, int range) const {
 bool Reversi::isLegal(Coordinate* current,int iOffset,int jOffset) const {
   //Ensure that the next square lies inside the bounds of the board
   return((current->x + jOffset < columns)&&(current->x + jOffset >= 0))
-        &&(current->y + iOffset < rows)&&(current->y + iOffset >= 0)
-        &&(iOffset != 0 || jOffset != 0);
+  &&(current->y + iOffset < rows)&&(current->y + iOffset >= 0)
+  &&(iOffset != 0 || jOffset != 0);
 }
 bool Reversi::flanks(Coordinate* current) const {
   bool count=false;

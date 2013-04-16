@@ -10,10 +10,12 @@ using std::vector;
 
 Checkers::Checkers():Game(2, 8, 8) {
   // Setup the players.
-  int amountOfPieceTypes = 2;
-  int maxAmountOfPlayerPieces = 12;
+  const int amountOfPieceTypes = 2;
+  const int maxAmountOfPlayerPieces = 12;
+
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
+
   player1PieceTypes[0] = FRED "○";
   player1PieceTypes[1] = FRED "◎";
   player2PieceTypes[0] = FWHITE "○";
@@ -76,7 +78,7 @@ void Checkers::drawScreen() const {
 }
 
 /// Prompts with message to get a point between 0 and range.
-int Checkers::getPoint(string message, int range) const {
+int Checkers::getPoint(const string message, const int range) const {
   int point=0;
   while(true) {
     cout << message;
@@ -104,8 +106,8 @@ int Checkers::getPoint(string message, int range) const {
 /// Validates the move and passes the source square and destination square
 /// onto executeMove().
 bool Checkers::getMove() {
-  Coordinate sourceCoordinate, destinationCoordinate, jumpCoordinate;
-  Square *sourceSquare, *destinationSquare;
+  Coordinate srcCoordinate, destCoordinate, jumpCoordinate;
+  Square *srcSquare, *destSquare;
   int x,y;
 
   // Get input for the source square.
@@ -116,19 +118,19 @@ bool Checkers::getMove() {
                  columns);
 
     // Setup a coordinate for the given X and Y.
-    sourceCoordinate = Coordinate(x,y);
+    srcCoordinate = Coordinate(x,y);
 
     // Setup a pointer to the square at the given coordinate.
-    sourceSquare = &grid[sourceCoordinate.y][sourceCoordinate.x];
+    srcSquare = &grid[srcCoordinate.y][srcCoordinate.x];
 
     // Check that the square has a piece.
-    if(!sourceSquare->hasPiece()) {
+    if(!srcSquare->hasPiece()) {
       cout << "\nThe selected square doesn't contain a piece, try again\n";
       continue;
     }
 
     // Check that the piece in the square is currentPlayers.
-    if(!sourceSquare->hasPieceOwnedBy(currentPlayer)) {
+    if(!srcSquare->hasPieceOwnedBy(currentPlayer)) {
       cout << "\nThe selected square doesn't contain a piece owned by you,"
       << "try again\n";
       continue;
@@ -145,19 +147,19 @@ bool Checkers::getMove() {
                  columns);
 
     // Setup a coordinate for the given X and Y.
-    destinationCoordinate = Coordinate(x,y);
+    destCoordinate = Coordinate(x,y);
 
     // Setup a pointer to the square at the given coordinate.
-    destinationSquare = &grid[destinationCoordinate.y][destinationCoordinate.x];
+    destSquare = &grid[destCoordinate.y][destCoordinate.x];
 
     // Check that the destination square is not white.
-    if(destinationSquare->getIdentifier() == 0) {
+    if(destSquare->getIdentifier() == 0) {
       cout << "\nThe selected square is invalid, try again\n";
       continue;
     }
 
     // Check that the destination square is not occupied.
-    if(destinationSquare->hasPiece()) {
+    if(destSquare->hasPiece()) {
       cout << "\nThe selected square is occupied, try again\n";
       continue;
     }
@@ -165,27 +167,27 @@ bool Checkers::getMove() {
     break;
   }
 
-  int xvalidator = abs(sourceCoordinate.x-destinationCoordinate.x);
-  int yvalidator = destinationCoordinate.y-sourceCoordinate.y;
-  bool isKing = (sourceSquare->getPiece(currentPlayer).getType() == 1);
+  int xvalidator = abs(srcCoordinate.x-destCoordinate.x);
+  int yvalidator = destCoordinate.y-srcCoordinate.y;
+  bool isKing = (srcSquare->getPiece(currentPlayer).getType() == 1);
 
   // Check for standard move.
   if(xvalidator==1) {
     // Check if its a southwards move.
     if((currentPlayer == 0 || isKing) && (yvalidator == 1)) {
-      return executeMove(sourceSquare,destinationSquare);
+      return executeMove(*srcSquare,*destSquare);
     }
 
     // Check if its a northwards move.
     else if((currentPlayer == 1 || isKing) && (yvalidator == -1)) {
-      return executeMove(sourceSquare,destinationSquare);
+      return executeMove(*srcSquare,*destSquare);
     }
   }
 
   // Check for a jump.
   else if(xvalidator==2) {
-    x = (sourceCoordinate.x+destinationCoordinate.x)/2;
-    y = (sourceCoordinate.y+destinationCoordinate.y)/2;
+    x = (srcCoordinate.x+destCoordinate.x)/2;
+    y = (srcCoordinate.y+destCoordinate.y)/2;
     jumpCoordinate = Coordinate(x,y);
     Square* toJump = &grid[jumpCoordinate.y][jumpCoordinate.x];
 
@@ -193,12 +195,12 @@ bool Checkers::getMove() {
     if(toJump->hasPiece() && toJump->hasPieceOwnedBy(getOpposition())) {
 
       if((currentPlayer == 0 || isKing) && (yvalidator == 2)) {
-        return executeMove(sourceSquare,destinationSquare,toJump);
+        return executeMove(*srcSquare,*destSquare,*toJump);
       }
 
       // Check if its a northwards jump.
       else if((currentPlayer == 1 || isKing) && (yvalidator == -2)) {
-        return executeMove(sourceSquare,destinationSquare,toJump);
+        return executeMove(*srcSquare,*destSquare,*toJump);
       }
 
     }
@@ -219,17 +221,16 @@ int Checkers::isOver() const {
 }
 
 /// Moves the piece on source square to destination square.
-bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
-  // Move the piece from sourceSquare to destinationSquare.
-  destinationSquare->addPiece(currentPlayer,
-                              sourceSquare->getPiece(currentPlayer));
-  sourceSquare->removePiece(currentPlayer);
+bool Checkers::executeMove(Square& srcSquare,Square& destSquare) {
+  // Move the piece from srcSquare to destSquare.
+  destSquare.addPiece(currentPlayer,srcSquare.getPiece(currentPlayer));
+  srcSquare.removePiece(currentPlayer);
 
   // Check if a piece needs to be kinged.
-  if(currentPlayer==0 && destinationSquare->getPosition().y == columns-1) {
-    destinationSquare->getPiece(currentPlayer).setType(1);
-  } else if(currentPlayer==1 && destinationSquare->getPosition().y == 0) {
-    destinationSquare->getPiece(currentPlayer).setType(1);
+  if(currentPlayer==0 && destSquare.getPosition().y == columns-1) {
+    destSquare.getPiece(currentPlayer).setType(1);
+  } else if(currentPlayer==1 && destSquare.getPosition().y == 0) {
+    destSquare.getPiece(currentPlayer).setType(1);
   }
 
   // Switch Player.
@@ -239,9 +240,9 @@ bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare) {
 
 /// Moves the piece on source square to destination square and deletes
 /// the piece on the to jump square.
-bool Checkers::executeMove(Square* sourceSquare,Square* destinationSquare,
-                           Square* toJump) {
-  toJump->removePiece(getOpposition());
+bool Checkers::executeMove(Square& srcSquare,Square& destSquare,
+                           Square& toJump) {
+  toJump.removePiece(getOpposition());
   players[getOpposition()]->removePiece();
-  return executeMove(sourceSquare,destinationSquare);
+  return executeMove(srcSquare,destSquare);
 }
