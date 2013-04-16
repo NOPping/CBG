@@ -36,9 +36,14 @@
 
 #else
 
+  // MISC ESCAPES
+  #define RESET ""
+  #define CLEAR ""
+
   // BACKGROUND COLORS
   #define BBLACK   ""
   #define BWHITE   ""
+  #define BGRAY    ""
   #define BYELLOW  ""
   #define BORANGE  ""
   #define BRED     ""
@@ -52,6 +57,7 @@
   // FOREGROUND COLORS
   #define FBLACK   ""
   #define FWHITE   ""
+  #define FGRAY    ""
   #define FYELLOW  ""
   #define FORANGE  ""
   #define FRED     ""
@@ -61,4 +67,4 @@
   #define FCYAN    ""
   #define FGREEN   ""
 
-#endif       
+#endif
