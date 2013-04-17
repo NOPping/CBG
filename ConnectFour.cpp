@@ -73,13 +73,13 @@ bool ConnectFour::fourInRow(const Square& current) const {
   Coordinate& currentPosition = current.getPosition();
   // Test each side of the current square.
   for(int yOffset = -1; yOffset <= 1; yOffset++)  {
-    for(int xOffset = -1; xOffset <= 1; xOffset++) {
+    for(int xOffset = 0; xOffset <= 1; xOffset++) {
       // Get the number of pieces the first side of current square.
       int numPlayerPiecesFirstSide  = checkNext(current,  yOffset,  xOffset);
-      // Get the number of pieces the second side of current square.
+      // Invert offsets to get the number of pieces the second side of current square.
       int numPlayerPiecesSecondSide = checkNext(current,0-yOffset,0-xOffset);
-      // Add the number of pieces each side up and test if they exceed three
-      // current square is counted twice so we take one away before testing
+      // Test if they exceed three together current square is counted twice so we 
+      // take one away before testing.
       if((numPlayerPiecesFirstSide + numPlayerPiecesSecondSide -1) > 3)
         return true;
     }
