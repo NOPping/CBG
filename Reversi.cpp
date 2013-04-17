@@ -141,13 +141,16 @@ bool Reversi::isLegal(const Coordinate current,int iOffset,int jOffset) const {
 }
 bool Reversi::checkLine(Coordinate current,int yOffset,int xOffset) const {
   bool test=false;
+  Coordinate next(1,1);
   int xCor=current.x;
   int yCor=current.y;
   int countPieces=0;
-  while (isLegal(current,yOffset,xOffset) &&  grid[yCor][xCor].hasPiece() && (grid[yCor][xCor].hasPieceOwnedBy((currentPlayer+1)%2))) {
+  while (isLegal(next,yOffset,xOffset) && isLegal(current,yOffset,xOffset) &&  grid[yCor][xCor].hasPiece() && (grid[yCor][xCor].hasPieceOwnedBy((currentPlayer+1)%2))) {
     countPieces++;
     xCor+=xOffset;
     yCor+=yOffset;
+    next.x=xCor;
+    next.y=yCor;
     cout<< "Just entered while loop in check line xcor="<<xCor<<" ycor="<<yCor<<"\n";
   }
   if(countPieces!=0&& isLegal(current,yOffset,xOffset) &&(grid[yCor][xCor].hasPieceOwnedBy((currentPlayer)))) {
