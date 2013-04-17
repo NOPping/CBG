@@ -19,7 +19,7 @@ Piece::~Piece() {
 
 }
 
-int Piece::getType() {
+int Piece::getType() const {
   return type;
 }
 

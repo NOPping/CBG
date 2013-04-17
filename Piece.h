@@ -23,7 +23,7 @@ class Piece {
       virtual ~Piece();
       
       /// Returns the type of piece.
-      int getType();
+      int getType() const ;
       
       /// Sets the type of piece.
       bool setType(int type);
