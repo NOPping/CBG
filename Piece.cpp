@@ -15,10 +15,6 @@ Piece::Piece(Player& owner) {
   this->type = 0;
 }
 
-Piece::~Piece() {
-
-}
-
 int Piece::getType() const {
   return type;
 }
@@ -36,4 +32,8 @@ bool Piece::setType(int type) {
 /// Inserts the piece into the given ostream.
 void Piece::print(ostream& os) const {
   os << owner->getCharacter(type);
+}
+
+Piece::~Piece() {
+
 }

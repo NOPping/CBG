@@ -17,11 +17,12 @@ Player::Player(int amountOfTypes, vector<string> types, int maxPieces) {
   this->suspended=false;
 }
 
-
+/// Returns a string from pieces vector at index type.
 std::string Player::getCharacter(int type) const {
   return types[type];
 }
 
+/// Check if pieces vector at index type is empty
 bool Player::hasType(int type) const {
   if(type<amountOfTypes) {
     return true;
@@ -30,6 +31,7 @@ bool Player::hasType(int type) const {
   }
 }
 
+/// Add pieces to the pieces vector.
 Piece& Player::addPiece() {
   Piece* piece = 0;
   if(amountOfPieces < maxPieces) {
@@ -41,7 +43,8 @@ Piece& Player::addPiece() {
   return *piece;
 }
 
-// / Only used by snakes and ladders
+/// Add pieces to the pieces vector at index.
+/// Only used by snakes and ladders
 Piece& Player::addPiece(Piece* insert) {
   Piece* piece = 0;
   if(amountOfPieces < maxPieces) {
@@ -53,6 +56,8 @@ Piece& Player::addPiece(Piece* insert) {
   return *piece;
 }
 
+/// Remove Piece from the player and return a bollean to identify 
+/// if it succeded or failed.
 bool Player::removePiece() {
   if(amountOfPieces > 0) {
     // Decrement amountOfPieces so the next piece added
@@ -64,10 +69,12 @@ bool Player::removePiece() {
   }
 }
 
+/// Returns the amount of pieces
 int Player::getAmountOfPieces() const {
   return amountOfPieces;
 }
 
+/// Returns a reference to the piece in the pieces vector at index.
 Piece& Player::getPiece(int index) const {
   Piece* piece = 0;
   // If index is valid get the piece

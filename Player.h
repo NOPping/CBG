@@ -54,7 +54,7 @@ class Player {
       Piece& addPiece();
       Piece& addPiece(Piece* insert);
       
-      /// Returns a pointer to the piece in the pieces vector at index index
+      /// Returns a reference to the piece in the pieces vector at index.
       Piece& getPiece(int index) const;
       
       /// Return weather this player can move or not
