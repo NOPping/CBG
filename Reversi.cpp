@@ -4,8 +4,8 @@ using std::cin;
 using std::string;
 using std::vector;
 Reversi::Reversi():Game(2, 8, 8)  {
-  int amountOfPieceTypes= 1;
-  int maxAmountOfPlayerPieces = 64;
+  const int amountOfPieceTypes= 1;
+  const int maxAmountOfPlayerPieces = 64;
   vector<string> player1PieceTypes(amountOfPieceTypes);
   vector<string> player2PieceTypes(amountOfPieceTypes);
   player1PieceTypes[0] = "\033[37m◎";
@@ -58,7 +58,7 @@ void Reversi::drawScreen() const {
   cout << "\n";
 }
 
-int Reversi::getPoint(string message, int range) const {
+int Reversi::getPoint(const string message, int range) const {
   int point=0;
   while(true) {
     cout << message;
@@ -80,23 +80,52 @@ int Reversi::getPoint(string message, int range) const {
     return point;
   }
 }
-bool Reversi::isLegal(Coordinate* current,int iOffset,int jOffset) const {
-  //Ensure that the next square lies inside the bounds of the board
-  return((current->x + jOffset < columns)&&(current->x + jOffset >= 0))
-  &&(current->y + iOffset < rows)&&(current->y + iOffset >= 0)
-  &&(iOffset != 0 || jOffset != 0);
+bool Reversi::getMove() {
+  Coordinate destinationCoordinate;
+  Square  *destinationSquare;
+  int x,y;
+  bool validInput=false;
+  while(!validInput) {
+    x = getPoint("Type the X point of the square you would like to move too:\n",rows);
+    y = getPoint("Type the Y point of the square you would like to move too:\n",columns);
+    destinationCoordinate = Coordinate(x,y);
+    
+    if(grid[y][x].hasPiece()) {
+      cout << "\nThe selected square is occupied, try again\n";
+      continue;
+    }
+    else {
+      destinationSquare = &grid[y][x];
+      validInput=executeMove(*destinationSquare);
+    }
+    if(validInput)currentPlayer = currentPlayer+1%2;
+  
+  }return true;
 }
-bool Reversi::flanks(Coordinate* current) const {
+bool Reversi::executeMove(Square& destinationSquare)const {    
+  if(flanks(destinationSquare.getPosition())) { 
+      destinationSquare.addPiece(currentPlayer,players[currentPlayer]->addPiece()); 
+      
+      return true;
+    } 
+  else{ 
+      cout<<"\nDoes not flank opponent piece\n";
+      return false;       
+      }
+ 
+  
+}
+bool Reversi::flanks(const Coordinate current) const {
   bool count=false;
   bool count2=false;
   Square* orbit;
-  for(int rowOffset = -1; rowOffset <= 1; rowOffset++)  {
-    for(int columnOffset = -1; columnOffset <= 1; columnOffset++) {
-      if(isLegal(current,rowOffset,columnOffset)) {
-        orbit = &grid[current->y + rowOffset][current->x + columnOffset];
-        if(orbit->hasPieceOwnedBy((currentPlayer+1)%2)&&orbit!=0) {
+  for(int yOffset = -1; yOffset <= 1; yOffset++)  {
+    for(int xOffset = -1; xOffset <= 1; xOffset++) {
+      if(isLegal(current,yOffset,xOffset)) {
+        orbit = &grid[current.y + yOffset][current.x + xOffset];
+        if(orbit->hasPieceOwnedBy(getOpposition())&&orbit!=0) {
           Coordinate beside=orbit->getPosition();
-          count= checkLine(beside,rowOffset,columnOffset);
+          count= checkLine(beside,yOffset,xOffset);
         }
       }
       if(count)count2=true;
@@ -104,22 +133,28 @@ bool Reversi::flanks(Coordinate* current) const {
   }
   return count2;
 }
-bool Reversi::checkLine(Coordinate current,int rowOffset,int columnOffset) const {
+bool Reversi::isLegal(const Coordinate current,int iOffset,int jOffset) const {
+  //Ensure that the next square lies inside the bounds of the board
+  return((current.x + jOffset < columns)&&(current.x + jOffset >= 0))
+  &&(current.y + iOffset < rows)&&(current.y + iOffset >= 0)
+  &&(iOffset != 0 || jOffset != 0);
+}
+bool Reversi::checkLine(Coordinate current,int yOffset,int xOffset) const {
   bool test=false;
   int xCor=current.x;
   int yCor=current.y;
   int countPieces=0;
-  while (isLegal(&current,rowOffset,columnOffset) &&  grid[yCor][xCor].hasPiece() && (grid[yCor][xCor].hasPieceOwnedBy((currentPlayer+1)%2))) {
+  while (isLegal(current,yOffset,xOffset) &&  grid[yCor][xCor].hasPiece() && (grid[yCor][xCor].hasPieceOwnedBy((currentPlayer+1)%2))) {
     countPieces++;
-    xCor+=columnOffset;
-    yCor+=rowOffset;
+    xCor+=xOffset;
+    yCor+=yOffset;
     cout<< "Just entered while loop in check line xcor="<<xCor<<" ycor="<<yCor<<"\n";
   }
-  if(countPieces!=0&& isLegal(&current,rowOffset,columnOffset) &&(grid[yCor][xCor].hasPieceOwnedBy((currentPlayer)))) {
+  if(countPieces!=0&& isLegal(current,yOffset,xOffset) &&(grid[yCor][xCor].hasPieceOwnedBy((currentPlayer)))) {
     test=true;
     for(int i =0; i<countPieces; i++) {
-      xCor-=columnOffset;
-      yCor-=rowOffset;
+      xCor-=xOffset;
+      yCor-=yOffset;
       Square* next = &grid[yCor][xCor];
       if (next->hasPiece())next->removePiece((currentPlayer+1)%2);
       next->addPiece(currentPlayer, players[currentPlayer]->addPiece());
@@ -128,29 +163,7 @@ bool Reversi::checkLine(Coordinate current,int rowOffset,int columnOffset) const
   return test;
 }
 
-bool Reversi::getMove() {
-  Coordinate destinationCoordinate;
-  Square  *destinationSquare;
-  int x,y;
-  bool test=true;
-  while(test) {
-    x = getPoint("Type the X point of the square you would like to move too:\n",rows);
-    y = getPoint("Type the Y point of the square you would like to move too:\n",columns);
-    destinationCoordinate = Coordinate(x,y);
-    destinationSquare = &grid[destinationCoordinate.y][destinationCoordinate.x];
 
-    if(destinationSquare->hasPiece()) {
-      cout << "\nThe selected square is occupied, try again\n";
-      continue;
-    }
-    if(flanks(&destinationCoordinate)) {
-      test=false;
-      destinationSquare->addPiece(currentPlayer,players[currentPlayer]->addPiece());
-    } else cout<<"\nDoes not flank opponent piece\n";
-  }
-  currentPlayer = (currentPlayer + 1) % 2;
-  return true;
-}
 
 int Reversi::isOver() const {
   return false;
@@ -158,12 +171,4 @@ int Reversi::isOver() const {
 int Reversi::getOpposition() const {
   return (currentPlayer+1)%amountOfPlayers;
 }
-bool Reversi::executeMove(Square* sourceSquare,Square* destinationSquare) {
-  // Not implemented yet
-  destinationSquare->addPiece(currentPlayer,
-                              sourceSquare->getPiece(currentPlayer));
-  sourceSquare->removePiece(currentPlayer);
 
-  currentPlayer = getOpposition();
-  return true;
-}
