@@ -46,7 +46,7 @@ private:
   vector<int> columnSpace;
 
   /// recursive function to check the next square to see if it has a piece 
-  /// owned by current player if square lies in the bounds of the board.
+  /// to see if it's owned by current player.
   int  checkNext(const Square& next,int yOffset,int xOffset) const;
 public:
   ConnectFour();
