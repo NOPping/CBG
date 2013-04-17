@@ -166,7 +166,7 @@ bool Reversi::checkLine(Coordinate current,int yOffset,int xOffset) const {
 
 
 int Reversi::isOver() const {
-  return players[currentPlayer]->getAmountOfPieces()+player[getOpposition]->getAmoutOfPieces() == 64 ? 1 : 0;
+  return players[currentPlayer]->getAmountOfPieces()+players[getOpposition()]->getAmountOfPieces() == 64 ? 1 : 0;
 }
 int Reversi::getOpposition() const {
   return (currentPlayer+1)%amountOfPlayers;
