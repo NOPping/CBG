@@ -7,12 +7,19 @@
 #include "Checkers.h"
 #include "ConnectFour.h"
 #include "SnakesAndLadders.h"
+#include <tr1/memory>
+#include <vector>
 #include "Colors.h"
 #include "Reversi.h"
 
 using std::cout;
 using std::cin;
 using std::string;
+using std::tr1::shared_ptr;
+
+using namespace std;
+
+typedef std::vector<std::tr1::shared_ptr<Game> > container;
 
 void border(int);
 
@@ -20,12 +27,11 @@ void border(int);
 int main() {
   int selection=0;
   const int numberOfGames = 4;
-  
-  vector <Game*> games(numberOfGames);
-  games[0] =  new Checkers();
-  games[1] =  new ConnectFour();
-  games[2] =  new SnakesAndLadders();
-  games[3] =  new Reversi();
+  container games(numberOfGames);
+  games[0] =  shared_ptr<Game> (new Checkers());
+  games[1] =  shared_ptr<Game> (new ConnectFour());
+  games[2] =  shared_ptr<Game> (new SnakesAndLadders());
+  games[3] =  shared_ptr<Game> (new Reversi());
   
   string menu[] = {
     "1) Checkers",
@@ -36,28 +42,28 @@ int main() {
   
   cout << CLEAR FVIOLET;
   
-  cout << "    ____                                     _ _                  ";
-  cout << "        __ \n";
-  cout << "   / ___|___  _ __ ___  _ __   ___ _ __   __| (_)_   _ _ __ ___   ";
-  cout << "  ___  / _|\n";
-  cout << "  | |   / _ \\| '_ ` _ \\| '_ \\ / _ \\ '_ \\ / _` | | | | | '_ ` ";
-  cout <<"_ \\   / _ \\| |_ \n";
-  cout << "  | |__| (_) | | | | | | |_) |  __/ | | | (_| | | |_| | | | | | | ";
-  cout << "| (_) |  _|\n";
-  cout << "   \\____\\___/|_| |_| |_| .__/ \\___|_| |_|\\__,_|_|\\__,_|_| |_|";
-  cout << " |_|  \\___/|_|  \n";
-  cout << "                       |_|                                        ";
-  cout << "           \n";
-  cout << "         _                         _                              ";
-  cout << "     \n";
-  cout << "        | |__   ___   __ _ _ __ __| |   __ _  __ _ _ __ ___   ___ ";
-  cout << " ___ \n";
-  cout << "        | '_ \\ / _ \\ / _` | '__/ _` |  / _` |/ _` | '_ ` _ \\ / ";
-  cout << " _\\/ __|\n";
-  cout << "        | |_) | (_) | (_| | | | (_| | | (_| | (_| | | | | | |  __/";
-  cout << "\\__ \\\n";
-  cout << "        |_.__/ \\___/ \\__,_|_|  \\__,_|  \\__, |\\__,_|_| |_| |_|";
-  cout << "\\___||___/\n";
+  cout << "    ____                                     _ _                  "
+  << "        __ \n";
+  cout << "   / ___|___  _ __ ___  _ __   ___ _ __   __| (_)_   _ _ __ ___   "
+  "  ___  / _|\n";
+  cout << "  | |   / _ \\| '_ ` _ \\| '_ \\ / _ \\ '_ \\ / _` | | | | | '_ ` "
+  <<"_ \\   / _ \\| |_ \n";
+  cout << "  | |__| (_) | | | | | | |_) |  __/ | | | (_| | | |_| | | | | | | "
+  << "| (_) |  _|\n";
+  cout << "   \\____\\___/|_| |_| |_| .__/ \\___|_| |_|\\__,_|_|\\__,_|_| |_|"
+  << " |_|  \\___/|_|  \n";
+  cout << "                       |_|                                        "
+  << "           \n";
+  cout << "         _                         _                              "
+  << "     \n";
+  cout << "        | |__   ___   __ _ _ __ __| |   __ _  __ _ _ __ ___   ___ "
+  << " ___ \n";
+  cout << "        | '_ \\ / _ \\ / _` | '__/ _` |  / _` |/ _` | '_ ` _ \\ / "
+  << " _\\/ __|\n";
+  cout << "        | |_) | (_) | (_| | | | (_| | | (_| | (_| | | | | | |  __/"
+  << "\\__ \\\n";
+  cout << "        |_.__/ \\___/ \\__,_|_|  \\__,_|  \\__, |\\__,_|_| |_| |_|"
+  << "\\___||___/\n";
   cout << "                                       |___/\n";
 
   cout << RESET;
