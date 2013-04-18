@@ -25,11 +25,6 @@ void border(int);
 int main() {
   int selection=0;
   const int numberOfGames = 4;
-  container games(numberOfGames);
-  games[0] =  shared_ptr<Game> (new Checkers());
-  games[1] =  shared_ptr<Game> (new ConnectFour());
-  games[2] =  shared_ptr<Game> (new SnakesAndLadders());
-  games[3] =  shared_ptr<Game> (new Reversi());
   
   string menu[] = {
     "1) Checkers",
@@ -79,24 +74,37 @@ int main() {
   border(80);
   cout << RESET;
   
-  bool validSelection = false;  
+  bool validSelection = false; 
   while(!validSelection) {
     cout << "\nInsert the number of the game you wish to play: ";
     cin >> selection;
     cin.clear();
-    cin.ignore(10000,'\n');
-    
-    // Ensure that the selection is valid.
-    if(selection > 0 && selection <= numberOfGames) {
+    cin.ignore(10000,'\n'); 
+    if(selection == 1) {
+      Checkers checkers = Checkers();
+      checkers.start();
       validSelection = true;
-      // Launch selected game.
-      games[selection-1]->start();
-    } else {
+    }
+    else if(selection == 2) {
+      ConnectFour connectFour = ConnectFour();
+      connectFour.start();
+      validSelection = true;
+    }
+    else if(selection == 3) {
+      SnakesAndLadders snakesAndLadders = SnakesAndLadders();
+      snakesAndLadders.start();
+      validSelection = true;
+    }
+    else if(selection == 4) {
+      Reversi reversi = Reversi();
+      reversi.start();
+      validSelection = true;
+    }    
+    else {
       cout << "\nInvalid Selection";
     }
   }
   
-  games.clear();
   
   return 0;
 }

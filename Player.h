@@ -47,6 +47,9 @@ class Player {
       /// Check if pieces vector at index type is empty
       bool hasType(int type) const;
       
+      /// Check if player can have another piece
+      bool hasRoomForPiece() const;
+      
       /// Returns a string from pieces vector at index type. 
       string getCharacter(int type) const;
       
