@@ -31,29 +31,26 @@ bool Player::hasType(int type) const {
   }
 }
 
+bool Player::hasRoomForPiece() const {
+  return(amountOfPieces < maxPieces);
+}
+
 /// Add pieces to the pieces vector.
 Piece& Player::addPiece() {
-  Piece* piece = 0;
-  if(amountOfPieces < maxPieces) {
-    // Add new piece to vector, pass in this player.
-    pieces[amountOfPieces] = new Piece(*this);
-    piece = pieces[amountOfPieces];
-    amountOfPieces++;
-  }
-  return *piece;
+  pieces[amountOfPieces] = new Piece(*this);
+  Piece& piece = *pieces[amountOfPieces];
+  amountOfPieces++;
+  return piece;
 }
 
 /// Add pieces to the pieces vector at index.
 /// Only used by snakes and ladders
 Piece& Player::addPiece(Piece* insert) {
-  Piece* piece = 0;
-  if(amountOfPieces < maxPieces) {
-    // Add insert to pieces vector
-    pieces[amountOfPieces] = insert;
-    piece = pieces[amountOfPieces];
-    amountOfPieces++;
-  }
-  return *piece;
+  // Add insert to pieces vector
+  pieces[amountOfPieces] = insert;
+  Piece& piece = *pieces[amountOfPieces];
+  amountOfPieces++;
+  return piece;
 }
 
 /// Remove Piece from the player and return a bollean to identify 
@@ -76,12 +73,8 @@ int Player::getAmountOfPieces() const {
 
 /// Returns a reference to the piece in the pieces vector at index.
 Piece& Player::getPiece(int index) const {
-  Piece* piece = 0;
-  // If index is valid get the piece
-  if(index >= 0 && index < maxPieces) {
-    piece = pieces[index];
-  }
-  return *piece;
+  Piece& piece = *pieces[index];
+  return piece;
 }
 
 Player::~Player() {

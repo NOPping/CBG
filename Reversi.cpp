@@ -103,7 +103,7 @@ bool Reversi::getMove() {
   }return true;
 }
 bool Reversi::executeMove(Square& destinationSquare)const {    
-  if(flanks(destinationSquare.getPosition())) { 
+  if(flanks(destinationSquare.getPosition()) && players[currentPlayer]->hasRoomForPiece()) { 
       destinationSquare.addPiece(currentPlayer,players[currentPlayer]->addPiece()); 
       
       return true;
@@ -160,7 +160,9 @@ bool Reversi::checkLine(Coordinate current,int yOffset,int xOffset) const {
       yCor-=yOffset;
       Square* next = &grid[yCor][xCor];
       if (next->hasPiece())next->removePiece((currentPlayer+1)%2);
-      next->addPiece(currentPlayer, players[currentPlayer]->addPiece());
+      if(players[currentPlayer]->hasRoomForPiece()) {
+        next->addPiece(currentPlayer, players[currentPlayer]->addPiece());
+      }
     }
   }
   return test;

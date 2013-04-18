@@ -90,7 +90,7 @@ bool ConnectFour::fourInRow(const Square& current) const {
 
 /// Recursive function to check the next square to see if it has a piece 
 /// to see if it's owned by current player.
-int ConnectFour::checkNext(const Square& current,int yOffset,int xOffset) const{
+int ConnectFour::checkNext(const Square& current,int yOffset,int xOffset) const {
   if(current.hasPieceOwnedBy(currentPlayer)) {
     if(isLegal(current, yOffset, xOffset)) {
       Coordinate currentPos = current.getPosition();
@@ -157,7 +157,9 @@ bool ConnectFour::executeMove(int x) {
   // Get the y destination of the piece to be added bytaking the
   // amount of pieces in the column from the total
   int y = rows - columnHeight[x];
-  grid[y][x].addPiece(currentPlayer, players[currentPlayer]->addPiece());
+  if(players[currentPlayer]->hasRoomForPiece()) {
+    grid[y][x].addPiece(currentPlayer, players[currentPlayer]->addPiece());
+  }
   // Update the state variable
   state = isOver(grid[y][x]);
   return true;
@@ -175,5 +177,4 @@ bool ConnectFour::topRowFull() const {
 /// Deconstructor for Connect Four
 ConnectFour::~ConnectFour() {
   columnHeight.clear();
-  
 }
