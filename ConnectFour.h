@@ -43,7 +43,7 @@ private:
   bool executeMove(int x);
 
   /// Vector to hold how much pieces lie in each column.
-  vector<int> columnSpace;
+  vector<int> columnHeight;
 
   /// recursive function to check the next square to see if it has a piece 
   /// to see if it's owned by current player.

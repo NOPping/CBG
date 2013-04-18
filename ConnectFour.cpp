@@ -9,7 +9,7 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   state = 0;
   int amountOfPieceTypes = 1;
   int maxAmountOfPlayerPieces = 21;
-  columnSpace.resize(columns);
+  columnHeight.resize(columns);
   vector <string> player1PieceTypes(amountOfPieceTypes);
   vector <string> player2PieceTypes(amountOfPieceTypes);
   player1PieceTypes[0] = FYELLOW "○";
@@ -76,10 +76,11 @@ bool ConnectFour::fourInRow(const Square& current) const {
     for(int xOffset = 0; xOffset <= 1; xOffset++) {
       // Get the number of pieces the first side of current square.
       int numPlayerPiecesFirstSide  = checkNext(current,  yOffset,  xOffset);
-      // Invert offsets to get the number of pieces the second side of current square.
+      // Invert offsets to get the number of pieces the second side of current 
+      // square.
       int numPlayerPiecesSecondSide = checkNext(current,0-yOffset,0-xOffset);
-      // Test if they exceed three together current square is counted twice so we 
-      // take one away before testing.
+      // Test if they exceed three together current square is counted twice so 
+      // we take one away before testing.
       if((numPlayerPiecesFirstSide + numPlayerPiecesSecondSide -1) > 3)
         return true;
     }
@@ -89,14 +90,14 @@ bool ConnectFour::fourInRow(const Square& current) const {
 
 /// Recursive function to check the next square to see if it has a piece 
 /// to see if it's owned by current player.
-int ConnectFour::checkNext(const Square& current,int yOffset,int xOffset) const {
+int ConnectFour::checkNext(const Square& current,int yOffset,int xOffset) const{
   if(current.hasPieceOwnedBy(currentPlayer)) {
     if(isLegal(current, yOffset, xOffset)) {
       Coordinate currentPos = current.getPosition();
       // Get the next square in the row by adding the offsets to there
       // cooresponding x/y values in the Coordinate class.
       Square& next = grid[currentPos.y + yOffset][currentPos.x + xOffset];
-      // Return 1 for the current piece plus check the next square and add it on.
+      // Return 1 for the current piece plus check the next square for piece.
       return 1 + checkNext(next, yOffset, xOffset);
     }
     // If the next square isn't legal just return one for the current square
@@ -136,7 +137,7 @@ bool ConnectFour::getMove() {
     // Ensure that the number inputted lies inside the bounds of the board.
     if(x >= columns || x < 0) {
       cout << "\nYour input fell out of the bounds of the board\n";
-    } else if(columnSpace[x] >= rows) {
+    } else if(columnHeight[x] >= rows) {
       cout << "\nDestination column is full\n";
     } else validInput = true;
     // Loop until correct number in inputed.
@@ -152,10 +153,10 @@ bool ConnectFour::getMove() {
 /// available slot in that column.
 bool ConnectFour::executeMove(int x) {
   // Add one to the number of items in desired column.
-  columnSpace[x]++;
+  columnHeight[x]++;
   // Get the y destination of the piece to be added bytaking the
   // amount of pieces in the column from the total
-  int y = rows - columnSpace[x];
+  int y = rows - columnHeight[x];
   grid[y][x].addPiece(currentPlayer, players[currentPlayer]->addPiece());
   // Update the state variable
   state = isOver(grid[y][x]);
@@ -165,7 +166,7 @@ bool ConnectFour::executeMove(int x) {
 bool ConnectFour::topRowFull() const {
   for(int currentColumn = 0; currentColumn < columns; currentColumn++) {
     // If this coloumn isn't full return false because top row isn't full
-    if(columnSpace[currentColumn] != rows) {
+    if(columnHeight[currentColumn] != rows) {
       return false;
     }
   }
@@ -173,5 +174,6 @@ bool ConnectFour::topRowFull() const {
 }
 /// Deconstructor for Connect Four
 ConnectFour::~ConnectFour() {
-
+  columnHeight.clear();
+  
 }

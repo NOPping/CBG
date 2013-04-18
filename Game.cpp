@@ -22,6 +22,9 @@ Game::~Game() {
     delete [] grid[i];
   }
   delete [] grid;
+  for(int i=0; i<amountOfPlayers; i++) {
+    delete players[i];
+  }
   delete [] players;
 }
 
