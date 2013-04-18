@@ -17,9 +17,7 @@ using std::cin;
 using std::string;
 using std::tr1::shared_ptr;
 
-using namespace std;
-
-typedef std::vector<std::tr1::shared_ptr<Game> > container;
+typedef vector<shared_ptr<Game> > container;
 
 void border(int);
 
