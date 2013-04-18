@@ -78,4 +78,7 @@ Piece& Player::getPiece(int index) const {
 }
 
 Player::~Player() {
+  for(int i = 0; i<maxPieces; i++) {
+    delete pieces[i];
+  }
 }

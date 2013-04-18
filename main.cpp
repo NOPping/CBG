@@ -7,17 +7,13 @@
 #include "Checkers.h"
 #include "ConnectFour.h"
 #include "SnakesAndLadders.h"
-#include <tr1/memory>
-#include <vector>
 #include "Colors.h"
 #include "Reversi.h"
 
 using std::cout;
 using std::cin;
 using std::string;
-using std::tr1::shared_ptr;
 
-typedef vector<shared_ptr<Game> > container;
 
 void border(int);
 
