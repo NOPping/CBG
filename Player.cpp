@@ -53,7 +53,7 @@ Piece& Player::addPiece(Piece* insert) {
   return piece;
 }
 
-/// Remove Piece from the player and return a bollean to identify 
+/// Remove Piece from the player and return a bollean to identify
 /// if it succeded or failed.
 bool Player::removePiece() {
   if(amountOfPieces > 0) {

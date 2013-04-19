@@ -21,16 +21,16 @@ void border(int);
 int main() {
   int selection=0;
   const int numberOfGames = 4;
-  
+
   string menu[] = {
     "1) Checkers",
     "2) ConnectFour",
     "3) Snakes and Ladders",
     "4) Reversi"
   };
-  
+
   cout << CLEAR FVIOLET;
-  
+
   cout << "    ____                                     _ _                  "
   << "        __ \n";
   cout << "   / ___|___  _ __ ___  _ __   ___ _ __   __| (_)_   _ _ __ ___   "
@@ -56,51 +56,63 @@ int main() {
   cout << "                                       |___/\n";
 
   cout << RESET;
-  
+
   cout << FRED "\n";
 
   int borderWitdh = 81;
   border(borderWitdh);
   cout << RESET "\n";
-  
+
   // Print out the titles of each game.
   for(int i=0; i<numberOfGames; i++) {
     cout << menu[i] << "\n";
   }
-  
+
   cout << FRED "\n";
   border(borderWitdh);
   cout << RESET;
-  
-  bool validSelection = false; 
-  cout << "\nInsert the number of the game you wish to play: \n";
-  while(!validSelection) {
 
-    if(cin.peek() < '1' || cin.peek() > '4') {
+  cout << "\nInsert the number of the game you wish to play: \n";
+  while(true) {
+    cin >> selection;
+
+    // Check that input is a numeric value.
+    if(cin.fail()) {
+      cout << "\nYou entered a non numeric value, try again\n";
+      cin.clear();
+      cin.ignore(1000,'\n');
+      continue;
+    }
+
+    if(selection < 1 || selection > 4) {
       cout << "\nYou didn't enter a valid number, please enter a number in the "
       << "range 1-4\n";
       cin.clear();
-      cin.ignore(1000);
-    } 
-    else {
-      cin >> selection;
-      switch(selection) {
+      cin.ignore(1000,'\n');
+      continue;
+    }
 
-        case  1: {
-          Checkers checkers = Checkers();
-          checkers.start();
-        } case 2: {
-          ConnectFour connectFour = ConnectFour();
-          connectFour.start();
-        }  case 3: {
-          SnakesAndLadders snakesAndLadders = SnakesAndLadders();
-          snakesAndLadders.start();     
-        } case 4: {
-          Reversi reversi = Reversi();
-          reversi.start();
-        }
-        validSelection = true;
-      }
+    switch(selection) {
+    case  1: {
+      Checkers checkers = Checkers();
+      checkers.start();
+      break;
+    }
+    case 2: {
+      ConnectFour connectFour = ConnectFour();
+      connectFour.start();
+      break;
+    }
+    case 3: {
+      SnakesAndLadders snakesAndLadders = SnakesAndLadders();
+      snakesAndLadders.start();
+      break;
+    }
+    case 4: {
+      Reversi reversi = Reversi();
+      reversi.start();
+      break;
+    }
     }
   }
   return 0;

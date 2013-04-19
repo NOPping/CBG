@@ -89,31 +89,30 @@ bool Reversi::getMove() {
     x = getPoint("Type the X point of the square you would like to move too:\n",rows);
     y = getPoint("Type the Y point of the square you would like to move too:\n",columns);
     destinationCoordinate = Coordinate(x,y);
-    
+
     if(grid[y][x].hasPiece()) {
       cout << "\nThe selected square is occupied, try again\n";
       continue;
-    }
-    else {
+    } else {
       destinationSquare = &grid[y][x];
       validInput=executeMove(*destinationSquare);
     }
     if(validInput)currentPlayer = currentPlayer+1%2;
-  
-  }return true;
+
+  }
+  return true;
 }
-bool Reversi::executeMove(Square& destinationSquare)const {    
-  if(flanks(destinationSquare.getPosition()) && players[currentPlayer]->hasRoomForPiece()) { 
-      destinationSquare.addPiece(currentPlayer,players[currentPlayer]->addPiece()); 
-      
-      return true;
-    } 
-  else{ 
-      cout<<"\nDoes not flank opponent piece\n";
-      return false;       
-      }
- 
-  
+bool Reversi::executeMove(Square& destinationSquare)const {
+  if(flanks(destinationSquare.getPosition()) && players[currentPlayer]->hasRoomForPiece()) {
+    destinationSquare.addPiece(currentPlayer,players[currentPlayer]->addPiece());
+
+    return true;
+  } else{
+    cout<<"\nDoes not flank opponent piece\n";
+    return false;
+  }
+
+
 }
 bool Reversi::flanks(const Coordinate current) const {
   bool count=false;

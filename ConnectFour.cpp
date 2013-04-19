@@ -67,7 +67,7 @@ int ConnectFour::isOver(const Square& current) const {
   else return 0;
 }
 
-/// Overloaded function to to return weather or not the game 
+/// Overloaded function to to return weather or not the game
 /// is over or not.
 bool ConnectFour::fourInRow(const Square& current) const {
   Coordinate& currentPosition = current.getPosition();
@@ -76,10 +76,10 @@ bool ConnectFour::fourInRow(const Square& current) const {
     for(int xOffset = 0; xOffset <= 1; xOffset++) {
       // Get the number of pieces the first side of current square.
       int numPlayerPiecesFirstSide  = checkNext(current,  yOffset,  xOffset);
-      // Invert offsets to get the number of pieces the second side of current 
+      // Invert offsets to get the number of pieces the second side of current
       // square.
       int numPlayerPiecesSecondSide = checkNext(current,0-yOffset,0-xOffset);
-      // Test if they exceed three together current square is counted twice so 
+      // Test if they exceed three together current square is counted twice so
       // we take one away before testing.
       if((numPlayerPiecesFirstSide + numPlayerPiecesSecondSide -1) > 3)
         return true;
@@ -88,7 +88,7 @@ bool ConnectFour::fourInRow(const Square& current) const {
   return false;
 }
 
-/// Recursive function to check the next square to see if it has a piece 
+/// Recursive function to check the next square to see if it has a piece
 /// to see if it's owned by current player.
 int ConnectFour::checkNext(const Square& current,int yOffset,int xOffset) const {
   if(current.hasPieceOwnedBy(currentPlayer)) {
@@ -111,8 +111,8 @@ bool ConnectFour::isLegal(const Square& current,int yOffset,int xOffset) const {
   Coordinate currentPos = current.getPosition();
   // Ensure that the next square lies inside the bounds of the board
   return((currentPos.x + xOffset < columns)&&(currentPos.x + xOffset >= 0))
-         &&(currentPos.y + yOffset < rows)&&(currentPos.y + yOffset >= 0)
-         &&(yOffset != 0 || xOffset != 0);
+  &&(currentPos.y + yOffset < rows)&&(currentPos.y + yOffset >= 0)
+  &&(yOffset != 0 || xOffset != 0);
 }
 
 /// Function to request a move from the user and read it in
@@ -149,7 +149,7 @@ bool ConnectFour::getMove() {
   return true;
 }
 
-/// Function to take a column and move a piece to the next 
+/// Function to take a column and move a piece to the next
 /// available slot in that column.
 bool ConnectFour::executeMove(int x) {
   // Add one to the number of items in desired column.
