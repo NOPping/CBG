@@ -75,20 +75,18 @@ int main() {
   cout << "\nInsert the number of the game you wish to play: \n";
   while(true) {
     cin >> selection;
-
+    cin.clear();
+    cin.ignore(1000,'\n');
+    
     // Check that input is a numeric value.
     if(cin.fail()) {
       cout << "\nYou entered a non numeric value, try again\n";
-      cin.clear();
-      cin.ignore(1000,'\n');
       continue;
     }
 
     if(selection < 1 || selection > 4) {
       cout << "\nYou didn't enter a valid number, please enter a number in the "
       << "range 1-4\n";
-      cin.clear();
-      cin.ignore(1000,'\n');
       continue;
     }
 
