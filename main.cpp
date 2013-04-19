@@ -58,7 +58,9 @@ int main() {
   cout << RESET;
   
   cout << FRED "\n";
-  border(80);
+
+  int borderWitdh = 81;
+  border(borderWitdh);
   cout << RESET "\n";
   
   // Print out the titles of each game.
@@ -67,46 +69,46 @@ int main() {
   }
   
   cout << FRED "\n";
-  border(80);
+  border(borderWitdh);
   cout << RESET;
   
   bool validSelection = false; 
+  cout << "\nInsert the number of the game you wish to play: \n";
   while(!validSelection) {
-    cout << "\nInsert the number of the game you wish to play: ";
-    cin >> selection;
-    cin.clear();
-    cin.ignore(10000,'\n'); 
-    if(selection == 1) {
-      Checkers checkers = Checkers();
-      checkers.start();
-      validSelection = true;
-    }
-    else if(selection == 2) {
-      ConnectFour connectFour = ConnectFour();
-      connectFour.start();
-      validSelection = true;
-    }
-    else if(selection == 3) {
-      SnakesAndLadders snakesAndLadders = SnakesAndLadders();
-      snakesAndLadders.start();
-      validSelection = true;
-    }
-    else if(selection == 4) {
-      Reversi reversi = Reversi();
-      reversi.start();
-      validSelection = true;
-    }    
+
+    if(cin.peek() < '1' || cin.peek() > '4') {
+      cout << "\nYou didn't enter a valid number, please enter a number in the "
+      << "range 1-4\n";
+      cin.clear();
+      cin.ignore(1000);
+    } 
     else {
-      cout << "\nInvalid Selection";
+      cin >> selection;
+      switch(selection) {
+
+        case  1: {
+          Checkers checkers = Checkers();
+          checkers.start();
+        } case 2: {
+          ConnectFour connectFour = ConnectFour();
+          connectFour.start();
+        }  case 3: {
+          SnakesAndLadders snakesAndLadders = SnakesAndLadders();
+          snakesAndLadders.start();     
+        } case 4: {
+          Reversi reversi = Reversi();
+          reversi.start();
+        }
+        validSelection = true;
+      }
     }
   }
-  
-  
   return 0;
 }
 
 /// Prints a border of the specified width.
 void border(const int width) {
-  for(int i=0; i<width/2; i++)cout << "=-";
+  cout.width(width);
+  cout.fill('=');
   cout << "\n";
 }
