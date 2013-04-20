@@ -248,7 +248,8 @@ bool SnakesAndLadders::getMove() {
 }
 
 /// Moves the piece on srcSquare to destSquare.
-bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) const {
+bool SnakesAndLadders::executeMove(Square* srcSquare,
+                                   Square* destSquare) const {
 
   // Check if the square has a snake or ladder.
   if(destSquare->hasPieceOwnedBy(2)) {
@@ -261,7 +262,8 @@ bool SnakesAndLadders::executeMove(Square* srcSquare, Square* destSquare) const 
   if(srcSquare == destSquare) {
     return true;
   } else {
-    SrcPiece& piece = dynamic_cast<SrcPiece&>(srcSquare->getPiece(currentPlayer));
+    SrcPiece& piece = dynamic_cast<SrcPiece&>(
+                                            srcSquare->getPiece(currentPlayer));
     Coord& destinationCoord = destSquare->getPosition();
     piece.setSource(destinationCoord);
 
