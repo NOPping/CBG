@@ -6,7 +6,8 @@
 
 Square::Square() {}
 
-Square::Square(int identifier, string start, string end, int amountOfPlayers, Coordinate position) {
+Square::Square(int identifier, string start, string end, int amountOfPlayers,
+               Coordinate position) {
   this->identifier = identifier;
   this->start = start;
   this->end = end;
