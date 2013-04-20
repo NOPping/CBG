@@ -77,7 +77,7 @@ int main() {
     cin >> selection;
     cin.clear();
     cin.ignore(1000,'\n');
-    
+
     // Check that input is a numeric value.
     if(cin.fail()) {
       cout << "\nYou entered a non numeric value, try again\n";
