@@ -33,21 +33,21 @@ Checkers::Checkers():Game(2, 8, 8) {
 
   int identifier = 0;
 
-  for(int i=0; i<rows; i++) {
-    for(int j=0; j<columns; j++) {
+  for(int y=0; y<rows; y++) {
+    for(int x=0; x<columns; x++) {
       // Setup the square
-      grid[i][j] = Square(identifier,start[identifier],end,amountOfPlayers,
-                          Coordinate(j,i));
+      grid[y][x] = Square(identifier,start[identifier],end,amountOfPlayers,
+                          Coordinate(x,y));
 
       // Check if its a black square
       if(identifier == 1) {
         // Add a black piece if its a black square and on the first 3 rows
-        if(i<3) {
-          grid[i][j].addPiece(0, players[0]->addPiece());
+        if(y<3) {
+          grid[y][x].addPiece(0, players[0]->addPiece());
         }
         // Add a white piece if its a black square and on the last 3 rows
-        else if(i>4) {
-          grid[i][j].addPiece(1, players[1]->addPiece());
+        else if(y>4) {
+          grid[y][x].addPiece(1, players[1]->addPiece());
         }
       }
 
@@ -63,14 +63,14 @@ Checkers::Checkers():Game(2, 8, 8) {
 void Checkers::drawScreen() const {
   clearScreen();
   cout << "Player " << (currentPlayer+1) << " it is your go\n\n  ";
-  for(int i=0; i<rows; i++) cout << " " << i << " ";
+  for(int x=0; x<columns; x++) cout << " " << x << " ";
   cout << "\n";
-  for(int i=0; i<rows; i++) {
-    cout << i << " ";
-    for(int j=0; j<columns; j++) {
-      cout << grid[i][j].getStart();
-      cout << grid[i][j];
-      cout << grid[i][j].getEnd();
+  for(int y=0; y<rows; y++) {
+    cout << y << " ";
+    for(int x=0; x<columns; x++) {
+      cout << grid[y][x].getStart();
+      cout << grid[y][x];
+      cout << grid[y][x].getEnd();
     }
     cout << "\n";
   }
@@ -84,16 +84,19 @@ int Checkers::getPoint(const string message, const int range) const {
     cout << message;
     cin >> point;
 
+    cin.clear();
+    cin.ignore(1000,'\n');
+
     // Check that input is a numeric value.
     if(cin.fail()) {
+      drawScreen();
       cout << "\nYou entered a non numeric value, try again\n";
-      cin.clear();
-      cin.ignore(1000,'\n');
       continue;
     }
 
     // Check that input is within our grid range.
     if(point < 0 || point >= range) {
+      drawScreen();
       cout << "\nPoint out of range, try again\n";
       continue;
     }
@@ -125,12 +128,14 @@ bool Checkers::getMove() {
 
     // Check that the square has a piece.
     if(!srcSquare->hasPiece()) {
+      drawScreen();
       cout << "\nThe selected square doesn't contain a piece, try again\n";
       continue;
     }
 
     // Check that the piece in the square is currentPlayers.
     if(!srcSquare->hasPieceOwnedBy(currentPlayer)) {
+      drawScreen();
       cout << "\nThe selected square doesn't contain a piece owned by you,"
       << "try again\n";
       continue;
@@ -154,12 +159,14 @@ bool Checkers::getMove() {
 
     // Check that the destination square is not white.
     if(destSquare->getIdentifier() == 0) {
+      drawScreen();
       cout << "\nThe selected square is invalid, try again\n";
       continue;
     }
 
     // Check that the destination square is not occupied.
     if(destSquare->hasPiece()) {
+      drawScreen();
       cout << "\nThe selected square is occupied, try again\n";
       continue;
     }
@@ -167,25 +174,25 @@ bool Checkers::getMove() {
     break;
   }
 
-  int xvalidator = abs(srcCoordinate.x-destCoordinate.x);
-  int yvalidator = destCoordinate.y-srcCoordinate.y;
+  int xValidator = abs(srcCoordinate.x-destCoordinate.x);
+  int yValidator = destCoordinate.y-srcCoordinate.y;
   bool isKing = (srcSquare->getPiece(currentPlayer).getType() == 1);
 
   // Check for standard move.
-  if(xvalidator==1) {
+  if(xValidator==1) {
     // Check if its a southwards move.
-    if((currentPlayer == 0 || isKing) && (yvalidator == 1)) {
+    if((currentPlayer == 0 || isKing) && (yValidator == 1)) {
       return executeMove(*srcSquare,*destSquare);
     }
 
     // Check if its a northwards move.
-    else if((currentPlayer == 1 || isKing) && (yvalidator == -1)) {
+    else if((currentPlayer == 1 || isKing) && (yValidator == -1)) {
       return executeMove(*srcSquare,*destSquare);
     }
   }
 
   // Check for a jump.
-  else if(xvalidator==2) {
+  else if(xValidator==2) {
     x = (srcCoordinate.x+destCoordinate.x)/2;
     y = (srcCoordinate.y+destCoordinate.y)/2;
     jumpCoordinate = Coordinate(x,y);
@@ -194,12 +201,12 @@ bool Checkers::getMove() {
     // Check if its a southwards jump.
     if(toJump->hasPiece() && toJump->hasPieceOwnedBy(getOpposition())) {
 
-      if((currentPlayer == 0 || isKing) && (yvalidator == 2)) {
+      if((currentPlayer == 0 || isKing) && (yValidator == 2)) {
         return executeMove(*srcSquare,*destSquare,*toJump);
       }
 
       // Check if its a northwards jump.
-      else if((currentPlayer == 1 || isKing) && (yvalidator == -2)) {
+      else if((currentPlayer == 1 || isKing) && (yValidator == -2)) {
         return executeMove(*srcSquare,*destSquare,*toJump);
       }
 
