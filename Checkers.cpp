@@ -299,25 +299,25 @@ int Checkers::isOver() const {
 
           // Can jump up right
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y+2));
-          if(isValid == 1 || isValid == 2) {
+          if(isValid == 2) {
             return 1;
           }
 
           // Can jump up left
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
-          if(isValid == 1 || isValid == 2) {
+          if(isValid == 2) {
             return 1;
           }
 
           // Can jump down right
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
-          if(isValid == 1 || isValid == 2) {
+          if(isValid == 2) {
             return 1;
           }
 
           // Can jump down left
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y-2));
-          if(isValid == 1 || isValid == 2) {
+          if(isValid == 2) {
             return 1;
           }
         }
