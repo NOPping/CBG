@@ -94,22 +94,22 @@ int main() {
     case  1: {
       Checkers checkers = Checkers();
       checkers.start();
-      break;
+      return 0;
     }
     case 2: {
       ConnectFour connectFour = ConnectFour();
       connectFour.start();
-      break;
+      return 0;
     }
     case 3: {
       SnakesAndLadders snakesAndLadders = SnakesAndLadders();
       snakesAndLadders.start();
-      break;
+      return 0;
     }
     case 4: {
       Reversi reversi = Reversi();
       reversi.start();
-      break;
+      return 0;
     }
     }
   }
