@@ -275,51 +275,35 @@ int Checkers::isOver() const {
 
           // Can move up and right
           isValid = validMove(Coordinate(x,y),Coordinate(x+1,y+1));
-          if(isValid == 1) {
-            return 1;
-          }
+          if(isValid == 1) return 1;
 
           // Can move up and left
           isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
-          if(isValid == 1) {
-            return 1;
-          }
+          if(isValid == 1) return 1;
 
           // Can move down and right
           isValid = validMove(Coordinate(x,y),Coordinate(x+1,y-1));
-          if(isValid == 1) {
-            return 1;
-          }
+          if(isValid == 1) return 1;
 
           // Can move down and left
           isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
-          if(isValid == 1) {
-            return 1;
-          }
+          if(isValid == 1) return 1;
 
           // Can jump up right
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y+2));
-          if(isValid == 2) {
-            return 1;
-          }
+          if(isValid == 2) return 1;
 
           // Can jump up left
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
-          if(isValid == 2) {
-            return 1;
-          }
+          if(isValid == 2) return 1;
 
           // Can jump down right
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
-          if(isValid == 2) {
-            return 1;
-          }
+          if(isValid == 2) return 1;
 
           // Can jump down left
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y-2));
-          if(isValid == 2) {
-            return 1;
-          }
+          if(isValid == 2) return 1;
         }
       }
     }
