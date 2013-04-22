@@ -184,6 +184,8 @@ bool Checkers::getMove() {
     jumpCoordinate = Coordinate(x,y);
     Square* toJump = &grid[jumpCoordinate.y][jumpCoordinate.x];
     return executeMove(*srcSquare,*destSquare,*toJump);
+  } else {
+    drawScreen();
   }
 
   // All other cases.
@@ -264,9 +266,8 @@ int Checkers::getOpposition() const {
 
 /// Checks if either of the players no longer have pieces.
 int Checkers::isOver() const {
-  if(players[currentPlayer]->getAmountOfPieces() != 0) {
-    // If current player has zero pieces return win.
-    return 0;
+  if(players[currentPlayer]->getAmountOfPieces() == 0) {
+    return 1;
   } else {
     int isValid = 0;
     for(int y=0; y<columns; y++) {
@@ -275,35 +276,35 @@ int Checkers::isOver() const {
 
           // Can move up and right
           isValid = validMove(Coordinate(x,y),Coordinate(x+1,y+1));
-          if(isValid == 1) return 1;
+          if(isValid == 1) return 0;
 
           // Can move up and left
           isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
-          if(isValid == 1) return 1;
+          if(isValid == 1) return 0;
 
           // Can move down and right
           isValid = validMove(Coordinate(x,y),Coordinate(x+1,y-1));
-          if(isValid == 1) return 1;
+          if(isValid == 1) return 0;
 
           // Can move down and left
           isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
-          if(isValid == 1) return 1;
+          if(isValid == 1) return 0;
 
           // Can jump up right
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y+2));
-          if(isValid == 2) return 1;
+          if(isValid == 2) return 0;
 
           // Can jump up left
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
-          if(isValid == 2) return 1;
+          if(isValid == 2) return 0;
 
           // Can jump down right
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
-          if(isValid == 2) return 1;
+          if(isValid == 2) return 0;
 
           // Can jump down left
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y-2));
-          if(isValid == 2) return 1;
+          if(isValid == 2) return 0;
         }
       }
     }
