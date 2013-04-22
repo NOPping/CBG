@@ -20,6 +20,9 @@ class Checkers : public Game {
     /// onto executeMove().
     bool  getMove();
     
+    /// Validates Moves.
+    int validMove(Coordinate srcCoordinate, Coordinate destCoordinate) const;
+    
     /// Moves the piece on source square to destination square.
     bool  executeMove(Square& srcSquare,Square& destSquare);
     

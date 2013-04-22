@@ -42,11 +42,11 @@ Checkers::Checkers():Game(2, 8, 8) {
       // Check if its a black square
       if(identifier == 1) {
         // Add a black piece if its a black square and on the first 3 rows
-        if(y<3) {
+        if(y<3 && players[0]->hasRoomForPiece()) {
           grid[y][x].addPiece(0, players[0]->addPiece());
         }
         // Add a white piece if its a black square and on the last 3 rows
-        else if(y>4) {
+        else if(y>4 && players[1]->hasRoomForPiece()) {
           grid[y][x].addPiece(1, players[1]->addPiece());
         }
       }
@@ -174,6 +174,48 @@ bool Checkers::getMove() {
     break;
   }
 
+  int isValid = validMove(srcCoordinate,destCoordinate);
+
+  if(isValid == 1) {
+    return executeMove(*srcSquare,*destSquare);
+  } else if(isValid == 2) {
+    x = (srcCoordinate.x+destCoordinate.x)/2;
+    y = (srcCoordinate.y+destCoordinate.y)/2;
+    jumpCoordinate = Coordinate(x,y);
+    Square* toJump = &grid[jumpCoordinate.y][jumpCoordinate.x];
+    return executeMove(*srcSquare,*destSquare,*toJump);
+  }
+  
+  // All other cases.
+  return false;
+}
+
+
+/// Validates moves.
+int Checkers::validMove(Coordinate srcCoordinate, Coordinate destCoordinate)
+                                                                        const {
+  
+  // Bound checks.
+  if(srcCoordinate.x >= rows || srcCoordinate.x < 0)
+    return 0;
+  if(srcCoordinate.y >= columns || srcCoordinate.y < 0)
+    return 0;
+  if(destCoordinate.x >= rows || destCoordinate.x < 0) 
+    return 0;
+  if(destCoordinate.y >= columns || destCoordinate.y < 0)
+    return 0;
+  
+  Square *srcSquare = &grid[srcCoordinate.y][srcCoordinate.x];
+  Square *destSquare = &grid[destCoordinate.y][destCoordinate.x];
+  
+  // Does source square have a piece
+  if(srcSquare->hasPieceOwnedBy(currentPlayer) == 0) 
+    return 0;
+  
+  // Is destination occupied?
+  if(destSquare->hasPiece() > 0)
+    return 0;
+  
   int xValidator = abs(srcCoordinate.x-destCoordinate.x);
   int yValidator = destCoordinate.y-srcCoordinate.y;
   bool isKing = (srcSquare->getPiece(currentPlayer).getType() == 1);
@@ -182,39 +224,37 @@ bool Checkers::getMove() {
   if(xValidator==1) {
     // Check if its a southwards move.
     if((currentPlayer == 0 || isKing) && (yValidator == 1)) {
-      return executeMove(*srcSquare,*destSquare);
+      return 1;
     }
 
     // Check if its a northwards move.
     else if((currentPlayer == 1 || isKing) && (yValidator == -1)) {
-      return executeMove(*srcSquare,*destSquare);
+      return 1;
     }
   }
 
   // Check for a jump.
   else if(xValidator==2) {
-    x = (srcCoordinate.x+destCoordinate.x)/2;
-    y = (srcCoordinate.y+destCoordinate.y)/2;
-    jumpCoordinate = Coordinate(x,y);
+    int x = (srcCoordinate.x+destCoordinate.x)/2;
+    int y = (srcCoordinate.y+destCoordinate.y)/2;
+    Coordinate jumpCoordinate = Coordinate(x,y);
     Square* toJump = &grid[jumpCoordinate.y][jumpCoordinate.x];
 
     // Check if its a southwards jump.
     if(toJump->hasPiece() && toJump->hasPieceOwnedBy(getOpposition())) {
 
       if((currentPlayer == 0 || isKing) && (yValidator == 2)) {
-        return executeMove(*srcSquare,*destSquare,*toJump);
+        return 2;
       }
 
       // Check if its a northwards jump.
       else if((currentPlayer == 1 || isKing) && (yValidator == -2)) {
-        return executeMove(*srcSquare,*destSquare,*toJump);
+        return 2;
       }
-
     }
   }
-
-  // All other cases.
-  return false;
+  
+  return 0;
 }
 
 /// Returns the opposition.
@@ -224,7 +264,69 @@ int Checkers::getOpposition() const {
 
 /// Checks if either of the players no longer have pieces.
 int Checkers::isOver() const {
-  return players[currentPlayer]->getAmountOfPieces() == 0 ? 1 : 0;
+  if(players[currentPlayer]->getAmountOfPieces() != 0) {
+    // If current player has zero pieces return win.
+    return 0;
+  } else {
+    int isValid = 0;
+    for(int y=0;y<columns;y++) {
+      for(int x=0;x<rows;x++) {
+        if(grid[y][x].hasPieceOwnedBy(currentPlayer)) {
+          
+          // Can move up and right
+          isValid = validMove(Coordinate(x,y),Coordinate(x+1,y+1));
+          if(isValid == 1) {
+            return 1;
+          }
+          
+          // Can move up and left
+          isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
+          if(isValid == 1) {
+            return 1;
+          }
+          
+          // Can move down and right
+          isValid = validMove(Coordinate(x,y),Coordinate(x+1,y-1));
+          if(isValid == 1) {
+            return 1;
+          }
+          
+          // Can move down and left
+          isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
+          if(isValid == 1) {
+            return 1;
+          }
+          
+          // Can jump up right
+          isValid = validMove(Coordinate(x,y),Coordinate(x-2,y+2));
+          if(isValid == 1 || isValid == 2) {
+            return 1;
+          }
+          
+          // Can jump up left
+          isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
+          if(isValid == 1 || isValid == 2) {
+            return 1;
+          }
+          
+          // Can jump down right
+          isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
+          if(isValid == 1 || isValid == 2) {
+            return 1;
+          }
+          
+          // Can jump down left
+          isValid = validMove(Coordinate(x,y),Coordinate(x-2,y-2));
+          if(isValid == 1 || isValid == 2) {
+            return 1;
+          }
+        }
+      }
+    }
+  }
+  
+  // Return Draw 
+  return 2;
 }
 
 /// Moves the piece on source square to destination square.
