@@ -36,6 +36,7 @@ bool Square::addPiece(int player, Piece& piece) {
 
 /// Removes a piece from the square.
 bool Square::removePiece(int player) {
+  pieces[player]->owner->removePiece();
   pieces[player] = 0;
   numberOfOccupants--;
   return true;
