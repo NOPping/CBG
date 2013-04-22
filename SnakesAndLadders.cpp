@@ -79,11 +79,13 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
   }
 
   // Add the players to the starting square.
-  Piece* player1Piece = new SrcPiece(*players[0],Coord(0,9));
-  Piece* player2Piece = new SrcPiece(*players[1],Coord(0,9));
-  squareRefs[0]->addPiece(0, players[0]->addPiece(player1Piece));
-  squareRefs[0]->addPiece(1, players[1]->addPiece(player2Piece));
-
+  if(players[0]->hasRoomForPiece() && players[1]->hasRoomForPiece()) {
+    Piece* player1Piece = new SrcPiece(*players[0],Coord(0,9));
+    Piece* player2Piece = new SrcPiece(*players[1],Coord(0,9));
+    squareRefs[0]->addPiece(0, players[0]->addPiece(player1Piece));
+    squareRefs[0]->addPiece(1, players[1]->addPiece(player2Piece));
+  }
+  
   Coord snakes[maxSystemPieces/2][2] = {
     {squareToCoordinate(20),squareToCoordinate(17)},
     {squareToCoordinate(33),squareToCoordinate(7)},
@@ -110,25 +112,29 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
 
   // Place all the snakes onto the board.
   for(int i=0; i<maxSystemPieces/amountOfSystemItems; i++) {
-    source = new SystemPiece(systemItems[0],snakes[i][0],snakes[i][1],i);
-    destination = new IDPiece(systemItems[1],i);
-    // Snake start point.
-    grid[snakes[i][0].y][snakes[i][0].x].addPiece(2,*source);
-    // Snake end point.
-    grid[snakes[i][1].y][snakes[i][1].x].addPiece(3,*destination);
+    if(systemItems[0].hasRoomForPiece() && systemItems[1].hasRoomForPiece()) {
+      source = new SystemPiece(systemItems[0],snakes[i][0],snakes[i][1],i);
+      destination = new IDPiece(systemItems[1],i);
+      // Snake start point.
+      grid[snakes[i][0].y][snakes[i][0].x].addPiece(2,*source);
+      // Snake end point.
+      grid[snakes[i][1].y][snakes[i][1].x].addPiece(3,*destination);
+    }
   }
 
   // Places all the ladders onto the board.
   for(int i=0; i<maxSystemPieces/2; i++) {
-    source = new SystemPiece(systemItems[0],ladders[i][0],ladders[i][1],i);
-    destination = new IDPiece(systemItems[1],i);
-    // Sets the piece to use the ladder character representation.
-    source->setType(1);
-    destination->setType(1);
-    // Ladder start point.
-    grid[ladders[i][0].y][ladders[i][0].x].addPiece(2,*source);
-    // Ladder end point.
-    grid[ladders[i][1].y][ladders[i][1].x].addPiece(3,*destination);
+    if(systemItems[0].hasRoomForPiece() && systemItems[1].hasRoomForPiece()) {    
+      source = new SystemPiece(systemItems[0],ladders[i][0],ladders[i][1],i);
+      destination = new IDPiece(systemItems[1],i);
+      // Sets the piece to use the ladder character representation.
+      source->setType(1);
+      destination->setType(1);
+      // Ladder start point.
+      grid[ladders[i][0].y][ladders[i][0].x].addPiece(2,*source);
+      // Ladder end point.
+      grid[ladders[i][1].y][ladders[i][1].x].addPiece(3,*destination);
+    }
   }
 }
 
