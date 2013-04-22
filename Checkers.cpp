@@ -185,7 +185,7 @@ bool Checkers::getMove() {
     Square* toJump = &grid[jumpCoordinate.y][jumpCoordinate.x];
     return executeMove(*srcSquare,*destSquare,*toJump);
   }
-  
+
   // All other cases.
   return false;
 }
@@ -193,29 +193,29 @@ bool Checkers::getMove() {
 
 /// Validates moves.
 int Checkers::validMove(Coordinate srcCoordinate, Coordinate destCoordinate)
-                                                                        const {
-  
+const {
+
   // Bound checks.
   if(srcCoordinate.x >= rows || srcCoordinate.x < 0)
     return 0;
   if(srcCoordinate.y >= columns || srcCoordinate.y < 0)
     return 0;
-  if(destCoordinate.x >= rows || destCoordinate.x < 0) 
+  if(destCoordinate.x >= rows || destCoordinate.x < 0)
     return 0;
   if(destCoordinate.y >= columns || destCoordinate.y < 0)
     return 0;
-  
+
   Square *srcSquare = &grid[srcCoordinate.y][srcCoordinate.x];
   Square *destSquare = &grid[destCoordinate.y][destCoordinate.x];
-  
+
   // Does source square have a piece
-  if(srcSquare->hasPieceOwnedBy(currentPlayer) == 0) 
+  if(srcSquare->hasPieceOwnedBy(currentPlayer) == 0)
     return 0;
-  
+
   // Is destination occupied?
   if(destSquare->hasPiece() > 0)
     return 0;
-  
+
   int xValidator = abs(srcCoordinate.x-destCoordinate.x);
   int yValidator = destCoordinate.y-srcCoordinate.y;
   bool isKing = (srcSquare->getPiece(currentPlayer).getType() == 1);
@@ -253,7 +253,7 @@ int Checkers::validMove(Coordinate srcCoordinate, Coordinate destCoordinate)
       }
     }
   }
-  
+
   return 0;
 }
 
@@ -269,52 +269,52 @@ int Checkers::isOver() const {
     return 0;
   } else {
     int isValid = 0;
-    for(int y=0;y<columns;y++) {
-      for(int x=0;x<rows;x++) {
+    for(int y=0; y<columns; y++) {
+      for(int x=0; x<rows; x++) {
         if(grid[y][x].hasPieceOwnedBy(currentPlayer)) {
-          
+
           // Can move up and right
           isValid = validMove(Coordinate(x,y),Coordinate(x+1,y+1));
           if(isValid == 1) {
             return 1;
           }
-          
+
           // Can move up and left
           isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
           if(isValid == 1) {
             return 1;
           }
-          
+
           // Can move down and right
           isValid = validMove(Coordinate(x,y),Coordinate(x+1,y-1));
           if(isValid == 1) {
             return 1;
           }
-          
+
           // Can move down and left
           isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
           if(isValid == 1) {
             return 1;
           }
-          
+
           // Can jump up right
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y+2));
           if(isValid == 1 || isValid == 2) {
             return 1;
           }
-          
+
           // Can jump up left
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
           if(isValid == 1 || isValid == 2) {
             return 1;
           }
-          
+
           // Can jump down right
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
           if(isValid == 1 || isValid == 2) {
             return 1;
           }
-          
+
           // Can jump down left
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y-2));
           if(isValid == 1 || isValid == 2) {
@@ -324,8 +324,8 @@ int Checkers::isOver() const {
       }
     }
   }
-  
-  // Return Draw 
+
+  // Return Draw
   return 2;
 }
 

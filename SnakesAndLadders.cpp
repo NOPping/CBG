@@ -263,7 +263,7 @@ bool SnakesAndLadders::executeMove(Square* srcSquare,
     return true;
   } else {
     SrcPiece& piece = dynamic_cast<SrcPiece&>(
-                                            srcSquare->getPiece(currentPlayer));
+      srcSquare->getPiece(currentPlayer));
     Coord& destinationCoord = destSquare->getPosition();
     piece.setSource(destinationCoord);
 
