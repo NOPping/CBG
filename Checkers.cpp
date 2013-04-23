@@ -337,6 +337,5 @@ bool Checkers::executeMove(Square& srcSquare,Square& destSquare) {
 bool Checkers::executeMove(Square& srcSquare,Square& destSquare,
                            Square& toJump) {
   toJump.removePiece(getOpposition());
-  players[getOpposition()]->removePiece();
   return executeMove(srcSquare,destSquare);
 }
