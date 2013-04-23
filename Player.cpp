@@ -55,10 +55,11 @@ Piece& Player::addPiece(Piece* insert) {
 
 /// Remove Piece from the player and return a bollean to identify
 /// if it succeded or failed.
-bool Player::removePiece() {
+bool Player::removePiece(Piece* toBeRemoved) {
   if(amountOfPieces > 0) {
-    // Decrement amountOfPieces so the next piece added
-    // will overwrite last piece
+    // replace the piece to be removed with the piece at the end of the
+    // vector and decrememnt 
+    toBeRemoved = pieces[amountOfPieces];
     amountOfPieces--;
     return true;
   } else {
