@@ -59,8 +59,8 @@ bool Player::removePiece(Piece* toBeRemoved) {
   if(amountOfPieces > 0) {
     // replace the piece to be removed with the piece at the end of the
     // vector and decrememnt 
-    toBeRemoved = pieces[amountOfPieces];
     amountOfPieces--;
+    *toBeRemoved = *pieces[amountOfPieces];
     return true;
   } else {
     return false;
