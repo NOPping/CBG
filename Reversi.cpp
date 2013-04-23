@@ -31,7 +31,7 @@ Reversi::Reversi():Game(2, 8, 8)  {
   grid[4][4].addPiece(0, players[0]->addPiece());
   grid[3][4].addPiece(1, players[1]->addPiece());
   grid[4][3].addPiece(1, players[1]->addPiece());
-
+}
 void Reversi::drawScreen() const {
   clearScreen();
   cout << "Player " << (currentPlayer+1) << " it is your go\n\n  ";
@@ -88,24 +88,23 @@ bool Reversi::getMove() {
       destinationSquare = &grid[y][x];
       validInput=executeMove(*destinationSquare);
     }
-    if(validInput)currentPlayer = currentPlayer+1%2;
+    if(validInput)currentPlayer = (currentPlayer+1)%2;
 
   }
   return true;
 }
-bool Reversi::executeMove(Square& destinationSquare)const {
-  if(flanks(destinationSquare.getPosition()) 
-      && players[currentPlayer]->hasRoomForPiece()) {
-    destinationSquare.addPiece(currentPlayer,players[currentPlayer]->addPiece());
-
-    return true;
-  } else{
+bool Reversi::executeMove(Square& destinationSquare)const {    
+  if(flanks(destinationSquare,true)) { 
+    destinationSquare.addPiece(currentPlayer,players[currentPlayer]->addPiece());   
+    //currentPlayer=((currentPlayer+1)%2);
+  return true;
+  } 
+  else{ 
     cout<<"\nDoes not flank opponent piece\n";
-    return false;
+    return false;       
   }
-
-
 }
+
 bool Reversi::flanks(const Square current,bool flip) const {
   bool count=false;
   
