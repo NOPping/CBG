@@ -268,8 +268,10 @@ int Checkers::getOpposition() const {
 /// Checks if either of the players no longer have pieces.
 int Checkers::isOver() const {
   if(players[currentPlayer]->getAmountOfPieces() == 0) {
-    return 0;
-  } else {
+    return 1;
+  } 
+  /*
+  else {
     int isValid = 0;
     for(int y=0; y<rows; y++) {
       for(int x=0; x<columns; x++) {
@@ -277,42 +279,42 @@ int Checkers::isOver() const {
 
           // Can move up and right
           isValid = validMove(Coordinate(x,y),Coordinate(x+1,y+1));
-          if(isValid == 1) return 1;
+          if(isValid == 1) return 0;
 
           // Can move up and left
           isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
-          if(isValid == 1) return 1;
+          if(isValid == 1) return 0;
 
           // Can move down and right
           isValid = validMove(Coordinate(x,y),Coordinate(x+1,y-1));
-          if(isValid == 1) return 1;
+          if(isValid == 1) return 0;
 
           // Can move down and left
           isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
-          if(isValid == 1) return 1;
+          if(isValid == 1) return 0;
 
           // Can jump up right
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y+2));
-          if(isValid == 2) return 1;
+          if(isValid == 2) return 0;
 
           // Can jump up left
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
-          if(isValid == 2) return 1;
+          if(isValid == 2) return 0;
 
           // Can jump down right
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
-          if(isValid == 2) return 1;
+          if(isValid == 2) return 0;
 
           // Can jump down left
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y-2));
-          if(isValid == 2) return 1;
+          if(isValid == 2) return 0;
         }
       }
-    }
-  }
+    } 
+  }*/
 
   // Return Draw
-  return 2;
+  return 0;
 }
 
 /// Moves the piece on source square to destination square.
@@ -338,5 +340,6 @@ bool Checkers::executeMove(Square& srcSquare,Square& destSquare) {
 bool Checkers::executeMove(Square& srcSquare,Square& destSquare,
                            Square& toJump) {
   toJump.removePiece(getOpposition());
+  players[getOpposition()]->removePiece();
   return executeMove(srcSquare,destSquare);
 }
