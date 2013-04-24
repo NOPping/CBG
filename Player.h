@@ -42,7 +42,7 @@ class Player {
       
       /// Remove Piece from the player and return a bollean to identify 
       /// if it succeded or failed.
-      bool removePiece();
+      bool removePiece(Piece* toBeRemoved);
       
       /// Check if pieces vector at index type is empty
       bool hasType(int type) const;
