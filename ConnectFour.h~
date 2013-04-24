@@ -33,7 +33,7 @@ private:
 
   /// Function to test the top row of the board and see if every
   /// square has a piece on it.
-  bool isDraw() const;
+  bool topRowFull() const;
 
   /// Function to test if four player pieces lie in a row.
   bool fourInRow(const Square& current) const;
