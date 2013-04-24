@@ -337,7 +337,7 @@ bool Checkers::executeMove(Square& srcSquare,Square& destSquare) {
 /// the piece on the to jump square.
 bool Checkers::executeMove(Square& srcSquare,Square& destSquare,
                            Square& toJump) {
+  players[getOpposition()]->removePiece(&(toJump.getPiece(getOpposition())));
   toJump.removePiece(getOpposition());
-  players[getOpposition()]->removePiece();
   return executeMove(srcSquare,destSquare);
 }

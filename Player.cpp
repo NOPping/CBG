@@ -5,6 +5,8 @@
 #include "Player.h"
 #include "Piece.h"
 
+#include <iostream>
+
 Player::Player() {}
 
 Player::Player(int amountOfTypes, vector<string> types, int maxPieces) {
@@ -55,12 +57,33 @@ Piece& Player::addPiece(Piece* insert) {
 
 /// Remove Piece from the player and return a bollean to identify
 /// if it succeded or failed.
-bool Player::removePiece() {
+bool Player::removePiece(Piece *toBeRemoved) {
   if(amountOfPieces > 0) {
     // replace the piece to be removed with the piece at the end of the
     // vector and decrememnt 
+    int index=-1;
+
+    // Find our piece
+    for(int i=0;i<amountOfPieces;i++) {
+      if(toBeRemoved == pieces[i]) {
+        index=i;
+        break;
+      }
+    }
+    
+    if(index=-1) return false;
+    
+    // Decrease amount of pieces by one.
     amountOfPieces--;
-    //*toBeRemoved = *pieces[amountOfPieces];
+
+    // Move all pieces back.
+    for(int i=index;i<amountOfPieces;i++) {
+      pieces[i] = pieces[i+1]; 
+    }
+    
+    // Delete the last index
+    pieces[amountOfPieces] = NULL;
+    
     return true;
   } else {
     return false;
