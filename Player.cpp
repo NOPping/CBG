@@ -66,6 +66,7 @@ bool Player::removePiece(Piece *toBeRemoved) {
     // Find our piece
     for(int i=0;i<amountOfPieces;i++) {
       if(toBeRemoved == pieces[i]) {
+        delete pieces[i];
         index=i;
         break;
       }
