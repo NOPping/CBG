@@ -269,9 +269,7 @@ int Checkers::getOpposition() const {
 int Checkers::isOver() const {
   if(players[currentPlayer]->getAmountOfPieces() == 0) {
     return 1;
-  } 
-  /*
-  else {
+  } else {
     int isValid = 0;
     for(int y=0; y<rows; y++) {
       for(int x=0; x<columns; x++) {
@@ -311,10 +309,10 @@ int Checkers::isOver() const {
         }
       }
     } 
-  }*/
+  }
 
   // Return Draw
-  return 0;
+  return 2;
 }
 
 /// Moves the piece on source square to destination square.
