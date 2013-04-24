@@ -84,13 +84,12 @@ int Checkers::getPoint(const string message, const int range) const {
     cout << message;
     cin >> point;
 
-    cin.clear();
-    cin.ignore(1000,'\n');
-
     // Check that input is a numeric value.
     if(cin.fail()) {
       drawScreen();
       cout << "\nYou entered a non numeric value, try again\n";
+      cin.clear();
+      cin.ignore(1000,'\n');
       continue;
     }
 
@@ -98,6 +97,8 @@ int Checkers::getPoint(const string message, const int range) const {
     if(point < 0 || point >= range) {
       drawScreen();
       cout << "\nPoint out of range, try again\n";
+      cin.clear();
+      cin.ignore(1000,'\n');
       continue;
     }
 
@@ -267,44 +268,44 @@ int Checkers::getOpposition() const {
 /// Checks if either of the players no longer have pieces.
 int Checkers::isOver() const {
   if(players[currentPlayer]->getAmountOfPieces() == 0) {
-    return 1;
+    return 0;
   } else {
     int isValid = 0;
-    for(int y=0; y<columns; y++) {
-      for(int x=0; x<rows; x++) {
+    for(int y=0; y<rows; y++) {
+      for(int x=0; x<columns; x++) {
         if(grid[y][x].hasPieceOwnedBy(currentPlayer)) {
 
           // Can move up and right
           isValid = validMove(Coordinate(x,y),Coordinate(x+1,y+1));
-          if(isValid == 1) return 0;
+          if(isValid == 1) return 1;
 
           // Can move up and left
           isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
-          if(isValid == 1) return 0;
+          if(isValid == 1) return 1;
 
           // Can move down and right
           isValid = validMove(Coordinate(x,y),Coordinate(x+1,y-1));
-          if(isValid == 1) return 0;
+          if(isValid == 1) return 1;
 
           // Can move down and left
           isValid = validMove(Coordinate(x,y),Coordinate(x-1,y+1));
-          if(isValid == 1) return 0;
+          if(isValid == 1) return 1;
 
           // Can jump up right
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y+2));
-          if(isValid == 2) return 0;
+          if(isValid == 2) return 1;
 
           // Can jump up left
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
-          if(isValid == 2) return 0;
+          if(isValid == 2) return 1;
 
           // Can jump down right
           isValid = validMove(Coordinate(x,y),Coordinate(x+2,y+2));
-          if(isValid == 2) return 0;
+          if(isValid == 2) return 1;
 
           // Can jump down left
           isValid = validMove(Coordinate(x,y),Coordinate(x-2,y-2));
-          if(isValid == 2) return 0;
+          if(isValid == 2) return 1;
         }
       }
     }
