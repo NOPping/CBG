@@ -24,8 +24,8 @@ private:
   /// Prompts with message to get a point between 0 and range.
   int getPoint(const string message, const int range) const;
 
-  /// Prints out the board and all the players pieces.
-  void  drawScreen() const;
+  /// Function to print out the board.
+  void drawScreen() const;
 
   /// Function to return weather or not the game is over or not.
   int  isOver() const;
