@@ -311,8 +311,8 @@ int Checkers::isOver() const {
     } 
   }
 
-  // Return Draw
-  return 2;
+  // Return Win
+  return 1;
 }
 
 /// Moves the piece on source square to destination square.

@@ -66,13 +66,16 @@ bool Player::removePiece(Piece *toBeRemoved) {
     // Find our piece
     for(int i=0;i<amountOfPieces;i++) {
       if(toBeRemoved == pieces[i]) {
-        delete pieces[i];
         index=i;
+        delete pieces[i];
         break;
       }
     }
-    
-    if(index=-1) return false;
+      
+    if(index==-1) {
+      std::cout << "PIECE NOT FOUND" << "\n";
+      return false;
+    }
     
     // Decrease amount of pieces by one.
     amountOfPieces--;
@@ -82,6 +85,7 @@ bool Player::removePiece(Piece *toBeRemoved) {
       pieces[i] = pieces[i+1]; 
     }
     
+    //delete pieces[amountOfPieces];
     // Delete the last index
     pieces[amountOfPieces] = NULL;
     
@@ -103,7 +107,7 @@ Piece& Player::getPiece(int index) const {
 }
 
 Player::~Player() {
-  for(int i = 0; i<maxPieces; i++) {
+  for(int i = 0; i<amountOfPieces; i++) {
     delete pieces[i];
   }
 }
