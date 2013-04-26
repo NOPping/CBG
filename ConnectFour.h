@@ -20,9 +20,12 @@ private:
   /// Function to request a move from the user and read it in
   /// Pass move to executeMove().
   bool getMove();
+  
+  /// Prompts with message to get a point between 0 and range.
+  int getPoint(const string message, const int range) const;
 
-  /// Function to print out the board.
-  void drawScreen() const;
+  /// Prints out the board and all the players pieces.
+  void  drawScreen() const;
 
   /// Function to return weather or not the game is over or not.
   int  isOver() const;
@@ -33,7 +36,7 @@ private:
 
   /// Function to test the top row of the board and see if every
   /// square has a piece on it.
-  bool topRowFull() const;
+  bool isDraw() const;
 
   /// Function to test if four player pieces lie in a row.
   bool fourInRow(const Square& current) const;
