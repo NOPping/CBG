@@ -6,6 +6,7 @@
 
 using namespace std;
 using std::max;
+using std::cout;
 
 ConnectFour::ConnectFour():Game(2,7,6) {
   state = 0;
@@ -74,13 +75,17 @@ int ConnectFour::isOver(const Square& current) const {
 /// returns weather or not the number is greater than 3, signifying a win.
 bool ConnectFour::fourInRow(const Square& current) const {
   int numPiecesInRow = max(
-    // Take away one on each becuase current square is tested twice
-    max((checkNext(current,0,1) + checkNext(current,0,-1) -1),
-        (checkNext(current,1,1) + checkNext(current,-1,-1)-1)),
-    max((checkNext(current,1,0) + checkNext(current,-1,0) -1),
-        (checkNext(current,1,-1) + checkNext(current,-1,1)-1))
+        // Vertical
+    max((checkNext(current,0,1) + checkNext(current,0,-1)),
+        // Diagonal down right / up left
+        (checkNext(current,1,1) + checkNext(current,-1,-1))),
+        // Horizontal
+    max((checkNext(current,1,0) + checkNext(current,-1,0)),
+        // Diagonal up right / down left
+        (checkNext(current,1,-1) + checkNext(current,-1,1)))
   );
-  return(numPiecesInRow > 3);
+   // Greater than 4 becuase current square was added in twice on each
+  return(numPiecesInRow > 4);
 }
 
 /// Recursive function to check the next square to see if it has a piece
@@ -88,7 +93,6 @@ bool ConnectFour::fourInRow(const Square& current) const {
 int ConnectFour::checkNext(const Square& current,int yOffset,int xOffset) const {
   if(current.hasPieceOwnedBy(currentPlayer)) {
     if(isLegal(current, yOffset, xOffset)) {
-    
       Coordinate currentPos = current.getPosition();
       
       // Get the next square in the row
@@ -108,9 +112,9 @@ bool ConnectFour::isLegal(const Square& current,int yOffset,int xOffset) const {
   Coordinate currentPos = current.getPosition();
   
   // Ensure that the next square lies inside the bounds of the board
-  return((currentPos.x + xOffset < columns)&&(currentPos.x + xOffset >= 0))
-  &&(currentPos.y + yOffset < rows)&&(currentPos.y + yOffset >= 0)
-  &&(yOffset != 0 || xOffset != 0);
+  return((currentPos.x + xOffset < columns)&&(currentPos.x + xOffset >= 0))&&
+          (currentPos.y + yOffset < rows)&&(currentPos.y + yOffset >= 0)&&
+           (yOffset != 0 || xOffset != 0);
 }
 
 /// Function to request a move from the user and read it in
@@ -118,13 +122,11 @@ bool ConnectFour::isLegal(const Square& current,int yOffset,int xOffset) const {
 bool ConnectFour::getMove() {
   int x = getPoint("\nType in the X coordinate of the column you would like to "
     "add your piece to:\n", columns);
-  
+  // decrememnt x so it matches how the columns are numbered in code
   x--;
   executeMove(x);
   
-  // Change currentPlayer to the next player.
   currentPlayer = (currentPlayer + 1) % 2;
-  
   return true;
 }
 
@@ -162,8 +164,8 @@ int ConnectFour::getPoint(const string message, const int range) const {
 bool ConnectFour::executeMove(int x) {
   // Add one to the number of items in desired column.
   columnHeight[x]++;
-  // Get the y destination of the piece to be added bytaking the
-  // amount of pieces in the column from the total
+  // Get the y destination of the piece to be added by taking the
+  // amount of pieces in the column from the total amount of rows
   int y = rows - columnHeight[x];
   if(players[currentPlayer]->hasRoomForPiece()) {
     grid[y][x].addPiece(currentPlayer, players[currentPlayer]->addPiece());
@@ -173,6 +175,7 @@ bool ConnectFour::executeMove(int x) {
   return true;
 }
 
+/// Functions to test if the game has ended in a draw
 bool ConnectFour::isDraw() const {
   return(players[0]->getAmountOfPieces()+players[1]->getAmountOfPieces() == 42);
 }
