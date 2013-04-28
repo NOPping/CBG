@@ -53,7 +53,7 @@ private:
   int  checkNext(const Square& next,int yOffset,int xOffset) const;
   
   /// Returns the opposition.
-  int getOpposition() const;
+  int ConnectFour::getOpposition() const;
   
 public:
   ConnectFour();

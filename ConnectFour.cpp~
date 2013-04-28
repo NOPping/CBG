@@ -181,7 +181,7 @@ bool ConnectFour::isDraw() const {
 }
 
 /// Returns the opposition.
-int ConnectFour::getOpposition() const {
+int Checkers::getOpposition() const {
   return (currentPlayer+1)%amountOfPlayers;
 }
 
