@@ -4,9 +4,16 @@
 #ifndef CONNECTFOUR_H
 #define CONNECTFOUR_H
 
+#include <algorithm>
+
 #include "Game.h"
 #include "Square.h"
 #include "Player.h"
+
+using std::vector;
+using std::max;
+using std::cout;
+using std::cin;
 
 class ConnectFour : public Game {
 private:

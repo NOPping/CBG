@@ -2,11 +2,6 @@
 /// @author Darren Brogan
 
 #include "ConnectFour.h"
-#include <algorithm>
-
-using std::max;
-using std::cout;
-using std::cin;
 
 ConnectFour::ConnectFour():Game(2,7,6) {
   state = 0;
