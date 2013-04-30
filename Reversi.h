@@ -11,18 +11,9 @@
 
 #include "Game.h"
 
-class Reversi:public Game {
+class Reversi:public Base {
     /// Gets a move from the player
     bool getMove();
-
-    /// Prints out the board and the players pieces.
-    void drawScreen() const;
-
-    /// Prompts with message to get a point between 0 and range.
-    int  getPoint(string message, int range) const;
-
-    /// Returns the opposition.
-    int  getOpposition() const;
 
     //determins if a destinaiton swuare is valid   
     bool isValidMove(int destinationX) const;  
