@@ -20,7 +20,7 @@ private:
   /// Function to test if the next square is legal.
   bool isLegal(const Square& current,int yOffset,int xOffset) const;
 
-  /// Int to storee the current state of the game.
+  /// Int to store the current state of the game.
   int  state;
 
   /// Function to request a move from the user and read it in
@@ -47,8 +47,8 @@ private:
   /// Function to test if four player pieces lie in a row.
   bool fourInRow(const Square& current) const;
 
-  /// Function to take a column and move a piece to the next 
-  /// available slot in that column.
+  /// Function to take an int representing a column and move a piece to 
+  /// the next available slot in that column.
   bool executeMove(int x);
 
   /// Vector to hold how much pieces lie in each column.
