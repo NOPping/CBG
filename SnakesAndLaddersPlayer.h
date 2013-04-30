@@ -7,12 +7,12 @@
 #include "Player.h"
 
 class SnakesAndLaddersPlayer : public Player {    
-  public:
-    SnakesAndLaddersPlayer();
-    SnakesAndLaddersPlayer(int amountOfTypes, vector<string> types,
-                           int maxPieces);
-    
-    bool suspended;
+public:
+  SnakesAndLaddersPlayer();
+  SnakesAndLaddersPlayer(int amountOfTypes, vector<string> types,
+                         int maxPieces);
+  
+  bool suspended;
 };
 
 #endif

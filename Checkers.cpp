@@ -129,6 +129,7 @@ bool Checkers::getMove() {
     break;
   }
 
+  // Validate the move.
   int isValid = validMove(srcCoordinate,destCoordinate);
 
   if(isValid == 1) {
@@ -153,25 +154,19 @@ int Checkers::validMove(Coordinate srcCoordinate, Coordinate destCoordinate)
 const {
 
   // Bound checks.
-  if(srcCoordinate.x >= rows || srcCoordinate.x < 0)
-    return 0;
-  if(srcCoordinate.y >= columns || srcCoordinate.y < 0)
-    return 0;
-  if(destCoordinate.x >= rows || destCoordinate.x < 0)
-    return 0;
-  if(destCoordinate.y >= columns || destCoordinate.y < 0)
-    return 0;
+  if(srcCoordinate.x >= rows || srcCoordinate.x < 0) return 0;
+  if(srcCoordinate.y >= columns || srcCoordinate.y < 0) return 0;
+  if(destCoordinate.x >= rows || destCoordinate.x < 0) return 0;
+  if(destCoordinate.y >= columns || destCoordinate.y < 0) return 0;
 
   Square *srcSquare = &grid[srcCoordinate.y][srcCoordinate.x];
   Square *destSquare = &grid[destCoordinate.y][destCoordinate.x];
 
   // Does source square have a piece
-  if(srcSquare->hasPieceOwnedBy(currentPlayer) == 0)
-    return 0;
+  if(srcSquare->hasPieceOwnedBy(currentPlayer) == 0) return 0;
 
   // Is destination occupied?
-  if(destSquare->hasPiece() > 0)
-    return 0;
+  if(destSquare->hasPiece() > 0) return 0;
 
   int xValidator = abs(srcCoordinate.x-destCoordinate.x);
   int yValidator = destCoordinate.y-srcCoordinate.y;
@@ -214,7 +209,8 @@ const {
   return 0;
 }
 
-/// Checks if either of the players no longer have pieces.
+/// Checks if either of the players no longer have pieces or a player cannot
+/// move.
 int Checkers::isOver() const {
   if(players[currentPlayer]->getAmountOfPieces() == 0) {
     return 1;

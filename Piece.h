@@ -13,26 +13,26 @@ using std::ostream;
 
 class Player;
 class Piece {
-    protected:
-      /// The type of the piece.
-      int type;
+protected:
+  /// The type of the piece.
+  int type;
 
-    public:
-      Piece();
-      Piece(Player& owner);
-      virtual ~Piece();
-      
-      /// Returns the type of piece.
-      int getType() const ;
-      
-      /// Sets the type of piece.
-      bool setType(int type);
-      
-      /// Inserts the piece into the given ostream.
-      virtual void print(ostream& os) const;
-      
-      /// Pointer to the pieces owner.
-      Player* owner;
+public:
+  Piece();
+  Piece(Player& owner);
+  virtual ~Piece();
+  
+  /// Returns the type of piece.
+  int getType() const ;
+  
+  /// Sets the type of piece.
+  bool setType(int type);
+  
+  /// Inserts the piece into the given ostream.
+  virtual void print(ostream& os) const;
+  
+  /// Pointer to the pieces owner.
+  Player* owner;
 };
 
 #endif

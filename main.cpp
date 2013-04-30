@@ -28,9 +28,11 @@ int main() {
     "3) Snakes and Ladders",
     "4) Reversi"
   };
-
+  
+  // Flush the screen and set the foreground color to violet.
   cout << CLEAR FVIOLET;
 
+  // Print out ASCII art of the product name.
   cout << "    ____                                     _ _                  "
   << "        __ \n";
   cout << "   / ___|___  _ __ ___  _ __   ___ _ __   __| (_)_   _ _ __ ___   "
@@ -55,11 +57,11 @@ int main() {
   << "\\___||___/\n";
   cout << "                                       |___/\n";
 
-  cout << RESET;
+  // Switch the forground color to red.
+  cout << RESET << FRED "\n";
 
-  cout << FRED "\n";
-
-  int borderWitdh = 81;
+  // Create a border.
+  const int borderWitdh = 80;
   border(borderWitdh);
   cout << RESET "\n";
 
@@ -68,10 +70,12 @@ int main() {
     cout << menu[i] << "\n";
   }
 
+  // Create a closing border.
   cout << FRED "\n";
   border(borderWitdh);
   cout << RESET;
 
+  // Prompt and read in the users selection.
   cout << "\nInsert the number of the game you wish to play: \n";
   while(true) {
     cin >> selection;
@@ -118,7 +122,7 @@ int main() {
 
 /// Prints a border of the specified width.
 void border(const int width) {
-  cout.width(width);
+  cout.width(width+1);
   cout.fill('=');
   cout << "\n";
 }

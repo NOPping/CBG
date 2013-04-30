@@ -4,7 +4,9 @@
 
 #include "SnakesAndLadders.h"
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::vector;
 
 typedef SnakesAndLaddersPlayer SLPlayer;
 typedef SourcePiece SrcPiece;
