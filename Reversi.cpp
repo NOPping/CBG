@@ -1,26 +1,38 @@
+/// Reversi Game.
+/// @author Peter Morgan
+
 #include "Reversi.h"
+
 using std::cout;
 using std::cin;
 using std::string;
 using std::vector;
+
 Reversi::Reversi():Game(2, 8, 8)  {
+  // Setup the players.
   const int amountOfPieceTypes= 1;
   const int maxPlayerPieces = 64;
+
   vector<string> player1PieceTypes(amountOfPieceTypes);
   vector<string> player2PieceTypes(amountOfPieceTypes);
-  player1PieceTypes[0] = "\033[37m◎";
-  player2PieceTypes[0] = "\033[30m◎";
+
+  player1PieceTypes[0] = FWHITE "◎";
+  player2PieceTypes[0] = FBLACK "◎";
+
   players[0] =new Player(amountOfPieceTypes,player1PieceTypes,maxPlayerPieces);
   players[1] =new Player(amountOfPieceTypes,player2PieceTypes,maxPlayerPieces);
-  string start[] = {"\033[48;5;2m ","\033[48;5;10m "};
-  string end = " \033[0m";
+
+  // Setup the colors for the squares.
+  string start[] = {BLIME" ",BGREEN" "};
+  string end = " "RESET;
 
   int identifier = 0;
 
-  for(int i=0; i<rows; i++) {
-    for(int j=0; j<columns; j++) {
-      grid[i][j] = Square(identifier,start[identifier],end,amountOfPlayers,
-                          Coordinate(j,i));
+  for(int y=0; y<rows; y++) {
+    for(int x=0; x<columns; x++) {
+      // Setup the square
+      grid[y][x] = Square(identifier,start[identifier],end,amountOfPlayers,
+                          Coordinate(x,y));
       // Switch identifier
       identifier = (identifier+1)%2;
     }
@@ -33,82 +45,95 @@ Reversi::Reversi():Game(2, 8, 8)  {
   grid[3][4].addPiece(1, players[1]->addPiece());
   grid[4][3].addPiece(1, players[1]->addPiece());
 }
-//flushes the screen and prints  out the board
+
+/// Prints out the board and all the players pieces.
 void Reversi::drawScreen() const {
   clearScreen();
   cout << "Player " << (currentPlayer+1) << " it is your go\n\n  ";
-  for(int i=0; i<rows; i++) cout << " " << i << " ";
+  for(int x=0; x<columns; x++) cout << " " << x << " ";
   cout << "\n";
-  for(int i=0; i<rows; i++) {
-    cout << i << " ";
-    for(int j=0; j<columns; j++) {
-      cout << grid[i][j].getStart();
-      cout << grid[i][j];
-      cout << grid[i][j].getEnd();
+  for(int y=0; y<rows; y++) {
+    cout << y << " ";
+    for(int x=0; x<columns; x++) {
+      cout << grid[y][x].getStart();
+      cout << grid[y][x];
+      cout << grid[y][x].getEnd();
     }
     cout << "\n";
   }
   cout << "\n";
 }
-//gets an int from the user and ensures it within  the range of the board
-int Reversi::getPoint(const string message, int range) const {
+
+/// Prompts with message to get a point between 0 and range.
+int Reversi::getPoint(const string message, const int range) const {
   int point=0;
   while(true) {
     cout << message;
     cin >> point;
 
-    // Check that input is a numeric value
+    // Check that input is a numeric value.
     if(cin.fail()) {
+      drawScreen();
       cout << "\nYou entered a non numeric value, try again\n";
       cin.clear();
       cin.ignore(1000,'\n');
       continue;
     }
-    // Check that input is within our grid range
+
+    // Check that input is within our grid range.
     if(point < 0 || point >= range) {
+      drawScreen();
       cout << "\nPoint out of range, try again\n";
+      cin.clear();
+      cin.ignore(1000,'\n');
       continue;
     }
 
     return point;
   }
 }
+
 //prompts a player to enter an x and y coordinate using get point
 //passes the coordinate on to execute move
 bool Reversi::getMove() {
   Coordinate destinationCoordinate;
-  Square  *destinationSquare;
+  Square  *destSquare;
   int x,y;
   bool validInput=false;
+
   while(!validInput) {
-    x = getPoint("Type the X point of the square you would like to move too:\n",rows);
-    y = getPoint("Type the Y point of the square you would like to move too:\n",columns);
+    x = getPoint("Type the X point of the piece you would like to move:\n",
+                 rows);
+    y = getPoint("Type the Y point of the piece you would like to move:\n",
+                 columns);
+
     destinationCoordinate = Coordinate(x,y);
 
     if(grid[y][x].hasPiece()) {
       cout << "\nThe selected square is occupied, try again\n";
       continue;
     } else {
-      destinationSquare = &grid[y][x];
-      validInput=executeMove(*destinationSquare);
+      destSquare = &grid[y][x];
+      validInput=executeMove(*destSquare);
     }
-    if(validInput)currentPlayer = (currentPlayer+1)%2;
+    if(validInput)currentPlayer = getOpposition();
 
   }
   return true;
 }
+
 // call the flanks method to ensure the destination coordinate  flanks an opponents piece
 //if ti does it adds the piece to the destination square
-bool Reversi::executeMove(Square& destinationSquare)const {
-  if(flanks(destinationSquare,true)) {
-    destinationSquare.addPiece(currentPlayer,players[currentPlayer]->addPiece());
-    //currentPlayer=((currentPlayer+1)%2);
+bool Reversi::executeMove(Square& destSquare)const {
+  if(flanks(destSquare,true)) {
+    destSquare.addPiece(currentPlayer,players[currentPlayer]->addPiece());
     return true;
   } else{
     cout<<"\nDoes not flank opponent piece\n";
     return false;
   }
 }
+
 //checks if a coordinate flanks an opponents piece
 //calls check next to see if the piece is inline with an existing piece owned
 //by the same player
@@ -149,6 +174,7 @@ bool Reversi::checkNext(Square &current,int yOffset,int xOffset,bool flip) const
   }
   return false;
 }
+
 //checks if a move is  within the bounds of the board
 bool Reversi::isLegal(const Coordinate current,int iOffset,int jOffset) const {
   //Ensure that the next square lies inside the bounds of the board
@@ -156,6 +182,7 @@ bool Reversi::isLegal(const Coordinate current,int iOffset,int jOffset) const {
   &&(current.y + iOffset < rows)&&(current.y + iOffset >= 0)
   &&(iOffset != 0 || jOffset != 0);
 }
+
 //determines the winner  of the game
 int Reversi::isOver() const {
   int check;
@@ -172,7 +199,8 @@ int Reversi::isOver() const {
   }
   return check+check2;
 }
-//changes the players
+
+/// Returns the opposition.
 int Reversi::getOpposition() const {
   return (currentPlayer+1)%amountOfPlayers;
 }
