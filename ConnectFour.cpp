@@ -79,7 +79,7 @@ bool ConnectFour::fourInRow(const Square& current) const {
         (checkNext(current,0,1) + checkNext(current,0,-1)),
         // Diagonal down right / up left
         (checkNext(current,1,1) + checkNext(current,-1,-1))
-      ),
+    ),
     max(
        // Horizontal
        (checkNext(current,1,0) + checkNext(current,-1,0)),
