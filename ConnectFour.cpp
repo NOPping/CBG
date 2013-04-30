@@ -146,7 +146,7 @@ int ConnectFour::getPoint(const string message, const int range) const {
     }
 
     // Check that input is within our grid range.
-    if(point < 0 || point >= range) {
+    if(point < 0 || point > range) {
       drawScreen();
       cout << "\nPoint out of range, try again\n";
       cin.clear();
