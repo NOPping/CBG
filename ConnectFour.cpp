@@ -39,11 +39,11 @@ void ConnectFour::drawScreen() const {
   for(int i=1; i<=columns; i++) cout << "  " << i << " ";
   cout << "\n";
   cout << FBLUE " +---+---+---+---+---+---+---+" RESET << "\n";
-  // Print out each square of the board
+  // Print out each square of the board.
   for(int y=0; y<rows; y++) {
     std::cout << " ";
     for(int x=0; x<columns; x++) {
-      // Print out what's inside each square
+      // Print out what's inside each square.
       cout << grid[y][x].getStart();
       cout << grid[y][x];
       cout << grid[y][x].getEnd();
@@ -54,7 +54,7 @@ void ConnectFour::drawScreen() const {
   cout << "\n";
 }
 
-/// Overloaded function to to return weather or not the game is over 
+/// Overloaded function to to return weather or not the game is over. 
 int ConnectFour::isOver() const {
   return state;
 }
@@ -70,19 +70,19 @@ int ConnectFour::isOver(const Square& current) const {
 bool ConnectFour::fourInRow(const Square& current) const {
   int numPiecesInRow = max(
     max(
-        // Vertical
+        // Vertical.
         (checkNext(current,0,1) + checkNext(current,0,-1)),
-        // Diagonal down right / up left
+        // Diagonal down right / up left.
         (checkNext(current,1,1) + checkNext(current,-1,-1))
     ),
     max(
-       // Horizontal
+       // Horizontal.
        (checkNext(current,1,0) + checkNext(current,-1,0)),
-       // Diagonal up right / down left
+       // Diagonal up right / down left.
        (checkNext(current,1,-1) + checkNext(current,-1,1))
     )
   );
-  // Greater than 4 becuase current square was added in twice on each
+  // Greater than 4 becuase current square was added in twice on each.
   return(numPiecesInRow > 4);
 }
 
@@ -94,13 +94,13 @@ int ConnectFour::checkNext(const Square& current,int yOffset,int xOffset) const 
       
       Coordinate currentPos = current.getPosition();
 
-      // Get the next square in the row
+      // Get the next square in the row.
       Square& next = grid[currentPos.y + yOffset][currentPos.x + xOffset];
 
       // Return 1 for the current piece plus check the next square for piece.
       return 1 + checkNext(next, yOffset, xOffset);
     }
-    // If the next square isn't legal just return one for the current square
+    // If the next square isn't legal just return one for the current square.
     return 1;
   }
   return 0;
@@ -110,7 +110,7 @@ int ConnectFour::checkNext(const Square& current,int yOffset,int xOffset) const 
 bool ConnectFour::isLegal(const Square& current,int yOffset,int xOffset) const {
   Coordinate currentPos = current.getPosition();
 
-  // Ensure that the next square lies inside the bounds of the board
+  // Ensure that the next square lies inside the bounds of the board.
   return((currentPos.x + xOffset < columns)&&(currentPos.x + xOffset >= 0))&&
          (currentPos.y + yOffset < rows)&&(currentPos.y + yOffset >= 0)&&
           (yOffset != 0 || xOffset != 0);
@@ -121,7 +121,7 @@ bool ConnectFour::isLegal(const Square& current,int yOffset,int xOffset) const {
 bool ConnectFour::getMove() {
   int x = getPoint("\nType in the X coordinate of the column you would like to "
                    "add your piece to:\n", columns);
-  // decrememnt x so it matches how the columns are numbered in code
+  // Decrememnt x so it matches how the columns are numbered in code.
   x--;
   executeMove(x);
 
@@ -162,6 +162,7 @@ int ConnectFour::getPoint(const string message, const int range) const {
       cin.ignore(1000,'\n');
       continue;
     }
+    
     return point;
   }
 }
@@ -171,13 +172,16 @@ int ConnectFour::getPoint(const string message, const int range) const {
 bool ConnectFour::executeMove(int x) {
   // Add one to the number of items in desired column.
   columnHeight[x]++;
+  
   // Get the y destination of the piece to be added by taking the
-  // amount of pieces in the column from the total amount of rows
+  // amount of pieces in the column from the total amount of rows.
   int y = rows - columnHeight[x];
+  
   if(players[currentPlayer]->hasRoomForPiece()) {
     grid[y][x].addPiece(currentPlayer, players[currentPlayer]->addPiece());
   }
-  // Update the state variable
+  
+  // Update the state variable.
   state = isOver(grid[y][x]);
   return true;
 }
@@ -192,7 +196,7 @@ int ConnectFour::getOpposition() const {
   return (currentPlayer+1)%amountOfPlayers;
 }
 
-/// Deconstructor for Connect Four
+/// Deconstructor for Connect Four.
 ConnectFour::~ConnectFour() {
   columnHeight.clear();
 }
