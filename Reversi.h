@@ -9,7 +9,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "Game.h"
+#include "Base.h"
 
 class Reversi:public Base {
     /// Gets a move from the player
