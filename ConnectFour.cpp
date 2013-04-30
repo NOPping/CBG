@@ -153,7 +153,15 @@ int ConnectFour::getPoint(const string message, const int range) const {
       cin.ignore(1000,'\n');
       continue;
     }
-
+    
+    // Check that there's room in column.
+    if(columnHeight[point-1] == rows) {
+      drawScreen();
+      cout << "\nColumn you selected is full\n";
+      cin.clear();
+      cin.ignore(1000,'\n');
+      continue;
+    }
     return point;
   }
 }
