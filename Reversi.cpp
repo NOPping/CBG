@@ -65,37 +65,46 @@ bool Reversi::getMove() {
     if(grid[y][x].hasPiece()) {
       cout << "\nThe selected square is occupied, try again\n";
       continue;
-    } else {
+    } 
+    
+    else {
       destSquare = &grid[y][x];
       validInput=executeMove(*destSquare);
     }
   }
+  
   currentPlayer = getOpposition();
   return true;
 }
 
-// Call the flanks method to ensure the destination coordinate flanks an opponents piece.
-// If it does it adds the piece to the destination square.
+/// Call the flanks method to ensure the destination coordinate flanks an opponents piece.
+/// If it does it adds the piece to the destination square.
 bool Reversi::executeMove(Square& destSquare) const {
+  
   if(flanks(destSquare,true)) {
     destSquare.addPiece(currentPlayer,players[currentPlayer]->addPiece());
     return true;
-  } else{
+  } 
+  
+  else{
     cout<<"\nDoes not flank opponent piece\n";
     return false;
   }
 }
 
-// Checks if the current square flanks an opponents piece
-// 
+/// Checks if the current square flanks an opponents piece
+/// Boolean flip is passed in to tel the function if we want to flip the pieces or we're 
+/// just testing if there is a place where a move could be made.
 bool Reversi::flanks(const Square current,bool flip) const {
   bool madeFlank=false;
 
   for(int yOffset = -1; yOffset <= 1; yOffset++)  {
     for(int xOffset = -1; xOffset <= 1; xOffset++) {
+      
       // Check the next position that orbit will take is  inside board bounds
       if(isLegal(current.getPosition(),yOffset,xOffset)) {
         Coordinate currentPos = current.getPosition();
+        
         // Get the next square by adding the offsets of x and y to the position
         Square& orbit = grid[currentPos.y + yOffset][currentPos.x + xOffset];
         if(checkNext(orbit,yOffset,xOffset,flip))
@@ -110,11 +119,13 @@ bool Reversi::flanks(const Square current,bool flip) const {
 /// Current player, if it does it removes the line of pieces and exchanges them 
 /// with pieces owned by the current player.
 bool Reversi::checkNext(Square &current,int yOffset,int xOffset,bool flip) const {
-  // Make ure the current piece is owned by currentPlayer
+  // Make sure the current piece is owned by currentPlayer
   Coordinate currentPos = current.getPosition();
+  
   if(current.hasPieceOwnedBy(getOpposition()) &&
     isLegal(currentPos,yOffset, xOffset)) {
     Square& next = grid[currentPos.y + yOffset][currentPos.x + xOffset];
+    
     // If the next square in line is owned by the current player or the piece
     // at the end of a line of opponent pieces is owned by current player
     // flip pieces. 
@@ -134,15 +145,14 @@ bool Reversi::checkNext(Square &current,int yOffset,int xOffset,bool flip) const
   return false;
 }
 
-// Checks if the next square is inside the bounds of the board
+// Checks if the next square is inside the bounds of the board.
 bool Reversi::isLegal(const Coordinate current,int yOffset,int xOffset) const {
-
-  return((current.x + xOffset < columns)&&(current.x + xOffset >= 0)) &&
+  return((current.x + xOffset < columns) && (current.x + xOffset >= 0)) &&
          (current.y + yOffset < rows)&&(current.y + yOffset >= 0)&&
          (yOffset != 0 || xOffset != 0);
 }
 
-// Determines if the game has been won or not
+// Determines if the game has been won or not.
 int Reversi::isOver() const {
   int check;
   int check2=1;
