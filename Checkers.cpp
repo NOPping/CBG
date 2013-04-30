@@ -8,7 +8,7 @@ using std::cin;
 using std::string;
 using std::vector;
 
-Checkers::Checkers():Game(2, 8, 8) {
+Checkers::Checkers():Base() {
   // Setup the players.
   const int amountOfPieceTypes = 2;
   const int maxAmountOfPlayerPieces = 12;
@@ -59,52 +59,6 @@ Checkers::Checkers():Game(2, 8, 8) {
   }
 }
 
-/// Prints out the board and all the players pieces.
-void Checkers::drawScreen() const {
-  clearScreen();
-  cout << "Player " << (currentPlayer+1) << " it is your go\n\n  ";
-  for(int x=0; x<columns; x++) cout << " " << x << " ";
-  cout << "\n";
-  for(int y=0; y<rows; y++) {
-    cout << y << " ";
-    for(int x=0; x<columns; x++) {
-      cout << grid[y][x].getStart();
-      cout << grid[y][x];
-      cout << grid[y][x].getEnd();
-    }
-    cout << "\n";
-  }
-  cout << "\n";
-}
-
-/// Prompts with message to get a point between 0 and range.
-int Checkers::getPoint(const string message, const int range) const {
-  int point=0;
-  while(true) {
-    cout << message;
-    cin >> point;
-
-    // Check that input is a numeric value.
-    if(cin.fail()) {
-      drawScreen();
-      cout << "\nYou entered a non numeric value, try again\n";
-      cin.clear();
-      cin.ignore(1000,'\n');
-      continue;
-    }
-
-    // Check that input is within our grid range.
-    if(point < 0 || point >= range) {
-      drawScreen();
-      cout << "\nPoint out of range, try again\n";
-      cin.clear();
-      cin.ignore(1000,'\n');
-      continue;
-    }
-
-    return point;
-  }
-}
 
 /// Calls getPoint twice to get a source square and destination square
 /// Validates the move and passes the source square and destination square
@@ -258,11 +212,6 @@ const {
   }
 
   return 0;
-}
-
-/// Returns the opposition.
-int Checkers::getOpposition() const {
-  return (currentPlayer+1)%amountOfPlayers;
 }
 
 /// Checks if either of the players no longer have pieces.
