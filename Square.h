@@ -41,7 +41,8 @@ protected:
   Coordinate position;
 public:
   Square();
-  Square(int identifier, string start, string end, int amountOfPlayers, Coordinate position);
+  Square(int identifier, string start, string end, int amountOfPlayers,
+         Coordinate position);
   
   /// Returns the square's identifier.
   int getIdentifier() const;
