@@ -27,7 +27,7 @@ Reversi::Reversi():Base()  {
   string end = " "RESET;
 
   int identifier = 0;
-
+  //Sets up the grid.
   for(int y=0; y<rows; y++) {
     for(int x=0; x<columns; x++) {
       // Setup the square
@@ -44,53 +44,6 @@ Reversi::Reversi():Base()  {
   grid[4][4].addPiece(0, players[0]->addPiece());
   grid[3][4].addPiece(1, players[1]->addPiece());
   grid[4][3].addPiece(1, players[1]->addPiece());
-}
-
-/// Prints out the board and the players pieces.
-void Reversi::drawScreen() const {
-  clearScreen();
-  cout << "Player " << (currentPlayer+1) << " it is your go\n\n  ";
-  for(int x=0; x<columns; x++) cout << " " << x << " ";
-  cout << "\n";
-  for(int y=0; y<rows; y++) {
-    cout << y << " ";
-    for(int x=0; x<columns; x++) {
-      cout << grid[y][x].getStart();
-      cout << grid[y][x];
-      cout << grid[y][x].getEnd();
-    }
-    cout << "\n";
-  }
-  cout << "\n";
-}
-
-/// Prompts with message to get a point between 0 and range.
-int Reversi::getPoint(const string message, const int range) const {
-  int point=0;
-  while(true) {
-    cout << message;
-    cin >> point;
-
-    // Check that input is a numeric value.
-    if(cin.fail()) {
-      drawScreen();
-      cout << "\nYou entered a non numeric value, try again\n";
-      cin.clear();
-      cin.ignore(1000,'\n');
-      continue;
-    }
-
-    // Check that input is within our grid range.
-    if(point < 0 || point >= range) {
-      drawScreen();
-      cout << "\nPoint out of range, try again\n";
-      cin.clear();
-      cin.ignore(1000,'\n');
-      continue;
-    }
-
-    return point;
-  }
 }
 
 //prompts a player to enter an x and y coordinate using get point
@@ -197,9 +150,4 @@ int Reversi::isOver() const {
     }
   }
   return check+check2;
-}
-
-/// Returns the opposition.
-int Reversi::getOpposition() const {
-  return (currentPlayer+1)%amountOfPlayers;
 }
