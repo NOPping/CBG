@@ -4,11 +4,10 @@ Compendium of board games
 Selection of well known board games implemented in C++
 
 Compile with:
-```g++ *.cpp```
+`g++ *.cpp`
 
 Launch with:
-```./a.out```
-
+`./a.out`
 
 Declaration:
 ------------
