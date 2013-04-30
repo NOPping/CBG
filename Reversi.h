@@ -2,7 +2,7 @@
 /// @author Peter Morgan
 
 #ifndef REVERSI_H
-#define REVERSI
+#define REVERSI_H
 
 #include <string>
 #include <vector>
