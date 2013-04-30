@@ -85,7 +85,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
     squareRefs[0]->addPiece(0, players[0]->addPiece(player1Piece));
     squareRefs[0]->addPiece(1, players[1]->addPiece(player2Piece));
   }
-  
+
   Coord snakes[maxSystemPieces/2][2] = {
     {squareToCoordinate(20),squareToCoordinate(17)},
     {squareToCoordinate(33),squareToCoordinate(7)},
@@ -124,7 +124,7 @@ SnakesAndLadders::SnakesAndLadders():Game(2,10,10), amountOfSystemItems(2) {
 
   // Places all the ladders onto the board.
   for(int i=0; i<maxSystemPieces/2; i++) {
-    if(systemItems[0].hasRoomForPiece() && systemItems[1].hasRoomForPiece()) {    
+    if(systemItems[0].hasRoomForPiece() && systemItems[1].hasRoomForPiece()) {
       source = new SystemPiece(systemItems[0],ladders[i][0],ladders[i][1],i);
       destination = new IDPiece(systemItems[1],i);
       // Sets the piece to use the ladder character representation.

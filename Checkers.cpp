@@ -308,7 +308,7 @@ int Checkers::isOver() const {
           if(isValid == 2) return 0;
         }
       }
-    } 
+    }
   }
 
   // Return Win
