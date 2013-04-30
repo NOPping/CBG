@@ -124,7 +124,7 @@ bool Reversi::getMove() {
 
 // call the flanks method to ensure the destination coordinate  flanks an opponents piece
 //if ti does it adds the piece to the destination square
-bool Reversi::executeMove(Square& destSquare)const {
+bool Reversi::executeMove(Square& destSquare) const {
   if(flanks(destSquare,true)) {
     destSquare.addPiece(currentPlayer,players[currentPlayer]->addPiece());
     return true;
@@ -157,8 +157,7 @@ bool Reversi::flanks(const Square current,bool flip) const {
 //current player if it does, it flips the line of pieces to the current players colour
 bool Reversi::checkNext(Square &current,int yOffset,int xOffset,bool flip) const {
   if(current.hasPieceOwnedBy(getOpposition()) &&
-  isLegal(current.getPosition(),
-  yOffset, xOffset)) {
+     isLegal(current.getPosition(),yOffset, xOffset)) {
     Coordinate currentPos = current.getPosition();
     Square& next = grid[currentPos.y + yOffset][currentPos.x + xOffset];
     if(next.hasPieceOwnedBy(currentPlayer)||checkNext(next,yOffset,xOffset,true)) {
