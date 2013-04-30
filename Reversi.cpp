@@ -46,7 +46,7 @@ Reversi::Reversi():Game(2, 8, 8)  {
   grid[4][3].addPiece(1, players[1]->addPiece());
 }
 
-/// Prints out the board and all the players pieces.
+/// Prints out the board and the players pieces.
 void Reversi::drawScreen() const {
   clearScreen();
   cout << "Player " << (currentPlayer+1) << " it is your go\n\n  ";
