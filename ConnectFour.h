@@ -1,5 +1,5 @@
 #ifndef CONNCTFOUR_H
-#define CONNCTFOUR
+#define CONNCTFOUR_H
 
 #include <string>
 #include <iostream>
