@@ -8,7 +8,7 @@ using std::cin;
 using std::string;
 using std::vector;
 
-Checkers::Checkers():Base() {
+Checkers::Checkers():GameWithXYSelector(2,8,8) {
   // Setup the players.
   const int amountOfPieceTypes = 2;
   const int maxAmountOfPlayerPieces = 12;

@@ -8,7 +8,7 @@ using std::cin;
 using std::string;
 using std::vector;
 
-Reversi::Reversi():Base()  {
+Reversi::Reversi():GameWithXYSelector(2,8,8)  {
   // Setup the players.
   const int amountOfPieceTypes= 1;
   const int maxPlayerPieces = 64;

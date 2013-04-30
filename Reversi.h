@@ -4,14 +4,10 @@
 #ifndef REVERSI_H
 #define REVERSI_H
 
-#include <string>
-#include <vector>
-#include <cstdlib>
-#include <iostream>
+#include "GameWithXYSelector.h"
 
-#include "Base.h"
-
-class Reversi:public Base {
+class Reversi:public GameWithXYSelector {
+private:
     /// Gets a move from the player
     bool getMove();
 
