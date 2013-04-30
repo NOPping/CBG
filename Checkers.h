@@ -4,7 +4,7 @@
 #ifndef CHECKERS_H
 #define CHECKERS_H
 
-#include "Game.h"
+#include "Base.h"
 
 class Checkers : public Game {
   private:
