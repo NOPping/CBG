@@ -8,7 +8,6 @@
 
 class Checkers : public Game {
   private:
-    
     /// Returns the opposition.
     int   getOpposition() const;
     

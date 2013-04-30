@@ -1,13 +1,12 @@
-#ifndef CONNCTFOUR_H
-#define CONNCTFOUR_H
+/// ConnectFour Game.
+/// @author Darren Brogan
 
-#include <string>
-#include <iostream>
+#ifndef CONNECTFOUR_H
+#define CONNECTFOUR_H
+
 #include "Game.h"
 #include "Square.h"
 #include "Player.h"
-
-using std::vector;
 
 class ConnectFour : public Game {
 private:
