@@ -5,14 +5,14 @@
 #define COORDINATE_H
 
 struct Coordinate {
-    /// The X position.
-    int x;
-    
-    /// The Y position.
-    int y;
-    
-    Coordinate();    
-    Coordinate(int x, int y);
+  /// The X position.
+  int x;
+
+  /// The Y position.
+  int y;
+
+  Coordinate();
+  Coordinate(int x, int y);
 };
 
 #endif

@@ -7,16 +7,16 @@
 #include "Piece.h"
 
 class DestinationPiece : virtual public Piece {
-protected:
+  protected:
   /// Coordinate containing the destination.
   Coordinate destination;
-  
-public:
+
+  public:
   DestinationPiece(Player& owner, Coordinate destination);
-  
+
   /// Returns the destination
   Coordinate getDestination();
-  
+
   /// Sets the destination coordinate.
   void setDestination(Coordinate destination);
 };

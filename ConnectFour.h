@@ -16,7 +16,7 @@ using std::cout;
 using std::cin;
 
 class ConnectFour : public Game {
-private:
+  private:
   /// Function to test if the next square is legal.
   bool isLegal(const Square& current,int yOffset,int xOffset) const;
 
@@ -26,7 +26,7 @@ private:
   /// Function to request a move from the user and read it in
   /// Pass move to executeMove().
   bool getMove();
-  
+
   /// Prompts with message to get a point between 0 and range.
   int getPoint(const string message, const int range) const;
 
@@ -36,7 +36,7 @@ private:
   /// Function to return weather or not the game is over or not.
   int  isOver() const;
 
-  /// Overloaded function to to return weather or not the game 
+  /// Overloaded function to to return weather or not the game
   /// is over or not.
   int  isOver(const Square& current) const;
 
@@ -47,21 +47,21 @@ private:
   /// Function to test if four player pieces lie in a row.
   bool fourInRow(const Square& current) const;
 
-  /// Function to take an int representing a column and move a piece to 
+  /// Function to take an int representing a column and move a piece to
   /// the next available slot in that column.
   bool executeMove(int x);
 
   /// Vector to hold how much pieces lie in each column.
   vector<int> columnHeight;
 
-  /// recursive function to check the next square to see if it has a piece 
+  /// recursive function to check the next square to see if it has a piece
   /// to see if it's owned by current player.
   int  checkNext(const Square& next,int yOffset,int xOffset) const;
-  
+
   /// Returns the opposition.
   int getOpposition() const;
-  
-public:
+
+  public:
   ConnectFour();
   ~ConnectFour();
 };

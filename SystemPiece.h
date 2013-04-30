@@ -11,10 +11,10 @@
 #include "IdentifierPiece.h"
 
 class SystemPiece : public SourcePiece, public DestinationPiece,
-                    public IdentifierPiece {    
+  public IdentifierPiece {
   public:
-    SystemPiece(Player& owner, Coordinate source, Coordinate destination,
-                int identifier);
+  SystemPiece(Player& owner, Coordinate source, Coordinate destination,
+              int identifier);
 };
 
 #endif

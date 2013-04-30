@@ -11,7 +11,7 @@
 #include "SystemPiece.h"
 
 class SnakesAndLadders : public Game {
-private:
+  private:
   /// Prints out the board, players, snakes and ladders.
   void drawScreen() const;
 
@@ -43,7 +43,7 @@ private:
   /// Check if square with identifier 100 is occupied.
   int isOver() const;
 
-public:
+  public:
   SnakesAndLadders();
   ~SnakesAndLadders();
 };

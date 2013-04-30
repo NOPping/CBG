@@ -7,16 +7,16 @@
 #include "Piece.h"
 
 class SourcePiece : virtual public Piece {
-protected:
+  protected:
   /// Coordinate containing the source.
   Coordinate source;
-  
-public:
+
+  public:
   SourcePiece(Player& owner, Coordinate source);
-  
+
   /// Returns the source.
   Coordinate getSource();
-  
+
   /// Sets the source coordinate.
   void setSource(Coordinate source);
 };

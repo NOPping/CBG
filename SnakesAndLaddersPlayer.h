@@ -6,12 +6,12 @@
 
 #include "Player.h"
 
-class SnakesAndLaddersPlayer : public Player {    
-public:
+class SnakesAndLaddersPlayer : public Player {
+  public:
   SnakesAndLaddersPlayer();
   SnakesAndLaddersPlayer(int amountOfTypes, vector<string> types,
                          int maxPieces);
-  
+
   bool suspended;
 };
 
