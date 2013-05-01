@@ -158,19 +158,28 @@ bool Reversi::isLegal(const Coordinate current,int yOffset,int xOffset) const {
 
 // Determines if the game has been won or not.
 int Reversi::isOver() const {
-  int check;
-  int check2=1;
-  for(int x = 0; x<rows; x++) {
-    for(int y=0; y<columns; y++) {
-      if(!grid[y][x].hasPiece()) {
-        if(flanks(grid[y][x],false))check=0;
-        //Checks if the board is full and determines the winner based on the number
-        //of pieces on the board.
-        check2=players[currentPlayer]->getAmountOfPieces()
-        +players[getOpposition()]->getAmountOfPieces() == 64 ? 1 : 0;
-
+  char c;
+  int check=1;
+  int check2;
+  int pCurPieces=players[currentPlayer]->getAmountOfPieces();
+  int pOppPieces=players[getOpposition()]->getAmountOfPieces();    
+  cout<<"Enter D to call the game a draw, Q to quit or R to resume"<<"\n";
+  cin>>c; 
+  if(c =='D')return 2;
+  else if( c =='Q') return 1;
+  
+  if(pCurPieces+pOppPieces == 64){          
+    if(pCurPieces>pOppPieces)
+      currentPlayer=getOpposition();        
+    check2=1;
+  }
+  for(int x = 0;x<rows;x++){
+    for(int y=0;y<columns;y++){
+      if(!grid[y][x].hasPiece()){
+        if(flanks(grid[y][x],false))
+          check=0;
       }
     }
-  }
+  }        
   return check+check2;
-}
+  }
