@@ -114,13 +114,14 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:a274f1eb1ef7a33b59b1d214945da5871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call the flanks method to ensure the destination coordinate flanks an opponents piece.  <a href="#a274f1eb1ef7a33b59b1d214945da5871">More...</a><br/></td></tr>
 <tr class="separator:a274f1eb1ef7a33b59b1d214945da5871"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af207a975f859079510679ae4b4368152"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reversi.html#af207a975f859079510679ae4b4368152">isOver</a> ()</td></tr>
-<tr class="memdesc:af207a975f859079510679ae4b4368152"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines whether or not the game is over.  <a href="#af207a975f859079510679ae4b4368152">More...</a><br/></td></tr>
+<tr class="memdesc:af207a975f859079510679ae4b4368152"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if the game has been won or not.  <a href="#af207a975f859079510679ae4b4368152">More...</a><br/></td></tr>
 <tr class="separator:af207a975f859079510679ae4b4368152"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac86d30e569d222c3eee17fe3d6dcfaf0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reversi.html#ac86d30e569d222c3eee17fe3d6dcfaf0">checkNext</a> (<a class="el" href="class_square.html">Square</a> &amp;current, int yOffset, int xOffset, bool flip) const </td></tr>
 <tr class="separator:ac86d30e569d222c3eee17fe3d6dcfaf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03cbdc52a74eaabb63f19721befdf8ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reversi.html#a03cbdc52a74eaabb63f19721befdf8ba">flanks</a> (<a class="el" href="class_square.html">Square</a> current, bool flip) const </td></tr>
 <tr class="separator:a03cbdc52a74eaabb63f19721befdf8ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a378767a7508aa0a82c93ac8fade0ad24"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reversi.html#a378767a7508aa0a82c93ac8fade0ad24">isLegal</a> (<a class="el" href="struct_coordinate.html">Coordinate</a> current, int iOffset, int jOffset) const </td></tr>
+<tr class="memdesc:a378767a7508aa0a82c93ac8fade0ad24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the next square is inside the bounds of the board.  <a href="#a378767a7508aa0a82c93ac8fade0ad24">More...</a><br/></td></tr>
 <tr class="separator:a378767a7508aa0a82c93ac8fade0ad24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -352,6 +353,8 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Checks if the next square is inside the bounds of the board. </p>
+
 </div>
 </div>
 <a class="anchor" id="af207a975f859079510679ae4b4368152"></a>
@@ -375,7 +378,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Defines whether or not the game is over. </p>
+<p>Determines if the game has been won or not. </p>
 
 <p>Implements <a class="el" href="class_game.html#ada584c598be0f7066a396e1677ad7dc6">Game</a>.</p>
 
