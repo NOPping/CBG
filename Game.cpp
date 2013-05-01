@@ -39,7 +39,6 @@ void Game::start() {
     } else {
       cout << "Invalid Move, try again.\n";
     }
-    over=isOver();
   }
 
   if(isOver()=1) {
