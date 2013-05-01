@@ -36,7 +36,7 @@ ConnectFour::ConnectFour():Game(2,7,6) {
   }
 }
 
-/// Function to print out the board.
+/// Prints out the board and all the players pieces.
 void ConnectFour::drawScreen() const {
   clearScreen();
   cout << "Player " << (currentPlayer+1) << " it is your go\n";
