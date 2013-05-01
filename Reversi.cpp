@@ -178,4 +178,5 @@ int Reversi::isOver() {
   }
   //If the current player cannot make a move switches to other player.
   if(!canMove) currentPlayer=getOpposition();
+  return 0;
 }
