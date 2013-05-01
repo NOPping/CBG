@@ -47,8 +47,8 @@ class Player {
   bool hasType(int type) const;
 
   /// Function to check does the player have room for another piece
-  /// Necessary to check before adding piece to ensure references 
-  /// never reference a non existant piece. 
+  /// Necessary to check before adding piece to ensure references
+  /// never reference a non existant piece.
   bool hasRoomForPiece() const;
 
   /// Returns a string from pieces vector at index type.
