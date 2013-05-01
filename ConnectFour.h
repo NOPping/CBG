@@ -28,28 +28,26 @@ class ConnectFour : public Game {
   /// Prints out the board and all the players pieces.
   void  drawScreen() const;
 
-  /// Function to return weather or not the game is over or not.
+  /// Overloaded function to to return weather or not the game is over.
   int  isOver();
 
-  /// Overloaded function to to return weather or not the game
-  /// is over or not.
   int  isOver(const Square& current) const;
 
-  /// Function to test the top row of the board and see if every
-  /// square has a piece on it.
+  /// Functions to test if the game has ended in a draw
   bool isDraw() const;
 
-  /// Function to test if four player pieces lie in a row.
+  /// Function to get the max amount of pieces in a line around the piece added
+  /// returns weather or not the number is greater than 3, signifying a win.
   bool fourInRow(const Square& current) const;
 
-  /// Function to take an int representing a column and move a piece to
-  /// the next available slot in that column.
+  /// Function to take an int representing a column and move a piece to the
+  /// next available slot in that column.
   bool executeMove(int x);
 
   /// Vector to hold how much pieces lie in each column.
   vector<int> columnHeight;
 
-  /// recursive function to check the next square to see if it has a piece
+  /// Recursive function to check the next square to see if it has a piece
   /// to see if it's owned by current player.
   int  checkNext(const Square& next,int yOffset,int xOffset) const;
 
