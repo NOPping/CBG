@@ -32,8 +32,7 @@ Game::~Game() {
 /// isOver() returns something other than 0.
 void Game::start() {
   drawScreen();
-  int over=isOver();
-  while(over==0) {
+  while(isOver()=0) {
 
     if(getMove()) {
       drawScreen();
@@ -43,10 +42,10 @@ void Game::start() {
     over=isOver();
   }
 
-  if(over==1) {
+  if(isOver()=1) {
     int winner =  currentPlayer-1 == -1  ? amountOfPlayers : currentPlayer;
     cout << "Player " << winner << " has won the game\n";
-  } else if(over==2) {
+  } else if(isOver()==2) {
     cout << "Game ended in a draw\n";
   }
 }
