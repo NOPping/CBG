@@ -5,7 +5,7 @@ var class_snakes_and_ladders =
     [ "drawScreen", "class_snakes_and_ladders.html#ac394787004bcf8c0d7fbf95dcd586af9", null ],
     [ "executeMove", "class_snakes_and_ladders.html#a594061a0479e473a8a5d4220119a9458", null ],
     [ "getMove", "class_snakes_and_ladders.html#ab9443779cb6c863631d328b4f8dc3f05", null ],
-    [ "isOver", "class_snakes_and_ladders.html#a21d414275a8c4a14cf11ff257a4ba87d", null ],
+    [ "isOver", "class_snakes_and_ladders.html#a4b2958470a95511a670aee062c0dfb91", null ],
     [ "printSnakeLadder", "class_snakes_and_ladders.html#a9db14518f3083323a451ed3719d2c41d", null ],
     [ "rollDice", "class_snakes_and_ladders.html#af15307f05b47fc9000043e85617577a6", null ],
     [ "squareToCoordinate", "class_snakes_and_ladders.html#ab80f1d8edb34eef59b8bfe5bceaecdc9", null ],

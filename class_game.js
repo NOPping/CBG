@@ -5,7 +5,7 @@ var class_game =
     [ "clearScreen", "class_game.html#a56ba41d5a2eba788a23c85c3e0072bad", null ],
     [ "drawScreen", "class_game.html#a8cd7c97462c01cacaa9fa2dabb9beba5", null ],
     [ "getMove", "class_game.html#a4986ef96dee8f573ba1532dfe3ee8a4a", null ],
-    [ "isOver", "class_game.html#aa79d08a7e6ab10e81b957a8b26924e73", null ],
+    [ "isOver", "class_game.html#ada584c598be0f7066a396e1677ad7dc6", null ],
     [ "start", "class_game.html#a3d9b98f7c4a96ecf578f75b96c9f0e90", null ],
     [ "amountOfPlayers", "class_game.html#a2a64a5ac5fe7466f02392d7bc75cf372", null ],
     [ "columns", "class_game.html#a33dcee5dd512148a0b12aa7fba41b5da", null ],

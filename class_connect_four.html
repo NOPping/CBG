@@ -115,16 +115,15 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a5e994333407ea653893381ba8f2a0d75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_connect_four.html#a5e994333407ea653893381ba8f2a0d75">drawScreen</a> () const </td></tr>
 <tr class="memdesc:a5e994333407ea653893381ba8f2a0d75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints out the board and all the players pieces.  <a href="#a5e994333407ea653893381ba8f2a0d75">More...</a><br/></td></tr>
 <tr class="separator:a5e994333407ea653893381ba8f2a0d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79f0bdae07948f9fe6fb4ad5d4aaebb0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_connect_four.html#a79f0bdae07948f9fe6fb4ad5d4aaebb0">isOver</a> () const </td></tr>
-<tr class="memdesc:a79f0bdae07948f9fe6fb4ad5d4aaebb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to return weather or not the game is over or not.  <a href="#a79f0bdae07948f9fe6fb4ad5d4aaebb0">More...</a><br/></td></tr>
-<tr class="separator:a79f0bdae07948f9fe6fb4ad5d4aaebb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad78218baa490e597b69c0de9d32d2fd3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_connect_four.html#ad78218baa490e597b69c0de9d32d2fd3">isOver</a> ()</td></tr>
+<tr class="memdesc:ad78218baa490e597b69c0de9d32d2fd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overloaded function to to return weather or not the game is over.  <a href="#ad78218baa490e597b69c0de9d32d2fd3">More...</a><br/></td></tr>
+<tr class="separator:ad78218baa490e597b69c0de9d32d2fd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a140da17d6c341fd6fb7445af765c1cbc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_connect_four.html#a140da17d6c341fd6fb7445af765c1cbc">isOver</a> (const <a class="el" href="class_square.html">Square</a> &amp;current) const </td></tr>
 <tr class="separator:a140da17d6c341fd6fb7445af765c1cbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47172c14713085349b579430b1badfb1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_connect_four.html#a47172c14713085349b579430b1badfb1">isDraw</a> () const </td></tr>
 <tr class="memdesc:a47172c14713085349b579430b1badfb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions to test if the game has ended in a draw.  <a href="#a47172c14713085349b579430b1badfb1">More...</a><br/></td></tr>
 <tr class="separator:a47172c14713085349b579430b1badfb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a7285d2b93d6726263c8fdf7c8b53d0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_connect_four.html#a1a7285d2b93d6726263c8fdf7c8b53d0">fourInRow</a> (const <a class="el" href="class_square.html">Square</a> &amp;current) const </td></tr>
-<tr class="memdesc:a1a7285d2b93d6726263c8fdf7c8b53d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to test if four player pieces lie in a row.  <a href="#a1a7285d2b93d6726263c8fdf7c8b53d0">More...</a><br/></td></tr>
 <tr class="separator:a1a7285d2b93d6726263c8fdf7c8b53d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6bef54d74b8cf8e4c85bc501ffc3392"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_connect_four.html#aa6bef54d74b8cf8e4c85bc501ffc3392">executeMove</a> (int x)</td></tr>
 <tr class="separator:aa6bef54d74b8cf8e4c85bc501ffc3392"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -243,7 +242,6 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>recursive function to check the next square to see if it has a piece to see if it's owned by current player.</p>
 <p>Recursive function to check the next square to see if it has a piece to see if it's owned by current player. </p>
 
 </div>
@@ -270,7 +268,6 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Prints out the board and all the players pieces. </p>
-<p>Function to print out the board. </p>
 
 <p>Implements <a class="el" href="class_game.html#a8cd7c97462c01cacaa9fa2dabb9beba5">Game</a>.</p>
 
@@ -322,8 +319,6 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Function to test if four player pieces lie in a row. </p>
 <p>Function to get the max amount of pieces in a line around the piece added returns weather or not the number is greater than 3, signifying a win. </p>
 
 </div>
@@ -437,7 +432,6 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Functions to test if the game has ended in a draw. </p>
-<p>Function to test the top row of the board and see if every square has a piece on it. </p>
 
 </div>
 </div>
@@ -483,7 +477,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a79f0bdae07948f9fe6fb4ad5d4aaebb0"></a>
+<a class="anchor" id="ad78218baa490e597b69c0de9d32d2fd3"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -494,7 +488,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">int ConnectFour::isOver </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -504,10 +498,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Function to return weather or not the game is over or not. </p>
 <p>Overloaded function to to return weather or not the game is over. </p>
 
-<p>Implements <a class="el" href="class_game.html#aa79d08a7e6ab10e81b957a8b26924e73">Game</a>.</p>
+<p>Implements <a class="el" href="class_game.html#ada584c598be0f7066a396e1677ad7dc6">Game</a>.</p>
 
 </div>
 </div>
@@ -532,7 +525,6 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Overloaded function to to return weather or not the game is over or not. </p>
 
 </div>
 </div>

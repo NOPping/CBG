@@ -6,6 +6,6 @@ var class_reversi =
     [ "flanks", "class_reversi.html#a03cbdc52a74eaabb63f19721befdf8ba", null ],
     [ "getMove", "class_reversi.html#a89f7ee06b6b224b7fae0a6e194a068a1", null ],
     [ "isLegal", "class_reversi.html#a378767a7508aa0a82c93ac8fade0ad24", null ],
-    [ "isOver", "class_reversi.html#abd0019f631d22e788564c1df5b59732d", null ],
+    [ "isOver", "class_reversi.html#af207a975f859079510679ae4b4368152", null ],
     [ "isValidMove", "class_reversi.html#ae99a7169e86c3afd52ca703f7abff049", null ]
 ];

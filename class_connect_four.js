@@ -11,7 +11,7 @@ var class_connect_four =
     [ "getPoint", "class_connect_four.html#a4fa471eec37bad12b3558c2395f0d005", null ],
     [ "isDraw", "class_connect_four.html#a47172c14713085349b579430b1badfb1", null ],
     [ "isLegal", "class_connect_four.html#a06161b2d898467f70bd5c4a5014bb966", null ],
-    [ "isOver", "class_connect_four.html#a79f0bdae07948f9fe6fb4ad5d4aaebb0", null ],
+    [ "isOver", "class_connect_four.html#ad78218baa490e597b69c0de9d32d2fd3", null ],
     [ "isOver", "class_connect_four.html#a140da17d6c341fd6fb7445af765c1cbc", null ],
     [ "columnHeight", "class_connect_four.html#af886a54fdc0daaf9e5c99bcb5cf9a6d4", null ],
     [ "state", "class_connect_four.html#ae1c59ad79df94c279fc374dc8927e524", null ]
