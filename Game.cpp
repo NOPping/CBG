@@ -45,7 +45,9 @@ void Game::start() {
   if(isOver()=1) {
     int winner =  currentPlayer-1 == -1  ? amountOfPlayers : currentPlayer;
     cout << "Player " << winner << " has won the game\n";
-  } else if(isOver()==2) {
+  } 
+  // A draw is the only other opeion so no need to test agagin
+  else {
     cout << "Game ended in a draw\n";
   }
 }
