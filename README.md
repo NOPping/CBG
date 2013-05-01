@@ -1,6 +1,8 @@
 Compendium of board games
 =========================
 
+![Screenshot](http://nopping.github.io/CBG/cbg.jpg)
+
 Selection of well known board games implemented in C++
 
 Compile with:
