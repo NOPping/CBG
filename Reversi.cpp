@@ -167,11 +167,12 @@ int Reversi::isOver() {
   cin>>c; 
   if(c =='D')return 2;
   else if( c =='Q') return 1;
-  
-  if(pCurPieces+pOppPieces == 64){          
+  //Checks of the board is full.
+  if(pCurPieces+pOppPieces == 64){
+    //if the board is full sets player with least pieces to current player.
     if(pCurPieces>pOppPieces)
       currentPlayer=getOpposition();        
-    check2=1;
+      return 1;
   }
   for(int x = 0;x<rows;x++){
     for(int y=0;y<columns;y++){
@@ -180,6 +181,7 @@ int Reversi::isOver() {
           check=0;
       }
     }
-  }        
-  return check+check2;
+  }
+  //If the current player cannot make a move switches to other player.
+  if(check=0) currentPlayer=getOpposition();
   }
