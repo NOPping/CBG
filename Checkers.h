@@ -25,7 +25,7 @@ class Checkers : public GameWithXYSelector {
                     Square& toJump);
 
   /// Checks if either of the players no longer have pieces.
-  int   isOver() const;
+  int   isOver();
 
   public:
   Checkers();

@@ -60,7 +60,7 @@ void ConnectFour::drawScreen() const {
 }
 
 /// Overloaded function to to return weather or not the game is over.
-int ConnectFour::isOver() const {
+int ConnectFour::isOver() {
   return state;
 }
 

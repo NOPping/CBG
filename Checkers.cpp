@@ -211,7 +211,7 @@ const {
 
 /// Checks if either of the players no longer have pieces or a player cannot
 /// move.
-int Checkers::isOver() const {
+int Checkers::isOver() {
   if(players[currentPlayer]->getAmountOfPieces() == 0) {
     return 1;
   } else {

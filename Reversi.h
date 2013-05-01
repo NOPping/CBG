@@ -19,7 +19,7 @@ class Reversi:public GameWithXYSelector {
   bool executeMove(Square& destinationSquare)const;
 
   //Determines the winner of the game
-  int  isOver() const;
+  int  isOver();
 
   ///Checks a line of pieces to see if it ends with a piece that belong to the
   ///current player if it does, it flips the line of pieces to the current players colour

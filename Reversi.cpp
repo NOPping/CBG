@@ -157,7 +157,7 @@ bool Reversi::isLegal(const Coordinate current,int yOffset,int xOffset) const {
 }
 
 // Determines if the game has been won or not.
-int Reversi::isOver() const {
+int Reversi::isOver() {
   char c;
   int check=1;
   int check2;

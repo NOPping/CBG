@@ -41,7 +41,7 @@ class SnakesAndLadders : public Game {
   bool printSnakeLadder(int x, int y) const;
 
   /// Check if square with identifier 100 is occupied.
-  int isOver() const;
+  int isOver();
 
   public:
   SnakesAndLadders();

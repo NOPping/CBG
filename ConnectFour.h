@@ -29,7 +29,7 @@ class ConnectFour : public Game {
   void  drawScreen() const;
 
   /// Function to return weather or not the game is over or not.
-  int  isOver() const;
+  int  isOver();
 
   /// Overloaded function to to return weather or not the game
   /// is over or not.

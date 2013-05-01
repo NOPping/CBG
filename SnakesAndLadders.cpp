@@ -205,7 +205,7 @@ int SnakesAndLadders::rollDice() const {
 }
 
 /// Check if square with identifier 100 is occupied.
-int SnakesAndLadders::isOver() const {
+int SnakesAndLadders::isOver() {
   return squareRefs[99]->hasPiece() ? 1 : 0;
 }
 

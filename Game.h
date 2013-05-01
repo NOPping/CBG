@@ -46,7 +46,7 @@ class Game {
   virtual void drawScreen() const = 0;
 
   /// Defines whether or not the game is over.
-  virtual int isOver() const =0;
+  virtual int isOver() =0;
   public:
   Game(const int amountOfPlayers, const int columns, const int rows);
   virtual ~Game();
