@@ -147,9 +147,13 @@ bool Reversi::checkNext(Square &current,int yOffset,int xOffset,bool flip) const
 
 // Checks if the next square is inside the bounds of the board.
 bool Reversi::isLegal(const Coordinate current,int yOffset,int xOffset) const {
-  return((current.x + xOffset < columns) && (current.x + xOffset >= 0)) &&
-  (current.y + yOffset < rows)&&(current.y + yOffset >= 0)&&
-  (yOffset != 0 || xOffset != 0);
+  return(
+    (current.x + xOffset < columns)&& 
+    (yOffset != 0 || xOffset != 0)&&
+    (current.y + yOffset < rows)&&
+    (current.x + xOffset >= 0) &&
+    (current.y + yOffset >= 0)
+  );
 }
 
 // Determines if the game has been won or not.
