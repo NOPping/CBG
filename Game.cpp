@@ -32,9 +32,9 @@ Game::~Game() {
 /// isOver() returns something other than 0.
 void Game::start() {
   drawScreen();
-  int over=isOver();  
+  int over=isOver();
   while(over==0) {
-   
+
     if(getMove()) {
       drawScreen();
     } else {
@@ -42,7 +42,7 @@ void Game::start() {
     }
     over=isOver();
   }
- 
+
   if(over==1) {
     int winner =  currentPlayer-1 == -1  ? amountOfPlayers : currentPlayer;
     cout << "Player " << winner << " has won the game\n";

@@ -24,7 +24,7 @@ bool Square::hasPiece() {
 
 /// Adds a piece to the square.
 bool Square::addPiece(int player, Piece& piece) {
-  if(player < amountOfPlayers && 
+  if(player < amountOfPlayers &&
       numberOfOccupants != amountOfPlayers
     ) {
     pieces[player] = &piece;

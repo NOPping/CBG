@@ -148,7 +148,7 @@ bool Reversi::checkNext(Square &current,int yOffset,int xOffset,bool flip) const
 // Checks if the next square is inside the bounds of the board.
 bool Reversi::isLegal(const Coordinate current,int yOffset,int xOffset) const {
   return(
-    (current.x + xOffset < columns)&& 
+    (current.x + xOffset < columns)&&
     (yOffset != 0 || xOffset != 0)&&
     (current.y + yOffset < rows)&&
     (current.x + xOffset >= 0) &&
@@ -162,17 +162,17 @@ int Reversi::isOver() {
   int check=1;
   int check2;
   int pCurPieces=players[currentPlayer]->getAmountOfPieces();
-  int pOppPieces=players[getOpposition()]->getAmountOfPieces();    
+  int pOppPieces=players[getOpposition()]->getAmountOfPieces();
   //Checks of the board is full.
-  if(pCurPieces+pOppPieces == 64){
+  if(pCurPieces+pOppPieces == 64) {
     //if the board is full sets player with least pieces to current player.
     if(pCurPieces>pOppPieces)
-      currentPlayer=getOpposition();        
-      return 1;
+      currentPlayer=getOpposition();
+    return 1;
   }
-  for(int x = 0;x<rows;x++){
-    for(int y=0;y<columns;y++){
-      if(!grid[y][x].hasPiece()){
+  for(int x = 0; x<rows; x++) {
+    for(int y=0; y<columns; y++) {
+      if(!grid[y][x].hasPiece()) {
         if(flanks(grid[y][x],false))
           check=0;
       }
@@ -180,4 +180,4 @@ int Reversi::isOver() {
   }
   //If the current player cannot make a move switches to other player.
   if(check=0) currentPlayer=getOpposition();
-  }
+}
