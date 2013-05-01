@@ -32,7 +32,7 @@ Game::~Game() {
 /// isOver() returns something other than 0.
 void Game::start() {
   drawScreen();
-  while(isOver()=0) {
+  while(isOver() == 0) {
 
     if(getMove()) {
       drawScreen();
@@ -40,8 +40,9 @@ void Game::start() {
       cout << "Invalid Move, try again.\n";
     }
   }
-
-  if(isOver()=1) {
+  // If game isn't ongoing chack if it has been won
+  // If it has then print winner
+  if(isOver() == 1) {
     int winner =  currentPlayer-1 == -1  ? amountOfPlayers : currentPlayer;
     cout << "Player " << winner << " has won the game\n";
   } 
