@@ -13,7 +13,7 @@ class Checkers : public GameWithXYSelector {
   /// onto executeMove().
   bool  getMove();
 
-  /// Validates Moves.
+  /// Validates moves.
   int validMove(Coordinate srcCoordinate, Coordinate destCoordinate) const;
 
   /// Moves the piece on source square to destination square.
