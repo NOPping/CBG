@@ -43,7 +43,7 @@ bool Square::removePiece(int player) {
 
 /// Returns the position of the square.
 Coordinate& Square::getPosition() const {
-  return position;
+  return (Coordinate&)position;
 }
 
 /// Returns the square's identifier.
