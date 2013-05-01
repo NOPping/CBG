@@ -111,9 +111,13 @@ bool ConnectFour::isLegal(const Square& current,int yOffset,int xOffset) const {
   Coordinate currentPos = current.getPosition();
 
   // Ensure that the next square lies inside the bounds of the board.
-  return((currentPos.x + xOffset < columns)&&(currentPos.x + xOffset >= 0))&&
-  (currentPos.y + yOffset < rows)&&(currentPos.y + yOffset >= 0)&&
-  (yOffset != 0 || xOffset != 0);
+  return(
+    (currentPos.x + xOffset < columns)&&
+    (currentPos.y + yOffset < rows)&&
+    (currentPos.x + xOffset >= 0)&&
+    (currentPos.y + yOffset >= 0)&&
+    (yOffset != 0 || xOffset != 0)
+  );
 }
 
 /// Function to request a move from the user and read it in
