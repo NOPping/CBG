@@ -163,10 +163,6 @@ int Reversi::isOver() {
   int check2;
   int pCurPieces=players[currentPlayer]->getAmountOfPieces();
   int pOppPieces=players[getOpposition()]->getAmountOfPieces();    
-  cout<<"Enter D to call the game a draw, Q to quit or R to resume"<<"\n";
-  cin>>c; 
-  if(c =='D')return 2;
-  else if( c =='Q') return 1;
   //Checks of the board is full.
   if(pCurPieces+pOppPieces == 64){
     //if the board is full sets player with least pieces to current player.
