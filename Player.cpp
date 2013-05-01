@@ -24,7 +24,7 @@ std::string Player::getCharacter(int type) const {
   return types[type];
 }
 
-/// Check if pieces vector at index type is empty
+/// Check if pieces vector at index type is empty.
 bool Player::hasType(int type) const {
   if(type<amountOfTypes) {
     return true;
@@ -46,7 +46,7 @@ Piece& Player::addPiece() {
 }
 
 /// Add pieces to the pieces vector at index.
-/// Only used by snakes and ladders
+/// Only used by snakes and ladders.
 Piece& Player::addPiece(Piece* insert) {
   // Add insert to pieces vector
   pieces[amountOfPieces] = insert;
@@ -55,7 +55,7 @@ Piece& Player::addPiece(Piece* insert) {
   return piece;
 }
 
-/// Remove Piece from the player and return a bollean to identify
+/// Remove Piece from the player and return a boolean to identify
 /// if it succeded or failed.
 bool Player::removePiece(Piece *toBeRemoved) {
   if(amountOfPieces > 0) {
@@ -85,7 +85,7 @@ bool Player::removePiece(Piece *toBeRemoved) {
       pieces[i] = pieces[i+1];
     }
 
-    //delete pieces[amountOfPieces];
+    // Delete pieces[amountOfPieces];
     // Delete the last index
     pieces[amountOfPieces] = NULL;
 
