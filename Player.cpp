@@ -5,8 +5,6 @@
 #include "Player.h"
 #include "Piece.h"
 
-#include <iostream>
-
 Player::Player() {}
 
 Player::Player(int amountOfTypes, vector<string> types, int maxPieces) {
@@ -73,7 +71,6 @@ bool Player::removePiece(Piece *toBeRemoved) {
     }
 
     if(index==-1) {
-      std::cout << "PIECE NOT FOUND" << "\n";
       return false;
     }
 
@@ -110,4 +107,6 @@ Player::~Player() {
   for(int i = 0; i<amountOfPieces; i++) {
     delete pieces[i];
   }
+  pieces.clear();
+  types.clear();
 }

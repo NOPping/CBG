@@ -73,3 +73,9 @@ string Square::getStart() {
 string Square::getEnd() {
   return end;
 }
+
+
+/// Deconstructor to clear the pieces vector.
+Square::~Square() {
+  pieces.clear();
+}

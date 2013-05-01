@@ -43,6 +43,7 @@ class Square {
   Square();
   Square(int identifier, string start, string end, int amountOfPlayers,
          Coordinate position);
+  ~Square();
 
   /// Returns the square's identifier.
   int getIdentifier() const;
