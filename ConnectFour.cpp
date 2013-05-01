@@ -3,6 +3,11 @@
 
 #include "ConnectFour.h"
 
+using std::vector;
+using std::max;
+using std::cout;
+using std::cin;
+
 ConnectFour::ConnectFour():Game(2,7,6) {
   state = 0;
   int amountOfPieceTypes = 1;
