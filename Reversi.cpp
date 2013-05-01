@@ -145,7 +145,7 @@ bool Reversi::checkNext(Square &current,int yOffset,int xOffset,bool flip) const
   return false;
 }
 
-// Checks if the next square is inside the bounds of the board.
+/// Checks if the next square is inside the bounds of the board.
 bool Reversi::isLegal(const Coordinate current,int yOffset,int xOffset) const {
   return(
     (current.x + xOffset < columns)&&
