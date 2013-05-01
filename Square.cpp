@@ -24,8 +24,8 @@ bool Square::hasPiece() {
 
 /// Adds a piece to the square.
 bool Square::addPiece(int player, Piece& piece) {
-  if(player < amountOfPlayers
-      && numberOfOccupants != amountOfPlayers
+  if(player < amountOfPlayers && 
+      numberOfOccupants != amountOfPlayers
     ) {
     pieces[player] = &piece;
     numberOfOccupants++;
@@ -43,7 +43,7 @@ bool Square::removePiece(int player) {
 
 /// Returns the position of the square.
 Coordinate& Square::getPosition() const {
-  return (Coordinate&)position;
+  return position;
 }
 
 /// Returns the square's identifier.
@@ -73,7 +73,6 @@ string Square::getStart() {
 string Square::getEnd() {
   return end;
 }
-
 
 /// Deconstructor to clear the pieces vector.
 Square::~Square() {
